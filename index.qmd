@@ -1,6 +1,6 @@
 ---
 title: "Análisis de la Sequía en México"
-image: foto_sequia.jpg
+image: foto_sequia.jpeg
 about:
   template: sandstone   # opciones: jolla, trestles, solana, marquee, broadside
   links:
