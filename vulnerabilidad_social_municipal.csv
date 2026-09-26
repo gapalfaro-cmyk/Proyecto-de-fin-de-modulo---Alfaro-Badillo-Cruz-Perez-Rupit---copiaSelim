@@ -1,0 +1,2464 @@
+cve_concatenada,cve_rha,nom_rha,probabilidad,t_prob
+1001,8,Lerma Santiago Pacifico,74.87431238,Alta
+1002,8,Lerma Santiago Pacifico,13.54891704,Muy Baja
+1003,8,Lerma Santiago Pacifico,26.19849489,Baja
+1004,8,Lerma Santiago Pacifico,8.701748664,Muy Baja
+1005,8,Lerma Santiago Pacifico,14.47665923,Muy Baja
+1006,8,Lerma Santiago Pacifico,14.73368896,Muy Baja
+1007,8,Lerma Santiago Pacifico,16.10817335,Muy Baja
+1008,8,Lerma Santiago Pacifico,3.694004767,Muy Baja
+1009,8,Lerma Santiago Pacifico,7.307944638,Muy Baja
+1010,8,Lerma Santiago Pacifico,24.50730936,Baja
+1011,8,Lerma Santiago Pacifico,26.4326294,Baja
+2001,1,Peninsula de Baja California,28.24133017,Baja
+2002,1,Peninsula de Baja California,24.96958072,Baja
+2003,1,Peninsula de Baja California,41.0841919,Media
+2004,1,Peninsula de Baja California,30.08916388,Baja
+2005,1,Peninsula de Baja California,61.20624099,Alta
+3001,1,Peninsula de Baja California,55.73417301,Media
+3002,1,Peninsula de Baja California,91.32374822,Muy Alta
+3003,1,Peninsula de Baja California,2.395549309,Muy Baja
+3008,1,Peninsula de Baja California,54.07299668,Media
+3009,1,Peninsula de Baja California,66.0423673,Alta
+4001,12,Peninsula de Yucatan,23.40169049,Baja
+4002,12,Peninsula de Yucatan,15.64210585,Muy Baja
+4003,12,Peninsula de Yucatan,7.598372931,Muy Baja
+4004,12,Peninsula de Yucatan,14.99660814,Muy Baja
+4005,12,Peninsula de Yucatan,30.56942049,Baja
+4006,12,Peninsula de Yucatan,15.32780255,Muy Baja
+4007,11,Frontera Sur,28.66808022,Baja
+4008,12,Peninsula de Yucatan,9.799058005,Muy Baja
+4009,12,Peninsula de Yucatan,27.14438645,Baja
+4010,12,Peninsula de Yucatan,94.12956494,Muy Alta
+4011,12,Peninsula de Yucatan,66.42346083,Alta
+5001,6,Rio Bravo,61.14339409,Alta
+5002,6,Rio Bravo,15.16222489,Muy Baja
+5003,6,Rio Bravo,10.68235888,Muy Baja
+5004,6,Rio Bravo,41.15124948,Media
+5005,6,Rio Bravo,29.39299996,Baja
+5006,6,Rio Bravo,42.79760441,Media
+5007,6,Rio Bravo,34.15079496,Baja
+5008,6,Rio Bravo,54.26758669,Media
+5009,7,Cuencas Centrales del Norte,17.27927531,Muy Baja
+5010,6,Rio Bravo,24.11750959,Baja
+5011,6,Rio Bravo,52.54919501,Media
+5012,6,Rio Bravo,46.4471667,Media
+5013,6,Rio Bravo,33.34807333,Baja
+5014,6,Rio Bravo,14.84360864,Muy Baja
+5015,6,Rio Bravo,28.19347911,Baja
+5016,6,Rio Bravo,10.92858073,Muy Baja
+5017,7,Cuencas Centrales del Norte,33.78925365,Baja
+5018,6,Rio Bravo,10.63560983,Muy Baja
+5019,6,Rio Bravo,37.66460239,Baja
+5020,6,Rio Bravo,2.957993758,Muy Baja
+5021,6,Rio Bravo,27.85806205,Baja
+5022,6,Rio Bravo,8.270485559,Muy Baja
+5023,6,Rio Bravo,18.16295013,Muy Baja
+5024,7,Cuencas Centrales del Norte,8.657067512,Muy Baja
+5025,6,Rio Bravo,14.802418,Muy Baja
+5026,6,Rio Bravo,53.67931319,Media
+5027,6,Rio Bravo,28.49400262,Baja
+5028,6,Rio Bravo,26.53249143,Baja
+5029,6,Rio Bravo,12.19583331,Muy Baja
+5030,6,Rio Bravo,15.69164081,Muy Baja
+5031,6,Rio Bravo,16.23896142,Muy Baja
+5032,6,Rio Bravo,5.844296608,Muy Baja
+5033,7,Cuencas Centrales del Norte,31.35955507,Baja
+5034,7,Cuencas Centrales del Norte,41.05152821,Media
+5035,7,Cuencas Centrales del Norte,12.92073995,Muy Baja
+5036,7,Cuencas Centrales del Norte,45.73812829,Media
+5037,6,Rio Bravo,36.61451623,Baja
+5038,6,Rio Bravo,35.26711307,Baja
+6001,8,Lerma Santiago Pacifico,12.55967424,Muy Baja
+6002,8,Lerma Santiago Pacifico,3.39261552,Muy Baja
+6003,8,Lerma Santiago Pacifico,25.24517597,Baja
+6004,8,Lerma Santiago Pacifico,26.8297419,Baja
+6005,8,Lerma Santiago Pacifico,5.002847366,Muy Baja
+6006,8,Lerma Santiago Pacifico,13.6966264,Muy Baja
+6007,8,Lerma Santiago Pacifico,5.577312592,Muy Baja
+6008,8,Lerma Santiago Pacifico,14.74112412,Muy Baja
+6009,8,Lerma Santiago Pacifico,16.57484015,Muy Baja
+6010,8,Lerma Santiago Pacifico,5.390209454,Muy Baja
+7001,11,Frontera Sur,18.55389427,Muy Baja
+7002,11,Frontera Sur,31.91545282,Baja
+7003,11,Frontera Sur,28.26345542,Baja
+7004,11,Frontera Sur,40.13823984,Media
+7005,11,Frontera Sur,43.36352819,Media
+7006,11,Frontera Sur,22.29047467,Baja
+7007,11,Frontera Sur,85.67517215,Muy Alta
+7008,11,Frontera Sur,37.44117237,Baja
+7009,11,Frontera Sur,45.02546638,Media
+7010,11,Frontera Sur,56.16470322,Media
+7011,11,Frontera Sur,25.69918831,Baja
+7012,11,Frontera Sur,70.79752579,Alta
+7013,11,Frontera Sur,45.42733539,Media
+7014,11,Frontera Sur,41.00828927,Media
+7015,11,Frontera Sur,53.77496403,Media
+7016,11,Frontera Sur,53.92498047,Media
+7017,11,Frontera Sur,62.72596194,Alta
+7018,11,Frontera Sur,46.11423982,Media
+7019,11,Frontera Sur,74.23862448,Alta
+7020,11,Frontera Sur,44.06689335,Media
+7021,11,Frontera Sur,46.81572343,Media
+7022,11,Frontera Sur,99.99957254,Muy Alta
+7023,11,Frontera Sur,81.34154883,Muy Alta
+7024,11,Frontera Sur,90.70754315,Muy Alta
+7025,11,Frontera Sur,44.46981971,Media
+7026,11,Frontera Sur,79.57251504,Alta
+7027,11,Frontera Sur,56.97388993,Media
+7028,11,Frontera Sur,59.85457106,Media
+7029,11,Frontera Sur,50.46482977,Media
+7030,11,Frontera Sur,77.37968219,Alta
+7031,11,Frontera Sur,96.95887147,Muy Alta
+7032,11,Frontera Sur,24.91038569,Baja
+7033,11,Frontera Sur,72.04981381,Alta
+7034,11,Frontera Sur,12.92168996,Muy Baja
+7035,11,Frontera Sur,79.85525655,Alta
+7036,11,Frontera Sur,10.00927459,Muy Baja
+7037,11,Frontera Sur,56.30344476,Media
+7038,11,Frontera Sur,58.19644049,Media
+7039,11,Frontera Sur,45.74315444,Media
+7040,11,Frontera Sur,16.69836104,Muy Baja
+7041,11,Frontera Sur,19.37601265,Muy Baja
+7042,11,Frontera Sur,8.048759537,Muy Baja
+7043,11,Frontera Sur,47.99868153,Media
+7044,11,Frontera Sur,37.58621204,Baja
+7045,11,Frontera Sur,63.74994278,Alta
+7046,11,Frontera Sur,13.97741648,Muy Baja
+7047,11,Frontera Sur,18.01640828,Muy Baja
+7048,11,Frontera Sur,32.93686304,Baja
+7049,11,Frontera Sur,10.53829367,Muy Baja
+7050,11,Frontera Sur,36.01236063,Baja
+7051,11,Frontera Sur,31.77799132,Baja
+7052,11,Frontera Sur,33.15794914,Baja
+7053,11,Frontera Sur,11.69431082,Muy Baja
+7054,11,Frontera Sur,42.2260778,Media
+7055,11,Frontera Sur,24.55702964,Baja
+7056,11,Frontera Sur,59.70127219,Media
+7057,11,Frontera Sur,11.30763894,Muy Baja
+7058,11,Frontera Sur,14.27745383,Muy Baja
+7059,11,Frontera Sur,91.02728172,Muy Alta
+7060,11,Frontera Sur,73.00428204,Alta
+7061,11,Frontera Sur,85.98458277,Muy Alta
+7062,11,Frontera Sur,73.41285967,Alta
+7063,11,Frontera Sur,51.13907667,Media
+7064,11,Frontera Sur,99.68474785,Muy Alta
+7065,11,Frontera Sur,45.65789372,Media
+7066,11,Frontera Sur,88.7744441,Muy Alta
+7067,11,Frontera Sur,60.77088327,Alta
+7068,11,Frontera Sur,73.23486242,Alta
+7069,11,Frontera Sur,85.17399316,Muy Alta
+7070,11,Frontera Sur,3.37892762,Muy Baja
+7071,11,Frontera Sur,75.24137369,Alta
+7072,11,Frontera Sur,37.40394542,Baja
+7073,11,Frontera Sur,46.51521694,Media
+7074,11,Frontera Sur,48.55402366,Media
+7075,11,Frontera Sur,80.66662755,Muy Alta
+7076,11,Frontera Sur,58.07314488,Media
+7077,11,Frontera Sur,70.52952483,Alta
+7078,11,Frontera Sur,46.31298431,Media
+7079,11,Frontera Sur,63.59432752,Alta
+7080,11,Frontera Sur,25.08064922,Baja
+7081,11,Frontera Sur,55.51120798,Media
+7082,11,Frontera Sur,99.99977014,Muy Alta
+7083,11,Frontera Sur,47.57013542,Media
+7084,11,Frontera Sur,50.28135719,Media
+7085,11,Frontera Sur,58.88330191,Media
+7086,11,Frontera Sur,66.50379822,Alta
+7087,11,Frontera Sur,94.1859154,Muy Alta
+7088,11,Frontera Sur,75.39145702,Alta
+7089,11,Frontera Sur,20.02714917,Baja
+7090,11,Frontera Sur,30.63749391,Baja
+7091,11,Frontera Sur,28.27225808,Baja
+7092,11,Frontera Sur,86.26250167,Muy Alta
+7093,11,Frontera Sur,41.79957387,Media
+7094,11,Frontera Sur,82.2259795,Muy Alta
+7096,11,Frontera Sur,78.11920295,Alta
+7097,11,Frontera Sur,30.14437692,Baja
+7098,11,Frontera Sur,76.95649733,Alta
+7099,11,Frontera Sur,65.92767883,Alta
+7100,11,Frontera Sur,69.12910605,Alta
+7101,11,Frontera Sur,16.96618593,Muy Baja
+7102,11,Frontera Sur,85.14443324,Muy Alta
+7103,11,Frontera Sur,59.01852884,Media
+7104,11,Frontera Sur,75.25067181,Alta
+7105,11,Frontera Sur,57.85025235,Media
+7106,11,Frontera Sur,76.28193861,Alta
+7107,11,Frontera Sur,85.01478116,Muy Alta
+7108,11,Frontera Sur,32.43590873,Baja
+7109,11,Frontera Sur,59.87914913,Media
+7110,11,Frontera Sur,55.26870286,Media
+7111,11,Frontera Sur,85.23176187,Muy Alta
+7112,11,Frontera Sur,89.88809477,Muy Alta
+7113,11,Frontera Sur,36.46348933,Baja
+7114,11,Frontera Sur,70.13382821,Alta
+7115,11,Frontera Sur,78.31548159,Alta
+7116,11,Frontera Sur,70.39902523,Alta
+7117,11,Frontera Sur,20.70950779,Baja
+7118,11,Frontera Sur,55.19432985,Media
+7119,11,Frontera Sur,40.73248734,Media
+7120,11,Frontera Sur,38.97627851,Baja
+7121,11,Frontera Sur,74.68423702,Alta
+7122,11,Frontera Sur,77.49026487,Alta
+7123,11,Frontera Sur,75.38837223,Alta
+7124,11,Frontera Sur,44.79363435,Media
+8001,6,Rio Bravo,79.12605667,Alta
+8002,6,Rio Bravo,45.55296297,Media
+8003,6,Rio Bravo,91.7752823,Muy Alta
+8004,6,Rio Bravo,81.20555688,Muy Alta
+8005,6,Rio Bravo,76.75359425,Alta
+8006,6,Rio Bravo,80.81747722,Muy Alta
+8007,6,Rio Bravo,89.0000515,Muy Alta
+8008,3,Pacifico Norte,99.88248722,Muy Alta
+8009,6,Rio Bravo,99.99850827,Muy Alta
+8010,6,Rio Bravo,80.16586183,Muy Alta
+8011,6,Rio Bravo,65.89430252,Alta
+8012,6,Rio Bravo,94.42712541,Muy Alta
+8013,6,Rio Bravo,99.97788973,Muy Alta
+8014,6,Rio Bravo,92.37639408,Muy Alta
+8015,6,Rio Bravo,32.72378641,Baja
+8016,6,Rio Bravo,94.5408211,Muy Alta
+8017,6,Rio Bravo,79.52896192,Alta
+8018,6,Rio Bravo,82.40558274,Muy Alta
+8019,6,Rio Bravo,49.60432921,Media
+8020,3,Pacifico Norte,12.80289631,Muy Baja
+8021,6,Rio Bravo,97.26286555,Muy Alta
+8022,6,Rio Bravo,60.37035204,Alta
+8023,6,Rio Bravo,65.35088727,Alta
+8024,6,Rio Bravo,64.13272614,Alta
+8025,6,Rio Bravo,27.00379585,Baja
+8026,6,Rio Bravo,63.43748094,Alta
+8027,3,Pacifico Norte,52.25946168,Media
+8028,6,Rio Bravo,99.43027294,Muy Alta
+8029,3,Pacifico Norte,44.57735725,Media
+8030,3,Pacifico Norte,88.37236677,Muy Alta
+8031,2,Noroeste,98.61768769,Muy Alta
+8032,6,Rio Bravo,51.1250846,Media
+8033,6,Rio Bravo,62.1535705,Alta
+8034,6,Rio Bravo,54.8878699,Media
+8035,6,Rio Bravo,87.87018153,Muy Alta
+8036,6,Rio Bravo,56.49222103,Media
+8037,6,Rio Bravo,42.30042951,Media
+8038,6,Rio Bravo,75.44288968,Alta
+8039,6,Rio Bravo,89.87675373,Muy Alta
+8040,2,Noroeste,36.32982168,Baja
+8041,3,Pacifico Norte,52.75144744,Media
+8042,6,Rio Bravo,66.66837429,Alta
+8043,2,Noroeste,53.47206474,Media
+8044,6,Rio Bravo,76.53863873,Alta
+8045,6,Rio Bravo,82.65626984,Muy Alta
+8046,3,Pacifico Norte,53.50634447,Media
+8047,2,Noroeste,99.94672543,Muy Alta
+8048,6,Rio Bravo,93.08349014,Muy Alta
+8049,6,Rio Bravo,52.62877561,Media
+8050,6,Rio Bravo,84.61554646,Muy Alta
+8051,2,Noroeste,38.50834972,Baja
+8052,6,Rio Bravo,24.15823346,Baja
+8053,6,Rio Bravo,84.75972605,Muy Alta
+8054,6,Rio Bravo,65.84178177,Alta
+8055,6,Rio Bravo,89.19219857,Muy Alta
+8056,6,Rio Bravo,49.14466723,Media
+8057,6,Rio Bravo,73.51764596,Alta
+8058,6,Rio Bravo,89.40737937,Muy Alta
+8059,6,Rio Bravo,59.36744456,Media
+8060,6,Rio Bravo,64.96975414,Alta
+8061,6,Rio Bravo,60.25352697,Alta
+8062,6,Rio Bravo,89.56780042,Muy Alta
+8063,2,Noroeste,47.34970663,Media
+8064,6,Rio Bravo,74.88158877,Alta
+8065,3,Pacifico Norte,48.13918821,Media
+8066,2,Noroeste,99.99996596,Muy Alta
+8067,6,Rio Bravo,98.32434184,Muy Alta
+9002,13,Aguas del Valle de Mexico,18.05055669,Muy Baja
+9003,13,Aguas del Valle de Mexico,2.280596779,Muy Baja
+9004,13,Aguas del Valle de Mexico,57.17728862,Media
+9005,13,Aguas del Valle de Mexico,99.99689347,Muy Alta
+9006,13,Aguas del Valle de Mexico,9.453957552,Muy Baja
+9007,13,Aguas del Valle de Mexico,5.890013227,Muy Baja
+9008,13,Aguas del Valle de Mexico,7.920363072,Muy Baja
+9009,13,Aguas del Valle de Mexico,12.22849217,Muy Baja
+9010,13,Aguas del Valle de Mexico,54.15061416,Media
+9011,13,Aguas del Valle de Mexico,7.044521899,Muy Baja
+9012,13,Aguas del Valle de Mexico,15.08584452,Muy Baja
+9013,13,Aguas del Valle de Mexico,32.05952151,Baja
+9014,13,Aguas del Valle de Mexico,25.53728726,Baja
+9015,13,Aguas del Valle de Mexico,6.593571215,Muy Baja
+9016,13,Aguas del Valle de Mexico,6.463690531,Muy Baja
+9017,13,Aguas del Valle de Mexico,8.688820232,Muy Baja
+10001,3,Pacifico Norte,20.69446367,Baja
+10002,3,Pacifico Norte,77.86627618,Alta
+10003,7,Cuencas Centrales del Norte,30.48505964,Baja
+10004,7,Cuencas Centrales del Norte,30.83744574,Baja
+10005,3,Pacifico Norte,94.97678109,Muy Alta
+10006,7,Cuencas Centrales del Norte,62.47854546,Alta
+10007,7,Cuencas Centrales del Norte,31.25961694,Baja
+10008,3,Pacifico Norte,26.34722504,Baja
+10009,7,Cuencas Centrales del Norte,93.9208442,Muy Alta
+10010,7,Cuencas Centrales del Norte,27.28944569,Baja
+10011,7,Cuencas Centrales del Norte,16.0568334,Muy Baja
+10012,7,Cuencas Centrales del Norte,23.11249684,Baja
+10013,7,Cuencas Centrales del Norte,71.23909444,Alta
+10014,3,Pacifico Norte,99.99709593,Muy Alta
+10015,7,Cuencas Centrales del Norte,44.82697685,Media
+10016,3,Pacifico Norte,66.79001996,Alta
+10017,6,Rio Bravo,53.72271137,Media
+10018,7,Cuencas Centrales del Norte,17.12400297,Muy Baja
+10019,3,Pacifico Norte,38.14966269,Baja
+10020,3,Pacifico Norte,48.24234984,Media
+10021,7,Cuencas Centrales del Norte,34.13034385,Baja
+10022,3,Pacifico Norte,66.52128043,Alta
+10023,3,Pacifico Norte,64.60555676,Alta
+10024,7,Cuencas Centrales del Norte,35.72257832,Baja
+10025,7,Cuencas Centrales del Norte,47.43637372,Media
+10026,3,Pacifico Norte,52.54862264,Media
+10027,7,Cuencas Centrales del Norte,77.13394996,Alta
+10028,7,Cuencas Centrales del Norte,37.86412941,Baja
+10029,7,Cuencas Centrales del Norte,36.01561939,Baja
+10030,7,Cuencas Centrales del Norte,48.67971671,Media
+10031,7,Cuencas Centrales del Norte,47.66151389,Media
+10032,7,Cuencas Centrales del Norte,67.80578875,Alta
+10033,3,Pacifico Norte,77.43686757,Alta
+10034,3,Pacifico Norte,89.20924705,Muy Alta
+10035,7,Cuencas Centrales del Norte,95.69145493,Muy Alta
+10036,7,Cuencas Centrales del Norte,67.102737,Alta
+10037,3,Pacifico Norte,95.01074471,Muy Alta
+10038,3,Pacifico Norte,67.51976928,Alta
+10039,3,Pacifico Norte,28.41854745,Baja
+11001,8,Lerma Santiago Pacifico,40.04648503,Media
+11002,8,Lerma Santiago Pacifico,48.49058164,Media
+11003,8,Lerma Santiago Pacifico,82.84542711,Muy Alta
+11004,8,Lerma Santiago Pacifico,78.5491825,Alta
+11005,8,Lerma Santiago Pacifico,67.24686616,Alta
+11006,9,Golfo Norte,95.91473761,Muy Alta
+11007,8,Lerma Santiago Pacifico,41.36017799,Media
+11008,8,Lerma Santiago Pacifico,71.06014075,Alta
+11009,8,Lerma Santiago Pacifico,87.583792,Muy Alta
+11010,8,Lerma Santiago Pacifico,57.13259437,Media
+11011,8,Lerma Santiago Pacifico,63.01006619,Alta
+11012,8,Lerma Santiago Pacifico,76.67306115,Alta
+11013,8,Lerma Santiago Pacifico,47.1579815,Media
+11014,8,Lerma Santiago Pacifico,65.75205282,Alta
+11015,8,Lerma Santiago Pacifico,26.75910359,Baja
+11016,8,Lerma Santiago Pacifico,56.36987668,Media
+11017,8,Lerma Santiago Pacifico,15.54803956,Muy Baja
+11018,8,Lerma Santiago Pacifico,68.86190505,Alta
+11019,8,Lerma Santiago Pacifico,83.38189951,Muy Alta
+11020,8,Lerma Santiago Pacifico,2.346739197,Muy Baja
+11021,8,Lerma Santiago Pacifico,53.20026623,Media
+11022,8,Lerma Santiago Pacifico,66.59923063,Alta
+11023,8,Lerma Santiago Pacifico,42.43367049,Media
+11024,8,Lerma Santiago Pacifico,40.72721775,Media
+11025,8,Lerma Santiago Pacifico,57.79479743,Media
+11026,8,Lerma Santiago Pacifico,56.33452409,Media
+11027,8,Lerma Santiago Pacifico,35.87187861,Baja
+11028,8,Lerma Santiago Pacifico,52.16761266,Media
+11029,8,Lerma Santiago Pacifico,67.42116135,Alta
+11030,8,Lerma Santiago Pacifico,68.52280102,Alta
+11031,8,Lerma Santiago Pacifico,53.17083132,Media
+11032,8,Lerma Santiago Pacifico,40.10674859,Media
+11033,8,Lerma Santiago Pacifico,71.7521185,Alta
+11034,9,Golfo Norte,78.03550121,Alta
+11035,8,Lerma Santiago Pacifico,70.47990354,Alta
+11036,8,Lerma Santiago Pacifico,56.03883409,Media
+11037,8,Lerma Santiago Pacifico,21.32403037,Baja
+11038,8,Lerma Santiago Pacifico,52.27120938,Media
+11039,8,Lerma Santiago Pacifico,55.45274874,Media
+11040,9,Golfo Norte,75.01077142,Alta
+11041,8,Lerma Santiago Pacifico,58.70237776,Media
+11042,8,Lerma Santiago Pacifico,65.62471184,Alta
+11043,9,Golfo Norte,88.04071851,Muy Alta
+11044,8,Lerma Santiago Pacifico,60.08085188,Alta
+11045,9,Golfo Norte,79.60823915,Alta
+11046,8,Lerma Santiago Pacifico,61.3106647,Alta
+12001,5,Pacifico Sur,1.054452987,Muy Baja
+12002,4,Balsas,94.08,Muy Alta
+12003,4,Balsas,95.75,Muy Alta
+12004,4,Balsas,95.52,Muy Alta
+12005,4,Balsas,36.22,Baja
+12006,4,Balsas,70.24,Alta
+12007,4,Balsas,61.32,Alta
+12008,4,Balsas,70.76,Alta
+12009,4,Balsas,99.81,Muy Alta
+12010,4,Balsas,98.18,Muy Alta
+12011,5,Pacifico Sur,34.2881898,Baja
+12012,5,Pacifico Sur,86.87514471,Muy Alta
+12013,5,Pacifico Sur,62.00034349,Alta
+12014,5,Pacifico Sur,39.38429191,Baja
+12015,4,Balsas,20.18,Baja
+12016,4,Balsas,99.97,Muy Alta
+12017,4,Balsas,39.39,Baja
+12018,5,Pacifico Sur,75.42769872,Alta
+12019,4,Balsas,99.93,Muy Alta
+12020,4,Balsas,99.74,Muy Alta
+12021,5,Pacifico Sur,28.29878809,Baja
+12022,4,Balsas,97.7,Muy Alta
+12023,5,Pacifico Sur,52.87127238,Media
+12024,4,Balsas,55.05,Media
+12025,5,Pacifico Sur,92.27626561,Muy Alta
+12026,4,Balsas,98.94,Muy Alta
+12027,4,Balsas,88.89,Muy Alta
+12028,5,Pacifico Sur,84.03952593,Muy Alta
+12029,4,Balsas,1.917163868,Muy Baja
+12030,5,Pacifico Sur,28.66940928,Baja
+12031,4,Balsas,98.63,Muy Alta
+12032,4,Balsas,98.63,Muy Alta
+12033,4,Balsas,28.89,Baja
+12034,4,Balsas,63.63,Alta
+12035,4,Balsas,19.23,Muy Baja
+12036,5,Pacifico Sur,57.36970771,Media
+12037,4,Balsas,67.62,Alta
+12038,5,Pacifico Sur,44.32639742,Media
+12039,5,Pacifico Sur,37.8338153,Baja
+12040,4,Balsas,47.18,Media
+12041,5,Pacifico Sur,90.25288025,Muy Alta
+12042,4,Balsas,66.2,Alta
+12043,5,Pacifico Sur,96.99436333,Muy Alta
+12044,5,Pacifico Sur,29.27897136,Baja
+12045,4,Balsas,98.85,Muy Alta
+12046,5,Pacifico Sur,44.92454032,Media
+12047,4,Balsas,99.98,Muy Alta
+12048,5,Pacifico Sur,63.82644799,Alta
+12049,4,Balsas,51.86,Media
+12050,4,Balsas,44.69,Media
+12051,5,Pacifico Sur,63.28028087,Alta
+12052,5,Pacifico Sur,93.17130258,Muy Alta
+12053,5,Pacifico Sur,82.95886658,Muy Alta
+12054,4,Balsas,99.98,Muy Alta
+12055,4,Balsas,20.16,Baja
+12056,5,Pacifico Sur,83.43155527,Muy Alta
+12057,5,Pacifico Sur,63.68176597,Alta
+12058,4,Balsas,62.01,Alta
+12059,4,Balsas,82.94,Muy Alta
+12060,4,Balsas,67.99,Alta
+12061,5,Pacifico Sur,57.23377304,Media
+12062,5,Pacifico Sur,97.94944098,Muy Alta
+12063,5,Pacifico Sur,97.73176255,Muy Alta
+12064,4,Balsas,64.75,Alta
+12065,4,Balsas,82.26,Muy Alta
+12066,4,Balsas,47.46,Media
+12067,4,Balsas,62.26,Alta
+12068,4,Balsas,82.88,Muy Alta
+12069,4,Balsas,98.52,Muy Alta
+12070,4,Balsas,47.27,Media
+12071,5,Pacifico Sur,61.46566422,Alta
+12072,5,Pacifico Sur,86.09037282,Muy Alta
+12073,4,Balsas,94.92,Muy Alta
+12074,4,Balsas,92.37,Muy Alta
+12075,4,Balsas,27.52,Baja
+12076,4,Balsas,98.19142832,Muy Alta
+12077,5,Pacifico Sur,40.12939385,Media
+12078,5,Pacifico Sur,99.99992543,Muy Alta
+12079,5,Pacifico Sur,99.13646855,Muy Alta
+12080,5,Pacifico Sur,65.93432873,Alta
+12081,5,Pacifico Sur,79.26514528,Alta
+13001,9,Golfo Norte,90.92568422,Muy Alta
+13002,10,Golfo Centro,89.98138319,Muy Alta
+13003,13,Aguas del Valle de Mexico,48.39379681,Media
+13004,10,Golfo Centro,52.07342912,Media
+13005,13,Aguas del Valle de Mexico,72.85878224,Alta
+13006,13,Aguas del Valle de Mexico,95.61973636,Muy Alta
+13007,13,Aguas del Valle de Mexico,43.68399652,Media
+13008,13,Aguas del Valle de Mexico,29.36391577,Baja
+13009,13,Aguas del Valle de Mexico,94.38618199,Muy Alta
+13010,13,Aguas del Valle de Mexico,23.84556169,Baja
+13011,9,Golfo Norte,8.76029645,Muy Baja
+13012,9,Golfo Norte,50.20938873,Media
+13013,13,Aguas del Valle de Mexico,40.13816337,Media
+13014,9,Golfo Norte,33.86381588,Baja
+13015,13,Aguas del Valle de Mexico,87.46687475,Muy Alta
+13016,9,Golfo Norte,57.68102506,Media
+13017,13,Aguas del Valle de Mexico,98.62866602,Muy Alta
+13018,9,Golfo Norte,42.27536179,Media
+13019,13,Aguas del Valle de Mexico,92.25497411,Muy Alta
+13020,9,Golfo Norte,45.65019614,Media
+13021,13,Aguas del Valle de Mexico,52.70787507,Media
+13022,13,Aguas del Valle de Mexico,67.4415832,Alta
+13023,13,Aguas del Valle de Mexico,47.37268053,Media
+13024,9,Golfo Norte,55.20051397,Media
+13025,9,Golfo Norte,50.83211612,Media
+13026,9,Golfo Norte,54.78447695,Media
+13027,10,Golfo Centro,53.19505588,Media
+13028,9,Golfo Norte,31.09094155,Baja
+13029,9,Golfo Norte,31.47687247,Baja
+13030,13,Aguas del Valle de Mexico,80.07376266,Muy Alta
+13031,9,Golfo Norte,23.66699497,Baja
+13032,9,Golfo Norte,44.46165842,Media
+13033,9,Golfo Norte,32.22097793,Baja
+13034,9,Golfo Norte,39.9986588,Baja
+13035,9,Golfo Norte,65.25324279,Alta
+13036,9,Golfo Norte,38.01450304,Baja
+13037,9,Golfo Norte,68.96796451,Alta
+13038,9,Golfo Norte,93.68605003,Muy Alta
+13039,13,Aguas del Valle de Mexico,64.85324338,Alta
+13040,9,Golfo Norte,70.56761272,Alta
+13041,13,Aguas del Valle de Mexico,54.77374642,Media
+13042,9,Golfo Norte,26.86045478,Baja
+13043,9,Golfo Norte,54.94524731,Media
+13044,9,Golfo Norte,83.4848649,Muy Alta
+13045,9,Golfo Norte,46.09712255,Media
+13046,9,Golfo Norte,49.91922812,Media
+13047,9,Golfo Norte,95.88356879,Muy Alta
+13048,13,Aguas del Valle de Mexico,10.88549922,Muy Baja
+13049,9,Golfo Norte,51.50140388,Media
+13050,13,Aguas del Valle de Mexico,52.60502858,Media
+13051,13,Aguas del Valle de Mexico,16.15733327,Muy Baja
+13052,13,Aguas del Valle de Mexico,75.56071147,Alta
+13053,10,Golfo Centro,61.27924611,Alta
+13054,13,Aguas del Valle de Mexico,28.57142886,Baja
+13055,13,Aguas del Valle de Mexico,65.21310985,Alta
+13056,9,Golfo Norte,64.53627892,Alta
+13057,13,Aguas del Valle de Mexico,77.24782217,Alta
+13058,13,Aguas del Valle de Mexico,91.77220056,Muy Alta
+13059,9,Golfo Norte,66.30860566,Alta
+13060,10,Golfo Centro,22.97337976,Baja
+13061,13,Aguas del Valle de Mexico,11.38778945,Muy Baja
+13062,9,Golfo Norte,43.75059511,Media
+13063,13,Aguas del Valle de Mexico,50.82629059,Media
+13064,13,Aguas del Valle de Mexico,60.06771775,Alta
+13065,13,Aguas del Valle de Mexico,35.60980681,Baja
+13066,13,Aguas del Valle de Mexico,36.85992324,Baja
+13067,13,Aguas del Valle de Mexico,56.4577315,Media
+13068,9,Golfo Norte,63.99632439,Alta
+13069,13,Aguas del Valle de Mexico,21.72820992,Baja
+13070,13,Aguas del Valle de Mexico,40.60851885,Media
+13071,9,Golfo Norte,53.64871768,Media
+13072,13,Aguas del Valle de Mexico,19.35283966,Muy Baja
+13073,9,Golfo Norte,7.286606139,Muy Baja
+13074,13,Aguas del Valle de Mexico,50.09316059,Media
+13075,13,Aguas del Valle de Mexico,17.18222285,Muy Baja
+13076,13,Aguas del Valle de Mexico,32.21325379,Baja
+13077,9,Golfo Norte,6.644130372,Muy Baja
+13078,9,Golfo Norte,47.50895287,Media
+13079,9,Golfo Norte,27.17689997,Baja
+13080,9,Golfo Norte,31.89178327,Baja
+13081,9,Golfo Norte,7.514679559,Muy Baja
+13082,13,Aguas del Valle de Mexico,20.13283033,Baja
+13083,13,Aguas del Valle de Mexico,35.17268913,Baja
+13084,9,Golfo Norte,38.43130552,Baja
+14001,8,Lerma Santiago Pacifico,60.5753198,Alta
+14002,8,Lerma Santiago Pacifico,31.94256897,Baja
+14003,8,Lerma Santiago Pacifico,15.81171969,Muy Baja
+14004,8,Lerma Santiago Pacifico,42.2838101,Media
+14005,8,Lerma Santiago Pacifico,36.22929008,Baja
+14006,8,Lerma Santiago Pacifico,15.76248855,Muy Baja
+14007,8,Lerma Santiago Pacifico,18.1667549,Muy Baja
+14008,8,Lerma Santiago Pacifico,54.37634686,Media
+14009,8,Lerma Santiago Pacifico,23.44152791,Baja
+14010,8,Lerma Santiago Pacifico,76.48343213,Alta
+14011,8,Lerma Santiago Pacifico,62.63946973,Alta
+14012,8,Lerma Santiago Pacifico,6.138092054,Muy Baja
+14013,8,Lerma Santiago Pacifico,45.74148178,Media
+14014,8,Lerma Santiago Pacifico,59.85380327,Media
+14015,8,Lerma Santiago Pacifico,15.21270663,Muy Baja
+14016,8,Lerma Santiago Pacifico,82.41885271,Muy Alta
+14017,8,Lerma Santiago Pacifico,36.75998376,Baja
+14018,8,Lerma Santiago Pacifico,48.0271234,Media
+14019,8,Lerma Santiago Pacifico,99.91474298,Muy Alta
+14020,8,Lerma Santiago Pacifico,48.45223214,Media
+14021,8,Lerma Santiago Pacifico,23.64332387,Baja
+14022,8,Lerma Santiago Pacifico,28.67505537,Baja
+14023,8,Lerma Santiago Pacifico,13.95543675,Muy Baja
+14024,8,Lerma Santiago Pacifico,26.31359401,Baja
+14025,8,Lerma Santiago Pacifico,9.997312241,Muy Baja
+14026,8,Lerma Santiago Pacifico,41.90433892,Media
+14027,8,Lerma Santiago Pacifico,89.447774,Muy Alta
+14028,8,Lerma Santiago Pacifico,33.13542323,Baja
+14029,8,Lerma Santiago Pacifico,42.15808353,Media
+14030,8,Lerma Santiago Pacifico,47.5874223,Media
+14031,8,Lerma Santiago Pacifico,93.59220863,Muy Alta
+14032,8,Lerma Santiago Pacifico,52.09878522,Media
+14033,8,Lerma Santiago Pacifico,85.14243145,Muy Alta
+14034,8,Lerma Santiago Pacifico,44.98958858,Media
+14035,8,Lerma Santiago Pacifico,45.37154017,Media
+14036,8,Lerma Santiago Pacifico,15.22230117,Muy Baja
+14037,8,Lerma Santiago Pacifico,31.16684766,Baja
+14038,8,Lerma Santiago Pacifico,33.20976446,Baja
+14039,8,Lerma Santiago Pacifico,5.038466536,Muy Baja
+14040,8,Lerma Santiago Pacifico,66.45640169,Alta
+14041,8,Lerma Santiago Pacifico,55.43660072,Media
+14042,8,Lerma Santiago Pacifico,58.01671116,Media
+14043,8,Lerma Santiago Pacifico,36.99463727,Baja
+14044,8,Lerma Santiago Pacifico,50.97684671,Media
+14045,8,Lerma Santiago Pacifico,73.7448986,Alta
+14046,8,Lerma Santiago Pacifico,64.51892805,Alta
+14047,8,Lerma Santiago Pacifico,52.99702277,Media
+14048,8,Lerma Santiago Pacifico,92.42365078,Muy Alta
+14049,4,Balsas,76.29,Alta
+14050,8,Lerma Santiago Pacifico,46.06811975,Media
+14051,8,Lerma Santiago Pacifico,69.96517036,Alta
+14052,8,Lerma Santiago Pacifico,53.53155951,Media
+14053,8,Lerma Santiago Pacifico,56.88944697,Media
+14054,8,Lerma Santiago Pacifico,35.90120282,Baja
+14055,8,Lerma Santiago Pacifico,36.45423894,Baja
+14056,4,Balsas,95.01,Muy Alta
+14057,8,Lerma Santiago Pacifico,73.46249407,Alta
+14058,8,Lerma Santiago Pacifico,36.34005884,Baja
+14059,8,Lerma Santiago Pacifico,45.01148878,Media
+14060,8,Lerma Santiago Pacifico,57.98237971,Media
+14061,8,Lerma Santiago Pacifico,100.0,Muy Alta
+14062,8,Lerma Santiago Pacifico,28.20130772,Baja
+14063,8,Lerma Santiago Pacifico,37.63794352,Baja
+14064,8,Lerma Santiago Pacifico,69.93262542,Alta
+14065,8,Lerma Santiago Pacifico,54.60942731,Media
+14066,8,Lerma Santiago Pacifico,74.61679199,Alta
+14067,8,Lerma Santiago Pacifico,6.650153645,Muy Baja
+14068,8,Lerma Santiago Pacifico,17.92091276,Muy Baja
+14069,4,Balsas,93.51,Muy Alta
+14070,8,Lerma Santiago Pacifico,89.95588449,Muy Alta
+14071,8,Lerma Santiago Pacifico,86.80977776,Muy Alta
+14072,8,Lerma Santiago Pacifico,70.87719976,Alta
+14073,8,Lerma Santiago Pacifico,47.19595377,Media
+14074,8,Lerma Santiago Pacifico,65.91072916,Alta
+14075,8,Lerma Santiago Pacifico,22.61632276,Baja
+14076,8,Lerma Santiago Pacifico,34.35885107,Baja
+14077,8,Lerma Santiago Pacifico,15.75845733,Muy Baja
+14078,8,Lerma Santiago Pacifico,33.2224574,Baja
+14079,8,Lerma Santiago Pacifico,19.25350616,Muy Baja
+14080,8,Lerma Santiago Pacifico,52.99741798,Media
+14081,8,Lerma Santiago Pacifico,65.94468847,Alta
+14082,8,Lerma Santiago Pacifico,37.74654423,Baja
+14083,8,Lerma Santiago Pacifico,18.42053661,Muy Baja
+14084,8,Lerma Santiago Pacifico,21.80355052,Baja
+14085,8,Lerma Santiago Pacifico,49.0826161,Media
+14086,8,Lerma Santiago Pacifico,68.90462996,Alta
+14087,8,Lerma Santiago Pacifico,58.87503254,Media
+14088,8,Lerma Santiago Pacifico,49.63754198,Media
+14089,8,Lerma Santiago Pacifico,50.52068364,Media
+14090,8,Lerma Santiago Pacifico,34.05409408,Baja
+14091,8,Lerma Santiago Pacifico,38.96523339,Baja
+14092,8,Lerma Santiago Pacifico,63.93390487,Alta
+14093,8,Lerma Santiago Pacifico,53.42165811,Media
+14094,8,Lerma Santiago Pacifico,28.00897601,Baja
+14095,8,Lerma Santiago Pacifico,39.16649801,Baja
+14096,8,Lerma Santiago Pacifico,60.06718606,Alta
+14097,8,Lerma Santiago Pacifico,6.361902141,Muy Baja
+14098,8,Lerma Santiago Pacifico,50.02941314,Media
+14099,8,Lerma Santiago Pacifico,64.25926292,Alta
+14100,8,Lerma Santiago Pacifico,8.010522347,Muy Baja
+14101,8,Lerma Santiago Pacifico,20.77808507,Baja
+14102,8,Lerma Santiago Pacifico,38.88537094,Baja
+14103,8,Lerma Santiago Pacifico,33.12137923,Baja
+14104,8,Lerma Santiago Pacifico,38.5636516,Baja
+14105,8,Lerma Santiago Pacifico,61.90853701,Alta
+14106,8,Lerma Santiago Pacifico,55.89154444,Media
+14107,8,Lerma Santiago Pacifico,74.49136174,Alta
+14108,8,Lerma Santiago Pacifico,24.63665638,Baja
+14109,8,Lerma Santiago Pacifico,82.43086814,Muy Alta
+14110,8,Lerma Santiago Pacifico,22.50101461,Baja
+14111,8,Lerma Santiago Pacifico,24.93110775,Baja
+14112,8,Lerma Santiago Pacifico,48.56681923,Media
+14113,8,Lerma Santiago Pacifico,54.12460613,Media
+14114,8,Lerma Santiago Pacifico,41.93475807,Media
+14115,8,Lerma Santiago Pacifico,52.64791119,Media
+14116,8,Lerma Santiago Pacifico,44.12338147,Media
+14117,8,Lerma Santiago Pacifico,67.57860052,Alta
+14118,8,Lerma Santiago Pacifico,52.23575712,Media
+14119,8,Lerma Santiago Pacifico,56.59622875,Media
+14120,8,Lerma Santiago Pacifico,3.491168198,Muy Baja
+14121,8,Lerma Santiago Pacifico,34.04558312,Baja
+14122,8,Lerma Santiago Pacifico,41.02626607,Media
+14123,8,Lerma Santiago Pacifico,66.09725323,Alta
+14124,8,Lerma Santiago Pacifico,84.66822867,Muy Alta
+14125,8,Lerma Santiago Pacifico,82.35321551,Muy Alta
+15001,9,Golfo Norte,98.50848814,Muy Alta
+15002,13,Aguas del Valle de Mexico,70.54135624,Alta
+15003,9,Golfo Norte,97.85748759,Muy Alta
+15004,4,Balsas,44.64,Media
+15005,8,Lerma Santiago Pacifico,79.55335884,Alta
+15006,8,Lerma Santiago Pacifico,13.83562075,Muy Baja
+15007,4,Balsas,89.9,Muy Alta
+15008,4,Balsas,66.29,Alta
+15009,13,Aguas del Valle de Mexico,77.23244504,Alta
+15010,13,Aguas del Valle de Mexico,61.80588782,Alta
+15011,13,Aguas del Valle de Mexico,90.47790426,Muy Alta
+15012,8,Lerma Santiago Pacifico,29.21910063,Baja
+15013,13,Aguas del Valle de Mexico,35.85809466,Baja
+15014,8,Lerma Santiago Pacifico,41.38024222,Media
+15015,4,Balsas,56.22,Media
+15016,13,Aguas del Valle de Mexico,40.12267301,Media
+15017,13,Aguas del Valle de Mexico,48.43447723,Media
+15018,8,Lerma Santiago Pacifico,36.13916374,Baja
+15019,8,Lerma Santiago Pacifico,40.6652217,Media
+15020,13,Aguas del Valle de Mexico,33.23794428,Baja
+15021,4,Balsas,67.73,Alta
+15022,13,Aguas del Valle de Mexico,66.34127633,Alta
+15023,13,Aguas del Valle de Mexico,76.77297619,Alta
+15024,13,Aguas del Valle de Mexico,34.51753487,Baja
+15025,13,Aguas del Valle de Mexico,61.46210711,Alta
+15026,13,Aguas del Valle de Mexico,93.1903062,Muy Alta
+15027,8,Lerma Santiago Pacifico,25.86999282,Baja
+15028,13,Aguas del Valle de Mexico,63.06796347,Alta
+15029,13,Aguas del Valle de Mexico,44.95800799,Media
+15030,13,Aguas del Valle de Mexico,59.26113675,Media
+15031,13,Aguas del Valle de Mexico,56.9726598,Media
+15032,4,Balsas,95.37,Muy Alta
+15033,13,Aguas del Valle de Mexico,2.863609825,Muy Baja
+15034,4,Balsas,60.42,Alta
+15035,13,Aguas del Valle de Mexico,30.61991264,Baja
+15036,13,Aguas del Valle de Mexico,91.18603744,Muy Alta
+15037,13,Aguas del Valle de Mexico,48.14112317,Media
+15038,13,Aguas del Valle de Mexico,46.02415986,Media
+15039,13,Aguas del Valle de Mexico,63.7624592,Alta
+15040,4,Balsas,47.02,Media
+15041,4,Balsas,81.13,Muy Alta
+15042,8,Lerma Santiago Pacifico,27.57375033,Baja
+15043,8,Lerma Santiago Pacifico,68.6829506,Alta
+15044,13,Aguas del Valle de Mexico,56.07409825,Media
+15045,9,Golfo Norte,87.36845417,Muy Alta
+15046,13,Aguas del Valle de Mexico,85.20852719,Muy Alta
+15047,8,Lerma Santiago Pacifico,71.66978007,Alta
+15048,8,Lerma Santiago Pacifico,40.27043407,Media
+15049,4,Balsas,66.03,Alta
+15050,4,Balsas,45.49,Media
+15051,8,Lerma Santiago Pacifico,16.98340115,Muy Baja
+15052,4,Balsas,62.33,Alta
+15053,13,Aguas del Valle de Mexico,59.39130429,Media
+15054,8,Lerma Santiago Pacifico,3.805295353,Muy Baja
+15055,8,Lerma Santiago Pacifico,45.79293096,Media
+15056,13,Aguas del Valle de Mexico,99.86737312,Muy Alta
+15057,13,Aguas del Valle de Mexico,21.78717555,Baja
+15058,13,Aguas del Valle de Mexico,32.37720352,Baja
+15059,13,Aguas del Valle de Mexico,29.82746599,Baja
+15060,13,Aguas del Valle de Mexico,41.50508414,Media
+15061,13,Aguas del Valle de Mexico,22.30735133,Baja
+15062,8,Lerma Santiago Pacifico,58.70149994,Media
+15063,4,Balsas,59.28,Media
+15064,8,Lerma Santiago Pacifico,67.99476087,Alta
+15065,13,Aguas del Valle de Mexico,74.78551207,Alta
+15066,4,Balsas,61.86,Alta
+15067,8,Lerma Santiago Pacifico,59.08852506,Media
+15068,4,Balsas,62.95,Alta
+15069,13,Aguas del Valle de Mexico,26.65570571,Baja
+15070,13,Aguas del Valle de Mexico,92.73657921,Muy Alta
+15071,9,Golfo Norte,71.69323525,Alta
+15072,8,Lerma Santiago Pacifico,39.83405961,Baja
+15073,8,Lerma Santiago Pacifico,33.92467595,Baja
+15074,8,Lerma Santiago Pacifico,90.7451063,Muy Alta
+15075,13,Aguas del Valle de Mexico,35.00035724,Baja
+15076,8,Lerma Santiago Pacifico,39.01717957,Baja
+15077,4,Balsas,57.26,Media
+15078,4,Balsas,22.9,Baja
+15079,13,Aguas del Valle de Mexico,88.90791776,Muy Alta
+15080,4,Balsas,66.62,Alta
+15081,13,Aguas del Valle de Mexico,33.75833603,Baja
+15082,4,Balsas,51.32,Media
+15083,13,Aguas del Valle de Mexico,66.5557947,Alta
+15084,13,Aguas del Valle de Mexico,86.5495093,Muy Alta
+15085,8,Lerma Santiago Pacifico,61.96933257,Alta
+15086,4,Balsas,79.76,Alta
+15087,8,Lerma Santiago Pacifico,43.46753004,Media
+15088,4,Balsas,42.68,Media
+15089,13,Aguas del Valle de Mexico,27.33426127,Baja
+15090,8,Lerma Santiago Pacifico,57.0646793,Media
+15091,13,Aguas del Valle de Mexico,67.82670832,Alta
+15092,13,Aguas del Valle de Mexico,65.24997433,Alta
+15093,13,Aguas del Valle de Mexico,76.6879639,Alta
+15094,4,Balsas,56.23,Media
+15095,13,Aguas del Valle de Mexico,63.04958158,Alta
+15096,13,Aguas del Valle de Mexico,66.46593774,Alta
+15097,4,Balsas,54.54,Media
+15098,8,Lerma Santiago Pacifico,34.66941095,Baja
+15099,13,Aguas del Valle de Mexico,64.22809447,Alta
+15100,13,Aguas del Valle de Mexico,99.64076362,Muy Alta
+15101,8,Lerma Santiago Pacifico,65.14738892,Alta
+15102,9,Golfo Norte,83.64329516,Muy Alta
+15103,13,Aguas del Valle de Mexico,38.39866908,Baja
+15104,13,Aguas del Valle de Mexico,22.46973858,Baja
+15105,4,Balsas,39.04,Baja
+15106,8,Lerma Santiago Pacifico,4.72699219,Muy Baja
+15107,4,Balsas,42.22,Media
+15108,13,Aguas del Valle de Mexico,37.09164341,Baja
+15109,13,Aguas del Valle de Mexico,39.31753368,Baja
+15110,4,Balsas,71.37,Alta
+15111,4,Balsas,94.41,Muy Alta
+15112,13,Aguas del Valle de Mexico,89.97723028,Muy Alta
+15113,4,Balsas,30.5,Baja
+15114,4,Balsas,94.8,Muy Alta
+15115,8,Lerma Santiago Pacifico,50.93091345,Media
+15116,4,Balsas,39.43,Baja
+15117,4,Balsas,91.33,Muy Alta
+15118,8,Lerma Santiago Pacifico,31.99126701,Baja
+15119,4,Balsas,80.79,Muy Alta
+15120,13,Aguas del Valle de Mexico,48.16356973,Media
+15121,13,Aguas del Valle de Mexico,4.416361706,Muy Baja
+15122,13,Aguas del Valle de Mexico,77.72030405,Alta
+15123,4,Balsas,74.11,Alta
+15124,8,Lerma Santiago Pacifico,89.2079713,Muy Alta
+15125,13,Aguas del Valle de Mexico,74.22266105,Alta
+16001,8,Lerma Santiago Pacifico,63.22959803,Alta
+16002,8,Lerma Santiago Pacifico,92.95504217,Muy Alta
+16003,8,Lerma Santiago Pacifico,69.23409767,Alta
+16004,8,Lerma Santiago Pacifico,79.71874943,Alta
+16005,4,Balsas,76.24,Alta
+16006,4,Balsas,45.57,Media
+16007,4,Balsas,74.86,Alta
+16008,8,Lerma Santiago Pacifico,99.4791674,Muy Alta
+16009,4,Balsas,54.12,Media
+16010,4,Balsas,82.83,Muy Alta
+16011,8,Lerma Santiago Pacifico,75.37183838,Alta
+16012,4,Balsas,88.37,Muy Alta
+16013,4,Balsas,85.49,Muy Alta
+16014,8,Lerma Santiago Pacifico,65.47071043,Alta
+16015,8,Lerma Santiago Pacifico,50.0082829,Media
+16016,8,Lerma Santiago Pacifico,76.39164985,Alta
+16017,8,Lerma Santiago Pacifico,83.70444184,Muy Alta
+16018,8,Lerma Santiago Pacifico,58.55991219,Media
+16019,4,Balsas,50.38,Media
+16020,8,Lerma Santiago Pacifico,68.66129926,Alta
+16021,4,Balsas,96.6,Muy Alta
+16022,8,Lerma Santiago Pacifico,84.68311859,Muy Alta
+16023,8,Lerma Santiago Pacifico,90.49674547,Muy Alta
+16024,8,Lerma Santiago Pacifico,56.21117948,Media
+16025,8,Lerma Santiago Pacifico,48.76492205,Media
+16026,8,Lerma Santiago Pacifico,68.84804647,Alta
+16027,8,Lerma Santiago Pacifico,94.12673648,Muy Alta
+16028,8,Lerma Santiago Pacifico,62.38879591,Alta
+16029,4,Balsas,94.12,Muy Alta
+16030,8,Lerma Santiago Pacifico,83.02574777,Muy Alta
+16031,8,Lerma Santiago Pacifico,87.45047778,Muy Alta
+16032,8,Lerma Santiago Pacifico,67.47628029,Alta
+16033,4,Balsas,41.15,Media
+16034,4,Balsas,66.02,Alta
+16035,4,Balsas,83.5,Muy Alta
+16036,8,Lerma Santiago Pacifico,81.49592906,Muy Alta
+16037,8,Lerma Santiago Pacifico,82.49693776,Muy Alta
+16038,4,Balsas,56.56,Media
+16039,8,Lerma Santiago Pacifico,57.36540697,Media
+16040,8,Lerma Santiago Pacifico,88.41830404,Muy Alta
+16041,8,Lerma Santiago Pacifico,85.67543053,Muy Alta
+16042,8,Lerma Santiago Pacifico,67.53338771,Alta
+16043,8,Lerma Santiago Pacifico,76.99931223,Alta
+16044,8,Lerma Santiago Pacifico,78.38034798,Alta
+16045,8,Lerma Santiago Pacifico,51.19388143,Media
+16046,4,Balsas,82.2,Muy Alta
+16047,4,Balsas,79.34,Alta
+16048,8,Lerma Santiago Pacifico,79.22734076,Alta
+16049,4,Balsas,66.67,Alta
+16050,8,Lerma Santiago Pacifico,87.63479505,Muy Alta
+16051,8,Lerma Santiago Pacifico,63.94350333,Alta
+16052,4,Balsas,25.06,Baja
+16053,8,Lerma Santiago Pacifico,10.87974157,Muy Baja
+16054,8,Lerma Santiago Pacifico,31.01031363,Baja
+16055,4,Balsas,76.35,Alta
+16056,8,Lerma Santiago Pacifico,93.4439535,Muy Alta
+16057,4,Balsas,92.38,Muy Alta
+16058,4,Balsas,65.69,Alta
+16059,4,Balsas,24.5,Baja
+16060,8,Lerma Santiago Pacifico,53.95131168,Media
+16061,4,Balsas,72.3,Alta
+16062,8,Lerma Santiago Pacifico,78.09750849,Alta
+16063,8,Lerma Santiago Pacifico,98.60761546,Muy Alta
+16064,4,Balsas,30.63,Baja
+16065,4,Balsas,82.46,Muy Alta
+16066,8,Lerma Santiago Pacifico,51.68123026,Media
+16067,8,Lerma Santiago Pacifico,76.47245399,Alta
+16068,4,Balsas,34.36,Baja
+16069,8,Lerma Santiago Pacifico,49.88523265,Media
+16070,8,Lerma Santiago Pacifico,70.49516002,Alta
+16071,8,Lerma Santiago Pacifico,58.69893357,Media
+16072,8,Lerma Santiago Pacifico,81.19964105,Muy Alta
+16073,8,Lerma Santiago Pacifico,69.57978508,Alta
+16074,8,Lerma Santiago Pacifico,84.97765312,Muy Alta
+16075,4,Balsas,75.37,Alta
+16076,8,Lerma Santiago Pacifico,76.42700751,Alta
+16077,4,Balsas,90.21,Muy Alta
+16078,8,Lerma Santiago Pacifico,81.75745495,Muy Alta
+16079,4,Balsas,82.07,Muy Alta
+16080,8,Lerma Santiago Pacifico,84.77636138,Muy Alta
+16081,4,Balsas,97.53,Muy Alta
+16082,4,Balsas,50.35,Media
+16083,4,Balsas,86.28,Muy Alta
+16084,8,Lerma Santiago Pacifico,94.05412758,Muy Alta
+16085,8,Lerma Santiago Pacifico,93.13546492,Muy Alta
+16086,8,Lerma Santiago Pacifico,76.75458753,Alta
+16087,4,Balsas,43.63,Media
+16088,8,Lerma Santiago Pacifico,46.62364854,Media
+16089,4,Balsas,84.79,Muy Alta
+16090,4,Balsas,66.19,Alta
+16091,4,Balsas,54.02,Media
+16092,4,Balsas,98.84,Muy Alta
+16093,8,Lerma Santiago Pacifico,89.20186936,Muy Alta
+16094,8,Lerma Santiago Pacifico,89.10319177,Muy Alta
+16095,4,Balsas,71.73,Alta
+16096,8,Lerma Santiago Pacifico,85.52217739,Muy Alta
+16097,4,Balsas,84.4,Muy Alta
+16098,4,Balsas,83.75,Muy Alta
+16099,4,Balsas,88.34,Muy Alta
+16100,8,Lerma Santiago Pacifico,85.74980839,Muy Alta
+16101,4,Balsas,99.89,Muy Alta
+16102,4,Balsas,1.29,Muy Baja
+16103,8,Lerma Santiago Pacifico,76.47911499,Alta
+16104,8,Lerma Santiago Pacifico,83.05219269,Muy Alta
+16105,8,Lerma Santiago Pacifico,81.0729209,Muy Alta
+16106,8,Lerma Santiago Pacifico,87.76562173,Muy Alta
+16107,8,Lerma Santiago Pacifico,61.22164747,Alta
+16108,8,Lerma Santiago Pacifico,57.46193002,Media
+16109,8,Lerma Santiago Pacifico,46.53819688,Media
+16110,8,Lerma Santiago Pacifico,88.06698509,Muy Alta
+16111,4,Balsas,68.1,Alta
+16112,4,Balsas,77.88,Alta
+16113,8,Lerma Santiago Pacifico,82.81426125,Muy Alta
+17001,4,Balsas,15.93,Muy Baja
+17002,4,Balsas,71.27,Alta
+17003,4,Balsas,69.24,Alta
+17004,4,Balsas,22.02,Baja
+17005,4,Balsas,52.52,Media
+17006,4,Balsas,17.2,Muy Baja
+17007,4,Balsas,7.3,Muy Baja
+17008,4,Balsas,33.16,Baja
+17009,4,Balsas,53.71,Media
+17010,4,Balsas,61.06,Alta
+17011,4,Balsas,3.97,Muy Baja
+17012,4,Balsas,16.08,Muy Baja
+17013,4,Balsas,20.96,Baja
+17014,4,Balsas,18.65,Muy Baja
+17015,4,Balsas,27.19,Baja
+17016,4,Balsas,34.58,Baja
+17017,4,Balsas,12.88,Muy Baja
+17018,4,Balsas,14.78,Muy Baja
+17019,4,Balsas,58.8,Media
+17020,4,Balsas,84.4,Muy Alta
+17021,4,Balsas,24.27,Baja
+17022,4,Balsas,9.13,Muy Baja
+17023,4,Balsas,79.08,Alta
+17024,4,Balsas,50.58,Media
+17025,4,Balsas,27.89,Baja
+17026,4,Balsas,39.22,Baja
+17027,4,Balsas,50.42,Media
+17028,4,Balsas,10.57,Muy Baja
+17029,4,Balsas,19.52,Muy Baja
+17030,4,Balsas,26.81,Baja
+17031,4,Balsas,20.4,Baja
+17032,4,Balsas,38.98,Baja
+17033,4,Balsas,29.24,Baja
+18001,3,Pacifico Norte,56.10199976,Media
+18002,8,Lerma Santiago Pacifico,29.71118886,Baja
+18003,8,Lerma Santiago Pacifico,22.94129808,Baja
+18004,8,Lerma Santiago Pacifico,38.87023186,Baja
+18005,3,Pacifico Norte,90.85957928,Muy Alta
+18006,8,Lerma Santiago Pacifico,34.58734771,Baja
+18007,8,Lerma Santiago Pacifico,17.9772433,Muy Baja
+18008,8,Lerma Santiago Pacifico,6.606789369,Muy Baja
+18009,8,Lerma Santiago Pacifico,100.0,Muy Alta
+18010,3,Pacifico Norte,31.41948439,Baja
+18011,3,Pacifico Norte,39.03901952,Baja
+18012,8,Lerma Santiago Pacifico,22.08094015,Baja
+18013,8,Lerma Santiago Pacifico,13.56800587,Muy Baja
+18014,8,Lerma Santiago Pacifico,40.75532851,Media
+18015,3,Pacifico Norte,13.99277846,Muy Baja
+18016,3,Pacifico Norte,16.35199525,Muy Baja
+18017,8,Lerma Santiago Pacifico,96.88854174,Muy Alta
+18018,3,Pacifico Norte,20.53893381,Baja
+18019,8,Lerma Santiago Pacifico,99.42986951,Muy Alta
+18020,8,Lerma Santiago Pacifico,5.702552077,Muy Baja
+19001,6,Rio Bravo,38.26525478,Baja
+19002,6,Rio Bravo,6.478767761,Muy Baja
+19003,6,Rio Bravo,42.77789498,Media
+19004,6,Rio Bravo,27.55384531,Baja
+19005,6,Rio Bravo,22.84128742,Baja
+19006,6,Rio Bravo,28.39868367,Baja
+19007,6,Rio Bravo,50.17793089,Media
+19008,6,Rio Bravo,19.4197384,Muy Baja
+19009,6,Rio Bravo,40.39843835,Media
+19010,6,Rio Bravo,30.05884583,Baja
+19011,6,Rio Bravo,13.20441845,Muy Baja
+19012,6,Rio Bravo,40.93360649,Media
+19013,6,Rio Bravo,7.394302743,Muy Baja
+19014,7,Cuencas Centrales del Norte,60.87299674,Alta
+19015,6,Rio Bravo,35.03774663,Baja
+19016,6,Rio Bravo,42.36095602,Media
+19017,7,Cuencas Centrales del Norte,60.40240963,Alta
+19018,6,Rio Bravo,41.94308232,Media
+19019,6,Rio Bravo,21.91636161,Baja
+19020,6,Rio Bravo,47.35309891,Media
+19021,6,Rio Bravo,33.99179199,Baja
+19022,6,Rio Bravo,43.91648792,Media
+19023,6,Rio Bravo,11.68007146,Muy Baja
+19024,9,Golfo Norte,87.04197212,Muy Alta
+19025,6,Rio Bravo,62.72404931,Alta
+19026,6,Rio Bravo,30.77901257,Baja
+19027,6,Rio Bravo,12.29530627,Muy Baja
+19028,6,Rio Bravo,58.41767389,Media
+19029,6,Rio Bravo,35.88174748,Baja
+19030,6,Rio Bravo,9.686383135,Muy Baja
+19031,6,Rio Bravo,25.18517124,Baja
+19032,6,Rio Bravo,12.50981211,Muy Baja
+19033,6,Rio Bravo,14.80596669,Muy Baja
+19034,6,Rio Bravo,27.9370761,Baja
+19035,6,Rio Bravo,9.752136708,Muy Baja
+19036,7,Cuencas Centrales del Norte,35.06012419,Baja
+19037,6,Rio Bravo,31.188392,Baja
+19038,6,Rio Bravo,21.69602097,Baja
+19039,6,Rio Bravo,15.71219101,Muy Baja
+19040,6,Rio Bravo,6.858483341,Muy Baja
+19041,6,Rio Bravo,26.66371278,Baja
+19042,6,Rio Bravo,46.03944072,Media
+19043,6,Rio Bravo,36.11854717,Baja
+19044,6,Rio Bravo,26.62478764,Baja
+19045,6,Rio Bravo,33.25817843,Baja
+19046,6,Rio Bravo,29.92804155,Baja
+19047,6,Rio Bravo,44.41130491,Media
+19048,6,Rio Bravo,33.99607096,Baja
+19049,6,Rio Bravo,20.54962832,Baja
+19050,6,Rio Bravo,17.00012934,Muy Baja
+19051,6,Rio Bravo,23.82290782,Baja
+20001,10,Golfo Centro,7.376694073,Muy Baja
+20002,10,Golfo Centro,45.18784435,Media
+20003,10,Golfo Centro,41.74689988,Media
+20004,4,Balsas,22.93,Baja
+20005,5,Pacifico Sur,4.047986232,Muy Baja
+20006,10,Golfo Centro,22.51372338,Baja
+20007,5,Pacifico Sur,96.86837952,Muy Alta
+20008,5,Pacifico Sur,12.89330084,Muy Baja
+20009,10,Golfo Centro,16.63640296,Muy Baja
+20010,10,Golfo Centro,1.628671396,Muy Baja
+20011,4,Balsas,44.35,Media
+20012,5,Pacifico Sur,62.40693911,Alta
+20013,5,Pacifico Sur,23.32430584,Baja
+20014,5,Pacifico Sur,3.331095858,Muy Baja
+20015,5,Pacifico Sur,68.24847412,Alta
+20016,5,Pacifico Sur,77.72411256,Alta
+20017,5,Pacifico Sur,56.14580471,Media
+20018,10,Golfo Centro,46.61653447,Media
+20019,10,Golfo Centro,30.51109594,Baja
+20020,5,Pacifico Sur,20.89286042,Baja
+20021,10,Golfo Centro,32.75128723,Baja
+20022,4,Balsas,11.12,Muy Baja
+20023,5,Pacifico Sur,77.20112921,Alta
+20024,10,Golfo Centro,54.72028523,Media
+20025,11,Frontera Sur,61.26027072,Alta
+20026,5,Pacifico Sur,20.81473691,Baja
+20027,10,Golfo Centro,58.1072,Media
+20028,5,Pacifico Sur,56.00248964,Media
+20029,10,Golfo Centro,69.71915097,Alta
+20030,5,Pacifico Sur,8.204124121,Muy Baja
+20031,10,Golfo Centro,47.46887441,Media
+20032,4,Balsas,61.0,Alta
+20033,5,Pacifico Sur,15.38898475,Muy Baja
+20034,4,Balsas,4.94,Muy Baja
+20035,10,Golfo Centro,1.90532347,Muy Baja
+20036,5,Pacifico Sur,3.679289292,Muy Baja
+20037,5,Pacifico Sur,93.83873893,Muy Alta
+20038,10,Golfo Centro,37.94040795,Baja
+20039,4,Balsas,2.99,Muy Baja
+20040,10,Golfo Centro,92.9833955,Muy Alta
+20041,10,Golfo Centro,82.37644332,Muy Alta
+20042,10,Golfo Centro,28.49507208,Baja
+20043,5,Pacifico Sur,31.53576447,Baja
+20044,10,Golfo Centro,5.222335149,Muy Baja
+20045,5,Pacifico Sur,6.553047496,Muy Baja
+20046,5,Pacifico Sur,14.27647623,Muy Baja
+20047,10,Golfo Centro,13.16136068,Muy Baja
+20048,5,Pacifico Sur,52.27017488,Media
+20049,5,Pacifico Sur,68.76362474,Alta
+20050,5,Pacifico Sur,31.96848094,Baja
+20051,5,Pacifico Sur,97.67382229,Muy Alta
+20052,5,Pacifico Sur,18.77850715,Muy Baja
+20053,5,Pacifico Sur,25.83844857,Baja
+20054,5,Pacifico Sur,33.21701464,Baja
+20055,4,Balsas,5.44,Muy Baja
+20056,5,Pacifico Sur,5.847975539,Muy Baja
+20057,10,Golfo Centro,55.11550669,Media
+20058,10,Golfo Centro,80.31464545,Muy Alta
+20059,5,Pacifico Sur,36.30496726,Baja
+20060,10,Golfo Centro,42.13589857,Media
+20061,5,Pacifico Sur,67.89925419,Alta
+20062,10,Golfo Centro,3.218904042,Muy Baja
+20063,5,Pacifico Sur,10.35156536,Muy Baja
+20064,5,Pacifico Sur,91.9128705,Muy Alta
+20065,4,Balsas,49.66,Media
+20066,5,Pacifico Sur,11.56516705,Muy Baja
+20067,5,Pacifico Sur,11.04182826,Muy Baja
+20068,5,Pacifico Sur,35.20173582,Baja
+20069,5,Pacifico Sur,13.45021008,Muy Baja
+20070,5,Pacifico Sur,15.88046182,Muy Baja
+20071,5,Pacifico Sur,46.58516301,Media
+20072,5,Pacifico Sur,46.08547384,Media
+20073,5,Pacifico Sur,6.967034223,Muy Baja
+20074,5,Pacifico Sur,3.234731094,Muy Baja
+20075,5,Pacifico Sur,17.49443782,Muy Baja
+20076,5,Pacifico Sur,8.904566507,Muy Baja
+20077,5,Pacifico Sur,31.88080748,Baja
+20078,5,Pacifico Sur,43.51494164,Media
+20079,5,Pacifico Sur,16.58601317,Muy Baja
+20080,5,Pacifico Sur,55.95850335,Media
+20081,4,Balsas,44.55,Media
+20082,5,Pacifico Sur,21.00055857,Baja
+20083,5,Pacifico Sur,33.80051799,Baja
+20084,5,Pacifico Sur,13.7583264,Muy Baja
+20085,5,Pacifico Sur,45.88784987,Media
+20086,5,Pacifico Sur,36.62801984,Baja
+20087,5,Pacifico Sur,98.73906565,Muy Alta
+20088,5,Pacifico Sur,46.76600765,Media
+20089,4,Balsas,27.03,Baja
+20090,5,Pacifico Sur,41.82269182,Media
+20091,5,Pacifico Sur,47.49868499,Media
+20092,5,Pacifico Sur,75.67045112,Alta
+20093,4,Balsas,19.22,Muy Baja
+20094,5,Pacifico Sur,7.380127504,Muy Baja
+20095,5,Pacifico Sur,60.69723913,Alta
+20096,5,Pacifico Sur,16.08341805,Muy Baja
+20097,10,Golfo Centro,38.81385186,Baja
+20098,10,Golfo Centro,61.05974774,Alta
+20099,4,Balsas,67.03,Alta
+20100,10,Golfo Centro,65.32669135,Alta
+20101,5,Pacifico Sur,82.5838281,Muy Alta
+20102,5,Pacifico Sur,69.12114424,Alta
+20103,5,Pacifico Sur,97.14469097,Muy Alta
+20104,5,Pacifico Sur,37.23253058,Baja
+20105,4,Balsas,24.33,Baja
+20106,4,Balsas,22.06,Baja
+20107,5,Pacifico Sur,37.92099246,Baja
+20108,5,Pacifico Sur,31.5473336,Baja
+20109,10,Golfo Centro,17.12951378,Muy Baja
+20110,5,Pacifico Sur,98.47742529,Muy Alta
+20111,5,Pacifico Sur,69.05649992,Alta
+20112,5,Pacifico Sur,71.24618032,Alta
+20113,5,Pacifico Sur,6.155146371,Muy Baja
+20114,10,Golfo Centro,36.1181947,Baja
+20115,5,Pacifico Sur,50.60387057,Media
+20116,10,Golfo Centro,67.92678719,Alta
+20117,5,Pacifico Sur,49.49153774,Media
+20118,5,Pacifico Sur,97.61741443,Muy Alta
+20119,5,Pacifico Sur,48.72944396,Media
+20120,10,Golfo Centro,7.019830066,Muy Baja
+20121,5,Pacifico Sur,45.27051077,Media
+20122,5,Pacifico Sur,5.436800302,Muy Baja
+20123,5,Pacifico Sur,57.88903332,Media
+20124,5,Pacifico Sur,99.03383952,Muy Alta
+20125,5,Pacifico Sur,76.15167608,Alta
+20126,5,Pacifico Sur,75.41319483,Alta
+20127,5,Pacifico Sur,67.72108831,Alta
+20128,10,Golfo Centro,46.05263413,Media
+20129,10,Golfo Centro,10.99583415,Muy Baja
+20130,5,Pacifico Sur,86.10331679,Muy Alta
+20131,5,Pacifico Sur,89.97127945,Muy Alta
+20132,5,Pacifico Sur,62.95598287,Alta
+20133,5,Pacifico Sur,73.97452062,Alta
+20134,10,Golfo Centro,85.25890579,Muy Alta
+20135,5,Pacifico Sur,69.27249104,Alta
+20136,10,Golfo Centro,55.36359195,Media
+20137,5,Pacifico Sur,64.76835627,Alta
+20138,10,Golfo Centro,32.73304944,Baja
+20139,10,Golfo Centro,42.0154925,Media
+20140,5,Pacifico Sur,19.46767133,Muy Baja
+20141,5,Pacifico Sur,87.89364138,Muy Alta
+20142,10,Golfo Centro,87.50923781,Muy Alta
+20143,5,Pacifico Sur,54.53446923,Media
+20144,5,Pacifico Sur,51.83510309,Media
+20145,5,Pacifico Sur,64.42216258,Alta
+20146,5,Pacifico Sur,58.0783871,Media
+20147,5,Pacifico Sur,19.02381447,Muy Baja
+20148,5,Pacifico Sur,69.67330566,Alta
+20149,5,Pacifico Sur,74.61597457,Alta
+20150,5,Pacifico Sur,47.79411638,Media
+20151,10,Golfo Centro,49.43520965,Media
+20152,4,Balsas,90.04,Muy Alta
+20153,5,Pacifico Sur,22.77366674,Baja
+20154,5,Pacifico Sur,56.5846155,Media
+20155,5,Pacifico Sur,97.49552545,Muy Alta
+20156,10,Golfo Centro,13.35621966,Muy Baja
+20157,5,Pacifico Sur,31.28982412,Baja
+20158,5,Pacifico Sur,8.482144789,Muy Baja
+20159,5,Pacifico Sur,49.67649454,Media
+20160,4,Balsas,19.4,Muy Baja
+20161,5,Pacifico Sur,39.42633119,Baja
+20162,5,Pacifico Sur,55.38811063,Media
+20163,10,Golfo Centro,56.09418493,Media
+20164,4,Balsas,29.55,Baja
+20165,4,Balsas,19.45,Muy Baja
+20166,10,Golfo Centro,31.39898933,Baja
+20167,5,Pacifico Sur,61.10018294,Alta
+20168,5,Pacifico Sur,65.0848539,Alta
+20169,10,Golfo Centro,99.86869138,Muy Alta
+20170,5,Pacifico Sur,70.16003081,Alta
+20171,10,Golfo Centro,99.99890414,Muy Alta
+20172,5,Pacifico Sur,13.90071157,Muy Baja
+20173,10,Golfo Centro,7.213146416,Muy Baja
+20174,5,Pacifico Sur,34.31318038,Baja
+20175,10,Golfo Centro,5.944873561,Muy Baja
+20176,10,Golfo Centro,61.07105196,Alta
+20177,10,Golfo Centro,19.2172579,Muy Baja
+20178,5,Pacifico Sur,6.037683118,Muy Baja
+20179,10,Golfo Centro,32.5669758,Baja
+20180,5,Pacifico Sur,20.40719059,Baja
+20181,4,Balsas,33.9,Baja
+20182,10,Golfo Centro,75.69821399,Alta
+20183,4,Balsas,33.21,Baja
+20184,10,Golfo Centro,10.29647312,Muy Baja
+20185,5,Pacifico Sur,17.43946107,Muy Baja
+20186,4,Balsas,21.9,Baja
+20187,10,Golfo Centro,86.02258849,Muy Alta
+20188,5,Pacifico Sur,39.39504254,Baja
+20189,10,Golfo Centro,84.27172069,Muy Alta
+20190,10,Golfo Centro,36.01955346,Baja
+20191,10,Golfo Centro,9.215464676,Muy Baja
+20192,5,Pacifico Sur,21.02517405,Baja
+20193,5,Pacifico Sur,63.58778457,Alta
+20194,5,Pacifico Sur,26.37648607,Baja
+20195,5,Pacifico Sur,91.27565177,Muy Alta
+20196,10,Golfo Centro,22.19714864,Baja
+20197,5,Pacifico Sur,51.91860301,Media
+20198,10,Golfo Centro,26.15309432,Baja
+20199,4,Balsas,74.52,Alta
+20200,5,Pacifico Sur,90.92302546,Muy Alta
+20201,10,Golfo Centro,32.7308384,Baja
+20202,5,Pacifico Sur,11.93485246,Muy Baja
+20203,5,Pacifico Sur,75.02395066,Alta
+20204,5,Pacifico Sur,27.22795666,Baja
+20205,10,Golfo Centro,78.78365759,Alta
+20206,10,Golfo Centro,48.62806482,Media
+20207,10,Golfo Centro,59.61947874,Media
+20208,4,Balsas,82.45,Muy Alta
+20209,5,Pacifico Sur,50.30960674,Media
+20210,4,Balsas,53.29,Media
+20211,5,Pacifico Sur,58.48369355,Media
+20212,10,Golfo Centro,71.4142318,Alta
+20213,5,Pacifico Sur,31.24900321,Baja
+20214,10,Golfo Centro,37.63776898,Baja
+20215,5,Pacifico Sur,14.03052471,Muy Baja
+20216,10,Golfo Centro,24.20140408,Baja
+20217,5,Pacifico Sur,93.7167282,Muy Alta
+20218,5,Pacifico Sur,21.16690498,Baja
+20219,5,Pacifico Sur,90.67998005,Muy Alta
+20220,10,Golfo Centro,26.35599907,Baja
+20221,4,Balsas,54.23,Media
+20222,10,Golfo Centro,17.26400962,Muy Baja
+20223,10,Golfo Centro,7.030574917,Muy Baja
+20224,5,Pacifico Sur,7.845783849,Muy Baja
+20225,5,Pacifico Sur,74.31777493,Alta
+20226,5,Pacifico Sur,30.14512257,Baja
+20227,5,Pacifico Sur,28.119726,Baja
+20228,10,Golfo Centro,43.53947599,Media
+20229,5,Pacifico Sur,53.87325804,Media
+20230,4,Balsas,17.22,Muy Baja
+20231,10,Golfo Centro,61.69129865,Alta
+20232,10,Golfo Centro,97.06661938,Muy Alta
+20233,5,Pacifico Sur,95.3388007,Muy Alta
+20234,10,Golfo Centro,83.92602605,Muy Alta
+20235,5,Pacifico Sur,47.07561109,Media
+20236,5,Pacifico Sur,78.72111496,Alta
+20237,4,Balsas,14.99,Muy Baja
+20238,5,Pacifico Sur,54.72955135,Media
+20239,4,Balsas,38.31,Baja
+20240,4,Balsas,93.67,Muy Alta
+20241,5,Pacifico Sur,76.99620441,Alta
+20242,4,Balsas,92.52,Muy Alta
+20243,5,Pacifico Sur,42.88758121,Media
+20244,10,Golfo Centro,56.35444052,Media
+20245,4,Balsas,32.7,Baja
+20246,10,Golfo Centro,11.83922179,Muy Baja
+20247,10,Golfo Centro,1.417308688,Muy Baja
+20248,5,Pacifico Sur,99.99977452,Muy Alta
+20249,10,Golfo Centro,67.63546796,Alta
+20250,5,Pacifico Sur,8.706997011,Muy Baja
+20251,4,Balsas,39.18,Baja
+20252,5,Pacifico Sur,37.33915113,Baja
+20253,5,Pacifico Sur,99.88311436,Muy Alta
+20254,5,Pacifico Sur,60.887814,Alta
+20255,5,Pacifico Sur,42.12794523,Media
+20256,10,Golfo Centro,17.14657795,Muy Baja
+20257,10,Golfo Centro,44.98493349,Media
+20258,5,Pacifico Sur,39.6883751,Baja
+20259,4,Balsas,41.05,Media
+20260,10,Golfo Centro,31.03404207,Baja
+20261,4,Balsas,10.7,Muy Baja
+20262,10,Golfo Centro,30.31503116,Baja
+20263,5,Pacifico Sur,37.09119612,Baja
+20264,10,Golfo Centro,44.64320404,Media
+20265,5,Pacifico Sur,31.35204936,Baja
+20266,5,Pacifico Sur,43.77257382,Media
+20267,10,Golfo Centro,27.10109212,Baja
+20268,5,Pacifico Sur,37.1294398,Baja
+20269,5,Pacifico Sur,18.36653556,Muy Baja
+20270,10,Golfo Centro,61.11944376,Alta
+20271,5,Pacifico Sur,66.12353094,Alta
+20272,5,Pacifico Sur,40.61678827,Media
+20273,5,Pacifico Sur,77.7415558,Alta
+20274,5,Pacifico Sur,52.63038666,Media
+20275,10,Golfo Centro,32.45783195,Baja
+20276,10,Golfo Centro,82.83263582,Muy Alta
+20277,5,Pacifico Sur,63.1369261,Alta
+20278,10,Golfo Centro,71.02538465,Alta
+20279,5,Pacifico Sur,21.43648159,Baja
+20280,10,Golfo Centro,21.46248321,Baja
+20281,5,Pacifico Sur,47.245704,Media
+20282,5,Pacifico Sur,27.32622125,Baja
+20283,10,Golfo Centro,7.783259663,Muy Baja
+20284,5,Pacifico Sur,97.60015825,Muy Alta
+20285,5,Pacifico Sur,25.43167847,Baja
+20286,4,Balsas,56.66,Media
+20287,10,Golfo Centro,12.08354245,Muy Baja
+20288,10,Golfo Centro,13.5855187,Muy Baja
+20289,5,Pacifico Sur,34.23385264,Baja
+20290,4,Balsas,19.98,Muy Baja
+20291,5,Pacifico Sur,15.02250954,Muy Baja
+20292,5,Pacifico Sur,66.31713993,Alta
+20293,5,Pacifico Sur,13.08322137,Muy Baja
+20294,5,Pacifico Sur,27.03481725,Baja
+20295,5,Pacifico Sur,40.264457,Media
+20296,10,Golfo Centro,5.388876481,Muy Baja
+20297,5,Pacifico Sur,75.11714633,Alta
+20298,5,Pacifico Sur,42.8392829,Media
+20299,10,Golfo Centro,10.04691227,Muy Baja
+20300,5,Pacifico Sur,26.94859169,Baja
+20301,5,Pacifico Sur,46.94347957,Media
+20302,5,Pacifico Sur,23.7422543,Baja
+20303,10,Golfo Centro,35.59251597,Baja
+20304,10,Golfo Centro,17.08009774,Muy Baja
+20305,5,Pacifico Sur,15.88194488,Muy Baja
+20306,5,Pacifico Sur,51.85856933,Media
+20307,5,Pacifico Sur,30.47992527,Baja
+20308,5,Pacifico Sur,43.27184093,Media
+20309,10,Golfo Centro,94.8720394,Muy Alta
+20310,5,Pacifico Sur,96.00448528,Muy Alta
+20311,10,Golfo Centro,52.25003544,Media
+20312,5,Pacifico Sur,45.12449798,Media
+20313,10,Golfo Centro,21.65902752,Baja
+20314,5,Pacifico Sur,32.89038726,Baja
+20315,5,Pacifico Sur,97.78786544,Muy Alta
+20316,5,Pacifico Sur,15.22463279,Muy Baja
+20317,4,Balsas,69.5,Alta
+20318,5,Pacifico Sur,40.58909829,Media
+20319,5,Pacifico Sur,40.23126273,Media
+20320,5,Pacifico Sur,22.53538535,Baja
+20321,4,Balsas,23.69,Baja
+20322,10,Golfo Centro,79.20279485,Alta
+20323,10,Golfo Centro,11.02971562,Muy Baja
+20324,5,Pacifico Sur,41.45400466,Media
+20325,5,Pacifico Sur,86.26131298,Muy Alta
+20326,10,Golfo Centro,74.07942354,Alta
+20327,11,Frontera Sur,46.57048204,Media
+20328,5,Pacifico Sur,49.01785949,Media
+20329,5,Pacifico Sur,53.50950487,Media
+20330,10,Golfo Centro,29.26115394,Baja
+20331,5,Pacifico Sur,23.32079937,Baja
+20332,5,Pacifico Sur,10.3296065,Muy Baja
+20333,5,Pacifico Sur,29.59124711,Baja
+20334,5,Pacifico Sur,44.04222231,Media
+20335,10,Golfo Centro,16.06163011,Muy Baja
+20336,10,Golfo Centro,9.744984216,Muy Baja
+20337,10,Golfo Centro,88.60307804,Muy Alta
+20338,5,Pacifico Sur,36.96927969,Baja
+20339,4,Balsas,41.0,Media
+20340,4,Balsas,29.06,Baja
+20341,4,Balsas,58.16,Media
+20342,5,Pacifico Sur,27.24396408,Baja
+20343,5,Pacifico Sur,70.95025512,Alta
+20344,5,Pacifico Sur,31.20859586,Baja
+20345,5,Pacifico Sur,29.97126618,Baja
+20346,4,Balsas,21.02,Baja
+20347,5,Pacifico Sur,28.17028937,Baja
+20348,4,Balsas,61.04,Alta
+20349,5,Pacifico Sur,91.16439436,Muy Alta
+20350,5,Pacifico Sur,22.9352045,Baja
+20351,5,Pacifico Sur,41.59388742,Media
+20352,4,Balsas,93.69,Muy Alta
+20353,5,Pacifico Sur,49.20880208,Media
+20354,10,Golfo Centro,99.8212174,Muy Alta
+20355,10,Golfo Centro,54.03151038,Media
+20356,5,Pacifico Sur,78.40894063,Alta
+20357,5,Pacifico Sur,27.07861985,Baja
+20358,5,Pacifico Sur,63.73394703,Alta
+20359,10,Golfo Centro,41.89554206,Media
+20360,5,Pacifico Sur,86.56890032,Muy Alta
+20361,5,Pacifico Sur,67.0518381,Alta
+20362,5,Pacifico Sur,48.22783239,Media
+20363,10,Golfo Centro,28.72909916,Baja
+20364,5,Pacifico Sur,59.85083457,Media
+20365,10,Golfo Centro,21.297891,Baja
+20366,5,Pacifico Sur,65.39737011,Alta
+20367,5,Pacifico Sur,78.538933,Alta
+20368,5,Pacifico Sur,61.8845407,Alta
+20369,5,Pacifico Sur,45.37769557,Media
+20370,5,Pacifico Sur,18.58522475,Muy Baja
+20371,5,Pacifico Sur,35.0243501,Baja
+20372,5,Pacifico Sur,71.95149778,Alta
+20373,4,Balsas,60.59,Alta
+20374,10,Golfo Centro,94.64113089,Muy Alta
+20375,5,Pacifico Sur,50.30819986,Media
+20376,4,Balsas,30.5,Baja
+20377,5,Pacifico Sur,67.05355088,Alta
+20378,5,Pacifico Sur,57.64161855,Media
+20379,4,Balsas,53.44,Media
+20380,5,Pacifico Sur,45.35318617,Media
+20381,4,Balsas,5.51,Muy Baja
+20382,5,Pacifico Sur,17.73321421,Muy Baja
+20383,5,Pacifico Sur,27.14617421,Baja
+20384,5,Pacifico Sur,65.61097366,Alta
+20385,5,Pacifico Sur,44.5992431,Media
+20386,5,Pacifico Sur,77.68554219,Alta
+20387,5,Pacifico Sur,45.25202291,Media
+20388,5,Pacifico Sur,77.9511797,Alta
+20389,5,Pacifico Sur,78.78947052,Alta
+20390,5,Pacifico Sur,42.92740247,Media
+20391,5,Pacifico Sur,82.01556341,Muy Alta
+20392,5,Pacifico Sur,77.55137252,Alta
+20393,5,Pacifico Sur,42.88288532,Media
+20394,10,Golfo Centro,36.52480678,Baja
+20395,10,Golfo Centro,95.82264693,Muy Alta
+20396,10,Golfo Centro,95.0642298,Muy Alta
+20397,4,Balsas,32.34,Baja
+20398,5,Pacifico Sur,50.48802585,Media
+20399,5,Pacifico Sur,58.66502272,Media
+20400,4,Balsas,41.84,Media
+20401,5,Pacifico Sur,47.41142214,Media
+20402,5,Pacifico Sur,37.53353733,Baja
+20403,5,Pacifico Sur,34.16841987,Baja
+20404,5,Pacifico Sur,15.58083596,Muy Baja
+20405,4,Balsas,11.95,Muy Baja
+20406,10,Golfo Centro,99.95202014,Muy Alta
+20407,10,Golfo Centro,56.68190923,Media
+20408,4,Balsas,32.58,Baja
+20409,5,Pacifico Sur,4.08598752,Muy Baja
+20410,5,Pacifico Sur,18.98852077,Muy Baja
+20411,5,Pacifico Sur,91.93798482,Muy Alta
+20412,5,Pacifico Sur,36.92968309,Baja
+20413,5,Pacifico Sur,48.1701391,Media
+20414,5,Pacifico Sur,46.74470923,Media
+20415,5,Pacifico Sur,14.9044279,Muy Baja
+20416,10,Golfo Centro,84.92555259,Muy Alta
+20417,10,Golfo Centro,23.25811674,Baja
+20418,5,Pacifico Sur,56.5320836,Media
+20419,10,Golfo Centro,5.738640731,Muy Baja
+20420,5,Pacifico Sur,52.13891965,Media
+20421,5,Pacifico Sur,41.69251736,Media
+20422,10,Golfo Centro,18.81929415,Muy Baja
+20423,4,Balsas,45.91,Media
+20424,5,Pacifico Sur,59.68369967,Media
+20425,10,Golfo Centro,54.28660341,Media
+20426,5,Pacifico Sur,83.33657282,Muy Alta
+20427,10,Golfo Centro,11.07332029,Muy Baja
+20428,5,Pacifico Sur,27.16081572,Baja
+20429,5,Pacifico Sur,57.39063689,Media
+20430,5,Pacifico Sur,39.50799709,Baja
+20431,10,Golfo Centro,17.86884758,Muy Baja
+20432,10,Golfo Centro,14.37258114,Muy Baja
+20433,5,Pacifico Sur,75.31754362,Alta
+20434,10,Golfo Centro,64.18721082,Alta
+20435,10,Golfo Centro,78.01949786,Alta
+20436,10,Golfo Centro,78.30191907,Alta
+20437,10,Golfo Centro,59.65123052,Media
+20438,10,Golfo Centro,45.86240657,Media
+20439,5,Pacifico Sur,46.71396848,Media
+20440,5,Pacifico Sur,49.48800017,Media
+20441,5,Pacifico Sur,64.44768349,Alta
+20442,10,Golfo Centro,8.850469016,Muy Baja
+20443,10,Golfo Centro,3.209128089,Muy Baja
+20444,5,Pacifico Sur,26.9921922,Baja
+20445,5,Pacifico Sur,6.893462768,Muy Baja
+20446,5,Pacifico Sur,13.29073636,Muy Baja
+20447,5,Pacifico Sur,40.73660796,Media
+20448,5,Pacifico Sur,15.95486246,Muy Baja
+20449,5,Pacifico Sur,84.34359767,Muy Alta
+20450,5,Pacifico Sur,86.03064881,Muy Alta
+20451,10,Golfo Centro,84.32348422,Muy Alta
+20452,5,Pacifico Sur,96.76245433,Muy Alta
+20453,5,Pacifico Sur,8.147039249,Muy Baja
+20454,10,Golfo Centro,71.60383934,Alta
+20455,4,Balsas,32.85,Baja
+20456,4,Balsas,7.27,Muy Baja
+20457,10,Golfo Centro,46.98544267,Media
+20458,10,Golfo Centro,5.227376038,Muy Baja
+20459,4,Balsas,6.24,Muy Baja
+20460,10,Golfo Centro,69.2396795,Alta
+20461,4,Balsas,74.93,Alta
+20462,4,Balsas,24.26,Baja
+20463,10,Golfo Centro,62.88830659,Alta
+20464,10,Golfo Centro,49.20460468,Media
+20465,10,Golfo Centro,21.52177488,Baja
+20466,5,Pacifico Sur,94.75304057,Muy Alta
+20467,5,Pacifico Sur,50.32482676,Media
+20468,10,Golfo Centro,65.45139238,Alta
+20469,5,Pacifico Sur,63.38464916,Alta
+20470,5,Pacifico Sur,27.44919063,Baja
+20471,10,Golfo Centro,13.92799845,Muy Baja
+20472,5,Pacifico Sur,6.787312386,Muy Baja
+20473,10,Golfo Centro,11.09206926,Muy Baja
+20474,5,Pacifico Sur,36.74308166,Baja
+20475,5,Pacifico Sur,59.58239999,Media
+20476,4,Balsas,15.47,Muy Baja
+20477,5,Pacifico Sur,48.869965,Media
+20478,10,Golfo Centro,20.36142433,Baja
+20479,5,Pacifico Sur,31.49894492,Baja
+20480,4,Balsas,99.31,Muy Alta
+20481,5,Pacifico Sur,30.59471192,Baja
+20482,5,Pacifico Sur,50.40316438,Media
+20483,5,Pacifico Sur,48.48508104,Media
+20484,4,Balsas,22.98,Baja
+20485,5,Pacifico Sur,67.06768682,Alta
+20486,4,Balsas,22.15,Baja
+20487,5,Pacifico Sur,66.80226253,Alta
+20488,10,Golfo Centro,3.572782504,Muy Baja
+20489,5,Pacifico Sur,62.05289352,Alta
+20490,10,Golfo Centro,78.03578707,Alta
+20491,5,Pacifico Sur,23.15775026,Baja
+20492,5,Pacifico Sur,58.48600349,Media
+20493,5,Pacifico Sur,13.52179027,Muy Baja
+20494,5,Pacifico Sur,79.83249022,Alta
+20495,5,Pacifico Sur,88.22549285,Muy Alta
+20496,10,Golfo Centro,13.59631075,Muy Baja
+20497,5,Pacifico Sur,83.73667503,Muy Alta
+20498,10,Golfo Centro,88.11824807,Muy Alta
+20499,4,Balsas,11.43,Muy Baja
+20500,5,Pacifico Sur,67.48066347,Alta
+20501,4,Balsas,54.96,Media
+20502,10,Golfo Centro,94.40603964,Muy Alta
+20503,10,Golfo Centro,14.20536078,Muy Baja
+20504,10,Golfo Centro,10.93483664,Muy Baja
+20505,5,Pacifico Sur,56.7458536,Media
+20506,5,Pacifico Sur,42.0925306,Media
+20507,5,Pacifico Sur,65.30006051,Alta
+20508,5,Pacifico Sur,19.8750267,Muy Baja
+20509,5,Pacifico Sur,67.79921661,Alta
+20510,5,Pacifico Sur,51.8109522,Media
+20511,5,Pacifico Sur,65.34995439,Alta
+20512,5,Pacifico Sur,49.49936308,Media
+20513,10,Golfo Centro,34.14543227,Baja
+20514,10,Golfo Centro,17.89303741,Muy Baja
+20515,5,Pacifico Sur,20.48736867,Baja
+20516,5,Pacifico Sur,29.23859851,Baja
+20517,10,Golfo Centro,98.98727989,Muy Alta
+20518,5,Pacifico Sur,27.06439077,Baja
+20519,5,Pacifico Sur,76.17799311,Alta
+20520,4,Balsas,21.19,Baja
+20521,4,Balsas,31.43,Baja
+20522,10,Golfo Centro,70.32524088,Alta
+20523,5,Pacifico Sur,45.34531275,Media
+20524,4,Balsas,23.0,Baja
+20525,5,Pacifico Sur,45.20248193,Media
+20526,5,Pacifico Sur,23.19851636,Baja
+20527,10,Golfo Centro,51.8435837,Media
+20528,4,Balsas,61.58,Alta
+20529,4,Balsas,65.57,Alta
+20530,5,Pacifico Sur,82.6661328,Muy Alta
+20531,5,Pacifico Sur,31.1143814,Baja
+20532,4,Balsas,89.56,Muy Alta
+20533,5,Pacifico Sur,62.74741811,Alta
+20534,5,Pacifico Sur,70.1863666,Alta
+20535,5,Pacifico Sur,55.43735168,Media
+20536,4,Balsas,2.29,Muy Baja
+20537,4,Balsas,36.99,Baja
+20538,5,Pacifico Sur,33.30131046,Baja
+20539,5,Pacifico Sur,57.10332862,Media
+20540,4,Balsas,16.66,Muy Baja
+20541,10,Golfo Centro,22.52882894,Baja
+20542,5,Pacifico Sur,20.45030326,Baja
+20543,5,Pacifico Sur,35.04167194,Baja
+20544,10,Golfo Centro,4.747707192,Muy Baja
+20545,10,Golfo Centro,45.11686404,Media
+20546,5,Pacifico Sur,95.83255039,Muy Alta
+20547,4,Balsas,41.1,Media
+20548,10,Golfo Centro,91.68308619,Muy Alta
+20549,4,Balsas,34.36,Baja
+20550,5,Pacifico Sur,59.50795577,Media
+20551,5,Pacifico Sur,69.03349929,Alta
+20552,10,Golfo Centro,43.84705049,Media
+20553,5,Pacifico Sur,88.99637441,Muy Alta
+20554,10,Golfo Centro,28.38683228,Baja
+20555,5,Pacifico Sur,92.065561,Muy Alta
+20556,4,Balsas,7.0,Muy Baja
+20557,5,Pacifico Sur,47.32989986,Media
+20558,10,Golfo Centro,8.92941031,Muy Baja
+20559,10,Golfo Centro,37.66952211,Baja
+20560,5,Pacifico Sur,77.23225814,Alta
+20561,5,Pacifico Sur,92.78348953,Muy Alta
+20562,5,Pacifico Sur,36.55625659,Baja
+20563,5,Pacifico Sur,99.04414239,Muy Alta
+20564,5,Pacifico Sur,9.142106544,Muy Baja
+20565,5,Pacifico Sur,97.80197262,Muy Alta
+20566,5,Pacifico Sur,57.99342457,Media
+20567,4,Balsas,84.58,Muy Alta
+20568,4,Balsas,38.78,Baja
+20569,5,Pacifico Sur,44.83332195,Media
+20570,5,Pacifico Sur,89.52358609,Muy Alta
+21001,4,Balsas,53.1,Media
+21002,10,Golfo Centro,56.38825273,Media
+21003,4,Balsas,41.11,Media
+21004,4,Balsas,63.05,Alta
+21005,4,Balsas,97.4,Muy Alta
+21006,10,Golfo Centro,55.77913254,Media
+21007,4,Balsas,45.6,Media
+21008,10,Golfo Centro,43.85252818,Media
+21009,4,Balsas,29.63,Baja
+21010,10,Golfo Centro,91.62745566,Muy Alta
+21011,4,Balsas,28.43,Baja
+21012,4,Balsas,20.68,Baja
+21013,10,Golfo Centro,32.93959254,Baja
+21014,10,Golfo Centro,45.18597141,Media
+21015,4,Balsas,24.86,Baja
+21016,10,Golfo Centro,47.87753857,Media
+21017,10,Golfo Centro,34.38518182,Baja
+21018,4,Balsas,42.05,Media
+21019,4,Balsas,6.8,Muy Baja
+21020,4,Balsas,24.45,Baja
+21021,4,Balsas,35.95,Baja
+21022,4,Balsas,61.77,Alta
+21023,10,Golfo Centro,47.90231143,Media
+21024,4,Balsas,42.55,Media
+21025,10,Golfo Centro,45.76575316,Media
+21026,4,Balsas,55.11,Media
+21027,10,Golfo Centro,71.87878053,Alta
+21028,10,Golfo Centro,38.92981003,Baja
+21029,10,Golfo Centro,24.14624817,Baja
+21030,10,Golfo Centro,19.0250985,Muy Baja
+21031,4,Balsas,45.16,Media
+21032,4,Balsas,21.73,Baja
+21033,4,Balsas,60.43,Alta
+21034,4,Balsas,29.04,Baja
+21035,10,Golfo Centro,29.5233888,Baja
+21036,10,Golfo Centro,85.26563691,Muy Alta
+21037,4,Balsas,18.23,Muy Baja
+21038,4,Balsas,81.9,Muy Alta
+21039,10,Golfo Centro,33.97189601,Baja
+21040,4,Balsas,34.71,Baja
+21041,4,Balsas,10.88,Muy Baja
+21042,4,Balsas,9.3,Muy Baja
+21043,10,Golfo Centro,50.28489662,Media
+21044,4,Balsas,8.5,Muy Baja
+21045,4,Balsas,12.38,Muy Baja
+21046,10,Golfo Centro,60.62553539,Alta
+21047,4,Balsas,50.05,Media
+21048,4,Balsas,50.91,Media
+21049,10,Golfo Centro,69.21102223,Alta
+21050,10,Golfo Centro,80.86501158,Muy Alta
+21051,4,Balsas,49.96,Media
+21052,4,Balsas,33.09,Baja
+21053,10,Golfo Centro,52.47838889,Media
+21054,10,Golfo Centro,57.5604928,Media
+21055,4,Balsas,36.53,Baja
+21056,4,Balsas,12.85,Muy Baja
+21057,10,Golfo Centro,42.29450424,Media
+21058,10,Golfo Centro,39.49296438,Baja
+21059,4,Balsas,60.14,Alta
+21060,4,Balsas,72.57,Alta
+21061,10,Golfo Centro,94.51996505,Muy Alta
+21062,4,Balsas,56.52,Media
+21063,10,Golfo Centro,47.39801074,Media
+21064,10,Golfo Centro,51.54773351,Media
+21065,4,Balsas,50.69,Media
+21066,4,Balsas,55.19,Media
+21067,4,Balsas,16.69,Muy Baja
+21068,10,Golfo Centro,63.20750488,Alta
+21069,4,Balsas,62.04,Alta
+21070,4,Balsas,57.17,Media
+21071,10,Golfo Centro,20.81452283,Baja
+21072,10,Golfo Centro,73.8992242,Alta
+21073,4,Balsas,59.37,Media
+21074,4,Balsas,45.76,Media
+21075,10,Golfo Centro,47.97377934,Media
+21076,10,Golfo Centro,25.7332274,Baja
+21077,10,Golfo Centro,92.5398679,Muy Alta
+21078,10,Golfo Centro,80.33756388,Muy Alta
+21079,4,Balsas,57.37,Media
+21080,10,Golfo Centro,67.24169027,Alta
+21081,4,Balsas,82.05,Muy Alta
+21082,4,Balsas,25.07,Baja
+21083,10,Golfo Centro,56.92438152,Media
+21084,10,Golfo Centro,89.05241895,Muy Alta
+21085,4,Balsas,28.7,Baja
+21086,10,Golfo Centro,50.37720961,Media
+21087,4,Balsas,76.57,Alta
+21088,10,Golfo Centro,57.64200653,Media
+21089,10,Golfo Centro,64.6282515,Alta
+21090,4,Balsas,52.98,Media
+21091,10,Golfo Centro,19.00647942,Muy Baja
+21092,4,Balsas,65.1,Alta
+21093,4,Balsas,43.74,Media
+21094,4,Balsas,18.71,Muy Baja
+21095,4,Balsas,6.61,Muy Baja
+21096,4,Balsas,33.65,Baja
+21097,4,Balsas,40.64,Media
+21098,4,Balsas,42.76,Media
+21099,10,Golfo Centro,73.00418408,Alta
+21100,10,Golfo Centro,54.140232,Media
+21101,10,Golfo Centro,56.45892774,Media
+21102,4,Balsas,49.7,Media
+21103,10,Golfo Centro,75.70656546,Alta
+21104,4,Balsas,46.29,Media
+21105,4,Balsas,59.59,Media
+21106,4,Balsas,51.8,Media
+21107,10,Golfo Centro,98.65026913,Muy Alta
+21108,4,Balsas,21.23,Baja
+21109,10,Golfo Centro,49.52219027,Media
+21110,4,Balsas,74.76,Alta
+21111,10,Golfo Centro,66.43875378,Alta
+21112,4,Balsas,49.42,Media
+21113,4,Balsas,64.54,Alta
+21114,4,Balsas,0.0,Muy Baja
+21115,4,Balsas,72.26,Alta
+21116,10,Golfo Centro,71.21454695,Alta
+21117,4,Balsas,21.62,Baja
+21118,4,Balsas,65.05,Alta
+21119,4,Balsas,18.94,Muy Baja
+21120,10,Golfo Centro,83.24499061,Muy Alta
+21121,4,Balsas,67.04,Alta
+21122,4,Balsas,65.31,Alta
+21123,10,Golfo Centro,76.9439125,Alta
+21124,10,Golfo Centro,57.37783634,Media
+21125,4,Balsas,45.14,Media
+21126,4,Balsas,68.29,Alta
+21127,4,Balsas,46.14,Media
+21128,4,Balsas,34.36,Baja
+21129,10,Golfo Centro,58.51144188,Media
+21130,4,Balsas,54.95,Media
+21131,4,Balsas,22.3,Baja
+21132,4,Balsas,43.11,Media
+21133,4,Balsas,68.2,Alta
+21134,4,Balsas,65.28,Alta
+21135,4,Balsas,13.67,Muy Baja
+21136,4,Balsas,27.26,Baja
+21137,4,Balsas,14.0,Muy Baja
+21138,4,Balsas,72.23,Alta
+21139,4,Balsas,37.4,Baja
+21140,4,Balsas,33.18,Baja
+21141,4,Balsas,51.91,Media
+21142,4,Balsas,56.46,Media
+21143,4,Balsas,54.35,Media
+21144,4,Balsas,94.68,Muy Alta
+21145,10,Golfo Centro,97.08969694,Muy Alta
+21146,4,Balsas,57.63,Media
+21147,4,Balsas,72.75,Alta
+21148,4,Balsas,85.95,Muy Alta
+21149,10,Golfo Centro,66.43652884,Alta
+21150,4,Balsas,33.96,Baja
+21151,4,Balsas,78.48,Alta
+21152,4,Balsas,50.0,Media
+21153,4,Balsas,45.42,Media
+21154,4,Balsas,65.3,Alta
+21155,4,Balsas,43.96,Media
+21156,10,Golfo Centro,1.653313112,Muy Baja
+21157,4,Balsas,81.34,Muy Alta
+21158,10,Golfo Centro,89.38464567,Muy Alta
+21159,4,Balsas,94.54,Muy Alta
+21160,4,Balsas,74.83,Alta
+21161,10,Golfo Centro,66.98620121,Alta
+21162,10,Golfo Centro,91.69960193,Muy Alta
+21163,4,Balsas,66.66,Alta
+21164,4,Balsas,64.4,Alta
+21165,4,Balsas,95.96,Muy Alta
+21166,4,Balsas,65.82,Alta
+21167,10,Golfo Centro,72.29310099,Alta
+21168,4,Balsas,96.84,Muy Alta
+21169,4,Balsas,51.56,Media
+21170,4,Balsas,45.25,Media
+21171,4,Balsas,65.31,Alta
+21172,10,Golfo Centro,65.75821568,Alta
+21173,10,Golfo Centro,19.75319564,Muy Baja
+21174,10,Golfo Centro,21.40183062,Baja
+21175,4,Balsas,79.55,Alta
+21176,4,Balsas,53.2,Media
+21177,10,Golfo Centro,76.53730416,Alta
+21178,10,Golfo Centro,67.28794192,Alta
+21179,4,Balsas,27.48,Baja
+21180,4,Balsas,42.86,Media
+21181,4,Balsas,43.72,Media
+21182,4,Balsas,72.8,Alta
+21183,10,Golfo Centro,75.28161685,Alta
+21184,10,Golfo Centro,56.47107135,Media
+21185,4,Balsas,81.14,Muy Alta
+21186,10,Golfo Centro,45.42539917,Media
+21187,10,Golfo Centro,65.49635034,Alta
+21188,4,Balsas,72.83,Alta
+21189,4,Balsas,70.44,Alta
+21190,4,Balsas,44.24,Media
+21191,4,Balsas,69.37,Alta
+21192,10,Golfo Centro,34.19873753,Baja
+21193,4,Balsas,66.37,Alta
+21194,10,Golfo Centro,52.41952947,Media
+21195,10,Golfo Centro,92.61959201,Muy Alta
+21196,4,Balsas,37.33,Baja
+21197,10,Golfo Centro,30.67881598,Baja
+21198,4,Balsas,87.82,Muy Alta
+21199,10,Golfo Centro,46.8659464,Media
+21200,10,Golfo Centro,67.54287514,Alta
+21201,4,Balsas,60.71,Alta
+21202,10,Golfo Centro,76.14312053,Alta
+21203,4,Balsas,42.38,Media
+21204,10,Golfo Centro,27.673905,Baja
+21205,10,Golfo Centro,74.04459322,Alta
+21206,4,Balsas,55.03,Media
+21207,10,Golfo Centro,39.23863255,Baja
+21208,10,Golfo Centro,29.63822996,Baja
+21209,10,Golfo Centro,72.54771946,Alta
+21210,10,Golfo Centro,35.18910004,Baja
+21211,10,Golfo Centro,27.20175538,Baja
+21212,10,Golfo Centro,77.562694,Alta
+21213,10,Golfo Centro,61.47454312,Alta
+21214,10,Golfo Centro,49.71448632,Media
+21215,10,Golfo Centro,23.18558624,Baja
+21216,10,Golfo Centro,81.08542694,Muy Alta
+21217,10,Golfo Centro,93.02618504,Muy Alta
+22001,9,Golfo Norte,98.80019833,Muy Alta
+22002,9,Golfo Norte,68.93978877,Alta
+22003,9,Golfo Norte,48.04254475,Media
+22004,9,Golfo Norte,79.08840056,Alta
+22005,9,Golfo Norte,94.20373476,Muy Alta
+22006,8,Lerma Santiago Pacifico,24.13441213,Baja
+22007,9,Golfo Norte,68.44572154,Alta
+22008,8,Lerma Santiago Pacifico,71.18422772,Alta
+22009,9,Golfo Norte,43.34454662,Media
+22010,9,Golfo Norte,45.12278564,Media
+22011,8,Lerma Santiago Pacifico,62.84225976,Alta
+22012,9,Golfo Norte,86.45655258,Muy Alta
+22013,9,Golfo Norte,56.1622006,Media
+22014,8,Lerma Santiago Pacifico,18.37319668,Muy Baja
+22015,9,Golfo Norte,61.91542252,Alta
+22016,9,Golfo Norte,5.970021427,Muy Baja
+22017,9,Golfo Norte,61.45403232,Alta
+22018,9,Golfo Norte,73.7708555,Alta
+23001,12,Peninsula de Yucatan,34.96993379,Baja
+23002,12,Peninsula de Yucatan,67.05988447,Alta
+23003,12,Peninsula de Yucatan,84.63953746,Muy Alta
+23004,12,Peninsula de Yucatan,1.55107565,Muy Baja
+23005,12,Peninsula de Yucatan,8.050553754,Muy Baja
+23006,12,Peninsula de Yucatan,59.84450221,Media
+23007,12,Peninsula de Yucatan,82.08619212,Muy Alta
+23008,12,Peninsula de Yucatan,32.62605439,Baja
+23009,12,Peninsula de Yucatan,78.91516403,Alta
+23010,12,Peninsula de Yucatan,54.69388288,Media
+23011,12,Peninsula de Yucatan,78.51032011,Alta
+24001,7,Cuencas Centrales del Norte,96.11481361,Muy Alta
+24002,9,Golfo Norte,74.27085228,Alta
+24003,9,Golfo Norte,97.6669345,Muy Alta
+24004,9,Golfo Norte,83.68043792,Muy Alta
+24005,9,Golfo Norte,49.71637783,Media
+24006,7,Cuencas Centrales del Norte,92.10311043,Muy Alta
+24007,7,Cuencas Centrales del Norte,37.51677063,Baja
+24008,9,Golfo Norte,65.32689119,Alta
+24009,7,Cuencas Centrales del Norte,75.38690611,Alta
+24010,9,Golfo Norte,64.0475483,Alta
+24011,9,Golfo Norte,43.2734489,Media
+24012,9,Golfo Norte,93.86352579,Muy Alta
+24013,9,Golfo Norte,5.232871941,Muy Baja
+24014,9,Golfo Norte,63.6581266,Alta
+24015,7,Cuencas Centrales del Norte,92.8175631,Muy Alta
+24016,9,Golfo Norte,9.852062773,Muy Baja
+24017,7,Cuencas Centrales del Norte,99.04780868,Muy Alta
+24018,9,Golfo Norte,82.51291315,Muy Alta
+24019,9,Golfo Norte,75.64869277,Alta
+24020,7,Cuencas Centrales del Norte,26.26969323,Baja
+24021,7,Cuencas Centrales del Norte,94.14442728,Muy Alta
+24022,7,Cuencas Centrales del Norte,91.5188593,Muy Alta
+24023,9,Golfo Norte,73.07625504,Alta
+24024,9,Golfo Norte,62.75023655,Alta
+24025,7,Cuencas Centrales del Norte,82.69985477,Muy Alta
+24026,9,Golfo Norte,72.86240817,Alta
+24027,9,Golfo Norte,60.92542334,Alta
+24028,7,Cuencas Centrales del Norte,4.516189701,Muy Baja
+24029,9,Golfo Norte,92.60388852,Muy Alta
+24030,9,Golfo Norte,68.90115465,Alta
+24031,9,Golfo Norte,98.12300875,Muy Alta
+24032,9,Golfo Norte,78.86857025,Alta
+24033,7,Cuencas Centrales del Norte,93.02070309,Muy Alta
+24034,9,Golfo Norte,60.77500879,Alta
+24035,7,Cuencas Centrales del Norte,26.53005216,Baja
+24036,9,Golfo Norte,76.69599738,Alta
+24037,9,Golfo Norte,8.839184621,Muy Baja
+24038,9,Golfo Norte,26.07845278,Baja
+24039,9,Golfo Norte,77.17786914,Alta
+24040,9,Golfo Norte,48.7842161,Media
+24041,9,Golfo Norte,66.53974817,Alta
+24042,9,Golfo Norte,52.86055519,Media
+24043,9,Golfo Norte,96.21977683,Muy Alta
+24044,7,Cuencas Centrales del Norte,71.26122274,Alta
+24045,7,Cuencas Centrales del Norte,96.59988054,Muy Alta
+24046,7,Cuencas Centrales del Norte,93.73352989,Muy Alta
+24047,7,Cuencas Centrales del Norte,98.96431866,Muy Alta
+24048,7,Cuencas Centrales del Norte,26.97547858,Baja
+24049,7,Cuencas Centrales del Norte,86.69103431,Muy Alta
+24050,7,Cuencas Centrales del Norte,88.57994241,Muy Alta
+24051,7,Cuencas Centrales del Norte,87.40051221,Muy Alta
+24052,9,Golfo Norte,71.65056291,Alta
+24053,9,Golfo Norte,24.43808476,Baja
+24054,9,Golfo Norte,52.21151793,Media
+24055,9,Golfo Norte,82.3719061,Muy Alta
+24056,7,Cuencas Centrales del Norte,80.8738763,Muy Alta
+24057,9,Golfo Norte,28.99269458,Baja
+24058,9,Golfo Norte,11.79781399,Muy Baja
+25001,3,Pacifico Norte,33.37170393,Baja
+25002,3,Pacifico Norte,50.85510936,Media
+25003,3,Pacifico Norte,74.20824804,Alta
+25004,3,Pacifico Norte,33.38967594,Baja
+25005,3,Pacifico Norte,65.83247015,Alta
+25006,3,Pacifico Norte,27.8029499,Baja
+25007,3,Pacifico Norte,57.67440891,Media
+25008,3,Pacifico Norte,40.30295265,Media
+25009,3,Pacifico Norte,33.25636902,Baja
+25010,3,Pacifico Norte,40.13631954,Media
+25011,3,Pacifico Norte,31.77323531,Baja
+25012,3,Pacifico Norte,11.60101134,Muy Baja
+25013,3,Pacifico Norte,43.2268989,Media
+25014,3,Pacifico Norte,39.61798196,Baja
+25015,3,Pacifico Norte,30.37959674,Baja
+25016,3,Pacifico Norte,29.35804619,Baja
+25017,3,Pacifico Norte,33.80257266,Baja
+25018,3,Pacifico Norte,38.14520642,Baja
+26001,2,Noroeste,26.91754717,Baja
+26002,2,Noroeste,46.4963362,Media
+26003,2,Noroeste,66.44797024,Alta
+26004,2,Noroeste,53.33306424,Media
+26005,2,Noroeste,59.32567271,Media
+26006,2,Noroeste,67.04139338,Alta
+26007,2,Noroeste,65.40086896,Alta
+26008,2,Noroeste,42.47635329,Media
+26009,2,Noroeste,59.16430845,Media
+26010,2,Noroeste,73.39179331,Alta
+26011,2,Noroeste,44.16950439,Media
+26012,2,Noroeste,75.21303216,Alta
+26013,2,Noroeste,12.96602295,Muy Baja
+26014,2,Noroeste,6.774036167,Muy Baja
+26015,2,Noroeste,87.23384344,Muy Alta
+26016,2,Noroeste,23.46527037,Baja
+26017,2,Noroeste,57.496786,Media
+26018,2,Noroeste,8.181315152,Muy Baja
+26019,2,Noroeste,18.50780908,Muy Baja
+26020,2,Noroeste,41.30696127,Media
+26021,2,Noroeste,68.44977837,Alta
+26022,2,Noroeste,64.9914449,Alta
+26023,2,Noroeste,15.41747629,Muy Baja
+26024,2,Noroeste,5.354899864,Muy Baja
+26025,2,Noroeste,16.49550085,Muy Baja
+26026,2,Noroeste,58.90281478,Media
+26027,2,Noroeste,42.42885681,Media
+26028,2,Noroeste,24.46299447,Baja
+26029,2,Noroeste,24.10014883,Baja
+26030,2,Noroeste,2.957516495,Muy Baja
+26031,2,Noroeste,55.72542516,Media
+26032,2,Noroeste,25.77672737,Baja
+26033,2,Noroeste,35.64177075,Baja
+26034,2,Noroeste,14.82084616,Muy Baja
+26035,2,Noroeste,45.46369317,Media
+26036,2,Noroeste,42.65422775,Media
+26037,2,Noroeste,56.498068,Media
+26038,2,Noroeste,17.66193912,Muy Baja
+26039,2,Noroeste,55.36898966,Media
+26040,2,Noroeste,76.81359605,Alta
+26041,2,Noroeste,23.00215508,Baja
+26042,2,Noroeste,37.58584785,Baja
+26043,2,Noroeste,29.17940807,Baja
+26044,2,Noroeste,59.78824833,Media
+26045,2,Noroeste,43.79928623,Media
+26046,2,Noroeste,57.66345085,Media
+26047,2,Noroeste,79.04379133,Alta
+26048,2,Noroeste,33.23258083,Baja
+26049,2,Noroeste,96.55227712,Muy Alta
+26050,2,Noroeste,45.80630662,Media
+26051,2,Noroeste,68.62034534,Alta
+26052,2,Noroeste,57.36885558,Media
+26053,2,Noroeste,22.55102899,Baja
+26054,2,Noroeste,3.644052367,Muy Baja
+26055,2,Noroeste,95.3317294,Muy Alta
+26056,2,Noroeste,83.50434268,Muy Alta
+26057,2,Noroeste,70.93194227,Alta
+26058,2,Noroeste,43.10368054,Media
+26059,2,Noroeste,18.13629458,Muy Baja
+26060,2,Noroeste,69.25805534,Alta
+26061,2,Noroeste,81.26012441,Muy Alta
+26062,2,Noroeste,49.7355646,Media
+26063,2,Noroeste,22.88177489,Baja
+26064,2,Noroeste,79.4747961,Alta
+26065,2,Noroeste,29.7505041,Baja
+26066,2,Noroeste,25.29355421,Baja
+26067,2,Noroeste,39.88503039,Baja
+26068,2,Noroeste,54.72469302,Media
+26069,2,Noroeste,86.99353626,Muy Alta
+26070,2,Noroeste,68.15527029,Alta
+26071,2,Noroeste,46.31965436,Media
+26072,2,Noroeste,76.49379532,Alta
+27001,11,Frontera Sur,39.99908897,Baja
+27002,11,Frontera Sur,11.61883433,Muy Baja
+27003,11,Frontera Sur,8.970854677,Muy Baja
+27004,11,Frontera Sur,2.918127669,Muy Baja
+27005,11,Frontera Sur,4.333912747,Muy Baja
+27006,11,Frontera Sur,9.963133491,Muy Baja
+27007,11,Frontera Sur,16.3769487,Muy Baja
+27008,11,Frontera Sur,13.32143389,Muy Baja
+27009,11,Frontera Sur,22.09817601,Baja
+27010,11,Frontera Sur,15.6266747,Muy Baja
+27011,11,Frontera Sur,15.71879332,Muy Baja
+27012,11,Frontera Sur,27.32833421,Baja
+27013,11,Frontera Sur,11.7698801,Muy Baja
+27014,11,Frontera Sur,1.048581155,Muy Baja
+27015,11,Frontera Sur,10.24928687,Muy Baja
+27016,11,Frontera Sur,55.05046506,Media
+27017,11,Frontera Sur,32.34316014,Baja
+28001,9,Golfo Norte,3.505374419,Muy Baja
+28002,9,Golfo Norte,17.41176212,Muy Baja
+28003,9,Golfo Norte,20.59308774,Baja
+28004,9,Golfo Norte,9.511088955,Muy Baja
+28005,9,Golfo Norte,48.72291576,Media
+28006,7,Cuencas Centrales del Norte,80.31148637,Muy Alta
+28007,6,Rio Bravo,30.08379085,Baja
+28008,9,Golfo Norte,51.94861736,Media
+28009,9,Golfo Norte,49.60644187,Media
+28010,9,Golfo Norte,42.49684805,Media
+28011,9,Golfo Norte,11.67055658,Muy Baja
+28012,9,Golfo Norte,19.56395776,Muy Baja
+28013,9,Golfo Norte,13.02293248,Muy Baja
+28014,6,Rio Bravo,87.24740258,Muy Alta
+28015,6,Rio Bravo,87.24543096,Muy Alta
+28016,9,Golfo Norte,45.74060706,Media
+28017,9,Golfo Norte,1.341995781,Muy Baja
+28018,9,Golfo Norte,7.614345234,Muy Baja
+28019,9,Golfo Norte,16.48587755,Muy Baja
+28020,9,Golfo Norte,54.20269117,Media
+28021,9,Golfo Norte,2.257275226,Muy Baja
+28022,6,Rio Bravo,78.93796009,Alta
+28023,9,Golfo Norte,10.25305762,Muy Baja
+28024,6,Rio Bravo,57.65430323,Media
+28025,6,Rio Bravo,91.05183148,Muy Alta
+28026,7,Cuencas Centrales del Norte,46.97249613,Media
+28027,6,Rio Bravo,46.85869584,Media
+28028,9,Golfo Norte,30.01696491,Baja
+28029,9,Golfo Norte,36.66592025,Baja
+28030,9,Golfo Norte,13.6399134,Muy Baja
+28031,9,Golfo Norte,41.84889676,Media
+28032,6,Rio Bravo,89.0987635,Muy Alta
+28033,6,Rio Bravo,69.46907621,Alta
+28034,9,Golfo Norte,84.58072471,Muy Alta
+28035,9,Golfo Norte,17.95405854,Muy Baja
+28036,9,Golfo Norte,98.28489483,Muy Alta
+28037,9,Golfo Norte,17.60042568,Muy Baja
+28038,9,Golfo Norte,3.600108611,Muy Baja
+28039,7,Cuencas Centrales del Norte,29.13225424,Baja
+28040,6,Rio Bravo,85.79265149,Muy Alta
+28041,9,Golfo Norte,5.267317419,Muy Baja
+28042,9,Golfo Norte,55.3569485,Media
+28043,9,Golfo Norte,24.63768069,Baja
+29001,4,Balsas,17.56,Muy Baja
+29002,4,Balsas,18.19,Muy Baja
+29003,4,Balsas,54.29,Media
+29004,4,Balsas,20.34,Baja
+29005,4,Balsas,20.55,Baja
+29006,13,Aguas del Valle de Mexico,37.87254488,Baja
+29007,4,Balsas,28.03,Baja
+29008,4,Balsas,18.5,Muy Baja
+29009,4,Balsas,12.68,Muy Baja
+29010,4,Balsas,12.43,Muy Baja
+29011,4,Balsas,19.96,Muy Baja
+29012,4,Balsas,42.87,Media
+29013,4,Balsas,9.48,Muy Baja
+29014,4,Balsas,26.37,Baja
+29015,4,Balsas,43.13,Media
+29016,4,Balsas,8.81,Muy Baja
+29017,4,Balsas,59.09,Media
+29018,4,Balsas,21.71,Baja
+29019,4,Balsas,47.87,Media
+29020,13,Aguas del Valle de Mexico,34.98007353,Baja
+29021,13,Aguas del Valle de Mexico,21.64368148,Baja
+29022,4,Balsas,32.49,Baja
+29023,4,Balsas,45.12,Media
+29024,4,Balsas,6.63,Muy Baja
+29025,4,Balsas,27.54,Baja
+29026,4,Balsas,7.96,Muy Baja
+29027,4,Balsas,27.59,Baja
+29028,4,Balsas,8.03,Muy Baja
+29029,4,Balsas,27.58,Baja
+29030,4,Balsas,36.57,Baja
+29031,4,Balsas,12.55,Muy Baja
+29032,4,Balsas,29.6,Baja
+29033,4,Balsas,13.24,Muy Baja
+29034,4,Balsas,30.44,Baja
+29035,4,Balsas,21.47,Baja
+29036,4,Balsas,24.71,Baja
+29037,4,Balsas,50.14,Media
+29038,4,Balsas,13.11,Muy Baja
+29039,4,Balsas,6.37,Muy Baja
+29040,4,Balsas,25.68,Baja
+29041,4,Balsas,10.1,Muy Baja
+29042,4,Balsas,34.16,Baja
+29043,4,Balsas,20.76,Baja
+29044,4,Balsas,15.44,Muy Baja
+29045,13,Aguas del Valle de Mexico,21.26950022,Baja
+29046,4,Balsas,20.58,Baja
+29047,4,Balsas,19.55,Muy Baja
+29048,4,Balsas,4.67,Muy Baja
+29049,4,Balsas,36.1,Baja
+29050,4,Balsas,44.15,Media
+29051,4,Balsas,17.72,Muy Baja
+29052,4,Balsas,55.76,Media
+29053,4,Balsas,40.02,Media
+29054,4,Balsas,11.7,Muy Baja
+29055,4,Balsas,44.23,Media
+29056,4,Balsas,42.82,Media
+29057,4,Balsas,20.54,Baja
+29058,4,Balsas,32.32,Baja
+29059,4,Balsas,47.04,Media
+29060,4,Balsas,21.99,Baja
+30001,10,Golfo Centro,40.6533989,Media
+30002,10,Golfo Centro,44.41893432,Media
+30003,10,Golfo Centro,37.59392337,Baja
+30004,10,Golfo Centro,20.51986344,Baja
+30005,10,Golfo Centro,73.85534041,Alta
+30006,10,Golfo Centro,90.81037915,Muy Alta
+30007,10,Golfo Centro,96.4970907,Muy Alta
+30008,10,Golfo Centro,91.12627049,Muy Alta
+30009,10,Golfo Centro,57.25309769,Media
+30010,10,Golfo Centro,41.2474903,Media
+30011,10,Golfo Centro,18.21156671,Muy Baja
+30012,10,Golfo Centro,49.23137439,Media
+30013,9,Golfo Norte,20.39227127,Baja
+30014,10,Golfo Centro,57.8873433,Media
+30015,10,Golfo Centro,61.95742576,Alta
+30016,10,Golfo Centro,34.1255999,Baja
+30017,10,Golfo Centro,36.59180855,Baja
+30018,10,Golfo Centro,93.05610993,Muy Alta
+30019,10,Golfo Centro,84.00852582,Muy Alta
+30020,10,Golfo Centro,84.06270853,Muy Alta
+30021,10,Golfo Centro,65.36820097,Alta
+30022,10,Golfo Centro,69.09258223,Alta
+30023,10,Golfo Centro,61.05894977,Alta
+30024,10,Golfo Centro,66.69265008,Alta
+30025,10,Golfo Centro,50.66904415,Media
+30026,10,Golfo Centro,27.46719496,Baja
+30027,9,Golfo Norte,87.29648508,Muy Alta
+30028,10,Golfo Centro,3.88576839,Muy Baja
+30029,10,Golfo Centro,76.98240761,Alta
+30030,10,Golfo Centro,40.69330899,Media
+30031,10,Golfo Centro,98.47616259,Muy Alta
+30032,10,Golfo Centro,55.36222011,Media
+30033,10,Golfo Centro,40.56314595,Media
+30034,10,Golfo Centro,18.36147449,Muy Baja
+30035,9,Golfo Norte,72.83671026,Alta
+30036,10,Golfo Centro,51.99280225,Media
+30037,10,Golfo Centro,81.39845161,Muy Alta
+30038,10,Golfo Centro,19.74077917,Muy Baja
+30039,10,Golfo Centro,25.46080395,Baja
+30040,10,Golfo Centro,14.87972953,Muy Baja
+30041,10,Golfo Centro,97.72520528,Muy Alta
+30042,10,Golfo Centro,67.88629309,Alta
+30043,10,Golfo Centro,98.72932549,Muy Alta
+30044,10,Golfo Centro,21.40926802,Baja
+30045,10,Golfo Centro,45.76185239,Media
+30046,10,Golfo Centro,58.97752323,Media
+30047,10,Golfo Centro,69.61108917,Alta
+30048,10,Golfo Centro,7.136103911,Muy Baja
+30049,10,Golfo Centro,90.66579712,Muy Alta
+30050,10,Golfo Centro,92.35158311,Muy Alta
+30051,10,Golfo Centro,81.17030398,Muy Alta
+30052,10,Golfo Centro,65.07107841,Alta
+30053,10,Golfo Centro,35.29632383,Baja
+30054,10,Golfo Centro,48.8867863,Media
+30055,9,Golfo Norte,94.647933,Muy Alta
+30056,9,Golfo Norte,82.53691526,Muy Alta
+30057,10,Golfo Centro,75.75147682,Alta
+30058,9,Golfo Norte,57.73006732,Media
+30059,10,Golfo Centro,29.39897412,Baja
+30060,9,Golfo Norte,85.74862559,Muy Alta
+30061,10,Golfo Centro,51.81099407,Media
+30062,10,Golfo Centro,81.55729039,Muy Alta
+30063,9,Golfo Norte,30.27101044,Baja
+30064,10,Golfo Centro,87.92557824,Muy Alta
+30065,10,Golfo Centro,34.84303578,Baja
+30066,10,Golfo Centro,74.92836402,Alta
+30067,10,Golfo Centro,82.9600564,Muy Alta
+30068,10,Golfo Centro,33.96873227,Baja
+30069,10,Golfo Centro,50.79991343,Media
+30070,10,Golfo Centro,78.78136668,Alta
+30071,10,Golfo Centro,58.1799682,Media
+30072,10,Golfo Centro,54.50921586,Media
+30073,10,Golfo Centro,62.66726338,Alta
+30074,10,Golfo Centro,26.95551581,Baja
+30075,10,Golfo Centro,71.39299152,Alta
+30076,9,Golfo Norte,95.99324116,Muy Alta
+30077,10,Golfo Centro,60.99690855,Alta
+30078,9,Golfo Norte,91.83893257,Muy Alta
+30079,10,Golfo Centro,63.32701805,Alta
+30080,10,Golfo Centro,75.58493104,Alta
+30081,10,Golfo Centro,49.55556946,Media
+30082,10,Golfo Centro,26.49049438,Baja
+30083,10,Golfo Centro,63.69953067,Alta
+30084,10,Golfo Centro,79.4298436,Alta
+30085,10,Golfo Centro,6.194315731,Muy Baja
+30086,10,Golfo Centro,29.2427312,Baja
+30087,10,Golfo Centro,3.603859855,Muy Baja
+30088,10,Golfo Centro,43.99429262,Media
+30089,10,Golfo Centro,22.36720415,Baja
+30090,10,Golfo Centro,72.70687385,Alta
+30091,10,Golfo Centro,61.15350153,Alta
+30092,10,Golfo Centro,37.61058301,Baja
+30093,10,Golfo Centro,50.57594596,Media
+30094,10,Golfo Centro,78.09295722,Alta
+30095,10,Golfo Centro,69.47152629,Alta
+30096,10,Golfo Centro,41.27170023,Media
+30097,10,Golfo Centro,30.10361736,Baja
+30098,10,Golfo Centro,52.70899022,Media
+30099,10,Golfo Centro,92.37332866,Muy Alta
+30100,10,Golfo Centro,67.22419595,Alta
+30101,10,Golfo Centro,74.07709676,Alta
+30102,10,Golfo Centro,20.1510893,Baja
+30103,10,Golfo Centro,92.01058327,Muy Alta
+30104,10,Golfo Centro,91.71527907,Muy Alta
+30105,10,Golfo Centro,42.93288036,Media
+30106,10,Golfo Centro,50.48712236,Media
+30107,10,Golfo Centro,65.53202468,Alta
+30108,10,Golfo Centro,17.24362756,Muy Baja
+30109,10,Golfo Centro,14.96037555,Muy Baja
+30110,10,Golfo Centro,99.97294575,Muy Alta
+30111,10,Golfo Centro,14.92403996,Muy Baja
+30112,10,Golfo Centro,21.89090649,Baja
+30113,10,Golfo Centro,84.39813493,Muy Alta
+30114,10,Golfo Centro,7.879585563,Muy Baja
+30115,10,Golfo Centro,30.49142436,Baja
+30116,10,Golfo Centro,28.50531711,Baja
+30117,10,Golfo Centro,45.15617112,Media
+30118,10,Golfo Centro,3.474108916,Muy Baja
+30119,10,Golfo Centro,25.70914725,Baja
+30120,10,Golfo Centro,18.16426514,Muy Baja
+30121,9,Golfo Norte,70.67570968,Alta
+30122,10,Golfo Centro,46.50891699,Media
+30123,9,Golfo Norte,2.777589818,Muy Baja
+30124,10,Golfo Centro,30.57065688,Baja
+30125,10,Golfo Centro,72.68443462,Alta
+30126,10,Golfo Centro,33.8923972,Baja
+30127,10,Golfo Centro,75.09900971,Alta
+30128,10,Golfo Centro,12.4056787,Muy Baja
+30129,9,Golfo Norte,15.4179682,Muy Baja
+30130,10,Golfo Centro,35.46123005,Baja
+30131,10,Golfo Centro,5.329288199,Muy Baja
+30132,10,Golfo Centro,44.10935126,Media
+30133,9,Golfo Norte,39.51325955,Baja
+30134,10,Golfo Centro,37.91250982,Baja
+30135,10,Golfo Centro,51.36496662,Media
+30136,10,Golfo Centro,38.70732406,Baja
+30137,10,Golfo Centro,91.48554659,Muy Alta
+30138,10,Golfo Centro,20.53077977,Baja
+30139,10,Golfo Centro,23.50919668,Baja
+30140,10,Golfo Centro,58.42331983,Media
+30141,10,Golfo Centro,21.0658018,Baja
+30142,10,Golfo Centro,26.39348748,Baja
+30143,10,Golfo Centro,31.30083758,Baja
+30144,10,Golfo Centro,59.59124434,Media
+30145,10,Golfo Centro,21.84497397,Baja
+30146,10,Golfo Centro,25.65594858,Baja
+30147,10,Golfo Centro,65.05234854,Alta
+30148,10,Golfo Centro,74.07976474,Alta
+30149,10,Golfo Centro,80.62771349,Muy Alta
+30150,9,Golfo Norte,49.11413848,Media
+30151,9,Golfo Norte,41.84771678,Media
+30152,9,Golfo Norte,81.58473038,Muy Alta
+30153,9,Golfo Norte,12.94342722,Muy Baja
+30154,9,Golfo Norte,55.36689514,Media
+30155,9,Golfo Norte,89.47268098,Muy Alta
+30156,10,Golfo Centro,60.23054648,Alta
+30157,10,Golfo Centro,83.18666461,Muy Alta
+30158,10,Golfo Centro,49.31410485,Media
+30159,10,Golfo Centro,99.83295338,Muy Alta
+30160,10,Golfo Centro,29.48900937,Baja
+30161,9,Golfo Norte,72.88670542,Alta
+30162,10,Golfo Centro,88.37638325,Muy Alta
+30163,10,Golfo Centro,29.88211328,Baja
+30164,10,Golfo Centro,20.25849184,Baja
+30165,10,Golfo Centro,97.80828292,Muy Alta
+30166,10,Golfo Centro,71.10921638,Alta
+30167,10,Golfo Centro,40.17898919,Media
+30168,10,Golfo Centro,95.5898109,Muy Alta
+30169,10,Golfo Centro,50.00505623,Media
+30170,10,Golfo Centro,93.8511439,Muy Alta
+30171,10,Golfo Centro,93.18197917,Muy Alta
+30172,10,Golfo Centro,74.35236215,Alta
+30173,10,Golfo Centro,95.53870803,Muy Alta
+30174,10,Golfo Centro,40.0284933,Media
+30175,10,Golfo Centro,24.92104596,Baja
+30176,10,Golfo Centro,46.45864676,Media
+30177,10,Golfo Centro,38.37113493,Baja
+30178,10,Golfo Centro,43.19220129,Media
+30179,10,Golfo Centro,70.34293107,Alta
+30180,10,Golfo Centro,78.5813542,Alta
+30181,10,Golfo Centro,66.72276696,Alta
+30182,10,Golfo Centro,9.755807901,Muy Baja
+30183,10,Golfo Centro,11.18719541,Muy Baja
+30184,10,Golfo Centro,80.60625044,Muy Alta
+30185,10,Golfo Centro,52.9297517,Media
+30186,10,Golfo Centro,52.42467108,Media
+30187,10,Golfo Centro,20.63373232,Baja
+30188,10,Golfo Centro,57.88779042,Media
+30189,10,Golfo Centro,4.551545469,Muy Baja
+30190,10,Golfo Centro,17.50629905,Muy Baja
+30191,10,Golfo Centro,27.13388192,Baja
+30192,10,Golfo Centro,20.69040279,Baja
+30193,10,Golfo Centro,2.302886199,Muy Baja
+30194,10,Golfo Centro,24.1024113,Baja
+30195,10,Golfo Centro,84.63659027,Muy Alta
+30196,10,Golfo Centro,59.48481004,Media
+30197,10,Golfo Centro,23.88914051,Baja
+30198,10,Golfo Centro,93.10601891,Muy Alta
+30199,10,Golfo Centro,2.354834244,Muy Baja
+30200,10,Golfo Centro,57.24393629,Media
+30201,10,Golfo Centro,75.73211209,Alta
+30202,9,Golfo Norte,92.85951728,Muy Alta
+30203,10,Golfo Centro,95.95667379,Muy Alta
+30204,10,Golfo Centro,5.696614619,Muy Baja
+30205,9,Golfo Norte,16.66284762,Muy Baja
+30206,10,Golfo Centro,2.113274287,Muy Baja
+30207,10,Golfo Centro,65.39593056,Alta
+30208,10,Golfo Centro,7.986826904,Muy Baja
+30209,10,Golfo Centro,71.18189836,Alta
+30210,10,Golfo Centro,23.00850072,Baja
+30211,10,Golfo Centro,18.51688622,Muy Baja
+30212,10,Golfo Centro,81.38271943,Muy Alta
+31001,12,Peninsula de Yucatan,71.24570649,Alta
+31002,12,Peninsula de Yucatan,30.07257523,Baja
+31003,12,Peninsula de Yucatan,76.48471587,Alta
+31004,12,Peninsula de Yucatan,27.362122,Baja
+31005,12,Peninsula de Yucatan,30.91830061,Baja
+31006,12,Peninsula de Yucatan,74.18880299,Alta
+31007,12,Peninsula de Yucatan,43.72199788,Media
+31008,12,Peninsula de Yucatan,80.11533796,Muy Alta
+31009,12,Peninsula de Yucatan,34.51492321,Baja
+31010,12,Peninsula de Yucatan,99.74607124,Muy Alta
+31011,12,Peninsula de Yucatan,68.74430521,Alta
+31012,12,Peninsula de Yucatan,64.54990474,Alta
+31013,12,Peninsula de Yucatan,16.57977735,Muy Baja
+31014,12,Peninsula de Yucatan,76.60487188,Alta
+31015,12,Peninsula de Yucatan,72.63700155,Alta
+31016,12,Peninsula de Yucatan,46.7545204,Media
+31017,12,Peninsula de Yucatan,90.59802696,Muy Alta
+31018,12,Peninsula de Yucatan,72.34949963,Alta
+31019,12,Peninsula de Yucatan,99.11254897,Muy Alta
+31020,12,Peninsula de Yucatan,44.66623814,Media
+31021,12,Peninsula de Yucatan,97.60106708,Muy Alta
+31022,12,Peninsula de Yucatan,80.0483698,Muy Alta
+31023,12,Peninsula de Yucatan,29.13272087,Baja
+31024,12,Peninsula de Yucatan,73.43807409,Alta
+31025,12,Peninsula de Yucatan,35.65861767,Baja
+31026,12,Peninsula de Yucatan,26.30813354,Baja
+31027,12,Peninsula de Yucatan,42.3303924,Media
+31028,12,Peninsula de Yucatan,69.27813186,Alta
+31029,12,Peninsula de Yucatan,81.96373206,Muy Alta
+31030,12,Peninsula de Yucatan,91.65291105,Muy Alta
+31031,12,Peninsula de Yucatan,81.50723592,Muy Alta
+31032,12,Peninsula de Yucatan,70.00896369,Alta
+31033,12,Peninsula de Yucatan,78.55468734,Alta
+31034,12,Peninsula de Yucatan,82.2641294,Muy Alta
+31035,12,Peninsula de Yucatan,91.51021429,Muy Alta
+31036,12,Peninsula de Yucatan,93.82241441,Muy Alta
+31037,12,Peninsula de Yucatan,53.21927634,Media
+31038,12,Peninsula de Yucatan,33.71297371,Baja
+31039,12,Peninsula de Yucatan,44.08853752,Media
+31040,12,Peninsula de Yucatan,53.06085255,Media
+31041,12,Peninsula de Yucatan,50.66724729,Media
+31042,12,Peninsula de Yucatan,70.41999861,Alta
+31043,12,Peninsula de Yucatan,67.52361787,Alta
+31044,12,Peninsula de Yucatan,18.31833272,Muy Baja
+31045,12,Peninsula de Yucatan,8.659758254,Muy Baja
+31046,12,Peninsula de Yucatan,48.1716995,Media
+31047,12,Peninsula de Yucatan,24.70204219,Baja
+31048,12,Peninsula de Yucatan,23.62273273,Baja
+31049,12,Peninsula de Yucatan,96.28613673,Muy Alta
+31050,12,Peninsula de Yucatan,3.101276028,Muy Baja
+31051,12,Peninsula de Yucatan,33.29823582,Baja
+31052,12,Peninsula de Yucatan,29.25665167,Baja
+31053,12,Peninsula de Yucatan,39.32069299,Baja
+31054,12,Peninsula de Yucatan,11.97900129,Muy Baja
+31055,12,Peninsula de Yucatan,47.81004323,Media
+31056,12,Peninsula de Yucatan,5.189742261,Muy Baja
+31057,12,Peninsula de Yucatan,8.145436489,Muy Baja
+31058,12,Peninsula de Yucatan,3.335211012,Muy Baja
+31059,12,Peninsula de Yucatan,19.62420266,Muy Baja
+31060,12,Peninsula de Yucatan,48.15047421,Media
+31061,12,Peninsula de Yucatan,51.08921952,Media
+31062,12,Peninsula de Yucatan,48.53357645,Media
+31063,12,Peninsula de Yucatan,26.95889964,Baja
+31064,12,Peninsula de Yucatan,19.27518598,Muy Baja
+31065,12,Peninsula de Yucatan,25.80979778,Baja
+31066,12,Peninsula de Yucatan,39.25605077,Baja
+31067,12,Peninsula de Yucatan,47.48573746,Media
+31068,12,Peninsula de Yucatan,36.56999994,Baja
+31069,12,Peninsula de Yucatan,85.48268511,Muy Alta
+31070,12,Peninsula de Yucatan,27.31399653,Baja
+31071,12,Peninsula de Yucatan,56.85597639,Media
+31072,12,Peninsula de Yucatan,20.78657486,Baja
+31073,12,Peninsula de Yucatan,74.81423873,Alta
+31074,12,Peninsula de Yucatan,32.51768439,Baja
+31075,12,Peninsula de Yucatan,81.81418671,Muy Alta
+31076,12,Peninsula de Yucatan,57.49886612,Media
+31077,12,Peninsula de Yucatan,58.32030468,Media
+31078,12,Peninsula de Yucatan,49.59923344,Media
+31079,12,Peninsula de Yucatan,7.341210784,Muy Baja
+31080,12,Peninsula de Yucatan,46.21336224,Media
+31081,12,Peninsula de Yucatan,74.5957529,Alta
+31082,12,Peninsula de Yucatan,63.63135072,Alta
+31083,12,Peninsula de Yucatan,59.94419591,Media
+31084,12,Peninsula de Yucatan,54.86187598,Media
+31085,12,Peninsula de Yucatan,63.10169924,Alta
+31086,12,Peninsula de Yucatan,72.69651174,Alta
+31087,12,Peninsula de Yucatan,73.05306415,Alta
+31088,12,Peninsula de Yucatan,43.1969967,Media
+31089,12,Peninsula de Yucatan,25.94456783,Baja
+31090,12,Peninsula de Yucatan,78.07517418,Alta
+31091,12,Peninsula de Yucatan,56.15116734,Media
+31092,12,Peninsula de Yucatan,98.1837969,Muy Alta
+31093,12,Peninsula de Yucatan,18.98711629,Muy Baja
+31094,12,Peninsula de Yucatan,81.61568075,Muy Alta
+31095,12,Peninsula de Yucatan,28.34815497,Baja
+31096,12,Peninsula de Yucatan,55.30694155,Media
+31097,12,Peninsula de Yucatan,73.79328963,Alta
+31098,12,Peninsula de Yucatan,20.74163338,Baja
+31099,12,Peninsula de Yucatan,92.30780521,Muy Alta
+31100,12,Peninsula de Yucatan,52.87044839,Media
+31101,12,Peninsula de Yucatan,21.97481512,Baja
+31102,12,Peninsula de Yucatan,60.1422685,Alta
+31103,12,Peninsula de Yucatan,75.47524202,Alta
+31104,12,Peninsula de Yucatan,95.58046557,Muy Alta
+31105,12,Peninsula de Yucatan,20.22196649,Baja
+31106,12,Peninsula de Yucatan,29.00266987,Baja
+32001,8,Lerma Santiago Pacifico,17.74595745,Muy Baja
+32002,8,Lerma Santiago Pacifico,19.51066887,Muy Baja
+32003,8,Lerma Santiago Pacifico,12.28304432,Muy Baja
+32004,8,Lerma Santiago Pacifico,28.30442427,Baja
+32005,7,Cuencas Centrales del Norte,11.7480377,Muy Baja
+32006,7,Cuencas Centrales del Norte,40.63534514,Media
+32007,7,Cuencas Centrales del Norte,21.47426845,Baja
+32008,8,Lerma Santiago Pacifico,29.56518237,Baja
+32009,3,Pacifico Norte,39.21265571,Baja
+32010,7,Cuencas Centrales del Norte,15.59160989,Muy Baja
+32011,8,Lerma Santiago Pacifico,56.97535625,Media
+32012,8,Lerma Santiago Pacifico,37.5770164,Baja
+32013,7,Cuencas Centrales del Norte,37.1495756,Baja
+32014,7,Cuencas Centrales del Norte,33.72097887,Baja
+32015,8,Lerma Santiago Pacifico,26.2496787,Baja
+32016,7,Cuencas Centrales del Norte,47.64124102,Media
+32017,7,Cuencas Centrales del Norte,6.300418197,Muy Baja
+32018,8,Lerma Santiago Pacifico,46.82438198,Media
+32019,8,Lerma Santiago Pacifico,31.59995138,Baja
+32020,8,Lerma Santiago Pacifico,30.20176692,Baja
+32021,8,Lerma Santiago Pacifico,25.28078364,Baja
+32022,7,Cuencas Centrales del Norte,30.43205066,Baja
+32023,8,Lerma Santiago Pacifico,5.548932768,Muy Baja
+32024,7,Cuencas Centrales del Norte,19.75322429,Muy Baja
+32025,8,Lerma Santiago Pacifico,37.45568816,Baja
+32026,7,Cuencas Centrales del Norte,48.08062711,Media
+32027,7,Cuencas Centrales del Norte,40.20771941,Media
+32028,8,Lerma Santiago Pacifico,27.03541071,Baja
+32029,7,Cuencas Centrales del Norte,14.61905247,Muy Baja
+32030,8,Lerma Santiago Pacifico,21.8584443,Baja
+32031,8,Lerma Santiago Pacifico,22.16735631,Baja
+32032,7,Cuencas Centrales del Norte,20.26755782,Baja
+32033,8,Lerma Santiago Pacifico,21.76666039,Baja
+32034,8,Lerma Santiago Pacifico,20.075998,Baja
+32035,7,Cuencas Centrales del Norte,41.79166965,Media
+32036,8,Lerma Santiago Pacifico,56.0328891,Media
+32037,7,Cuencas Centrales del Norte,58.2398087,Media
+32038,7,Cuencas Centrales del Norte,45.20632521,Media
+32039,7,Cuencas Centrales del Norte,22.57729814,Baja
+32040,7,Cuencas Centrales del Norte,22.79741559,Baja
+32041,7,Cuencas Centrales del Norte,87.81150689,Muy Alta
+32042,3,Pacifico Norte,31.05064648,Baja
+32043,8,Lerma Santiago Pacifico,46.32246384,Media
+32044,8,Lerma Santiago Pacifico,33.50468015,Baja
+32045,8,Lerma Santiago Pacifico,15.99368068,Muy Baja
+32046,8,Lerma Santiago Pacifico,28.21950155,Baja
+32047,8,Lerma Santiago Pacifico,6.485273163,Muy Baja
+32048,8,Lerma Santiago Pacifico,17.12847339,Muy Baja
+32049,8,Lerma Santiago Pacifico,30.40375987,Baja
+32050,7,Cuencas Centrales del Norte,43.48447513,Media
+32051,7,Cuencas Centrales del Norte,46.84271139,Media
+32052,8,Lerma Santiago Pacifico,15.5529434,Muy Baja
+32053,7,Cuencas Centrales del Norte,48.30579055,Media
+32054,7,Cuencas Centrales del Norte,29.57078483,Baja
+32055,8,Lerma Santiago Pacifico,37.46832731,Baja
+32056,7,Cuencas Centrales del Norte,12.13554165,Muy Baja
+32057,7,Cuencas Centrales del Norte,42.31364667,Media
+32058,8,Lerma Santiago Pacifico,27.66293075,Baja
