@@ -1,0 +1,6 @@
+/.quarto/
+**/*.quarto_ipynb
+.pyproject.toml
+.python-version
+uv.lock
+/.venv/

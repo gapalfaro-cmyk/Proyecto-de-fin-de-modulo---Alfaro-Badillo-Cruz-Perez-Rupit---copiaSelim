@@ -5,11 +5,13 @@ website:
   title: "Evolución de la Sequía en México"
   description: "Análisis territorial y temporal (PRONACOSE)"
   navbar:
+    background: primary
+    pinned: true
     left:
       - href: index.qmd
-        text: Inicio
+        text: 🏠 Inicio
       - href: mis_reportes/reporte-01.qmd
-        text: Exploración y Limpieza
+        text: 📂 Exploración y Limpieza
       - href: mis_reportes/reporte-02.qmd
         text: Análisis y Modelado
       - href: mis_reportes/reporte-03.qmd
