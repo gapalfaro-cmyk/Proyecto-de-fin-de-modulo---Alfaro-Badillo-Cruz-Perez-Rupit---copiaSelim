@@ -1,21 +1,26 @@
 ---
-title: "Primer reporte"
-description: "Análisis de los datos trimestrales"
-date: "2026-09-05"
+title: "1. Exploración, Limpieza y Transformación"
+jupyter: python3
 ---
 
-## Bienvenida
+## Carga de Datos
 
-Este es un ejemplo de un reporte. Puedes borrar el contenido de este archivo y crear el tuyo
+En esta sección exploramos la estructura inicial de los datos de PRONACOSE, identificando valores faltantes e inconsistencias temporales o geográficas.
 
-### Ejemplo de código
+```{python}
+import pandas as pd
+import numpy as np
 
-```{r}
-print("Hola mundo")
+
+df = pd.read_csv("../MunicipiosSequiaCSV.csv")
+
+
+print(f"Total de registros: {df.shape[0]}")
+print(f"Total de variables: {df.shape[1]}\n")
+
+
+df.info()
 ```
 
-### Ejemplo de lista
-
-- Punto uno
-- Punto dos
-- Punto tres
+```{python}
+df.head(5)
