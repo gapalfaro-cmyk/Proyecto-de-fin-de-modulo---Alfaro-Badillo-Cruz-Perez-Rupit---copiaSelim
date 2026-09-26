@@ -9,7 +9,7 @@ website:
     pinned: true
     left:
       - href: index.qmd
-        text: 🏠 Resumen Ejecutivo
+        text: 🏠 Ïndice
       - href: mis_reportes/01-preparacion_datos.qmd
         text: ⚙️ Datos
       - href: mis_reportes/02-analisis_temporal.qmd
