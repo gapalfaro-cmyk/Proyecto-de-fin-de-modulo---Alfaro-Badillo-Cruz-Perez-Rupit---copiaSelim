@@ -1,21 +1,12 @@
 ---
-title: "Reportes trimestrales"
-image: foto_gato.jpg
+title: "Análisis de la Sequía en México"
+image: foto_sequia.jpg
 about:
-  template: jolla   # opciones: jolla, trestles, solana, marquee, broadside
+  template: sandstone   # opciones: jolla, trestles, solana, marquee, broadside
   links:
     - icon: github
       text: GitHub
-      href: https://github.com
-    - icon: linkedin
-      text: LinkedIn
-      href: https://linkedin.com
-    - icon: telegram
-      text: Telegram
-      href: https://t.me
-    - icon: slack
-      text: Slack
-      href: https://slack.com/intl/es-mx/
+      href: https://github.com/gapalfaro-cmyk/Proyecto-de-fin-de-modulo---Alfaro-Badillo-Cruz-Perez-Rupit---copiaSelim/
 ---
 
-En este sitio encontrarás los reportes que se realizaron para el proyecto...
+En este sitio encontrarás el análisis y modelado que se hizo a la información de Programa Nacional Contra la Sequía — PRONACOSE
