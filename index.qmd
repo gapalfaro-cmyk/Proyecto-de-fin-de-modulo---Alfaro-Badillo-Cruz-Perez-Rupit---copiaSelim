@@ -1,12 +1,6 @@
 ---
 title: "Análisis de la Sequía en México"
-image: foto_sequia.jpeg
-about:
-  template: sandstone   # opciones: jolla, trestles, solana, marquee, broadside
-  links:
-    - icon: github
-      text: GitHub
-      href: https://github.com/gapalfaro-cmyk/Proyecto-de-fin-de-modulo---Alfaro-Badillo-Cruz-Perez-Rupit---copiaSelim/
+jupyter: python3
 ---
 
 En este sitio encontrarás el análisis y modelado que se hizo a la información de Programa Nacional Contra la Sequía — PRONACOSE

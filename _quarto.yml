@@ -19,8 +19,7 @@ website:
 
 format:
   html:
-    theme: sandstone
-    css: styles.css
+    theme: cosmo
     toc: true
     code-fold: true 
     execute:

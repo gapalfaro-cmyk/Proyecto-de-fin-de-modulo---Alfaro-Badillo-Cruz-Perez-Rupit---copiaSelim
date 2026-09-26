@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Análisis de la Sequía en México",
+    "section": "",
+    "text": "En este sitio encontrarás el análisis y modelado que se hizo a la información de Programa Nacional Contra la Sequía — PRONACOSE"
+  },
+  {
+    "objectID": "mis_reportes/reporte-01.html",
+    "href": "mis_reportes/reporte-01.html",
+    "title": "1. Exploración, Limpieza y Transformación",
+    "section": "",
+    "text": "En esta sección exploramos la estructura inicial de los datos de PRONACOSE, identificando valores faltantes e inconsistencias temporales o geográficas.\n\n\nCode\nimport pandas as pd\nimport numpy as np\n\n\ndf = pd.read_csv(\"../MunicipiosSequiaCSV.csv\")\n\n\nprint(f\"Total de registros: {df.shape[0]}\")\nprint(f\"Total de variables: {df.shape[1]}\\n\")\n\n\ndf.info()\n\n\nTotal de registros: 2478\nTotal de variables: 444\n\n&lt;class 'pandas.DataFrame'&gt;\nRangeIndex: 2478 entries, 0 to 2477\nColumns: 444 entries, CVE_CONCATENADA to 15-sep-26\ndtypes: float64(2), int64(4), str(438)\nmemory usage: 8.4 MB\n\n\ndf.head(5)"
+  },
+  {
+    "objectID": "mis_reportes/reporte-01.html#carga-de-datos",
+    "href": "mis_reportes/reporte-01.html#carga-de-datos",
+    "title": "1. Exploración, Limpieza y Transformación",
+    "section": "",
+    "text": "En esta sección exploramos la estructura inicial de los datos de PRONACOSE, identificando valores faltantes e inconsistencias temporales o geográficas.\n\n\nCode\nimport pandas as pd\nimport numpy as np\n\n\ndf = pd.read_csv(\"../MunicipiosSequiaCSV.csv\")\n\n\nprint(f\"Total de registros: {df.shape[0]}\")\nprint(f\"Total de variables: {df.shape[1]}\\n\")\n\n\ndf.info()\n\n\nTotal de registros: 2478\nTotal de variables: 444\n\n&lt;class 'pandas.DataFrame'&gt;\nRangeIndex: 2478 entries, 0 to 2477\nColumns: 444 entries, CVE_CONCATENADA to 15-sep-26\ndtypes: float64(2), int64(4), str(438)\nmemory usage: 8.4 MB\n\n\ndf.head(5)"
+  }
+]
