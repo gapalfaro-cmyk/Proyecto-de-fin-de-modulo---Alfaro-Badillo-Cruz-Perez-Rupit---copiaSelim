@@ -16,6 +16,8 @@ website:
         text: Análisis y Modelado
       - href: mis_reportes/reporte-03.qmd
         text: Resultados y Conclusiones
+      - href: mis_reportes/Proyecto_Modulo_8_EDA.qmd
+        text: 📊 EDA Sequía
 
 format:
   html:
