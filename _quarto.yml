@@ -18,7 +18,7 @@ website:
         text: Resultados y Conclusiones
       - href: mis_reportes/Proyecto_Modulo_8_EDA.qmd
         text: 📊 EDA Sequía
-
+        
 format:
   html:
     theme: cosmo
