@@ -23,4 +23,5 @@ df.info()
 ```
 
 ```{python}
-df.head(5)
+display(df.head(5))
+```

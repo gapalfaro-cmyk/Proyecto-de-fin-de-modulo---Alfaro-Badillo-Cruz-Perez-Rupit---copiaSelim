@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -189,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="carga-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="carga-de-datos">Carga de Datos</h2>
 <p>En esta sección exploramos la estructura inicial de los datos de PRONACOSE, identificando valores faltantes e inconsistencias temporales o geográficas.</p>
-<div id="b39dbe26" class="cell" data-execution_count="1">
+<div id="4a5678e8" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -216,7 +219,170 @@ dtypes: float64(2), int64(4), str(438)
 memory usage: 8.4 MB</code></pre>
 </div>
 </div>
-<p>df.head(5)</p>
+<div id="343b5aa1" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>display(df.head(<span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CVE_CONCATENADA</th>
+<th data-quarto-table-cell-role="th">CVE_ENT</th>
+<th data-quarto-table-cell-role="th">CVE_MUN</th>
+<th data-quarto-table-cell-role="th">NOMBRE_MUN</th>
+<th data-quarto-table-cell-role="th">ENTIDAD</th>
+<th data-quarto-table-cell-role="th">ORG_CUENCA*</th>
+<th data-quarto-table-cell-role="th">CLV_OC</th>
+<th data-quarto-table-cell-role="th">CON_CUENCA</th>
+<th data-quarto-table-cell-role="th">CVE_CONC</th>
+<th data-quarto-table-cell-role="th">31-ene-03</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">30-abr-26</th>
+<th data-quarto-table-cell-role="th">15-may-26</th>
+<th data-quarto-table-cell-role="th">31-may-26</th>
+<th data-quarto-table-cell-role="th">15-jun-26</th>
+<th data-quarto-table-cell-role="th">30-jun-26</th>
+<th data-quarto-table-cell-role="th">15-jul-26</th>
+<th data-quarto-table-cell-role="th">31-jul-26</th>
+<th data-quarto-table-cell-role="th">15-ago-26</th>
+<th data-quarto-table-cell-role="th">31-ago-26</th>
+<th data-quarto-table-cell-role="th">15-sep-26</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1002</td>
+<td>1</td>
+<td>2</td>
+<td>Asientos</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1003</td>
+<td>1</td>
+<td>3</td>
+<td>Calvillo</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1004</td>
+<td>1</td>
+<td>4</td>
+<td>Cosío</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1005</td>
+<td>1</td>
+<td>5</td>
+<td>Jesús María</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>NaN</td>
+<td>...</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 444 columns</p>
+</div>
+</div>
+</div>
 
 
 </section>
