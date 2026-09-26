@@ -1,0 +1,27 @@
+p {
+  text-align: justify;
+}
+
+
+.cell {
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  margin-bottom: 2em;
+}
+
+
+h1.title {
+  font-weight: 700;
+  color: #b05c38; 
+  text-align: center;
+  margin-bottom: 1.5em;
+}
+
+blockquote {
+  border-left: 5px solid #d9534f; /* Rojo de alerta */
+  background-color: #fdf5f5;
+  padding: 15px 20px;
+  font-size: 1.1em;
+  font-style: normal;
+  color: #333;
+}

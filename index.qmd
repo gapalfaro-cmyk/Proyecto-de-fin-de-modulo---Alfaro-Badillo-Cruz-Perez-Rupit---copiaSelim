@@ -1,6 +1,30 @@
 ---
-title: "Análisis de la Sequía en México"
-jupyter: python3
+title: "Reporte"
 ---
 
-En este sitio encontrarás el análisis y modelado que se hizo a la información de Programa Nacional Contra la Sequía — PRONACOSE
+![Impacto territorial de la sequía en México.](foto_sequia.jpeg){fig-align="center" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"}
+
+## El Problema del Agua en México
+
+México enfrenta un escenario crítico de estrés hídrico. Entender cómo se distribuye y persiste este fenómeno es fundamental para el diseño de políticas públicas, la asignación de recursos agrícolas y la gestión de presas. Este proyecto analiza la evolución territorial y temporal de la sequía a nivel municipal utilizando registros históricos reales.
+
+## Pregunta de Investigación
+
+**¿Qué regiones del país presentan la mayor exposición y persistencia a niveles críticos de sequía, y cómo ha evolucionado su intensidad en las últimas dos décadas?**
+
+### Objetivos Secundarios
+1. **Modelado Espacial:** Identificar clústers geográficos con patrones estadísticos similares de estrés hídrico.
+2. **Dinámica Temporal:** Detectar la frecuencia y los picos de anomalías (D3 - Sequía Extrema y D4 - Sequía Excepcional) a lo largo del tiempo.
+
+## Metodología y Alcance
+
+El análisis se estructura bajo un enfoque de ciencia de datos, integrando preprocesamiento, análisis exploratorio, modelado no supervisado (Clustering) y visualización interactiva.
+
+* **Fuente Principal:** Programa Nacional Contra la Sequía (PRONACOSE).
+* **Unidad de Análisis:** Nivel Municipal (2,400+ municipios).
+* **Variable Objetivo:** Categorías del Monitor de Sequía (D0 a D4).
+* **Herramientas:** Análisis procesado íntegramente en Python (Pandas, Scikit-learn, Plotly) y desplegado mediante Quarto.
+
+---
+
+> **Nota para la revisión:** Este documento es interactivo. En las siguientes secciones, los bloques de código Python se encuentran colapsados por defecto para facilitar la lectura ejecutiva, pero pueden expandirse haciendo clic en *"Ver código de Python"*.

@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Preparación y Limpieza de Datos – Evolución de la Sequía en México</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-441783e66bab013804a22decd087c97d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script>
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+</script>
+<script type="module">import "https://cdn.plot.ly/plotly-4.1.1.min"</script>
+
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Evolución de la Sequía en México</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">🏠 Resumen Ejecutivo</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../mis_reportes/01-preparacion_datos.html" aria-current="page"> 
+<span class="menu-text">⚙️ Datos</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../mis_reportes/02-analisis_temporal.html"> 
+<span class="menu-text">📈 Evolución Histórica</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../mis_reportes/03-clustering_territorial.html"> 
+<span class="menu-text">🗺️ Patrones Espaciales</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../mis_reportes/04-conclusiones.html"> 
+<span class="menu-text">🎯 Conclusiones</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#transformación-estructural-data-wrangling" id="toc-transformación-estructural-data-wrangling" class="nav-link active" data-scroll-target="#transformación-estructural-data-wrangling">Transformación Estructural (Data Wrangling)</a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">EDA</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Preparación y Limpieza de Datos</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="transformación-estructural-data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="transformación-estructural-data-wrangling">Transformación Estructural (Data Wrangling)</h2>
+<p>La base original de PRONACOSE se presenta en un formato ancho (una columna por fecha). Para facilitar el modelado de series de tiempo y la visualización, aplicamos un proceso de <em>melting</em> para transformar la estructura a un formato largo, obteniendo una serie temporal continua por cada municipio.</p>
+<div class="card">
+<div class="card-header">
+<p><strong>Código de Limpieza y Estandarización de Fechas</strong></p>
+</div>
+<div class="card-body">
+<div id="61667926" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Cargar datos</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../MunicipiosSequiaCSV.csv"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Separar columnas geográficas de las columnas temporales</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>columnas_base <span class="op">=</span> [<span class="st">'CVE_CONCATENADA'</span>, <span class="st">'CVE_ENT'</span>, <span class="st">'CVE_MUN'</span>, <span class="st">'NOMBRE_MUN'</span>, <span class="st">'ENTIDAD'</span>, <span class="st">'ORG_CUENCA*'</span>, <span class="st">'CLV_OC'</span>, <span class="st">'CON_CUENCA'</span>, <span class="st">'CVE_CONC'</span>]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>columnas_fecha <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> col <span class="kw">not</span> <span class="kw">in</span> columnas_base]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Transformar de formato ancho a largo (Melt)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>df_long <span class="op">=</span> df.melt(id_vars<span class="op">=</span>columnas_base, value_vars<span class="op">=</span>columnas_fecha, </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                  var_name<span class="op">=</span><span class="st">'Fecha_Texto'</span>, value_name<span class="op">=</span><span class="st">'Categoria_Sequia'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Manejo de nulos: Los vacíos indican ausencia de sequía</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>df_long[<span class="st">'Categoria_Sequia'</span>] <span class="op">=</span> df_long[<span class="st">'Categoria_Sequia'</span>].fillna(<span class="st">'Sin Sequía'</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Estandarización de fechas ultrarrápida (Mapeo de únicos)</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>meses <span class="op">=</span> {<span class="st">'ene'</span>: <span class="st">'01'</span>, <span class="st">'feb'</span>: <span class="st">'02'</span>, <span class="st">'mar'</span>: <span class="st">'03'</span>, <span class="st">'abr'</span>: <span class="st">'04'</span>, <span class="st">'may'</span>: <span class="st">'05'</span>, <span class="st">'jun'</span>: <span class="st">'06'</span>, </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>         <span class="st">'jul'</span>: <span class="st">'07'</span>, <span class="st">'ago'</span>: <span class="st">'08'</span>, <span class="st">'sep'</span>: <span class="st">'09'</span>, <span class="st">'oct'</span>: <span class="st">'10'</span>, <span class="st">'nov'</span>: <span class="st">'11'</span>, <span class="st">'dic'</span>: <span class="st">'12'</span>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parse_date(date_str):</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        dia, mes, anio <span class="op">=</span> date_str.split(<span class="st">'-'</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.to_datetime(<span class="ss">f'20</span><span class="sc">{</span>anio<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>meses[mes.lower()]<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>dia<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.NaT</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># EL TRUCO: Solo calculamos las fechas únicas (ej. 500 cálculos en lugar de 1.5 millones)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>fechas_unicas <span class="op">=</span> df_long[<span class="st">'Fecha_Texto'</span>].unique()</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>mapa_fechas <span class="op">=</span> {fecha: parse_date(fecha) <span class="cf">for</span> fecha <span class="kw">in</span> fechas_unicas}</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Asignamos el diccionario mapeado a la columna completa instantáneamente</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>df_long[<span class="st">'Fecha'</span>] <span class="op">=</span> df_long[<span class="st">'Fecha_Texto'</span>].<span class="bu">map</span>(mapa_fechas)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Crear un índice numérico de severidad para futuros modelos (0 a 5)</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>mapa_sequia <span class="op">=</span> {<span class="st">'Sin Sequía'</span>: <span class="dv">0</span>, <span class="st">'D0'</span>: <span class="dv">1</span>, <span class="st">'D1'</span>: <span class="dv">2</span>, <span class="st">'D2'</span>: <span class="dv">3</span>, <span class="st">'D3'</span>: <span class="dv">4</span>, <span class="st">'D4'</span>: <span class="dv">5</span>}</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>df_long[<span class="st">'Nivel_Num'</span>] <span class="op">=</span> df_long[<span class="st">'Categoria_Sequia'</span>].<span class="bu">map</span>(mapa_sequia)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Limpiar columnas innecesarias y ordenar</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>df_clean <span class="op">=</span> df_long.drop(columns<span class="op">=</span>[<span class="st">'Fecha_Texto'</span>]).sort_values([<span class="st">'CVE_CONCATENADA'</span>, <span class="st">'Fecha'</span>])</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Estructura final: </span><span class="sc">{</span>df_clean<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss"> registros."</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>df_clean.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estructura final: 1,077,930 registros.</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CVE_CONCATENADA</th>
+<th data-quarto-table-cell-role="th">CVE_ENT</th>
+<th data-quarto-table-cell-role="th">CVE_MUN</th>
+<th data-quarto-table-cell-role="th">NOMBRE_MUN</th>
+<th data-quarto-table-cell-role="th">ENTIDAD</th>
+<th data-quarto-table-cell-role="th">ORG_CUENCA*</th>
+<th data-quarto-table-cell-role="th">CLV_OC</th>
+<th data-quarto-table-cell-role="th">CON_CUENCA</th>
+<th data-quarto-table-cell-role="th">CVE_CONC</th>
+<th data-quarto-table-cell-role="th">Categoria_Sequia</th>
+<th data-quarto-table-cell-role="th">Fecha</th>
+<th data-quarto-table-cell-role="th">Nivel_Num</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>Sin Sequía</td>
+<td>2003-01-31</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2478</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>Sin Sequía</td>
+<td>2003-02-28</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4956</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>Sin Sequía</td>
+<td>2003-03-31</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7434</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>Sin Sequía</td>
+<td>2003-04-30</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">9912</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>Lerma-Santiago-Pacífico</td>
+<td>VIII</td>
+<td>Rio Santiago</td>
+<td>16</td>
+<td>Sin Sequía</td>
+<td>2003-05-31</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="eda" class="level2">
+<h2 class="anchored" data-anchor-id="eda">EDA</h2>
+<p>Para entender el comportamiento histórico, calculamos cuántos municipios se encontraban en cada categoría de sequía en cada quincena registrada desde 2003 hasta 2026.</p>
+<div class="card">
+<div class="card-header">
+<p>Evolución Nacional de la Sequía (2003 - 2026)</p>
+</div>
+<div class="card-body">
+<div id="2b063b9d" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Contar municipios por categoría en cada fecha</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>evolucion <span class="op">=</span> df_clean.groupby([<span class="st">'Fecha'</span>, <span class="st">'Categoria_Sequia'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'Conteo'</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Colores oficiales del Monitor de Sequía</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>orden <span class="op">=</span> [<span class="st">'Sin Sequía'</span>, <span class="st">'D0'</span>, <span class="st">'D1'</span>, <span class="st">'D2'</span>, <span class="st">'D3'</span>, <span class="st">'D4'</span>]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>colores <span class="op">=</span> {<span class="st">'Sin Sequía'</span>: <span class="st">'#e0e0e0'</span>, <span class="st">'D0'</span>: <span class="st">'#ffff00'</span>, <span class="st">'D1'</span>: <span class="st">'#fcd37f'</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">'D2'</span>: <span class="st">'#ffaa00'</span>, <span class="st">'D3'</span>: <span class="st">'#e60000'</span>, <span class="st">'D4'</span>: <span class="st">'#730000'</span>}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica de área apilada interactiva</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfica de área apilada interactiva</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.area(evolucion, x<span class="op">=</span><span class="st">'Fecha'</span>, y<span class="op">=</span><span class="st">'Conteo'</span>, </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>              color<span class="op">=</span><span class="st">'Categoria_Sequia'</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>              category_orders<span class="op">=</span>{<span class="st">'Categoria_Sequia'</span>: orden},</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>              color_discrete_map<span class="op">=</span>colores)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    title_text<span class="op">=</span><span class="st">'Proporción de Municipios por Nivel de Severidad de Sequía'</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">'Año'</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">'Número de Municipios'</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    hovermode<span class="op">=</span><span class="st">'x unified'</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    legend_title_text<span class="op">=</span><span class="st">'Nivel de Sequía'</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="bu">dict</span>(l<span class="op">=</span><span class="dv">20</span>, r<span class="op">=</span><span class="dv">20</span>, t<span class="op">=</span><span class="dv">50</span>, b<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar la gráfica en Quarto</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div style="height:525px; width:100%;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="c6e12d72-1739-45cd-9ebc-f01912d65182" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("c6e12d72-1739-45cd-9ebc-f01912d65182")) {                    Plotly.newPlot(                        "c6e12d72-1739-45cd-9ebc-f01912d65182",                        [{"fillpattern":{"shape":""},"hovertemplate":"Categoria_Sequia=Sin Sequ\u00eda\u003cbr\u003eFecha=%{x}\u003cbr\u003eConteo=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Sin Sequ\u00eda","line":{"color":"#e0e0e0"},"marker":{"symbol":"circle"},"mode":"lines","name":"Sin Sequ\u00eda","orientation":"v","showlegend":true,"stackgroup":"1","x":["2003-01-31T00:00:00.000000","2003-02-28T00:00:00.000000","2003-03-31T00:00:00.000000","2003-04-30T00:00:00.000000","2003-05-31T00:00:00.000000","2003-06-30T00:00:00.000000","2003-07-31T00:00:00.000000","2003-08-31T00:00:00.000000","2003-09-30T00:00:00.000000","2003-10-31T00:00:00.000000","2003-11-30T00:00:00.000000","2003-12-31T00:00:00.000000","2004-01-31T00:00:00.000000","2004-02-29T00:00:00.000000","2004-03-31T00:00:00.000000","2004-04-30T00:00:00.000000","2004-05-31T00:00:00.000000","2004-06-30T00:00:00.000000","2004-07-31T00:00:00.000000","2004-08-31T00:00:00.000000","2004-09-30T00:00:00.000000","2004-10-31T00:00:00.000000","2004-11-30T00:00:00.000000","2004-12-31T00:00:00.000000","2005-01-31T00:00:00.000000","2005-02-28T00:00:00.000000","2005-03-31T00:00:00.000000","2005-04-30T00:00:00.000000","2005-05-31T00:00:00.000000","2005-06-30T00:00:00.000000","2005-07-31T00:00:00.000000","2005-08-31T00:00:00.000000","2005-09-30T00:00:00.000000","2005-10-31T00:00:00.000000","2005-11-30T00:00:00.000000","2005-12-31T00:00:00.000000","2006-01-31T00:00:00.000000","2006-02-28T00:00:00.000000","2006-03-31T00:00:00.000000","2006-04-30T00:00:00.000000","2006-05-31T00:00:00.000000","2006-06-30T00:00:00.000000","2006-07-31T00:00:00.000000","2006-08-31T00:00:00.000000","2006-09-30T00:00:00.000000","2006-10-31T00:00:00.000000","2006-11-30T00:00:00.000000","2006-12-31T00:00:00.000000","2007-01-31T00:00:00.000000","2007-02-28T00:00:00.000000","2007-03-31T00:00:00.000000","2007-04-30T00:00:00.000000","2007-05-31T00:00:00.000000","2007-06-30T00:00:00.000000","2007-07-31T00:00:00.000000","2007-08-31T00:00:00.000000","2007-09-30T00:00:00.000000","2007-10-31T00:00:00.000000","2007-11-30T00:00:00.000000","2007-12-31T00:00:00.000000","2008-01-31T00:00:00.000000","2008-02-29T00:00:00.000000","2008-03-31T00:00:00.000000","2008-04-30T00:00:00.000000","2008-05-31T00:00:00.000000","2008-06-30T00:00:00.000000","2008-07-31T00:00:00.000000","2008-08-31T00:00:00.000000","2008-09-30T00:00:00.000000","2008-10-31T00:00:00.000000","2008-11-30T00:00:00.000000","2008-12-31T00:00:00.000000","2009-01-31T00:00:00.000000","2009-02-28T00:00:00.000000","2009-03-31T00:00:00.000000","2009-04-30T00:00:00.000000","2009-05-31T00:00:00.000000","2009-06-30T00:00:00.000000","2009-07-31T00:00:00.000000","2009-08-31T00:00:00.000000","2009-09-30T00:00:00.000000","2009-10-31T00:00:00.000000","2009-11-30T00:00:00.000000","2009-12-31T00:00:00.000000","2010-01-31T00:00:00.000000","2010-02-28T00:00:00.000000","2010-03-31T00:00:00.000000","2010-04-30T00:00:00.000000","2010-05-31T00:00:00.000000","2010-06-30T00:00:00.000000","2010-07-31T00:00:00.000000","2010-08-31T00:00:00.000000","2010-09-30T00:00:00.000000","2010-10-31T00:00:00.000000","2010-11-30T00:00:00.000000","2010-12-31T00:00:00.000000","2011-01-31T00:00:00.000000","2011-02-28T00:00:00.000000","2011-03-31T00:00:00.000000","2011-04-30T00:00:00.000000","2011-05-31T00:00:00.000000","2011-06-30T00:00:00.000000","2011-07-31T00:00:00.000000","2011-08-31T00:00:00.000000","2011-09-30T00:00:00.000000","2011-10-31T00:00:00.000000","2011-11-30T00:00:00.000000","2011-12-31T00:00:00.000000","2012-01-31T00:00:00.000000","2012-02-29T00:00:00.000000","2012-03-31T00:00:00.000000","2012-04-30T00:00:00.000000","2012-05-31T00:00:00.000000","2012-06-30T00:00:00.000000","2012-07-31T00:00:00.000000","2012-08-31T00:00:00.000000","2012-09-30T00:00:00.000000","2012-10-31T00:00:00.000000","2012-11-30T00:00:00.000000","2012-12-31T00:00:00.000000","2013-01-31T00:00:00.000000","2013-02-28T00:00:00.000000","2013-03-31T00:00:00.000000","2013-04-30T00:00:00.000000","2013-05-31T00:00:00.000000","2013-06-30T00:00:00.000000","2013-07-31T00:00:00.000000","2013-08-31T00:00:00.000000","2013-09-30T00:00:00.000000","2013-10-31T00:00:00.000000","2013-11-30T00:00:00.000000","2013-12-31T00:00:00.000000","2014-01-31T00:00:00.000000","2014-02-15T00:00:00.000000","2014-02-28T00:00:00.000000","2014-03-15T00:00:00.000000","2014-03-31T00:00:00.000000","2014-04-15T00:00:00.000000","2014-04-30T00:00:00.000000","2014-05-15T00:00:00.000000","2014-05-31T00:00:00.000000","2014-06-15T00:00:00.000000","2014-06-30T00:00:00.000000","2014-07-15T00:00:00.000000","2014-07-31T00:00:00.000000","2014-08-15T00:00:00.000000","2014-08-31T00:00:00.000000","2014-09-15T00:00:00.000000","2014-09-30T00:00:00.000000","2014-10-15T00:00:00.000000","2014-10-31T00:00:00.000000","2014-11-15T00:00:00.000000","2014-11-30T00:00:00.000000","2014-12-15T00:00:00.000000","2014-12-31T00:00:00.000000","2015-01-15T00:00:00.000000","2015-01-31T00:00:00.000000","2015-02-15T00:00:00.000000","2015-02-28T00:00:00.000000","2015-03-15T00:00:00.000000","2015-03-31T00:00:00.000000","2015-04-15T00:00:00.000000","2015-04-30T00:00:00.000000","2015-05-15T00:00:00.000000","2015-05-31T00:00:00.000000","2015-06-15T00:00:00.000000","2015-06-30T00:00:00.000000","2015-07-15T00:00:00.000000","2015-07-31T00:00:00.000000","2015-08-15T00:00:00.000000","2015-08-31T00:00:00.000000","2015-09-15T00:00:00.000000","2015-09-30T00:00:00.000000","2015-10-15T00:00:00.000000","2015-10-31T00:00:00.000000","2015-11-15T00:00:00.000000","2015-11-30T00:00:00.000000","2015-12-15T00:00:00.000000","2015-12-31T00:00:00.000000","2016-01-15T00:00:00.000000","2016-01-31T00:00:00.000000","2016-02-15T00:00:00.000000","2016-02-29T00:00:00.000000","2016-03-15T00:00:00.000000","2016-03-31T00:00:00.000000","2016-04-15T00:00:00.000000","2016-04-30T00:00:00.000000","2016-05-15T00:00:00.000000","2016-05-31T00:00:00.000000","2016-06-15T00:00:00.000000","2016-06-30T00:00:00.000000","2016-07-15T00:00:00.000000","2016-07-31T00:00:00.000000","2016-08-15T00:00:00.000000","2016-08-31T00:00:00.000000","2016-09-15T00:00:00.000000","2016-09-30T00:00:00.000000","2016-10-15T00:00:00.000000","2016-10-31T00:00:00.000000","2016-11-15T00:00:00.000000","2016-11-30T00:00:00.000000","2016-12-15T00:00:00.000000","2016-12-31T00:00:00.000000","2017-01-15T00:00:00.000000","2017-01-31T00:00:00.000000","2017-02-15T00:00:00.000000","2017-02-28T00:00:00.000000","2017-03-15T00:00:00.000000","2017-03-31T00:00:00.000000","2017-04-15T00:00:00.000000","2017-04-30T00:00:00.000000","2017-05-15T00:00:00.000000","2017-05-31T00:00:00.000000","2017-06-15T00:00:00.000000","2017-06-30T00:00:00.000000","2017-07-15T00:00:00.000000","2017-07-31T00:00:00.000000","2017-08-15T00:00:00.000000","2017-08-31T00:00:00.000000","2017-09-15T00:00:00.000000","2017-09-30T00:00:00.000000","2017-10-15T00:00:00.000000","2017-10-31T00:00:00.000000","2017-11-15T00:00:00.000000","2017-11-30T00:00:00.000000","2017-12-15T00:00:00.000000","2017-12-31T00:00:00.000000","2018-01-15T00:00:00.000000","2018-01-31T00:00:00.000000","2018-02-15T00:00:00.000000","2018-02-28T00:00:00.000000","2018-03-15T00:00:00.000000","2018-03-31T00:00:00.000000","2018-04-15T00:00:00.000000","2018-04-30T00:00:00.000000","2018-05-15T00:00:00.000000","2018-05-31T00:00:00.000000","2018-06-15T00:00:00.000000","2018-06-30T00:00:00.000000","2018-07-15T00:00:00.000000","2018-07-31T00:00:00.000000","2018-08-15T00:00:00.000000","2018-08-31T00:00:00.000000","2018-09-15T00:00:00.000000","2018-09-30T00:00:00.000000","2018-10-15T00:00:00.000000","2018-10-31T00:00:00.000000","2018-11-15T00:00:00.000000","2018-11-30T00:00:00.000000","2018-12-15T00:00:00.000000","2018-12-31T00:00:00.000000","2019-01-15T00:00:00.000000","2019-01-31T00:00:00.000000","2019-02-15T00:00:00.000000","2019-02-28T00:00:00.000000","2019-03-15T00:00:00.000000","2019-03-31T00:00:00.000000","2019-04-15T00:00:00.000000","2019-04-30T00:00:00.000000","2019-05-15T00:00:00.000000","2019-05-31T00:00:00.000000","2019-06-15T00:00:00.000000","2019-06-30T00:00:00.000000","2019-07-15T00:00:00.000000","2019-07-31T00:00:00.000000","2019-08-15T00:00:00.000000","2019-08-31T00:00:00.000000","2019-09-15T00:00:00.000000","2019-09-30T00:00:00.000000","2019-10-15T00:00:00.000000","2019-10-31T00:00:00.000000","2019-11-15T00:00:00.000000","2019-11-30T00:00:00.000000","2019-12-15T00:00:00.000000","2019-12-31T00:00:00.000000","2020-01-15T00:00:00.000000","2020-01-31T00:00:00.000000","2020-02-15T00:00:00.000000","2020-02-29T00:00:00.000000","2020-03-15T00:00:00.000000","2020-03-31T00:00:00.000000","2020-04-15T00:00:00.000000","2020-04-30T00:00:00.000000","2020-05-15T00:00:00.000000","2020-05-31T00:00:00.000000","2020-06-15T00:00:00.000000","2020-06-30T00:00:00.000000","2020-07-15T00:00:00.000000","2020-07-31T00:00:00.000000","2020-08-15T00:00:00.000000","2020-08-31T00:00:00.000000","2020-09-15T00:00:00.000000","2020-09-30T00:00:00.000000","2020-10-15T00:00:00.000000","2020-10-31T00:00:00.000000","2020-11-15T00:00:00.000000","2020-11-30T00:00:00.000000","2020-12-15T00:00:00.000000","2020-12-31T00:00:00.000000","2021-01-15T00:00:00.000000","2021-01-31T00:00:00.000000","2021-02-15T00:00:00.000000","2021-02-28T00:00:00.000000","2021-03-15T00:00:00.000000","2021-03-31T00:00:00.000000","2021-04-15T00:00:00.000000","2021-04-30T00:00:00.000000","2021-05-15T00:00:00.000000","2021-05-31T00:00:00.000000","2021-06-15T00:00:00.000000","2021-06-30T00:00:00.000000","2021-07-15T00:00:00.000000","2021-07-31T00:00:00.000000","2021-08-15T00:00:00.000000","2021-08-31T00:00:00.000000","2021-09-15T00:00:00.000000","2021-09-30T00:00:00.000000","2021-10-15T00:00:00.000000","2021-10-31T00:00:00.000000","2021-11-15T00:00:00.000000","2021-11-30T00:00:00.000000","2021-12-15T00:00:00.000000","2021-12-31T00:00:00.000000","2022-01-15T00:00:00.000000","2022-01-31T00:00:00.000000","2022-02-15T00:00:00.000000","2022-02-28T00:00:00.000000","2022-03-15T00:00:00.000000","2022-03-31T00:00:00.000000","2022-04-15T00:00:00.000000","2022-04-30T00:00:00.000000","2022-05-15T00:00:00.000000","2022-05-31T00:00:00.000000","2022-06-15T00:00:00.000000","2022-06-30T00:00:00.000000","2022-07-15T00:00:00.000000","2022-07-31T00:00:00.000000","2022-08-15T00:00:00.000000","2022-08-31T00:00:00.000000","2022-09-15T00:00:00.000000","2022-09-30T00:00:00.000000","2022-10-15T00:00:00.000000","2022-10-31T00:00:00.000000","2022-11-15T00:00:00.000000","2022-11-30T00:00:00.000000","2022-12-15T00:00:00.000000","2022-12-31T00:00:00.000000","2023-01-15T00:00:00.000000","2023-01-31T00:00:00.000000","2023-02-15T00:00:00.000000","2023-02-28T00:00:00.000000","2023-03-15T00:00:00.000000","2023-03-31T00:00:00.000000","2023-04-30T00:00:00.000000","2023-05-15T00:00:00.000000","2023-05-31T00:00:00.000000","2023-06-15T00:00:00.000000","2023-06-30T00:00:00.000000","2023-07-15T00:00:00.000000","2023-07-31T00:00:00.000000","2023-08-15T00:00:00.000000","2023-08-31T00:00:00.000000","2023-09-15T00:00:00.000000","2023-09-30T00:00:00.000000","2023-10-15T00:00:00.000000","2023-10-31T00:00:00.000000","2023-11-15T00:00:00.000000","2023-11-30T00:00:00.000000","2023-12-15T00:00:00.000000","2023-12-31T00:00:00.000000","2024-01-15T00:00:00.000000","2024-01-31T00:00:00.000000","2024-02-15T00:00:00.000000","2024-02-29T00:00:00.000000","2024-03-15T00:00:00.000000","2024-03-31T00:00:00.000000","2024-04-15T00:00:00.000000","2024-04-30T00:00:00.000000","2024-05-15T00:00:00.000000","2024-05-31T00:00:00.000000","2024-06-15T00:00:00.000000","2024-06-30T00:00:00.000000","2024-07-15T00:00:00.000000","2024-07-31T00:00:00.000000","2024-08-15T00:00:00.000000","2024-08-31T00:00:00.000000","2024-09-15T00:00:00.000000","2024-09-30T00:00:00.000000","2024-10-15T00:00:00.000000","2024-10-31T00:00:00.000000","2024-11-15T00:00:00.000000","2024-11-30T00:00:00.000000","2024-12-15T00:00:00.000000","2024-12-31T00:00:00.000000","2025-01-15T00:00:00.000000","2025-01-31T00:00:00.000000","2025-02-15T00:00:00.000000","2025-02-28T00:00:00.000000","2025-03-15T00:00:00.000000","2025-03-31T00:00:00.000000","2025-04-15T00:00:00.000000","2025-04-30T00:00:00.000000","2025-05-15T00:00:00.000000","2025-05-31T00:00:00.000000","2025-06-15T00:00:00.000000","2025-06-30T00:00:00.000000","2025-07-15T00:00:00.000000","2025-07-31T00:00:00.000000","2025-08-15T00:00:00.000000","2025-08-31T00:00:00.000000","2025-09-15T00:00:00.000000","2025-09-30T00:00:00.000000","2025-10-15T00:00:00.000000","2025-10-31T00:00:00.000000","2025-11-15T00:00:00.000000","2025-11-30T00:00:00.000000","2025-12-15T00:00:00.000000","2025-12-31T00:00:00.000000","2026-01-15T00:00:00.000000","2026-01-31T00:00:00.000000","2026-02-15T00:00:00.000000","2026-02-28T00:00:00.000000","2026-03-15T00:00:00.000000","2026-03-31T00:00:00.000000","2026-04-15T00:00:00.000000","2026-04-30T00:00:00.000000","2026-05-15T00:00:00.000000","2026-05-31T00:00:00.000000","2026-06-15T00:00:00.000000","2026-06-30T00:00:00.000000","2026-07-15T00:00:00.000000","2026-07-31T00:00:00.000000","2026-08-15T00:00:00.000000","2026-08-31T00:00:00.000000","2026-09-15T00:00:00.000000"],"xaxis":"x","y":{"dtype":"i2","bdata":"WATkA1kEGAQYBJEDwQOuCVwGvwi0CDQIPwiuCcEIYQlTCbkIugj\u002fBtYEOwVQBWAFEgWxBY4GrwUbBXEGlgfuCG0GIgd4BhcERAJJAokDuQJHBUYEjQMxBSEHtgZ6B+kHkwfYB2wF8wPSBe4CQQRNCPUG9QeGB68H\u002fAY5BG0DdAPqAeEC9QV2BqgGFwc0BoAFIQX+BJwEKgRIBC8EYwMmAaME0wSFBIIEJQXDBuYGygaCBp0GugiNCYQJLwmUCBIIhQdhBzICrgD\u002fAGwBsgLBAtgGGQUbBSwFsAVEB20HdAeNBwwI4wdoCIgIbwjsB6EHegd+Bh4H5AV9BbkGmQa6BpoI0AhVCWAJ+whMCAAIPgjYB1kH4wbpB\u002fUHAwjBB3cHGwfZBp4GfQbbBuYGOghuCI8IcQhZCDoIZQh7CEgIggiICCAIEAgPCDYITwh4Bw0HAgazBY8EcwSKBG0EGAUrBoAGxwbtBrIGngbwBTMFKQUYBd4EIQU1BYcFIgU5BM0DkwMcBDkFyQXuBdEFzAVjBqMFSQWmBRYGswXkBAYEygPzA+0DOwRVBNQEZwS0Ax4EpQRvBWAGtQaJBmoHVgdVB+sG\u002fAb+Bb8FcgVMBeYEpgT+A\u002fkDyARhBbMFLQZiBtwEcQO9AiMDbAORAycELwZfBlkGYQYfBmQGAAaqBZEEKQQfBIMDmgLLAXICoQI0AtoB2AH7AbEBAgIpAvcCCwS+BH8FtwUBBvoF4AWtBUsFLAUUBMEDJQTsBNcEggTuA7YDpAPRA68D3QMpBGUE6wMpBC0E3gMuAzMDwAOeAzADBAOrAqUCvwGnAoUD5wTmBkAHQgfLBtkHqAhtB6gG1AamBp8GAAbMBA0F0AT5BPUEzATnBK0CXwNMAgcD8wMsBJsD1QJxA4ADvQSoBQYGcAb3BbIEkwOyAlkC8AHhAcQBHgLGAf4B\u002fQKuA\u002fwCBgKyAcIAQQFHAcIAmQASAY4BqQH7AZECkQHCAJcBiAFqAYwBPwHOAJ4AKwArADAAZwGtAsEFngY+B5oHXQgbCAkI\u002fAfoB\u002fkHBggCCHUHVgeABzcH0QbkBYMFZwWXBkgHWAgTCKwHOQdxBsoG8AYJCPgH8AeZB3MITwh4CNoIlQjECMAIDQnpCNsI2wiHCAUJrQhYB80GeQbKBFoE"},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"Categoria_Sequia=D0\u003cbr\u003eFecha=%{x}\u003cbr\u003eConteo=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"D0","line":{"color":"#ffff00"},"marker":{"symbol":"circle"},"mode":"lines","name":"D0","orientation":"v","showlegend":true,"stackgroup":"1","x":["2003-01-31T00:00:00.000000","2003-02-28T00:00:00.000000","2003-03-31T00:00:00.000000","2003-04-30T00:00:00.000000","2003-05-31T00:00:00.000000","2003-06-30T00:00:00.000000","2003-07-31T00:00:00.000000","2003-09-30T00:00:00.000000","2003-10-31T00:00:00.000000","2003-11-30T00:00:00.000000","2003-12-31T00:00:00.000000","2004-01-31T00:00:00.000000","2004-03-31T00:00:00.000000","2004-04-30T00:00:00.000000","2004-05-31T00:00:00.000000","2004-06-30T00:00:00.000000","2004-07-31T00:00:00.000000","2004-08-31T00:00:00.000000","2004-09-30T00:00:00.000000","2004-10-31T00:00:00.000000","2004-11-30T00:00:00.000000","2004-12-31T00:00:00.000000","2005-01-31T00:00:00.000000","2005-02-28T00:00:00.000000","2005-03-31T00:00:00.000000","2005-04-30T00:00:00.000000","2005-05-31T00:00:00.000000","2005-06-30T00:00:00.000000","2005-07-31T00:00:00.000000","2005-08-31T00:00:00.000000","2005-09-30T00:00:00.000000","2005-10-31T00:00:00.000000","2005-11-30T00:00:00.000000","2005-12-31T00:00:00.000000","2006-01-31T00:00:00.000000","2006-02-28T00:00:00.000000","2006-03-31T00:00:00.000000","2006-04-30T00:00:00.000000","2006-05-31T00:00:00.000000","2006-06-30T00:00:00.000000","2006-07-31T00:00:00.000000","2006-08-31T00:00:00.000000","2006-09-30T00:00:00.000000","2006-10-31T00:00:00.000000","2006-11-30T00:00:00.000000","2006-12-31T00:00:00.000000","2007-01-31T00:00:00.000000","2007-02-28T00:00:00.000000","2007-03-31T00:00:00.000000","2007-04-30T00:00:00.000000","2007-05-31T00:00:00.000000","2007-06-30T00:00:00.000000","2007-07-31T00:00:00.000000","2007-08-31T00:00:00.000000","2007-09-30T00:00:00.000000","2007-10-31T00:00:00.000000","2007-11-30T00:00:00.000000","2007-12-31T00:00:00.000000","2008-01-31T00:00:00.000000","2008-02-29T00:00:00.000000","2008-03-31T00:00:00.000000","2008-04-30T00:00:00.000000","2008-05-31T00:00:00.000000","2008-06-30T00:00:00.000000","2008-07-31T00:00:00.000000","2008-08-31T00:00:00.000000","2008-09-30T00:00:00.000000","2008-10-31T00:00:00.000000","2008-11-30T00:00:00.000000","2008-12-31T00:00:00.000000","2009-01-31T00:00:00.000000","2009-02-28T00:00:00.000000","2009-03-31T00:00:00.000000","2009-04-30T00:00:00.000000","2009-05-31T00:00:00.000000","2009-06-30T00:00:00.000000","2009-07-31T00:00:00.000000","2009-08-31T00:00:00.000000","2009-09-30T00:00:00.000000","2009-10-31T00:00:00.000000","2009-11-30T00:00:00.000000","2009-12-31T00:00:00.000000","2010-01-31T00:00:00.000000","2010-02-28T00:00:00.000000","2010-03-31T00:00:00.000000","2010-04-30T00:00:00.000000","2010-05-31T00:00:00.000000","2010-06-30T00:00:00.000000","2010-07-31T00:00:00.000000","2010-08-31T00:00:00.000000","2010-09-30T00:00:00.000000","2010-10-31T00:00:00.000000","2010-11-30T00:00:00.000000","2010-12-31T00:00:00.000000","2011-01-31T00:00:00.000000","2011-02-28T00:00:00.000000","2011-03-31T00:00:00.000000","2011-04-30T00:00:00.000000","2011-05-31T00:00:00.000000","2011-06-30T00:00:00.000000","2011-07-31T00:00:00.000000","2011-08-31T00:00:00.000000","2011-09-30T00:00:00.000000","2011-10-31T00:00:00.000000","2011-11-30T00:00:00.000000","2011-12-31T00:00:00.000000","2012-01-31T00:00:00.000000","2012-02-29T00:00:00.000000","2012-03-31T00:00:00.000000","2012-04-30T00:00:00.000000","2012-05-31T00:00:00.000000","2012-06-30T00:00:00.000000","2012-07-31T00:00:00.000000","2012-08-31T00:00:00.000000","2012-09-30T00:00:00.000000","2012-10-31T00:00:00.000000","2012-11-30T00:00:00.000000","2012-12-31T00:00:00.000000","2013-01-31T00:00:00.000000","2013-02-28T00:00:00.000000","2013-03-31T00:00:00.000000","2013-04-30T00:00:00.000000","2013-05-31T00:00:00.000000","2013-06-30T00:00:00.000000","2013-07-31T00:00:00.000000","2013-08-31T00:00:00.000000","2013-09-30T00:00:00.000000","2013-10-31T00:00:00.000000","2013-11-30T00:00:00.000000","2013-12-31T00:00:00.000000","2014-01-31T00:00:00.000000","2014-02-15T00:00:00.000000","2014-02-28T00:00:00.000000","2014-03-15T00:00:00.000000","2014-03-31T00:00:00.000000","2014-04-15T00:00:00.000000","2014-04-30T00:00:00.000000","2014-05-15T00:00:00.000000","2014-05-31T00:00:00.000000","2014-06-15T00:00:00.000000","2014-06-30T00:00:00.000000","2014-07-15T00:00:00.000000","2014-07-31T00:00:00.000000","2014-08-15T00:00:00.000000","2014-08-31T00:00:00.000000","2014-09-15T00:00:00.000000","2014-09-30T00:00:00.000000","2014-10-15T00:00:00.000000","2014-10-31T00:00:00.000000","2014-11-15T00:00:00.000000","2014-11-30T00:00:00.000000","2014-12-15T00:00:00.000000","2014-12-31T00:00:00.000000","2015-01-15T00:00:00.000000","2015-01-31T00:00:00.000000","2015-02-15T00:00:00.000000","2015-02-28T00:00:00.000000","2015-03-15T00:00:00.000000","2015-03-31T00:00:00.000000","2015-04-15T00:00:00.000000","2015-04-30T00:00:00.000000","2015-05-15T00:00:00.000000","2015-05-31T00:00:00.000000","2015-06-15T00:00:00.000000","2015-06-30T00:00:00.000000","2015-07-15T00:00:00.000000","2015-07-31T00:00:00.000000","2015-08-15T00:00:00.000000","2015-08-31T00:00:00.000000","2015-09-15T00:00:00.000000","2015-09-30T00:00:00.000000","2015-10-15T00:00:00.000000","2015-10-31T00:00:00.000000","2015-11-15T00:00:00.000000","2015-11-30T00:00:00.000000","2015-12-15T00:00:00.000000","2015-12-31T00:00:00.000000","2016-01-15T00:00:00.000000","2016-01-31T00:00:00.000000","2016-02-15T00:00:00.000000","2016-02-29T00:00:00.000000","2016-03-15T00:00:00.000000","2016-03-31T00:00:00.000000","2016-04-15T00:00:00.000000","2016-04-30T00:00:00.000000","2016-05-15T00:00:00.000000","2016-05-31T00:00:00.000000","2016-06-15T00:00:00.000000","2016-06-30T00:00:00.000000","2016-07-15T00:00:00.000000","2016-07-31T00:00:00.000000","2016-08-15T00:00:00.000000","2016-08-31T00:00:00.000000","2016-09-15T00:00:00.000000","2016-09-30T00:00:00.000000","2016-10-15T00:00:00.000000","2016-10-31T00:00:00.000000","2016-11-15T00:00:00.000000","2016-11-30T00:00:00.000000","2016-12-15T00:00:00.000000","2016-12-31T00:00:00.000000","2017-01-15T00:00:00.000000","2017-01-31T00:00:00.000000","2017-02-15T00:00:00.000000","2017-02-28T00:00:00.000000","2017-03-15T00:00:00.000000","2017-03-31T00:00:00.000000","2017-04-15T00:00:00.000000","2017-04-30T00:00:00.000000","2017-05-15T00:00:00.000000","2017-05-31T00:00:00.000000","2017-06-15T00:00:00.000000","2017-06-30T00:00:00.000000","2017-07-15T00:00:00.000000","2017-07-31T00:00:00.000000","2017-08-15T00:00:00.000000","2017-08-31T00:00:00.000000","2017-09-15T00:00:00.000000","2017-09-30T00:00:00.000000","2017-10-15T00:00:00.000000","2017-10-31T00:00:00.000000","2017-11-15T00:00:00.000000","2017-11-30T00:00:00.000000","2017-12-15T00:00:00.000000","2017-12-31T00:00:00.000000","2018-01-15T00:00:00.000000","2018-01-31T00:00:00.000000","2018-02-15T00:00:00.000000","2018-02-28T00:00:00.000000","2018-03-15T00:00:00.000000","2018-03-31T00:00:00.000000","2018-04-15T00:00:00.000000","2018-04-30T00:00:00.000000","2018-05-15T00:00:00.000000","2018-05-31T00:00:00.000000","2018-06-15T00:00:00.000000","2018-06-30T00:00:00.000000","2018-07-15T00:00:00.000000","2018-07-31T00:00:00.000000","2018-08-15T00:00:00.000000","2018-08-31T00:00:00.000000","2018-09-15T00:00:00.000000","2018-09-30T00:00:00.000000","2018-10-15T00:00:00.000000","2018-10-31T00:00:00.000000","2018-11-15T00:00:00.000000","2018-11-30T00:00:00.000000","2018-12-15T00:00:00.000000","2018-12-31T00:00:00.000000","2019-01-15T00:00:00.000000","2019-01-31T00:00:00.000000","2019-02-15T00:00:00.000000","2019-02-28T00:00:00.000000","2019-03-15T00:00:00.000000","2019-03-31T00:00:00.000000","2019-04-15T00:00:00.000000","2019-04-30T00:00:00.000000","2019-05-15T00:00:00.000000","2019-05-31T00:00:00.000000","2019-06-15T00:00:00.000000","2019-06-30T00:00:00.000000","2019-07-15T00:00:00.000000","2019-07-31T00:00:00.000000","2019-08-15T00:00:00.000000","2019-08-31T00:00:00.000000","2019-09-15T00:00:00.000000","2019-09-30T00:00:00.000000","2019-10-15T00:00:00.000000","2019-10-31T00:00:00.000000","2019-11-15T00:00:00.000000","2019-11-30T00:00:00.000000","2019-12-15T00:00:00.000000","2019-12-31T00:00:00.000000","2020-01-15T00:00:00.000000","2020-01-31T00:00:00.000000","2020-02-15T00:00:00.000000","2020-02-29T00:00:00.000000","2020-03-15T00:00:00.000000","2020-03-31T00:00:00.000000","2020-04-15T00:00:00.000000","2020-04-30T00:00:00.000000","2020-05-15T00:00:00.000000","2020-05-31T00:00:00.000000","2020-06-15T00:00:00.000000","2020-06-30T00:00:00.000000","2020-07-15T00:00:00.000000","2020-07-31T00:00:00.000000","2020-08-15T00:00:00.000000","2020-08-31T00:00:00.000000","2020-09-15T00:00:00.000000","2020-09-30T00:00:00.000000","2020-10-15T00:00:00.000000","2020-10-31T00:00:00.000000","2020-11-15T00:00:00.000000","2020-11-30T00:00:00.000000","2020-12-15T00:00:00.000000","2020-12-31T00:00:00.000000","2021-01-15T00:00:00.000000","2021-01-31T00:00:00.000000","2021-02-15T00:00:00.000000","2021-02-28T00:00:00.000000","2021-03-15T00:00:00.000000","2021-03-31T00:00:00.000000","2021-04-15T00:00:00.000000","2021-04-30T00:00:00.000000","2021-05-15T00:00:00.000000","2021-05-31T00:00:00.000000","2021-06-15T00:00:00.000000","2021-06-30T00:00:00.000000","2021-07-15T00:00:00.000000","2021-07-31T00:00:00.000000","2021-08-15T00:00:00.000000","2021-08-31T00:00:00.000000","2021-09-15T00:00:00.000000","2021-09-30T00:00:00.000000","2021-10-15T00:00:00.000000","2021-10-31T00:00:00.000000","2021-11-15T00:00:00.000000","2021-11-30T00:00:00.000000","2021-12-15T00:00:00.000000","2021-12-31T00:00:00.000000","2022-01-15T00:00:00.000000","2022-01-31T00:00:00.000000","2022-02-15T00:00:00.000000","2022-02-28T00:00:00.000000","2022-03-15T00:00:00.000000","2022-03-31T00:00:00.000000","2022-04-15T00:00:00.000000","2022-04-30T00:00:00.000000","2022-05-15T00:00:00.000000","2022-05-31T00:00:00.000000","2022-06-15T00:00:00.000000","2022-06-30T00:00:00.000000","2022-07-15T00:00:00.000000","2022-07-31T00:00:00.000000","2022-08-15T00:00:00.000000","2022-08-31T00:00:00.000000","2022-09-15T00:00:00.000000","2022-09-30T00:00:00.000000","2022-10-15T00:00:00.000000","2022-10-31T00:00:00.000000","2022-11-15T00:00:00.000000","2022-11-30T00:00:00.000000","2022-12-15T00:00:00.000000","2022-12-31T00:00:00.000000","2023-01-15T00:00:00.000000","2023-01-31T00:00:00.000000","2023-02-15T00:00:00.000000","2023-02-28T00:00:00.000000","2023-03-15T00:00:00.000000","2023-03-31T00:00:00.000000","2023-04-30T00:00:00.000000","2023-05-15T00:00:00.000000","2023-05-31T00:00:00.000000","2023-06-15T00:00:00.000000","2023-06-30T00:00:00.000000","2023-07-15T00:00:00.000000","2023-07-31T00:00:00.000000","2023-08-15T00:00:00.000000","2023-08-31T00:00:00.000000","2023-09-15T00:00:00.000000","2023-09-30T00:00:00.000000","2023-10-15T00:00:00.000000","2023-10-31T00:00:00.000000","2023-11-15T00:00:00.000000","2023-11-30T00:00:00.000000","2023-12-15T00:00:00.000000","2023-12-31T00:00:00.000000","2024-01-15T00:00:00.000000","2024-01-31T00:00:00.000000","2024-02-15T00:00:00.000000","2024-02-29T00:00:00.000000","2024-03-15T00:00:00.000000","2024-03-31T00:00:00.000000","2024-04-15T00:00:00.000000","2024-04-30T00:00:00.000000","2024-05-15T00:00:00.000000","2024-05-31T00:00:00.000000","2024-06-15T00:00:00.000000","2024-06-30T00:00:00.000000","2024-07-15T00:00:00.000000","2024-07-31T00:00:00.000000","2024-08-15T00:00:00.000000","2024-08-31T00:00:00.000000","2024-09-15T00:00:00.000000","2024-09-30T00:00:00.000000","2024-10-15T00:00:00.000000","2024-10-31T00:00:00.000000","2024-11-15T00:00:00.000000","2024-11-30T00:00:00.000000","2024-12-15T00:00:00.000000","2024-12-31T00:00:00.000000","2025-01-15T00:00:00.000000","2025-01-31T00:00:00.000000","2025-02-15T00:00:00.000000","2025-02-28T00:00:00.000000","2025-03-15T00:00:00.000000","2025-03-31T00:00:00.000000","2025-04-15T00:00:00.000000","2025-04-30T00:00:00.000000","2025-05-15T00:00:00.000000","2025-05-31T00:00:00.000000","2025-06-15T00:00:00.000000","2025-06-30T00:00:00.000000","2025-07-15T00:00:00.000000","2025-07-31T00:00:00.000000","2025-08-15T00:00:00.000000","2025-08-31T00:00:00.000000","2025-09-15T00:00:00.000000","2025-09-30T00:00:00.000000","2025-10-15T00:00:00.000000","2025-10-31T00:00:00.000000","2025-11-15T00:00:00.000000","2025-11-30T00:00:00.000000","2025-12-15T00:00:00.000000","2025-12-31T00:00:00.000000","2026-01-15T00:00:00.000000","2026-01-31T00:00:00.000000","2026-02-15T00:00:00.000000","2026-02-28T00:00:00.000000","2026-03-15T00:00:00.000000","2026-03-31T00:00:00.000000","2026-04-15T00:00:00.000000","2026-04-30T00:00:00.000000","2026-05-15T00:00:00.000000","2026-05-31T00:00:00.000000","2026-06-15T00:00:00.000000","2026-06-30T00:00:00.000000","2026-07-15T00:00:00.000000","2026-07-31T00:00:00.000000","2026-08-15T00:00:00.000000","2026-08-31T00:00:00.000000","2026-09-15T00:00:00.000000"],"xaxis":"x","y":{"dtype":"i2","bdata":"GQOPAxIDOwM7AycEpgPUAskA0gBJAUkB2QA7AEQA3wDkAKUC\u002fAK7A10DPgPzAnICzQHqAogDlgIIArQAIQNqAh0DcARbBZ8DUAKpAicCUgKuA60CHAIuAm4BWgElAcUA6QKGAp8BYAOdAugA4gHDABMBCgH1AFoDyAP3AsEDCwP1AbwBOwLHAe8BhAJAAl8CfwKkAokCwgI+A8cCBwHvAAICKALhAWMBIgFJAXQBugGwABEAHwB+AO8AUgHzAdABfwT1AYQBJgHDAKIBjQDgAQwCKAJiAc0A0ADPAAoBpgABAbIAngDXAEcBiwGwAU4C3AHcAg8DOwKRAp8C8ADIAFEASACSAEEBiwFQAZ8BFAJgAnUBYwFQAXcBvwEaAlkCfAKOAl4CaQI2AQYB8AALASMBQwEeARMBOAECAfYAYAF0AYMBZQE9AeYBGwKrArkCjwOUA38DhQMyA00CLQIXAiUCJgJFAtACSgNOA+UCBQO+AuYCZAK3ApED0AN8AxkDYQJFAmcCJwIOArYBJwKnApQCVwKsAlsDmAOlA4ADmANvA3IDDwRCBBwEtQN8A08D5AKNAtMCEwIYAhoCSgJAAiEDNwPUAvkCTgNvA4wDDwN5Am8CawLiAqQCBATnBFoEogO9A1YD6QIGAiIC3QHNARECzgFJAo4CWgNoA5gD8wMXBEgE9QNaBEcELwSWA2ADbANBA5wDKQPXAvoCYgI8AgcCQgJmAqgCBwMmAwgERQSLAwsDUQNQA0ADhgO4A4QDaANlA+sCkALNAoECOAJYAr8CvAJUAnECegJTAusB2QGBAhcC3wEJAcMACQFGAe8BQgGfAPsBpgJ4Ap4CxAJfAx8E4wMWBNMDNQPLAiMCewPxArADQwM3A0EDEgPRA60D1wNeA5ACRQL+AUkCEgOgAzkE6gNpA1MD1gK7AjEDIQOYAsACJAPpApECTQN2AoYCTQJ7AXoBzwHrAWwCRAJnApkC9AESAv8BxwHzAW8BXgFDAfgAHQGJAnwCSQEUAQMB9gB9AKEAjgCZALEAoQCIAIgADwEhAQoBSQG3AQQC1AH8AZEBMAGnAOUANwHBAYMCYgIhAkgBQAE1AX4BwQDrAM0AdwC1AIMAhgBAAH0AlQCeAPUAigDiAAcCgQKkAncDhwM="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"Categoria_Sequia=D1\u003cbr\u003eFecha=%{x}\u003cbr\u003eConteo=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"D1","line":{"color":"#fcd37f"},"marker":{"symbol":"circle"},"mode":"lines","name":"D1","orientation":"v","showlegend":true,"stackgroup":"1","x":["2003-01-31T00:00:00.000000","2003-02-28T00:00:00.000000","2003-03-31T00:00:00.000000","2003-04-30T00:00:00.000000","2003-05-31T00:00:00.000000","2003-06-30T00:00:00.000000","2003-07-31T00:00:00.000000","2003-09-30T00:00:00.000000","2003-10-31T00:00:00.000000","2003-11-30T00:00:00.000000","2003-12-31T00:00:00.000000","2004-01-31T00:00:00.000000","2004-03-31T00:00:00.000000","2004-04-30T00:00:00.000000","2004-05-31T00:00:00.000000","2004-06-30T00:00:00.000000","2004-07-31T00:00:00.000000","2004-08-31T00:00:00.000000","2004-09-30T00:00:00.000000","2004-10-31T00:00:00.000000","2004-11-30T00:00:00.000000","2004-12-31T00:00:00.000000","2005-01-31T00:00:00.000000","2005-02-28T00:00:00.000000","2005-03-31T00:00:00.000000","2005-04-30T00:00:00.000000","2005-05-31T00:00:00.000000","2005-06-30T00:00:00.000000","2005-07-31T00:00:00.000000","2005-08-31T00:00:00.000000","2005-09-30T00:00:00.000000","2005-10-31T00:00:00.000000","2005-11-30T00:00:00.000000","2005-12-31T00:00:00.000000","2006-01-31T00:00:00.000000","2006-02-28T00:00:00.000000","2006-03-31T00:00:00.000000","2006-04-30T00:00:00.000000","2006-05-31T00:00:00.000000","2006-06-30T00:00:00.000000","2006-07-31T00:00:00.000000","2006-08-31T00:00:00.000000","2006-09-30T00:00:00.000000","2006-10-31T00:00:00.000000","2006-11-30T00:00:00.000000","2006-12-31T00:00:00.000000","2007-01-31T00:00:00.000000","2007-02-28T00:00:00.000000","2007-03-31T00:00:00.000000","2007-04-30T00:00:00.000000","2007-05-31T00:00:00.000000","2007-06-30T00:00:00.000000","2007-07-31T00:00:00.000000","2007-08-31T00:00:00.000000","2007-09-30T00:00:00.000000","2007-10-31T00:00:00.000000","2007-11-30T00:00:00.000000","2007-12-31T00:00:00.000000","2008-01-31T00:00:00.000000","2008-02-29T00:00:00.000000","2008-03-31T00:00:00.000000","2008-04-30T00:00:00.000000","2008-05-31T00:00:00.000000","2008-06-30T00:00:00.000000","2008-07-31T00:00:00.000000","2008-08-31T00:00:00.000000","2008-09-30T00:00:00.000000","2008-10-31T00:00:00.000000","2008-11-30T00:00:00.000000","2008-12-31T00:00:00.000000","2009-01-31T00:00:00.000000","2009-02-28T00:00:00.000000","2009-03-31T00:00:00.000000","2009-04-30T00:00:00.000000","2009-05-31T00:00:00.000000","2009-06-30T00:00:00.000000","2009-07-31T00:00:00.000000","2009-08-31T00:00:00.000000","2009-09-30T00:00:00.000000","2009-10-31T00:00:00.000000","2009-11-30T00:00:00.000000","2009-12-31T00:00:00.000000","2010-01-31T00:00:00.000000","2010-02-28T00:00:00.000000","2010-03-31T00:00:00.000000","2010-04-30T00:00:00.000000","2010-05-31T00:00:00.000000","2010-06-30T00:00:00.000000","2010-07-31T00:00:00.000000","2010-08-31T00:00:00.000000","2010-09-30T00:00:00.000000","2010-10-31T00:00:00.000000","2010-11-30T00:00:00.000000","2010-12-31T00:00:00.000000","2011-01-31T00:00:00.000000","2011-02-28T00:00:00.000000","2011-03-31T00:00:00.000000","2011-04-30T00:00:00.000000","2011-05-31T00:00:00.000000","2011-06-30T00:00:00.000000","2011-07-31T00:00:00.000000","2011-08-31T00:00:00.000000","2011-09-30T00:00:00.000000","2011-10-31T00:00:00.000000","2011-11-30T00:00:00.000000","2011-12-31T00:00:00.000000","2012-01-31T00:00:00.000000","2012-02-29T00:00:00.000000","2012-03-31T00:00:00.000000","2012-04-30T00:00:00.000000","2012-05-31T00:00:00.000000","2012-06-30T00:00:00.000000","2012-07-31T00:00:00.000000","2012-08-31T00:00:00.000000","2012-09-30T00:00:00.000000","2012-10-31T00:00:00.000000","2012-11-30T00:00:00.000000","2012-12-31T00:00:00.000000","2013-01-31T00:00:00.000000","2013-02-28T00:00:00.000000","2013-03-31T00:00:00.000000","2013-04-30T00:00:00.000000","2013-05-31T00:00:00.000000","2013-06-30T00:00:00.000000","2013-07-31T00:00:00.000000","2013-08-31T00:00:00.000000","2013-09-30T00:00:00.000000","2013-10-31T00:00:00.000000","2013-11-30T00:00:00.000000","2013-12-31T00:00:00.000000","2014-01-31T00:00:00.000000","2014-02-15T00:00:00.000000","2014-02-28T00:00:00.000000","2014-03-15T00:00:00.000000","2014-03-31T00:00:00.000000","2014-04-15T00:00:00.000000","2014-04-30T00:00:00.000000","2014-05-15T00:00:00.000000","2014-05-31T00:00:00.000000","2014-06-15T00:00:00.000000","2014-06-30T00:00:00.000000","2014-07-15T00:00:00.000000","2014-07-31T00:00:00.000000","2014-08-15T00:00:00.000000","2014-08-31T00:00:00.000000","2014-09-15T00:00:00.000000","2014-09-30T00:00:00.000000","2014-10-15T00:00:00.000000","2014-10-31T00:00:00.000000","2014-11-15T00:00:00.000000","2014-11-30T00:00:00.000000","2014-12-15T00:00:00.000000","2014-12-31T00:00:00.000000","2015-01-15T00:00:00.000000","2015-01-31T00:00:00.000000","2015-02-15T00:00:00.000000","2015-02-28T00:00:00.000000","2015-03-15T00:00:00.000000","2015-03-31T00:00:00.000000","2015-04-15T00:00:00.000000","2015-04-30T00:00:00.000000","2015-05-15T00:00:00.000000","2015-05-31T00:00:00.000000","2015-06-15T00:00:00.000000","2015-06-30T00:00:00.000000","2015-07-15T00:00:00.000000","2015-07-31T00:00:00.000000","2015-08-15T00:00:00.000000","2015-08-31T00:00:00.000000","2015-09-15T00:00:00.000000","2015-09-30T00:00:00.000000","2015-10-15T00:00:00.000000","2015-10-31T00:00:00.000000","2015-11-15T00:00:00.000000","2015-11-30T00:00:00.000000","2015-12-15T00:00:00.000000","2015-12-31T00:00:00.000000","2016-01-15T00:00:00.000000","2016-01-31T00:00:00.000000","2016-02-15T00:00:00.000000","2016-02-29T00:00:00.000000","2016-03-15T00:00:00.000000","2016-03-31T00:00:00.000000","2016-04-15T00:00:00.000000","2016-04-30T00:00:00.000000","2016-05-15T00:00:00.000000","2016-05-31T00:00:00.000000","2016-06-15T00:00:00.000000","2016-06-30T00:00:00.000000","2016-07-15T00:00:00.000000","2016-07-31T00:00:00.000000","2016-08-15T00:00:00.000000","2016-08-31T00:00:00.000000","2016-09-15T00:00:00.000000","2016-09-30T00:00:00.000000","2016-10-15T00:00:00.000000","2016-10-31T00:00:00.000000","2016-11-15T00:00:00.000000","2016-11-30T00:00:00.000000","2016-12-15T00:00:00.000000","2016-12-31T00:00:00.000000","2017-01-15T00:00:00.000000","2017-01-31T00:00:00.000000","2017-02-15T00:00:00.000000","2017-02-28T00:00:00.000000","2017-03-15T00:00:00.000000","2017-03-31T00:00:00.000000","2017-04-15T00:00:00.000000","2017-04-30T00:00:00.000000","2017-05-15T00:00:00.000000","2017-05-31T00:00:00.000000","2017-06-15T00:00:00.000000","2017-06-30T00:00:00.000000","2017-07-15T00:00:00.000000","2017-07-31T00:00:00.000000","2017-08-15T00:00:00.000000","2017-08-31T00:00:00.000000","2017-09-15T00:00:00.000000","2017-09-30T00:00:00.000000","2017-10-15T00:00:00.000000","2017-10-31T00:00:00.000000","2017-11-15T00:00:00.000000","2017-11-30T00:00:00.000000","2017-12-15T00:00:00.000000","2017-12-31T00:00:00.000000","2018-01-15T00:00:00.000000","2018-01-31T00:00:00.000000","2018-02-15T00:00:00.000000","2018-02-28T00:00:00.000000","2018-03-15T00:00:00.000000","2018-03-31T00:00:00.000000","2018-04-15T00:00:00.000000","2018-04-30T00:00:00.000000","2018-05-15T00:00:00.000000","2018-05-31T00:00:00.000000","2018-06-15T00:00:00.000000","2018-06-30T00:00:00.000000","2018-07-15T00:00:00.000000","2018-07-31T00:00:00.000000","2018-08-15T00:00:00.000000","2018-08-31T00:00:00.000000","2018-09-15T00:00:00.000000","2018-09-30T00:00:00.000000","2018-10-15T00:00:00.000000","2018-10-31T00:00:00.000000","2018-11-15T00:00:00.000000","2018-11-30T00:00:00.000000","2018-12-15T00:00:00.000000","2018-12-31T00:00:00.000000","2019-01-15T00:00:00.000000","2019-01-31T00:00:00.000000","2019-02-15T00:00:00.000000","2019-02-28T00:00:00.000000","2019-03-15T00:00:00.000000","2019-03-31T00:00:00.000000","2019-04-15T00:00:00.000000","2019-04-30T00:00:00.000000","2019-05-15T00:00:00.000000","2019-05-31T00:00:00.000000","2019-06-15T00:00:00.000000","2019-06-30T00:00:00.000000","2019-07-15T00:00:00.000000","2019-07-31T00:00:00.000000","2019-08-15T00:00:00.000000","2019-08-31T00:00:00.000000","2019-09-15T00:00:00.000000","2019-09-30T00:00:00.000000","2019-10-15T00:00:00.000000","2019-10-31T00:00:00.000000","2019-11-15T00:00:00.000000","2019-11-30T00:00:00.000000","2019-12-15T00:00:00.000000","2019-12-31T00:00:00.000000","2020-01-15T00:00:00.000000","2020-01-31T00:00:00.000000","2020-02-15T00:00:00.000000","2020-02-29T00:00:00.000000","2020-03-15T00:00:00.000000","2020-03-31T00:00:00.000000","2020-04-15T00:00:00.000000","2020-04-30T00:00:00.000000","2020-05-15T00:00:00.000000","2020-05-31T00:00:00.000000","2020-06-15T00:00:00.000000","2020-06-30T00:00:00.000000","2020-07-15T00:00:00.000000","2020-07-31T00:00:00.000000","2020-08-15T00:00:00.000000","2020-08-31T00:00:00.000000","2020-09-15T00:00:00.000000","2020-09-30T00:00:00.000000","2020-10-15T00:00:00.000000","2020-10-31T00:00:00.000000","2020-11-15T00:00:00.000000","2020-11-30T00:00:00.000000","2020-12-15T00:00:00.000000","2020-12-31T00:00:00.000000","2021-01-15T00:00:00.000000","2021-01-31T00:00:00.000000","2021-02-15T00:00:00.000000","2021-02-28T00:00:00.000000","2021-03-15T00:00:00.000000","2021-03-31T00:00:00.000000","2021-04-15T00:00:00.000000","2021-04-30T00:00:00.000000","2021-05-15T00:00:00.000000","2021-05-31T00:00:00.000000","2021-06-15T00:00:00.000000","2021-06-30T00:00:00.000000","2021-07-15T00:00:00.000000","2021-07-31T00:00:00.000000","2021-08-15T00:00:00.000000","2021-08-31T00:00:00.000000","2021-09-15T00:00:00.000000","2021-09-30T00:00:00.000000","2021-10-15T00:00:00.000000","2021-10-31T00:00:00.000000","2021-11-15T00:00:00.000000","2021-11-30T00:00:00.000000","2021-12-15T00:00:00.000000","2021-12-31T00:00:00.000000","2022-01-15T00:00:00.000000","2022-01-31T00:00:00.000000","2022-02-15T00:00:00.000000","2022-02-28T00:00:00.000000","2022-03-15T00:00:00.000000","2022-03-31T00:00:00.000000","2022-04-15T00:00:00.000000","2022-04-30T00:00:00.000000","2022-05-15T00:00:00.000000","2022-05-31T00:00:00.000000","2022-06-15T00:00:00.000000","2022-06-30T00:00:00.000000","2022-07-15T00:00:00.000000","2022-07-31T00:00:00.000000","2022-08-15T00:00:00.000000","2022-08-31T00:00:00.000000","2022-09-15T00:00:00.000000","2022-09-30T00:00:00.000000","2022-10-15T00:00:00.000000","2022-10-31T00:00:00.000000","2022-11-15T00:00:00.000000","2022-11-30T00:00:00.000000","2022-12-15T00:00:00.000000","2022-12-31T00:00:00.000000","2023-01-15T00:00:00.000000","2023-01-31T00:00:00.000000","2023-02-15T00:00:00.000000","2023-02-28T00:00:00.000000","2023-03-15T00:00:00.000000","2023-03-31T00:00:00.000000","2023-04-30T00:00:00.000000","2023-05-15T00:00:00.000000","2023-05-31T00:00:00.000000","2023-06-15T00:00:00.000000","2023-06-30T00:00:00.000000","2023-07-15T00:00:00.000000","2023-07-31T00:00:00.000000","2023-08-15T00:00:00.000000","2023-08-31T00:00:00.000000","2023-09-15T00:00:00.000000","2023-09-30T00:00:00.000000","2023-10-15T00:00:00.000000","2023-10-31T00:00:00.000000","2023-11-15T00:00:00.000000","2023-11-30T00:00:00.000000","2023-12-15T00:00:00.000000","2023-12-31T00:00:00.000000","2024-01-15T00:00:00.000000","2024-01-31T00:00:00.000000","2024-02-15T00:00:00.000000","2024-02-29T00:00:00.000000","2024-03-15T00:00:00.000000","2024-03-31T00:00:00.000000","2024-04-15T00:00:00.000000","2024-04-30T00:00:00.000000","2024-05-15T00:00:00.000000","2024-05-31T00:00:00.000000","2024-06-15T00:00:00.000000","2024-06-30T00:00:00.000000","2024-07-15T00:00:00.000000","2024-07-31T00:00:00.000000","2024-08-15T00:00:00.000000","2024-08-31T00:00:00.000000","2024-09-15T00:00:00.000000","2024-09-30T00:00:00.000000","2024-10-15T00:00:00.000000","2024-10-31T00:00:00.000000","2024-11-15T00:00:00.000000","2024-11-30T00:00:00.000000","2024-12-15T00:00:00.000000","2024-12-31T00:00:00.000000","2025-01-15T00:00:00.000000","2025-01-31T00:00:00.000000","2025-02-15T00:00:00.000000","2025-02-28T00:00:00.000000","2025-03-15T00:00:00.000000","2025-03-31T00:00:00.000000","2025-04-15T00:00:00.000000","2025-04-30T00:00:00.000000","2025-05-15T00:00:00.000000","2025-05-31T00:00:00.000000","2025-06-15T00:00:00.000000","2025-06-30T00:00:00.000000","2025-07-15T00:00:00.000000","2025-07-31T00:00:00.000000","2025-08-15T00:00:00.000000","2025-08-31T00:00:00.000000","2025-09-15T00:00:00.000000","2025-09-30T00:00:00.000000","2025-10-15T00:00:00.000000","2025-10-31T00:00:00.000000","2025-11-15T00:00:00.000000","2025-11-30T00:00:00.000000","2025-12-15T00:00:00.000000","2025-12-31T00:00:00.000000","2026-01-15T00:00:00.000000","2026-01-31T00:00:00.000000","2026-02-15T00:00:00.000000","2026-02-28T00:00:00.000000","2026-03-15T00:00:00.000000","2026-03-31T00:00:00.000000","2026-04-15T00:00:00.000000","2026-04-30T00:00:00.000000","2026-05-15T00:00:00.000000","2026-05-31T00:00:00.000000","2026-06-15T00:00:00.000000","2026-06-30T00:00:00.000000","2026-07-15T00:00:00.000000","2026-07-31T00:00:00.000000","2026-08-15T00:00:00.000000","2026-08-31T00:00:00.000000","2026-09-15T00:00:00.000000"],"xaxis":"x","y":{"dtype":"i2","bdata":"YwFoAXEBjAGMAS0BkQFYABkAGgAdABUACAAKABAADgAKAAYA1gG2AAEBDgGnAXsBQQEDAfEAoAAQAAwAHQAiABkAJwHOAS0DZwHyAeUAPAGmAWsBYgC1ALsAXwDhAPUAKgEuApEBOwLgAUkAzQCmAHwAlADfAFEBGgJiApICJgJJAQUBuAC9AFwBgAEDAgYCSAJBAigCDALzASgEOgJLAp4BnQE0AXIAcwB3AIMAkAAxAAkACwABAB4ANwAlAEUA+QGGAyUD6AD6AhwDsQCKAIUAiwDwAK8AngCzAI0AhgCMAGwAdwBYAGUAaQBmALgAiwC1AOQAdgBmAEAAIgATAAUABQAcABsAHgAbACwANgBcADsAQwBIADsAQQBPAGsAhgCfAHIAXAA7ADcALAAvAC8ALgAoAB0AKwAnACkAJwAjABUADAAbAEkAcgDUAAQBTgFfAXIBhQEvAQ0B6gCxAIEArQCjAMQA+gDqAEoBdgFeAS4BVAFyAX4BigEGAu4BkgFSASQBcgGQAX8BRgFwATAB8gAFASYBlwHJAagBqwGJAYUBvgD7AJ8BdAFFAckAXwBlAEcALgA4ADcAXwBWAGsAjQATAQkBEQEOAWAB1AGlASsB8QBbAGgAkwDmAAwCUgLnARAC+gEfAe8AMwFUAVQBYQFKASkBbgHGAZoBwQFWAqICbgLaAV0CmALxAtwC3QKwAisCKQK3AUEBGwEsASQBBQH8AOQA4ADjAA0B+gBaAVoBSwFfAbkBoQGDAYQB2QG7AdQB3AEKAuEBAQIjAhAC\u002fAHFAdEBmQHfARQCAgLiAY4B+QAGAc4AigCIAJAAYABJAC8ATQBNAFgAOAA6AKcAoQCqAMkAWAGXAewBFQLsAR4CKQJ4AUwB6AHpAYoBdgEHAfAA5ADLAAUBdgHmASAClAIsAygDIgPdAsACegIKAqoBuQEEAuACDQMiA58ClQKrAncCVwI6AuIB+wFcAhQC8AEBAnQCcgJvAuICvALmAnQCTwJiAnAB0gC2AJsAkwBeAGMAeQB6AHwAdABfAFoAWABhAFIASwBKAOQAdwFrAb8AdQA+AFkAeABzAHcAVgB1AC8ARABXAF8AQwBJAEUAOwA+ADwAQQA0ACkAJAAjACAAFwAXAEsAXQCOAFoBugE="},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"Categoria_Sequia=D2\u003cbr\u003eFecha=%{x}\u003cbr\u003eConteo=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"D2","line":{"color":"#ffaa00"},"marker":{"symbol":"circle"},"mode":"lines","name":"D2","orientation":"v","showlegend":true,"stackgroup":"1","x":["2003-01-31T00:00:00.000000","2003-02-28T00:00:00.000000","2003-03-31T00:00:00.000000","2003-04-30T00:00:00.000000","2003-05-31T00:00:00.000000","2003-06-30T00:00:00.000000","2003-07-31T00:00:00.000000","2003-09-30T00:00:00.000000","2003-10-31T00:00:00.000000","2003-11-30T00:00:00.000000","2003-12-31T00:00:00.000000","2004-01-31T00:00:00.000000","2004-03-31T00:00:00.000000","2004-04-30T00:00:00.000000","2004-05-31T00:00:00.000000","2004-06-30T00:00:00.000000","2004-07-31T00:00:00.000000","2004-08-31T00:00:00.000000","2004-09-30T00:00:00.000000","2004-10-31T00:00:00.000000","2004-12-31T00:00:00.000000","2005-01-31T00:00:00.000000","2005-02-28T00:00:00.000000","2005-03-31T00:00:00.000000","2005-04-30T00:00:00.000000","2005-05-31T00:00:00.000000","2005-06-30T00:00:00.000000","2005-09-30T00:00:00.000000","2006-01-31T00:00:00.000000","2006-02-28T00:00:00.000000","2006-03-31T00:00:00.000000","2006-04-30T00:00:00.000000","2006-05-31T00:00:00.000000","2006-06-30T00:00:00.000000","2006-07-31T00:00:00.000000","2006-08-31T00:00:00.000000","2006-09-30T00:00:00.000000","2006-10-31T00:00:00.000000","2006-11-30T00:00:00.000000","2006-12-31T00:00:00.000000","2007-01-31T00:00:00.000000","2007-02-28T00:00:00.000000","2007-03-31T00:00:00.000000","2007-04-30T00:00:00.000000","2007-05-31T00:00:00.000000","2007-06-30T00:00:00.000000","2007-07-31T00:00:00.000000","2007-08-31T00:00:00.000000","2007-09-30T00:00:00.000000","2007-10-31T00:00:00.000000","2007-11-30T00:00:00.000000","2007-12-31T00:00:00.000000","2008-01-31T00:00:00.000000","2008-02-29T00:00:00.000000","2008-03-31T00:00:00.000000","2008-04-30T00:00:00.000000","2008-05-31T00:00:00.000000","2008-06-30T00:00:00.000000","2008-07-31T00:00:00.000000","2008-08-31T00:00:00.000000","2008-09-30T00:00:00.000000","2008-10-31T00:00:00.000000","2008-11-30T00:00:00.000000","2008-12-31T00:00:00.000000","2009-01-31T00:00:00.000000","2009-02-28T00:00:00.000000","2009-03-31T00:00:00.000000","2009-04-30T00:00:00.000000","2009-05-31T00:00:00.000000","2009-06-30T00:00:00.000000","2009-07-31T00:00:00.000000","2009-08-31T00:00:00.000000","2009-09-30T00:00:00.000000","2009-10-31T00:00:00.000000","2009-11-30T00:00:00.000000","2009-12-31T00:00:00.000000","2010-01-31T00:00:00.000000","2010-02-28T00:00:00.000000","2010-03-31T00:00:00.000000","2010-04-30T00:00:00.000000","2010-05-31T00:00:00.000000","2010-06-30T00:00:00.000000","2010-07-31T00:00:00.000000","2010-08-31T00:00:00.000000","2010-11-30T00:00:00.000000","2010-12-31T00:00:00.000000","2011-01-31T00:00:00.000000","2011-02-28T00:00:00.000000","2011-03-31T00:00:00.000000","2011-04-30T00:00:00.000000","2011-05-31T00:00:00.000000","2011-06-30T00:00:00.000000","2011-07-31T00:00:00.000000","2011-08-31T00:00:00.000000","2011-09-30T00:00:00.000000","2011-10-31T00:00:00.000000","2011-11-30T00:00:00.000000","2011-12-31T00:00:00.000000","2012-01-31T00:00:00.000000","2012-02-29T00:00:00.000000","2012-03-31T00:00:00.000000","2012-04-30T00:00:00.000000","2012-05-31T00:00:00.000000","2012-06-30T00:00:00.000000","2012-07-31T00:00:00.000000","2012-08-31T00:00:00.000000","2012-09-30T00:00:00.000000","2012-10-31T00:00:00.000000","2012-11-30T00:00:00.000000","2012-12-31T00:00:00.000000","2013-01-31T00:00:00.000000","2013-02-28T00:00:00.000000","2013-03-31T00:00:00.000000","2013-04-30T00:00:00.000000","2013-05-31T00:00:00.000000","2013-06-30T00:00:00.000000","2013-07-31T00:00:00.000000","2013-08-31T00:00:00.000000","2013-09-30T00:00:00.000000","2013-10-31T00:00:00.000000","2013-11-30T00:00:00.000000","2013-12-31T00:00:00.000000","2014-01-31T00:00:00.000000","2014-02-15T00:00:00.000000","2014-02-28T00:00:00.000000","2014-03-15T00:00:00.000000","2014-03-31T00:00:00.000000","2014-04-15T00:00:00.000000","2014-04-30T00:00:00.000000","2014-05-15T00:00:00.000000","2014-05-31T00:00:00.000000","2014-06-15T00:00:00.000000","2014-06-30T00:00:00.000000","2014-07-15T00:00:00.000000","2014-07-31T00:00:00.000000","2014-08-15T00:00:00.000000","2014-08-31T00:00:00.000000","2014-09-15T00:00:00.000000","2014-12-15T00:00:00.000000","2014-12-31T00:00:00.000000","2015-01-15T00:00:00.000000","2015-01-31T00:00:00.000000","2015-02-15T00:00:00.000000","2015-02-28T00:00:00.000000","2015-03-15T00:00:00.000000","2015-03-31T00:00:00.000000","2015-04-15T00:00:00.000000","2015-04-30T00:00:00.000000","2015-05-15T00:00:00.000000","2015-05-31T00:00:00.000000","2015-06-15T00:00:00.000000","2015-06-30T00:00:00.000000","2015-07-15T00:00:00.000000","2015-07-31T00:00:00.000000","2015-08-15T00:00:00.000000","2015-08-31T00:00:00.000000","2015-09-15T00:00:00.000000","2015-09-30T00:00:00.000000","2015-10-15T00:00:00.000000","2015-10-31T00:00:00.000000","2015-11-15T00:00:00.000000","2015-11-30T00:00:00.000000","2015-12-15T00:00:00.000000","2015-12-31T00:00:00.000000","2016-01-15T00:00:00.000000","2016-01-31T00:00:00.000000","2016-02-15T00:00:00.000000","2016-02-29T00:00:00.000000","2016-03-15T00:00:00.000000","2016-03-31T00:00:00.000000","2016-04-15T00:00:00.000000","2016-04-30T00:00:00.000000","2016-05-15T00:00:00.000000","2016-05-31T00:00:00.000000","2016-06-15T00:00:00.000000","2016-06-30T00:00:00.000000","2016-07-15T00:00:00.000000","2016-07-31T00:00:00.000000","2016-08-15T00:00:00.000000","2016-08-31T00:00:00.000000","2016-09-15T00:00:00.000000","2016-09-30T00:00:00.000000","2016-10-15T00:00:00.000000","2016-10-31T00:00:00.000000","2016-11-15T00:00:00.000000","2016-11-30T00:00:00.000000","2016-12-15T00:00:00.000000","2016-12-31T00:00:00.000000","2017-01-15T00:00:00.000000","2017-01-31T00:00:00.000000","2017-02-15T00:00:00.000000","2017-02-28T00:00:00.000000","2017-03-15T00:00:00.000000","2017-03-31T00:00:00.000000","2017-04-15T00:00:00.000000","2017-04-30T00:00:00.000000","2017-05-15T00:00:00.000000","2017-05-31T00:00:00.000000","2017-06-15T00:00:00.000000","2017-06-30T00:00:00.000000","2017-07-15T00:00:00.000000","2017-07-31T00:00:00.000000","2017-08-15T00:00:00.000000","2017-08-31T00:00:00.000000","2017-09-15T00:00:00.000000","2017-09-30T00:00:00.000000","2017-10-15T00:00:00.000000","2017-10-31T00:00:00.000000","2017-11-15T00:00:00.000000","2017-11-30T00:00:00.000000","2017-12-15T00:00:00.000000","2017-12-31T00:00:00.000000","2018-01-15T00:00:00.000000","2018-01-31T00:00:00.000000","2018-02-15T00:00:00.000000","2018-02-28T00:00:00.000000","2018-03-15T00:00:00.000000","2018-03-31T00:00:00.000000","2018-04-15T00:00:00.000000","2018-04-30T00:00:00.000000","2018-05-15T00:00:00.000000","2018-05-31T00:00:00.000000","2018-06-15T00:00:00.000000","2018-06-30T00:00:00.000000","2018-07-15T00:00:00.000000","2018-07-31T00:00:00.000000","2018-08-15T00:00:00.000000","2018-08-31T00:00:00.000000","2018-09-15T00:00:00.000000","2018-09-30T00:00:00.000000","2018-10-15T00:00:00.000000","2018-10-31T00:00:00.000000","2018-11-15T00:00:00.000000","2018-11-30T00:00:00.000000","2018-12-15T00:00:00.000000","2018-12-31T00:00:00.000000","2019-01-15T00:00:00.000000","2019-01-31T00:00:00.000000","2019-02-15T00:00:00.000000","2019-02-28T00:00:00.000000","2019-03-15T00:00:00.000000","2019-03-31T00:00:00.000000","2019-04-15T00:00:00.000000","2019-04-30T00:00:00.000000","2019-05-15T00:00:00.000000","2019-05-31T00:00:00.000000","2019-06-15T00:00:00.000000","2019-06-30T00:00:00.000000","2019-07-15T00:00:00.000000","2019-07-31T00:00:00.000000","2019-08-15T00:00:00.000000","2019-08-31T00:00:00.000000","2019-09-15T00:00:00.000000","2019-09-30T00:00:00.000000","2019-10-15T00:00:00.000000","2019-10-31T00:00:00.000000","2019-11-15T00:00:00.000000","2019-11-30T00:00:00.000000","2019-12-15T00:00:00.000000","2019-12-31T00:00:00.000000","2020-01-15T00:00:00.000000","2020-01-31T00:00:00.000000","2020-02-15T00:00:00.000000","2020-02-29T00:00:00.000000","2020-03-15T00:00:00.000000","2020-03-31T00:00:00.000000","2020-04-15T00:00:00.000000","2020-04-30T00:00:00.000000","2020-05-15T00:00:00.000000","2020-05-31T00:00:00.000000","2020-06-15T00:00:00.000000","2020-06-30T00:00:00.000000","2020-07-15T00:00:00.000000","2020-07-31T00:00:00.000000","2020-08-15T00:00:00.000000","2020-08-31T00:00:00.000000","2020-09-15T00:00:00.000000","2020-09-30T00:00:00.000000","2020-10-15T00:00:00.000000","2020-10-31T00:00:00.000000","2020-11-15T00:00:00.000000","2020-11-30T00:00:00.000000","2020-12-15T00:00:00.000000","2020-12-31T00:00:00.000000","2021-01-15T00:00:00.000000","2021-01-31T00:00:00.000000","2021-02-15T00:00:00.000000","2021-02-28T00:00:00.000000","2021-03-15T00:00:00.000000","2021-03-31T00:00:00.000000","2021-04-15T00:00:00.000000","2021-04-30T00:00:00.000000","2021-05-15T00:00:00.000000","2021-05-31T00:00:00.000000","2021-06-15T00:00:00.000000","2021-06-30T00:00:00.000000","2021-07-15T00:00:00.000000","2021-07-31T00:00:00.000000","2021-08-15T00:00:00.000000","2021-08-31T00:00:00.000000","2021-09-15T00:00:00.000000","2021-09-30T00:00:00.000000","2021-10-15T00:00:00.000000","2021-10-31T00:00:00.000000","2021-11-15T00:00:00.000000","2021-11-30T00:00:00.000000","2021-12-15T00:00:00.000000","2021-12-31T00:00:00.000000","2022-01-15T00:00:00.000000","2022-01-31T00:00:00.000000","2022-02-15T00:00:00.000000","2022-02-28T00:00:00.000000","2022-03-15T00:00:00.000000","2022-03-31T00:00:00.000000","2022-04-15T00:00:00.000000","2022-04-30T00:00:00.000000","2022-05-15T00:00:00.000000","2022-05-31T00:00:00.000000","2022-06-15T00:00:00.000000","2022-06-30T00:00:00.000000","2022-07-15T00:00:00.000000","2022-07-31T00:00:00.000000","2022-08-15T00:00:00.000000","2022-08-31T00:00:00.000000","2022-09-15T00:00:00.000000","2022-09-30T00:00:00.000000","2022-10-15T00:00:00.000000","2022-10-31T00:00:00.000000","2022-11-15T00:00:00.000000","2022-11-30T00:00:00.000000","2022-12-15T00:00:00.000000","2022-12-31T00:00:00.000000","2023-01-15T00:00:00.000000","2023-01-31T00:00:00.000000","2023-02-15T00:00:00.000000","2023-02-28T00:00:00.000000","2023-03-15T00:00:00.000000","2023-03-31T00:00:00.000000","2023-04-30T00:00:00.000000","2023-05-15T00:00:00.000000","2023-05-31T00:00:00.000000","2023-06-15T00:00:00.000000","2023-06-30T00:00:00.000000","2023-07-15T00:00:00.000000","2023-07-31T00:00:00.000000","2023-08-15T00:00:00.000000","2023-08-31T00:00:00.000000","2023-09-15T00:00:00.000000","2023-09-30T00:00:00.000000","2023-10-15T00:00:00.000000","2023-10-31T00:00:00.000000","2023-11-15T00:00:00.000000","2023-11-30T00:00:00.000000","2023-12-15T00:00:00.000000","2023-12-31T00:00:00.000000","2024-01-15T00:00:00.000000","2024-01-31T00:00:00.000000","2024-02-15T00:00:00.000000","2024-02-29T00:00:00.000000","2024-03-15T00:00:00.000000","2024-03-31T00:00:00.000000","2024-04-15T00:00:00.000000","2024-04-30T00:00:00.000000","2024-05-15T00:00:00.000000","2024-05-31T00:00:00.000000","2024-06-15T00:00:00.000000","2024-06-30T00:00:00.000000","2024-07-15T00:00:00.000000","2024-07-31T00:00:00.000000","2024-08-15T00:00:00.000000","2024-08-31T00:00:00.000000","2024-09-15T00:00:00.000000","2024-09-30T00:00:00.000000","2024-10-15T00:00:00.000000","2024-10-31T00:00:00.000000","2024-11-15T00:00:00.000000","2024-11-30T00:00:00.000000","2024-12-15T00:00:00.000000","2024-12-31T00:00:00.000000","2025-01-15T00:00:00.000000","2025-01-31T00:00:00.000000","2025-02-15T00:00:00.000000","2025-02-28T00:00:00.000000","2025-03-15T00:00:00.000000","2025-03-31T00:00:00.000000","2025-04-15T00:00:00.000000","2025-04-30T00:00:00.000000","2025-05-15T00:00:00.000000","2025-05-31T00:00:00.000000","2025-06-15T00:00:00.000000","2025-06-30T00:00:00.000000","2025-07-15T00:00:00.000000","2025-07-31T00:00:00.000000","2025-08-15T00:00:00.000000","2025-08-31T00:00:00.000000","2025-09-15T00:00:00.000000","2025-09-30T00:00:00.000000","2025-10-15T00:00:00.000000","2025-10-31T00:00:00.000000","2025-11-15T00:00:00.000000","2025-11-30T00:00:00.000000","2025-12-15T00:00:00.000000","2025-12-31T00:00:00.000000","2026-01-15T00:00:00.000000","2026-01-31T00:00:00.000000","2026-02-15T00:00:00.000000","2026-02-28T00:00:00.000000","2026-03-15T00:00:00.000000","2026-03-31T00:00:00.000000","2026-04-15T00:00:00.000000","2026-04-30T00:00:00.000000","2026-05-15T00:00:00.000000","2026-05-31T00:00:00.000000","2026-06-15T00:00:00.000000","2026-06-30T00:00:00.000000","2026-07-15T00:00:00.000000","2026-07-31T00:00:00.000000","2026-08-15T00:00:00.000000","2026-08-31T00:00:00.000000","2026-09-15T00:00:00.000000"],"xaxis":"x","y":{"dtype":"i2","bdata":"mACUAJQAjwCPAIoAegAWAAQABgALAAcABwAGAAQABwAFAAMABQACAAIAAgAQABIAEgAaAAYAAwAtAFoAAgKzAeYAFAGEACsADwAUAAgABgARABkALgDjAIgA0wCmACUAAgBHAJkAYQDcAMAATACwAPUA\u002fQBuAHcAEwATAC8AKgBIAEgASwCeALMArwAFAUYBXAEpAS0BFQEIAYYAMwGIAOAAtAAEAAcADQAQABAANgB6AB8CLgJUAxACewH3AOkA3ACeAKwAcwCOAIIAcgBfADgAIAALAAwAEgAVABgAEwAPACAANAA8ABcADQABAAIAAwABAAUABgAEAAQACgAKAA4AFAASABIAMgAxACcADgALAAEAAQABAAEAAQABAAEAAQACAAIABQAFAAUABQAFABIAKwA8AEAARgAuADIAMwAnABUAFwATABYAFQAXACEAMQBLAE0AawBfAGkAXQBZAHIAaQBvAGwASAAvAD4APgAQAJgASAA7ADIALwAtAF0AWgB2AGEAXABOAA0ACgA\u002fAGcASAAnAAsABwALAAMACAAIABoAHAAkACsASgBUAFkAdwCRAIkAgAB1AGIAHAAmACcAXwB2AG4AdACWAH8APAAwAEAAKQAnABgAGABKAFIAVABaAHQAkwDlAMIAxACuAOAACQEBASUBGwH\u002fALIAqAB7AIgAZQBcAEQATQBUAFcAVABdAIoAmwBZADsAfQC2AL8AnwCvAJsAkgCmALMAtgDzAPgA8wBEAVMBegFjAfwB9wE9AkECZgImAiYCtgGaAHYAagBhADAAHAAVABEAEwASABMAFQAZABkAGQATAB4AaQCeAE8BSwFXAe0AtQC5AOUA9gDjANUAjACGAH8AdQBmAHEAkgCgANQAEQE5AcUB0AHQAfYB+wGCAXYBwAFpAYEBsgEHAkUC+wFKAs4BxQGOAWIBsQErAhsC\u002fwHsAekB+wFJAqACqQLvAoMCegFbAdUAqQBbAEEALgAzADgAOAA4ADsATgBJADwAOwArACwAHgAaABcAGQAoADAAJgAlACIAGgApAB4AHQAlACkAKQA0ADMAJwAYABQAFwAYABgAGQAQAA8ACwAMAAgACAAEAAMAAwATABMA"},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"Categoria_Sequia=D3\u003cbr\u003eFecha=%{x}\u003cbr\u003eConteo=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"D3","line":{"color":"#e60000"},"marker":{"symbol":"circle"},"mode":"lines","name":"D3","orientation":"v","showlegend":true,"stackgroup":"1","x":["2003-01-31T00:00:00.000000","2003-02-28T00:00:00.000000","2003-03-31T00:00:00.000000","2003-04-30T00:00:00.000000","2003-05-31T00:00:00.000000","2003-06-30T00:00:00.000000","2003-07-31T00:00:00.000000","2003-09-30T00:00:00.000000","2003-10-31T00:00:00.000000","2003-11-30T00:00:00.000000","2003-12-31T00:00:00.000000","2004-01-31T00:00:00.000000","2004-03-31T00:00:00.000000","2004-04-30T00:00:00.000000","2004-05-31T00:00:00.000000","2004-06-30T00:00:00.000000","2004-07-31T00:00:00.000000","2004-08-31T00:00:00.000000","2004-09-30T00:00:00.000000","2005-06-30T00:00:00.000000","2006-01-31T00:00:00.000000","2006-02-28T00:00:00.000000","2006-03-31T00:00:00.000000","2006-04-30T00:00:00.000000","2006-05-31T00:00:00.000000","2006-06-30T00:00:00.000000","2006-07-31T00:00:00.000000","2006-08-31T00:00:00.000000","2006-10-31T00:00:00.000000","2006-11-30T00:00:00.000000","2006-12-31T00:00:00.000000","2007-01-31T00:00:00.000000","2007-02-28T00:00:00.000000","2007-03-31T00:00:00.000000","2007-04-30T00:00:00.000000","2007-05-31T00:00:00.000000","2007-06-30T00:00:00.000000","2007-07-31T00:00:00.000000","2007-08-31T00:00:00.000000","2007-09-30T00:00:00.000000","2007-10-31T00:00:00.000000","2008-01-31T00:00:00.000000","2008-02-29T00:00:00.000000","2008-03-31T00:00:00.000000","2008-04-30T00:00:00.000000","2008-05-31T00:00:00.000000","2008-06-30T00:00:00.000000","2008-07-31T00:00:00.000000","2009-01-31T00:00:00.000000","2009-02-28T00:00:00.000000","2009-04-30T00:00:00.000000","2009-05-31T00:00:00.000000","2009-06-30T00:00:00.000000","2009-07-31T00:00:00.000000","2009-08-31T00:00:00.000000","2009-09-30T00:00:00.000000","2009-10-31T00:00:00.000000","2009-11-30T00:00:00.000000","2009-12-31T00:00:00.000000","2010-01-31T00:00:00.000000","2010-02-28T00:00:00.000000","2010-04-30T00:00:00.000000","2010-05-31T00:00:00.000000","2010-06-30T00:00:00.000000","2010-07-31T00:00:00.000000","2010-12-31T00:00:00.000000","2011-01-31T00:00:00.000000","2011-02-28T00:00:00.000000","2011-03-31T00:00:00.000000","2011-04-30T00:00:00.000000","2011-05-31T00:00:00.000000","2011-06-30T00:00:00.000000","2011-07-31T00:00:00.000000","2011-08-31T00:00:00.000000","2011-09-30T00:00:00.000000","2011-10-31T00:00:00.000000","2011-11-30T00:00:00.000000","2011-12-31T00:00:00.000000","2012-01-31T00:00:00.000000","2012-02-29T00:00:00.000000","2012-03-31T00:00:00.000000","2012-04-30T00:00:00.000000","2012-05-31T00:00:00.000000","2012-06-30T00:00:00.000000","2012-07-31T00:00:00.000000","2012-08-31T00:00:00.000000","2012-09-30T00:00:00.000000","2012-10-31T00:00:00.000000","2012-11-30T00:00:00.000000","2012-12-31T00:00:00.000000","2013-01-31T00:00:00.000000","2013-02-28T00:00:00.000000","2013-03-31T00:00:00.000000","2013-04-30T00:00:00.000000","2013-05-31T00:00:00.000000","2013-06-30T00:00:00.000000","2013-07-31T00:00:00.000000","2013-08-31T00:00:00.000000","2013-09-30T00:00:00.000000","2013-10-31T00:00:00.000000","2014-02-28T00:00:00.000000","2014-03-15T00:00:00.000000","2014-03-31T00:00:00.000000","2014-04-15T00:00:00.000000","2014-04-30T00:00:00.000000","2014-05-15T00:00:00.000000","2014-05-31T00:00:00.000000","2014-06-15T00:00:00.000000","2014-06-30T00:00:00.000000","2014-07-15T00:00:00.000000","2014-07-31T00:00:00.000000","2014-08-15T00:00:00.000000","2014-08-31T00:00:00.000000","2014-09-15T00:00:00.000000","2014-09-30T00:00:00.000000","2014-10-15T00:00:00.000000","2014-10-31T00:00:00.000000","2014-11-15T00:00:00.000000","2014-11-30T00:00:00.000000","2014-12-15T00:00:00.000000","2014-12-31T00:00:00.000000","2015-01-15T00:00:00.000000","2015-01-31T00:00:00.000000","2015-02-15T00:00:00.000000","2015-02-28T00:00:00.000000","2015-03-15T00:00:00.000000","2015-03-31T00:00:00.000000","2015-04-15T00:00:00.000000","2015-04-30T00:00:00.000000","2015-05-15T00:00:00.000000","2015-05-31T00:00:00.000000","2015-06-15T00:00:00.000000","2015-06-30T00:00:00.000000","2015-07-15T00:00:00.000000","2015-07-31T00:00:00.000000","2015-08-15T00:00:00.000000","2015-08-31T00:00:00.000000","2015-09-15T00:00:00.000000","2015-09-30T00:00:00.000000","2015-10-15T00:00:00.000000","2015-10-31T00:00:00.000000","2015-11-15T00:00:00.000000","2015-11-30T00:00:00.000000","2015-12-15T00:00:00.000000","2015-12-31T00:00:00.000000","2016-01-15T00:00:00.000000","2016-01-31T00:00:00.000000","2016-02-15T00:00:00.000000","2016-02-29T00:00:00.000000","2016-03-15T00:00:00.000000","2016-03-31T00:00:00.000000","2016-04-15T00:00:00.000000","2016-04-30T00:00:00.000000","2016-05-15T00:00:00.000000","2016-05-31T00:00:00.000000","2016-06-15T00:00:00.000000","2016-06-30T00:00:00.000000","2016-07-15T00:00:00.000000","2016-07-31T00:00:00.000000","2016-08-15T00:00:00.000000","2016-08-31T00:00:00.000000","2016-09-15T00:00:00.000000","2016-09-30T00:00:00.000000","2016-10-15T00:00:00.000000","2016-10-31T00:00:00.000000","2016-11-15T00:00:00.000000","2016-11-30T00:00:00.000000","2016-12-15T00:00:00.000000","2016-12-31T00:00:00.000000","2017-01-15T00:00:00.000000","2017-01-31T00:00:00.000000","2017-02-15T00:00:00.000000","2017-02-28T00:00:00.000000","2017-03-15T00:00:00.000000","2017-03-31T00:00:00.000000","2017-04-15T00:00:00.000000","2017-04-30T00:00:00.000000","2017-05-15T00:00:00.000000","2018-01-31T00:00:00.000000","2018-02-15T00:00:00.000000","2018-02-28T00:00:00.000000","2018-03-15T00:00:00.000000","2018-03-31T00:00:00.000000","2018-04-15T00:00:00.000000","2018-04-30T00:00:00.000000","2018-05-15T00:00:00.000000","2018-05-31T00:00:00.000000","2018-06-15T00:00:00.000000","2018-06-30T00:00:00.000000","2018-07-15T00:00:00.000000","2018-07-31T00:00:00.000000","2018-08-15T00:00:00.000000","2018-08-31T00:00:00.000000","2018-09-15T00:00:00.000000","2018-09-30T00:00:00.000000","2018-10-15T00:00:00.000000","2018-10-31T00:00:00.000000","2018-11-15T00:00:00.000000","2018-11-30T00:00:00.000000","2018-12-15T00:00:00.000000","2018-12-31T00:00:00.000000","2019-01-15T00:00:00.000000","2019-01-31T00:00:00.000000","2019-02-15T00:00:00.000000","2019-02-28T00:00:00.000000","2019-03-15T00:00:00.000000","2019-03-31T00:00:00.000000","2019-04-15T00:00:00.000000","2019-04-30T00:00:00.000000","2019-05-15T00:00:00.000000","2019-05-31T00:00:00.000000","2019-06-15T00:00:00.000000","2019-06-30T00:00:00.000000","2019-07-15T00:00:00.000000","2019-07-31T00:00:00.000000","2019-08-15T00:00:00.000000","2019-08-31T00:00:00.000000","2019-09-15T00:00:00.000000","2019-09-30T00:00:00.000000","2019-10-15T00:00:00.000000","2019-10-31T00:00:00.000000","2019-11-15T00:00:00.000000","2019-11-30T00:00:00.000000","2019-12-15T00:00:00.000000","2019-12-31T00:00:00.000000","2020-01-15T00:00:00.000000","2020-01-31T00:00:00.000000","2020-02-15T00:00:00.000000","2020-02-29T00:00:00.000000","2020-03-15T00:00:00.000000","2020-03-31T00:00:00.000000","2020-04-15T00:00:00.000000","2020-04-30T00:00:00.000000","2020-05-15T00:00:00.000000","2020-06-30T00:00:00.000000","2020-07-15T00:00:00.000000","2020-07-31T00:00:00.000000","2020-08-15T00:00:00.000000","2020-08-31T00:00:00.000000","2020-09-15T00:00:00.000000","2020-09-30T00:00:00.000000","2020-10-15T00:00:00.000000","2020-10-31T00:00:00.000000","2020-11-15T00:00:00.000000","2020-11-30T00:00:00.000000","2020-12-15T00:00:00.000000","2020-12-31T00:00:00.000000","2021-01-15T00:00:00.000000","2021-01-31T00:00:00.000000","2021-02-15T00:00:00.000000","2021-02-28T00:00:00.000000","2021-03-15T00:00:00.000000","2021-03-31T00:00:00.000000","2021-04-15T00:00:00.000000","2021-04-30T00:00:00.000000","2021-05-15T00:00:00.000000","2021-05-31T00:00:00.000000","2021-06-15T00:00:00.000000","2021-06-30T00:00:00.000000","2021-07-15T00:00:00.000000","2021-07-31T00:00:00.000000","2021-08-15T00:00:00.000000","2021-08-31T00:00:00.000000","2021-09-15T00:00:00.000000","2021-09-30T00:00:00.000000","2021-10-15T00:00:00.000000","2021-10-31T00:00:00.000000","2021-12-31T00:00:00.000000","2022-01-15T00:00:00.000000","2022-01-31T00:00:00.000000","2022-02-15T00:00:00.000000","2022-02-28T00:00:00.000000","2022-03-15T00:00:00.000000","2022-03-31T00:00:00.000000","2022-04-15T00:00:00.000000","2022-04-30T00:00:00.000000","2022-05-15T00:00:00.000000","2022-05-31T00:00:00.000000","2022-06-15T00:00:00.000000","2022-06-30T00:00:00.000000","2022-07-15T00:00:00.000000","2022-07-31T00:00:00.000000","2022-08-15T00:00:00.000000","2022-08-31T00:00:00.000000","2022-11-15T00:00:00.000000","2022-11-30T00:00:00.000000","2022-12-15T00:00:00.000000","2022-12-31T00:00:00.000000","2023-01-15T00:00:00.000000","2023-01-31T00:00:00.000000","2023-02-15T00:00:00.000000","2023-02-28T00:00:00.000000","2023-03-15T00:00:00.000000","2023-03-31T00:00:00.000000","2023-04-30T00:00:00.000000","2023-05-15T00:00:00.000000","2023-05-31T00:00:00.000000","2023-06-15T00:00:00.000000","2023-06-30T00:00:00.000000","2023-07-15T00:00:00.000000","2023-07-31T00:00:00.000000","2023-08-15T00:00:00.000000","2023-08-31T00:00:00.000000","2023-09-15T00:00:00.000000","2023-09-30T00:00:00.000000","2023-10-15T00:00:00.000000","2023-10-31T00:00:00.000000","2023-11-15T00:00:00.000000","2023-11-30T00:00:00.000000","2023-12-15T00:00:00.000000","2023-12-31T00:00:00.000000","2024-01-15T00:00:00.000000","2024-01-31T00:00:00.000000","2024-02-15T00:00:00.000000","2024-02-29T00:00:00.000000","2024-03-15T00:00:00.000000","2024-03-31T00:00:00.000000","2024-04-15T00:00:00.000000","2024-04-30T00:00:00.000000","2024-05-15T00:00:00.000000","2024-05-31T00:00:00.000000","2024-06-15T00:00:00.000000","2024-06-30T00:00:00.000000","2024-07-15T00:00:00.000000","2024-07-31T00:00:00.000000","2024-08-15T00:00:00.000000","2024-08-31T00:00:00.000000","2024-09-15T00:00:00.000000","2024-09-30T00:00:00.000000","2024-10-15T00:00:00.000000","2024-10-31T00:00:00.000000","2024-11-15T00:00:00.000000","2024-11-30T00:00:00.000000","2024-12-15T00:00:00.000000","2024-12-31T00:00:00.000000","2025-01-15T00:00:00.000000","2025-01-31T00:00:00.000000","2025-02-15T00:00:00.000000","2025-02-28T00:00:00.000000","2025-03-15T00:00:00.000000","2025-03-31T00:00:00.000000","2025-04-15T00:00:00.000000","2025-04-30T00:00:00.000000","2025-05-15T00:00:00.000000","2025-05-31T00:00:00.000000","2025-06-15T00:00:00.000000","2025-06-30T00:00:00.000000","2025-07-15T00:00:00.000000","2025-07-31T00:00:00.000000","2025-08-15T00:00:00.000000","2025-08-31T00:00:00.000000","2025-09-15T00:00:00.000000","2025-09-30T00:00:00.000000","2025-10-15T00:00:00.000000","2025-10-31T00:00:00.000000","2025-11-15T00:00:00.000000","2025-11-30T00:00:00.000000","2025-12-15T00:00:00.000000","2025-12-31T00:00:00.000000","2026-01-15T00:00:00.000000","2026-01-31T00:00:00.000000","2026-02-15T00:00:00.000000","2026-02-28T00:00:00.000000","2026-03-15T00:00:00.000000","2026-03-31T00:00:00.000000","2026-04-15T00:00:00.000000","2026-04-30T00:00:00.000000","2026-05-15T00:00:00.000000","2026-05-31T00:00:00.000000"],"xaxis":"x","y":{"dtype":"i2","bdata":"PgA7ADoAPAA8ADsAOgAQAAgABwAHAAcAAwACAAMAAQABAAEAAQABABQAPQBWAI4AJQCOADwAJAABAAMABAADAAMAAQAkACQAUgBHAAsACAAJAAIACgATADEAfACWAA0AAgADAAEAAgACABUAUQBiAFIAUABSAGwAkACcAFUAEwAPAAMAAQACAIoAXAHHAVAC7gCeAIMAAwHYAN0AwwBsAEEAMgAYABcABgAIAAYABAAEAAQABgAXABIAEwAJAAcABgAGAAEAAQABAAEAAQABAAEAAQABAAEACQAGAAMAAwADAAMAAwADAAMAAwADAAIAAgACAAIAAgACAAIABQAFAAIAAgACAAIAAgACAAIAAgACAAIABQAFAAIAAgACAAgACAATABMAEwAWABwAHAAIAAYABgAGAAYADQAVADAAHAAWAAYABgAGAAYABgAGAAYACQAdABsAHAAcABwAHQAdAB8AFAALAAwAEAAUADMASQBIAD4APQAoABcAFAARABUAKQAqACEAJQAeAA4ABQADAAMAAwADAAMAAwADAAMAAwAUABQAFwAVACgALQA\u002fAHAAiQCYAKQAmABtADoAKgAqACYAKQAfACEAJQAlACYAIgAJAAQAEQASADAAJgAjAB8AIAAqADYAMABEAFYAYQBnAFEAYQBlAHUAuADaAA8BHwEQAeYAhABTADIAAwADAAIAAgACAAIAAwAEAAUABgAOABUAGAAeAB4ANABJAFIANwAqACMAIAAMAAMAAwADAAMAAwAYABkALQAoACcAHwAUABQAXwD7ACIBEQEjATsBxQHEAjUCBQLxAa0BYAFfAYwBjQGFAUwBXAFqAXkBfQHTAQ8CPAJrAVABsQBZAEEAMQAvADQAMwAzADEANQBDAGAAdQB0AHgAfwCAAGkAUQBMAEUAQwAmAB8AHwAYABAACwAJAAgACAAIAAIAAgACAAoADAANAA8ACwAOAA0ACQAHAAYA"},"yaxis":"y","type":"scatter"},{"fillpattern":{"shape":""},"hovertemplate":"Categoria_Sequia=D4\u003cbr\u003eFecha=%{x}\u003cbr\u003eConteo=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"D4","line":{"color":"#730000"},"marker":{"symbol":"circle"},"mode":"lines","name":"D4","orientation":"v","showlegend":true,"stackgroup":"1","x":["2003-01-31T00:00:00.000000","2003-02-28T00:00:00.000000","2003-03-31T00:00:00.000000","2003-04-30T00:00:00.000000","2003-05-31T00:00:00.000000","2003-06-30T00:00:00.000000","2003-07-31T00:00:00.000000","2003-10-31T00:00:00.000000","2003-11-30T00:00:00.000000","2003-12-31T00:00:00.000000","2004-01-31T00:00:00.000000","2004-03-31T00:00:00.000000","2006-02-28T00:00:00.000000","2006-03-31T00:00:00.000000","2006-04-30T00:00:00.000000","2006-05-31T00:00:00.000000","2006-06-30T00:00:00.000000","2006-07-31T00:00:00.000000","2006-08-31T00:00:00.000000","2006-12-31T00:00:00.000000","2007-01-31T00:00:00.000000","2007-07-31T00:00:00.000000","2008-06-30T00:00:00.000000","2009-08-31T00:00:00.000000","2009-09-30T00:00:00.000000","2009-10-31T00:00:00.000000","2009-11-30T00:00:00.000000","2011-04-30T00:00:00.000000","2011-05-31T00:00:00.000000","2011-06-30T00:00:00.000000","2011-07-31T00:00:00.000000","2011-08-31T00:00:00.000000","2011-09-30T00:00:00.000000","2011-10-31T00:00:00.000000","2011-11-30T00:00:00.000000","2011-12-31T00:00:00.000000","2012-01-31T00:00:00.000000","2012-02-29T00:00:00.000000","2012-03-31T00:00:00.000000","2012-04-30T00:00:00.000000","2013-03-31T00:00:00.000000","2013-04-30T00:00:00.000000","2013-05-31T00:00:00.000000","2013-06-30T00:00:00.000000","2013-07-31T00:00:00.000000","2013-08-31T00:00:00.000000","2018-06-30T00:00:00.000000","2019-07-31T00:00:00.000000","2019-08-15T00:00:00.000000","2019-08-31T00:00:00.000000","2019-09-15T00:00:00.000000","2019-09-30T00:00:00.000000","2019-10-15T00:00:00.000000","2020-03-31T00:00:00.000000","2020-04-15T00:00:00.000000","2020-11-30T00:00:00.000000","2020-12-15T00:00:00.000000","2020-12-31T00:00:00.000000","2021-01-15T00:00:00.000000","2021-01-31T00:00:00.000000","2021-02-15T00:00:00.000000","2021-02-28T00:00:00.000000","2021-03-15T00:00:00.000000","2021-03-31T00:00:00.000000","2021-04-15T00:00:00.000000","2021-04-30T00:00:00.000000","2021-05-15T00:00:00.000000","2021-05-31T00:00:00.000000","2021-06-15T00:00:00.000000","2021-06-30T00:00:00.000000","2021-07-15T00:00:00.000000","2021-07-31T00:00:00.000000","2022-03-15T00:00:00.000000","2022-03-31T00:00:00.000000","2022-04-15T00:00:00.000000","2022-04-30T00:00:00.000000","2022-05-15T00:00:00.000000","2022-05-31T00:00:00.000000","2022-06-15T00:00:00.000000","2022-06-30T00:00:00.000000","2022-07-15T00:00:00.000000","2022-07-31T00:00:00.000000","2022-08-15T00:00:00.000000","2023-09-30T00:00:00.000000","2023-10-15T00:00:00.000000","2023-10-31T00:00:00.000000","2023-11-15T00:00:00.000000","2023-11-30T00:00:00.000000","2023-12-15T00:00:00.000000","2023-12-31T00:00:00.000000","2024-01-15T00:00:00.000000","2024-01-31T00:00:00.000000","2024-02-15T00:00:00.000000","2024-02-29T00:00:00.000000","2024-03-15T00:00:00.000000","2024-03-31T00:00:00.000000","2024-04-15T00:00:00.000000","2024-04-30T00:00:00.000000","2024-05-15T00:00:00.000000","2024-05-31T00:00:00.000000","2024-06-15T00:00:00.000000","2024-06-30T00:00:00.000000","2024-07-15T00:00:00.000000","2024-07-31T00:00:00.000000","2024-08-15T00:00:00.000000","2024-08-31T00:00:00.000000","2024-09-15T00:00:00.000000","2024-09-30T00:00:00.000000","2024-10-15T00:00:00.000000","2024-10-31T00:00:00.000000","2024-11-15T00:00:00.000000","2024-11-30T00:00:00.000000","2024-12-15T00:00:00.000000","2024-12-31T00:00:00.000000","2025-01-15T00:00:00.000000","2025-01-31T00:00:00.000000","2025-02-15T00:00:00.000000","2025-02-28T00:00:00.000000","2025-03-15T00:00:00.000000","2025-03-31T00:00:00.000000","2025-04-15T00:00:00.000000","2025-04-30T00:00:00.000000","2025-05-15T00:00:00.000000","2025-05-31T00:00:00.000000","2025-06-15T00:00:00.000000","2025-06-30T00:00:00.000000","2025-07-15T00:00:00.000000","2025-07-31T00:00:00.000000","2025-08-15T00:00:00.000000","2025-08-31T00:00:00.000000","2025-09-15T00:00:00.000000","2025-09-30T00:00:00.000000","2025-10-15T00:00:00.000000","2025-10-31T00:00:00.000000","2025-11-15T00:00:00.000000","2025-11-30T00:00:00.000000","2025-12-15T00:00:00.000000","2025-12-31T00:00:00.000000","2026-01-15T00:00:00.000000","2026-01-31T00:00:00.000000","2026-02-15T00:00:00.000000","2026-02-28T00:00:00.000000","2026-03-15T00:00:00.000000","2026-03-31T00:00:00.000000","2026-04-15T00:00:00.000000","2026-04-30T00:00:00.000000"],"xaxis":"x","y":{"dtype":"i2","bdata":"BAAEAAQABAAEAAQAAgABAAEAAgADAAIAAgAWABkAUAA4AA0AFgACAAEAAwAJAAIADAAmAAwACgARAJAAQQAWAB4APwBOAFQAPQAPAAQABAAIAAYAAQABAAEAAgADAAcABgAGAAgAGwAbAAIAAgAMAAwADAAJAAoACgAKAAwADwATABcAHQAbABwAGQASAAIAAgACAAQACQAJAAUABQAFAAoABgADADAALAAnACoAKgAcAEoAiACLAI8AmQCkAKgAzQDZAN4AGQFTAXcAagBMAEQANgAZABkAKAAzADQAMAAwADAAIQAhACcALwA4AD4AXwB4AHsAWgBOACUAGQASAA8ACgADAAIAAQABAAEAAgACAAIAAgACAAIABAAEAAYAAgACAA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"white","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"#C8D4E3","linecolor":"#C8D4E3","minorgridcolor":"#C8D4E3","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"white","showlakes":true,"showland":true,"subunitcolor":"#C8D4E3"},"hoverlabel":{"align":"left"},"hovermode":"closest","margin":{"b":0,"l":0,"r":0,"t":30},"paper_bgcolor":"white","plot_bgcolor":"white","polar":{"angularaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""},"bgcolor":"white","radialaxis":{"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"yaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"},"zaxis":{"backgroundcolor":"white","gridcolor":"#DFE8F3","gridwidth":2,"linecolor":"#EBF0F8","showbackground":true,"ticks":"","zerolinecolor":"#EBF0F8"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"baxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""},"bgcolor":"white","caxis":{"gridcolor":"#DFE8F3","linecolor":"#A2B1C6","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#EBF0F8","linecolor":"#EBF0F8","ticks":"","title":{"standoff":15},"zerolinecolor":"#EBF0F8","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"A\u00f1o"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"N\u00famero de Municipios"}},"legend":{"title":{"text":"Nivel de Sequ\u00eda"},"tracegroupgap":0},"title":{"text":"Proporci\u00f3n de Municipios por Nivel de Severidad de Sequ\u00eda"},"margin":{"l":20,"r":20,"t":50,"b":20},"hovermode":"x unified"},                        {"responsive": true}                    ).then(function(){
+                            
+var gd = document.getElementById('c6e12d72-1739-45cd-9ebc-f01912d65182');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };            </script>        </div>
+</div>
+</div>
+
+
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

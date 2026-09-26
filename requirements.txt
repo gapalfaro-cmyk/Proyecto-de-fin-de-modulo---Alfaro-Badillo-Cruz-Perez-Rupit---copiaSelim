@@ -11,6 +11,7 @@ bleach==6.4.0
 certifi==2026.7.22
 cffi==2.1.1
 charset-normalizer==3.5.1
+click==8.5.0
 cloudpickle==3.1.2
 comm==0.2.3
 contourpy==1.4.0
@@ -25,6 +26,7 @@ h11==0.16.0
 httpcore==1.0.9
 httpx==0.28.1
 idna==3.20
+importlib-metadata==9.0.1
 ipykernel==7.3.0
 ipython==9.17.1
 ipython-pygments-lexers==1.1.1
@@ -39,6 +41,7 @@ jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 jupyter==1.1.1
 jupyter-builder==1.2.3
+jupyter-cache==1.0.1
 jupyter-client==8.10.0
 jupyter-console==6.6.3
 jupyter-core==5.9.1
@@ -96,7 +99,9 @@ seaborn==0.13.2
 send2trash==2.1.0
 six==1.17.0
 soupsieve==2.10
+sqlalchemy==2.1.1
 stack-data==0.6.3
+tabulate==0.10.0
 terminado==0.18.1
 threadpoolctl==3.7.0
 tinycss2==1.5.1
@@ -111,3 +116,4 @@ webcolors==25.10.0
 webencodings==0.6.1
 websocket-client==1.9.2
 widgetsnbextension==4.0.16
+zipp==4.1.0
