@@ -4,6 +4,26 @@ jupyter: python3
 execute:
   cache: true
 ---
+## Información Disponible
+
+Columnas:
+CVE_CONCATENADA: Clave del municipio
+CVE_ENT: Clave de la entidad federativa
+CVE_MUN: Clave Municipio
+NOMBRE_MUN: Nombre municipio
+ENTIDAD: Nombre de la entidad federativa 
+ORG_CUENCA: Organismo de cuenca donde se localiza el municipio
+CLV_OC:Clave del organismo de cuenca donde se localiza el municipio
+CON_CUENCA: Consejo de cuenca donde se localiza el municipio
+CVE_CUENCA: Clave del consejo de cuenca donde se localiza el municipio
+
+# Clasificación de la Sequía
+Sin valor: Sin sequía
+D0: Anormalmente seco
+D1: Sequía Moderada
+D2: Sequía Severa
+D3: Sequía Extrema
+D4: Sequía Excepcional 
 
 ## Transformación Estructural (Data Wrangling)
 
