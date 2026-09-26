@@ -2,45 +2,25 @@ project:
   type: website
 
 website:
-  title: "Mi sitio de reportes"
+  title: "Evolución de la Sequía en México"
+  description: "Análisis territorial y temporal (PRONACOSE)"
   navbar:
     left:
-      - text: "Sobre este sitio"
-        href: index.qmd
-  sidebar:
-    style: docked
-    contents:
-      - index.qmd
-      - section: "Primer reporte"
-        contents:
-          - mis_reportes/reporte-01.qmd
-      - section: "Segundo reporte"
-        contents:
-          - mis_reportes/reporte-02.qmd
-      - section: "Último reporte"
-        contents:
-          - mis_reportes/reporte-03.qmd
-      - section: "Reporte con dos lenguajes"
-        contents:
-          - mis_reportes/reporte-04.qmd
-      - section: "Reporte pero en slides"
-        contents:
-          - mis_reportes/slides-01.qmd
-      - section: "Reporte en slides embebido en el sitio"
-        contents:
-          - mis_reportes/ver-slides-01.qmd
-      - section: "Quinto reporte"
-        contents:
-          - mis_reportes/reporte-05.qmd
-      - section: "Sexto reporte"
-        contents:
-          - mis_reportes/reporte-06.qmd
-      - section: "Más reportes con gráficas"
-        contents:
-          - mis_reportes/reporte-07.qmd
+      - href: index.qmd
+        text: Inicio
+      - href: mis_reportes/reporte-01.qmd
+        text: Exploración y Limpieza
+      - href: mis_reportes/reporte-02.qmd
+        text: Análisis y Modelado
+      - href: mis_reportes/reporte-03.qmd
+        text: Resultados y Conclusiones
 
 format:
   html:
-    theme: minty
+    theme: sandstone
+    css: styles.css
     toc: true
-    lang: es
+    code-fold: true 
+    execute:
+      warning: false
+      message: false
