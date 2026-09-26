@@ -1,0 +1,32 @@
+---
+title: "Un formato de dashboard"
+format: dashboard
+---
+    
+## Row {height=70%}
+
+```{r}
+library(palmerpenguins)
+library(highcharter)
+library(forecast)
+```
+
+```{r}
+hchart(
+  penguins,
+  "scatter",
+  hcaes(x = flipper_length_mm, y = bill_length_mm, group = species)
+)
+```
+
+## Row {height=30%}
+
+```{r}
+airforecast <- forecast(auto.arima(AirPassengers), level = 95)
+hchart(airforecast)
+```
+
+```{r}
+hchart(mtcars, "scatter", hcaes(wt, mpg, z = drat, color = hp)) |>
+  hc_title(text = "Scatter chart with size and color")
+```

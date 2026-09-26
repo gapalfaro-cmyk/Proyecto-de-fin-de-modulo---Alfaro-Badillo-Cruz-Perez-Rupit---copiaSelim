@@ -1,0 +1,104 @@
+---
+title: "Slides con R y Python"
+subtitle: "Mis resultados en slides"
+author: "Tu nombre"
+format:
+  revealjs:
+    theme: simple
+    transition: slide
+    slide-number: true
+    incremental: false
+    code-line-numbers: true
+---
+
+## Bienvenida {.center}
+
+Esta presentación combina:
+
+- Chunks de **R**
+- Chunks de **Python**
+- Gráficos generados en vivo
+- Layout en columnas
+
+---
+
+## Chunk de R
+
+Usamos R para generar un gráfico simple con `ggplot2`:
+
+```{r}
+#| echo: true
+#| fig-align: center
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg, color = factor(cyl))) +
+  geom_point(size = 3) +
+  labs(title = "Peso vs. Consumo", color = "Cilindros") +
+  theme_minimal()
+```
+
+---
+
+## Chunk de Python
+
+Ahora el mismo tipo de análisis, pero en Python:
+
+```{python}
+#| echo: true
+#| fig-align: center
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.figure(figsize=(6, 4))
+plt.plot(x, y, color="darkorange")
+plt.title("Función seno")
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+## Dos columnas: R vs Python
+
+::: {.columns}
+::: {.column width="50%"}
+**R**
+
+```{r}
+#| echo: true
+mean(mtcars$mpg)
+```
+:::
+
+::: {.column width="50%"}
+**Python**
+
+```{python}
+#| echo: true
+import statistics
+statistics.mean([21, 22.8, 21.4, 18.7])
+```
+:::
+:::
+
+---
+
+## Lista incremental
+
+Algunos puntos clave sobre Quarto:
+
+::: {.incremental}
+- Permite mezclar motores de ejecución (`knitr` + `reticulate`).
+- Un solo documento fuente para ambos lenguajes.
+- Se renderiza a HTML, PDF o PowerPoint.
+- Ideal para reportes reproducibles.
+:::
+
+---
+
+## Gracias {.center}
+
+¿Preguntas?

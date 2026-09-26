@@ -1,0 +1,21 @@
+---
+title: "Este es mi segundo reporte"
+description: "Análisis de los datos de otro trimestre"
+date: "2026-12-01"
+---
+
+## Segundo reporte
+
+Este es un ejemplo de lección. Puedes borrar el contenido de este archivo y crear el tuyos.
+
+### Ejemplo de código
+
+```{r}
+summary(iris)
+```
+
+### Ejemplo de lista
+
+- Punto uno
+- Punto dos
+- Punto tres

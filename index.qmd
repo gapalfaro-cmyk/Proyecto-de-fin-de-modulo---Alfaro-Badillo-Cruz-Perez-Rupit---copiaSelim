@@ -1,0 +1,21 @@
+---
+title: "Reportes trimestrales"
+image: foto_gato.jpg
+about:
+  template: jolla   # opciones: jolla, trestles, solana, marquee, broadside
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com
+    - icon: telegram
+      text: Telegram
+      href: https://t.me
+    - icon: slack
+      text: Slack
+      href: https://slack.com/intl/es-mx/
+---
+
+En este sitio encontrarás los reportes que se realizaron para el proyecto...

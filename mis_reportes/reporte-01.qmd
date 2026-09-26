@@ -1,0 +1,21 @@
+---
+title: "Primer reporte"
+description: "Análisis de los datos trimestrales"
+date: "2026-09-05"
+---
+
+## Bienvenida
+
+Este es un ejemplo de un reporte. Puedes borrar el contenido de este archivo y crear el tuyo
+
+### Ejemplo de código
+
+```{r}
+print("Hola mundo")
+```
+
+### Ejemplo de lista
+
+- Punto uno
+- Punto dos
+- Punto tres

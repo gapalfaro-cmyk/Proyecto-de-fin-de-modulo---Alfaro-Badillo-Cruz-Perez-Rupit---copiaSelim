@@ -1,0 +1,52 @@
+---
+title: "Tercer reporte trimestral"
+description: "Análisis de los datos actualizados"
+date: "2026-04-01"
+---
+
+Acá usamos nuestra sintaxis clásica de RMarkdown/Quarto
+
+## Un vistazo a los datos
+
+```{r}
+#| echo: false
+#| message: false
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+head(mtcars)
+```
+
+## Un gráfico
+
+```{r}
+#| echo: false
+#| warning: false
+ggplot(mtcars, aes(x = wt, y = mpg, color = as.factor(cyl))) +
+  geom_point(size = 3) +
+  labs(
+    title = "Peso del auto vs. rendimiento",
+    x = "Peso (miles de lb)",
+    y = "Millas por galón",
+    color = "Cilindros"
+  ) +
+  theme_minimal()
+```
+
+## Una tabla resumen
+
+```{r}
+#| echo: false
+mtcars |>
+  group_by(cyl) |>
+  summarise(mpg_promedio = mean(mpg)) |>
+  knitr::kable()
+```
+
+Un resumen del famoso dataset "iris"
+
+```{r}
+summary(iris)
+```

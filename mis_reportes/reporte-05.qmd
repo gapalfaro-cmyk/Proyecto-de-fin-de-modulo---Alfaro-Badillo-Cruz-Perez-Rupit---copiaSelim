@@ -1,0 +1,122 @@
+---
+title: "Vamos por otro reporte"
+description: "Análisis de los datos más bonito"
+date: "2026-09-15"
+---
+
+```{r}
+library(ggplot2)
+library(gghighlight)
+library(palmerpenguins)
+```
+
+Empezamos creando una tablita con 3 series aleatorias.
+
+```{r}
+set.seed(202609)
+period <- 365
+df <- data.frame(
+  Date = seq(as.Date("2025-01-01"),
+    by = "day",
+    length.out = period
+  ),
+  Value = c(
+    cumsum(rnorm(period)),
+    cumsum(rnorm(period)),
+    cumsum(rnorm(period))
+  ),
+  Type = c(
+    rep("producto 1", period),
+    rep("producto 2", period),
+    rep("producto 3", period)
+  )
+)
+
+df |> head()
+```
+
+```{r}
+df |> ggplot() +
+  geom_line(aes(x = Date, y = Value, color = Type)) +
+  theme_linedraw()
+```
+
+```{r}
+df |> ggplot() +
+  geom_line(aes(x = Date, y = Value, color = Type)) +
+  theme_linedraw() +
+  gghighlight(min(Value) < -20) # Se resalta el grupo si su valor mínimo está por debajo de -20
+```
+
+```{r}
+df |> ggplot() +
+  geom_line(aes(x = Date, y = Value, color = Type)) +
+  theme_linedraw() +
+  gghighlight(min(Value) < -20, # Se resalta el grupo si su valor mínimo está por debajo de -20
+              unhighlighted_params = list(
+                linewidth = 0.3,
+                colour = alpha("khaki", 0.6))
+  ) 
+```
+
+¿Se acuerdan del dataset de los pingüinos?
+
+Podemos poner tabsets
+
+::: {.panel-tabset}
+
+## Primera pestaña
+
+```{r}
+penguins |> ggplot() +
+  geom_histogram(aes(x = body_mass_g, fill = species)) +
+  facet_wrap(~species) +
+  theme_light()
+```
+
+## Segunda pestaña
+
+```{r}
+penguins |> ggplot() +
+  geom_point(aes(x = flipper_length_mm, y = body_mass_g), color = "blue") +
+  theme_light()
+```
+:::
+
+
+```{r}
+penguins |> ggplot() +
+  geom_histogram(aes(x = body_mass_g, fill = species)) +
+  gghighlight() +
+  facet_wrap(~species) +
+  theme_light()
+```
+
+```{r}
+penguins |> ggplot() +
+  geom_point(aes(x = flipper_length_mm, y = body_mass_g), color = "blue") +
+  gghighlight(body_mass_g > 5800, flipper_length_mm > 200, label_key = sex) +
+  theme_light()
+```
+
+```{r}
+penguins |> ggplot() +
+  geom_point(aes(x = flipper_length_mm, y = body_mass_g), color = "blue") +
+  gghighlight(body_mass_g > 5800, flipper_length_mm > 200, label_key = sex,
+              unhighlighted_params = list(
+                linewidth = 0.3,
+                colour = alpha("lavender", 0.6))) +
+  theme_light()
+```
+
+```{r}
+mtcars$model <- rownames(mtcars)
+
+ggplot(mtcars, aes(reorder(model, mpg), mpg)) +
+  geom_col(fill = "deeppink") +
+  gghighlight(mpg > 25,
+              unhighlighted_params = list(fill = alpha("aliceblue", 0.6))) +
+  coord_flip() +
+  labs(x = NULL, y = "Millas por galón") +
+  theme_minimal()
+```

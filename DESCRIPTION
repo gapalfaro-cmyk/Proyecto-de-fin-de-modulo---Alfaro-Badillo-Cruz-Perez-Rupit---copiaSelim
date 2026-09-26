@@ -1,0 +1,22 @@
+Package: misitio
+Type: Package
+Title: Mi sitio web con Quarto
+Version: 1.0.0
+Imports:
+    dplyr,
+    ggplot2,
+    knitr,
+    rmarkdown,
+    reticulate,
+    gghighlight,
+    palmerpenguins,
+    highcharter,
+    forecast,
+    ggalluvial,
+    geomtextpath,
+    gapminder,
+    gganimate,
+    gifski,
+    transformr,
+    kableExtra,
+    plotly

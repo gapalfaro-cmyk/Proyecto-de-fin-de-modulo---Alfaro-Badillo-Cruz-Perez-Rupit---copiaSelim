@@ -1,0 +1,6 @@
+---
+title: "Acá podemos ver la presentación presentación embebida"
+format: html
+---
+
+<iframe src="slides-01.html" width="100%" height="700" style="border:none;"></iframe>
