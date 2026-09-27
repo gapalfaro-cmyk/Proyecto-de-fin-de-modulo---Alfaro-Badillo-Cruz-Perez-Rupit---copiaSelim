@@ -9,17 +9,40 @@ execute:
 
 ## Introducción
 
-Esta sección documenta la exploración, limpieza y transformación de la fuente
-principal del proyecto: el **Monitor de Sequía en México**, publicado por el
-Programa Nacional Contra la Sequía
+Esta sección documenta la preparación de la fuente principal del proyecto:
+el **Monitor de Sequía en México**, publicado por el Programa Nacional
+Contra la Sequía
 ([PRONACOSE](https://www.datos.gob.mx/es/dataset/programa_nacional_contra_sequia_pronacose)).
-El archivo original (`MunicipiosSequiaCSV.csv`) viene en **formato ancho**:
-una fila por municipio y una columna por fecha de publicación del monitor,
-con la categoría de sequía observada (D0 a D4) o celda vacía.
+El archivo original viene en **formato ancho**: una fila por municipio y
+una columna por fecha de publicación del monitor, con la categoría de
+sequía observada (D0 a D4) o celda vacía.
 
-El objetivo de esta etapa es dejar los datos en un formato **largo (tidy)**,
-con una fila por combinación municipio–fecha, listo para el análisis
-exploratorio y el modelado de las siguientes secciones.
+Se generan **dos productos** a partir de esta limpieza:
+
+- **`df_historico`**: serie completa 2003–2026 en formato largo, útil para
+  gráficas de contexto de largo plazo (con la salvedad metodológica que se
+  documenta más abajo).
+- **`df_analitico`**: subconjunto 2016 en adelante, con una sola columna
+  `fecha`, definición metodológica consistente y frecuencia quincenal
+  uniforme — este es el dataset que alimenta el EDA y el modelado.
+
+
+```{python}
+#| label: setup
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from IPython.display import display
+
+pd.set_option("display.max_columns", 10)
+
+# Ajustar esta ruta según el archivo del equipo.
+# Si usan la versión .xlsx, cambien esta línea por:
+#   df = pd.read_excel("data/raw/MunicipiosSequia.xlsx")
+RUTA_DATOS = "data/raw/MunicipiosSequiaCSV.csv"
+```
+
 
 ::: {.grid}
 
@@ -50,34 +73,6 @@ exploratorio y el modelado de las siguientes secciones.
 
 :::
 
-
-```{python}
-#| label: setup
-
-import re
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from IPython.display import display
-
-pd.set_option("display.max_columns", 10)
-
-RUTA_DATOS = "../data/raw/MunicipiosSequiaCSV.csv"
-
-ID_COLS = [
-    "CVE_CONCATENADA", "CVE_ENT", "CVE_MUN", "NOMBRE_MUN", "ENTIDAD",
-    "ORG_CUENCA*", "CLV_OC", "CON_CUENCA", "CVE_CONC",
-]
-
-MESES = {
-    "ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
-    "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12,
-}
-
-# Nivel ordinal de severidad: sin sequía < D0 < D1 < D2 < D3 < D4
-NIVEL_ORDINAL = {np.nan: 0, "D0": 1, "D1": 2, "D2": 3, "D3": 4, "D4": 5}
-```
-
 ## Carga y estructura de los datos
 
 ```{python}
@@ -86,31 +81,26 @@ NIVEL_ORDINAL = {np.nan: 0, "D0": 1, "D1": 2, "D2": 3, "D3": 4, "D4": 5}
 df = pd.read_csv(RUTA_DATOS, encoding="utf-8-sig", low_memory=False)
 df.columns = [c.strip() for c in df.columns]
 
-date_cols = [c for c in df.columns if c not in ID_COLS]
-n_municipios = df.shape[0]
-n_entidades = df["ENTIDAD"].nunique()
-n_fechas = len(date_cols)
+# Columnas de identificación del municipio (no son fechas)
+columnas_id = [
+    "CVE_CONCATENADA", "CVE_ENT", "CVE_MUN", "NOMBRE_MUN", "ENTIDAD",
+    "ORG_CUENCA*", "CLV_OC", "CON_CUENCA", "CVE_CONC",
+]
+columnas_fecha = [c for c in df.columns if c not in columnas_id]
 
-print(f"Municipios: {n_municipios:,}")
-print(f"Columnas de identificación: {len(ID_COLS)}")
-print(f"Columnas de fecha (periodos publicados): {n_fechas}")
-print(f"Entidades federativas: {n_entidades}")
+print(f"Municipios: {df.shape[0]:,}")
+print(f"Columnas de identificación: {len(columnas_id)}")
+print(f"Columnas de fecha (periodos publicados): {len(columnas_fecha)}")
+print(f"Entidades federativas: {df['ENTIDAD'].nunique()}")
 ```
 
-El archivo cubre el total de municipios del país (ver salida de la celda
-anterior) distribuidos en las 32 entidades federativas, con más de 400
-cortes de tiempo publicados por el monitor desde 2003.
-
 ## Verificación de integridad
-
-Antes de transformar, se verifica que las llaves de municipio sean únicas y
-que no existan valores faltantes en las columnas de identificación.
 
 ```{python}
 #| label: integridad
 
 duplicados = df["CVE_CONCATENADA"].duplicated().sum()
-nulos_id = df[ID_COLS].isna().sum().sum()
+nulos_id = df[columnas_id].isna().sum().sum()
 
 print(f"Claves de municipio duplicadas: {duplicados}")
 print(f"Valores nulos en columnas de identificación: {nulos_id}")
@@ -122,47 +112,19 @@ assert nulos_id == 0, "Hay nulos en columnas de identificación"
 No se encontraron duplicados ni valores faltantes en las llaves de
 municipio, entidad o cuenca.
 
-## Interpretación de celdas vacías: ¿sin sequía o dato faltante?
+## De nombres de columna a fechas reales
 
-Este es el punto de limpieza más importante de la fuente. Una celda vacía
-puede significar dos cosas muy distintas:
-
-1. **Sin sequía** en ese municipio durante ese periodo (la interpretación
-   estándar de la metodología del Monitor de Sequía en México), o
-2. Un **hueco real de publicación**: el monitor no se publicó ese corte
-   para *ningún* municipio del país.
-
-Para distinguirlos, se calcula el porcentaje de celdas vacías por columna
-(fecha): si una fecha tiene el **100% de los municipios vacíos**, se trata
-como hueco real de publicación en vez de "sin sequía".
-
-```{python}
-#| label: fig-vacios-por-fecha
-#| fig-cap: "Porcentaje de municipios sin categoría asignada, por fecha de publicación"
-
-frac_vacio = df[date_cols].isna().mean()
-cols_missing_real = frac_vacio[frac_vacio == 1.0].index.tolist()
-
-fig, ax = plt.subplots()
-ax.plot(range(len(frac_vacio)), frac_vacio.values * 100, linewidth=0.8)
-ax.set_xlabel("Corte de publicación (orden cronológico)")
-ax.set_ylabel("% de municipios vacíos")
-ax.axhline(100, color="firebrick", linestyle="--", linewidth=0.8, label="100% vacío = hueco real")
-ax.legend()
-plt.tight_layout()
-plt.show()
-
-print(f"Fechas con 100% de celdas vacías (hueco real de publicación): {cols_missing_real}")
-```
-
-Las fechas listadas en la salida de la celda anterior (100% de municipios
-vacíos) se tratan como hueco real de publicación. El resto de las celdas
-vacías se codifican como "sin sequía".
-
-## Transformación de formato ancho a largo
+Los nombres de columna vienen como texto en español (`31-ene-03`,
+`15-sep-26`), que `pandas` no reconoce de forma nativa. Se parsean
+manualmente para poder analizar la cobertura temporal.
 
 ```{python}
 #| label: fn-parseo
+
+MESES = {
+    "ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+    "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12,
+}
 
 def parsear_fecha(col_name: str) -> pd.Timestamp:
     """Convierte 'dd-mmm-aa' (español) a Timestamp, p.ej. '15-sep-26' -> 2026-09-15."""
@@ -171,87 +133,158 @@ def parsear_fecha(col_name: str) -> pd.Timestamp:
 ```
 
 ```{python}
-#| label: wide-to-long
+#| label: fig-cobertura-anual
+#| fig-cap: "Número de cortes de publicación del monitor por año"
 
-largo = df.melt(id_vars=ID_COLS, value_vars=date_cols,
-                 var_name="fecha_str", value_name="categoria")
+fechas_cols = pd.Series(columnas_fecha).map(parsear_fecha)
+conteo_anual = fechas_cols.dt.year.value_counts().sort_index()
 
-largo["fecha"] = largo["fecha_str"].map(parsear_fecha)
-largo["es_hueco_publicacion"] = largo["fecha_str"].isin(cols_missing_real)
-
-# Nivel ordinal de severidad (0-5); NaN real para huecos de publicación
-largo["nivel_severidad"] = largo["categoria"].map(NIVEL_ORDINAL)
-largo.loc[largo["es_hueco_publicacion"], "nivel_severidad"] = np.nan
-
-largo["categoria"] = largo["categoria"].fillna("Sin sequía")
-largo.loc[largo["es_hueco_publicacion"], "categoria"] = np.nan
-
-# Periodicidad de la fuente: mensual hasta 2013, quincenal desde 2014
-largo["periodicidad"] = np.where(largo["fecha"] < pd.Timestamp("2014-01-01"),
-                                  "mensual", "quincenal")
-
-largo = (largo.drop(columns=["fecha_str"])
-              .sort_values(["CVE_CONCATENADA", "fecha"])
-              .reset_index(drop=True))
-
-display(largo.head())
-print(f"\nFilas en formato largo: {len(largo):,}")
+fig, ax = plt.subplots()
+ax.bar(conteo_anual.index.astype(str), conteo_anual.values)
+ax.set_xlabel("Año")
+ax.set_ylabel("Cortes de publicación")
+ax.tick_params(axis="x", rotation=90)
+plt.tight_layout()
+plt.show()
 ```
 
-::: {.callout-note}
-## Decisión de limpieza: cambio de periodicidad
+Se confirma lo esperado: **12 cortes por año** entre 2003 y 2013 (mensual)
+y **~24 cortes por año** desde 2014 (quincenal). Este cambio de frecuencia
+por sí solo ya complica comparar el periodo completo, pero hay un problema
+más importante que el de frecuencia, documentado a continuación.
 
-La fuente cambia de frecuencia **mensual (2003–2013)** a **quincenal
-(2014 en adelante)**. Esto se documenta en la columna `periodicidad` y se
-conserva la resolución nativa en este dataset para el análisis de detalle
-2014–2026. Para comparar tendencias a lo largo de **todo** el periodo
-2003–2026 de forma consistente, en la siguiente sección se construye además
-una serie armonizada a frecuencia mensual.
+## Cambio metodológico en 2016: por qué no basta con re-muestrear
+
+::: {.callout-important}
+## Hallazgo clave de la documentación de la fuente
+
+Según la nota metodológica que acompaña al dataset, la forma de asignar la
+categoría de sequía a un municipio **cambió de definición**, no solo de
+frecuencia:
+
+- **2003–2015**: se asignaba una categoría (D0 a D4) al municipio solo
+  cuando esa condición cubría **al menos 40% de su superficie**.
+- **2016 en adelante**: se asigna la categoría de **mayor intensidad
+  observada en cualquier punto** del municipio, sin importar qué
+  porcentaje de su superficie cubre.
+
+Esto significa que un mismo valor "D2" **no es comparable** antes y
+después de 2016: el criterio de 2003–2015 es más conservador (requiere
+afectación extendida) y el de 2016+ es más sensible (basta un punto
+afectado). Re-muestrear la frecuencia (mensual → quincenal) no resuelve
+este problema de fondo.
 :::
 
-## Armonización a frecuencia mensual (comparabilidad 2003–2026)
-
-Se colapsa cada municipio-mes tomando la **severidad máxima observada en el
-mes** (criterio de peor caso, estándar en climatología de sequías: reporta
-si el municipio estuvo en sequía en algún momento del mes).
+**Decisión de limpieza:** para el dataset analítico que alimenta el EDA y
+el modelado, se **recorta la serie a partir de enero de 2016**, donde la
+definición y la frecuencia (quincenal) son consistentes en todo el rango.
+El costo de esta decisión es perder 13 años de historia (2003–2015); a
+cambio se gana un dataset internamente comparable, que es indispensable
+para cualquier análisis de tendencia, clustering o modelado serio. La
+serie completa 2003–2026 se conserva aparte (`df_historico`) únicamente
+para gráficas de contexto de largo plazo, dejando explícita esta
+salvedad cada vez que se use.
 
 ```{python}
-#| label: armonizacion-mensual
+#| label: cols-2016
 
-tmp = largo.copy()
-tmp["anio_mes"] = tmp["fecha"].values.astype("datetime64[M]")
+fecha_por_columna = dict(zip(columnas_fecha, fechas_cols))
+columnas_2016 = [c for c in columnas_fecha if fecha_por_columna[c] >= pd.Timestamp("2016-01-01")]
 
-mensual = (tmp.groupby(ID_COLS + ["anio_mes"], as_index=False)
-              .agg(nivel_severidad_max=("nivel_severidad", "max"),
-                   n_lecturas=("nivel_severidad", "size"),
-                   n_lecturas_validas=("nivel_severidad", "count"))
-              .rename(columns={"anio_mes": "fecha"}))
+print(f"Columnas totales: {len(columnas_fecha)}")
+print(f"Columnas a partir de 2016 (dataset analítico): {len(columnas_2016)}")
+print(f"Columnas descartadas (2003-2015, dataset histórico únicamente): "
+      f"{len(columnas_fecha) - len(columnas_2016)}")
+```
 
-inv_map = {0: "Sin sequía", 1: "D0", 2: "D1", 3: "D2", 4: "D3", 5: "D4"}
-mensual["categoria_max"] = mensual["nivel_severidad_max"].map(inv_map)
-mensual = mensual.sort_values(["CVE_CONCATENADA", "fecha"]).reset_index(drop=True)
+## Codificación de la intensidad de sequía
 
-display(mensual.head())
-print(f"\nFilas en formato mensual armonizado: {len(mensual):,}")
+```{python}
+#| label: mapas-intensidad
+
+intensidad_map = {np.nan: 0, "D0": 1, "D1": 2, "D2": 3, "D3": 4, "D4": 5}
+intensidad_labels = {
+    0: "Sin sequía",
+    1: "D0 Anormalmente seco",
+    2: "D1 Sequía moderada",
+    3: "D2 Sequía severa",
+    4: "D3 Sequía extrema",
+    5: "D4 Sequía excepcional",
+}
+```
+
+Al igual que en la exploración inicial, una celda vacía se interpreta como
+"sin sequía" (nivel 0), **excepto** en fechas donde el 100% de los
+municipios está vacío, que se tratan como hueco real de publicación del
+monitor y se dejan como `NaN` en vez de 0.
+
+```{python}
+#| label: huecos-publicacion
+
+frac_vacio = df[columnas_fecha].isna().mean()
+huecos_publicacion = frac_vacio[frac_vacio == 1.0].index.tolist()
+print(f"Fechas con 100% de celdas vacías (hueco real de publicación): {huecos_publicacion}")
+```
+
+## Dataset histórico completo (formato largo, solo para contexto)
+
+```{python}
+#| label: df-historico
+
+df_historico = df.melt(id_vars=columnas_id, value_vars=columnas_fecha,
+                        var_name="fecha_str", value_name="clasificacion_sequia")
+df_historico["fecha"] = df_historico["fecha_str"].map(parsear_fecha)
+df_historico["es_hueco_publicacion"] = df_historico["fecha_str"].isin(huecos_publicacion)
+
+df_historico["intensidad"] = df_historico["clasificacion_sequia"].map(intensidad_map)
+df_historico.loc[df_historico["es_hueco_publicacion"], "intensidad"] = np.nan
+df_historico["intensidad_desc"] = df_historico["intensidad"].map(intensidad_labels)
+
+df_historico = (df_historico.drop(columns="fecha_str")
+                             .sort_values(["CVE_CONCATENADA", "fecha"])
+                             .reset_index(drop=True))
+
+display(df_historico.head())
+print(f"\nFilas en df_historico: {len(df_historico):,}")
+```
+
+## Dataset analítico 2016+ (para EDA y modelado)
+
+Se parte de las columnas 2016 en adelante y se pivotea a una sola columna
+`fecha`, exactamente como en la exploración inicial del equipo, con las
+etiquetas de intensidad ya resueltas.
+
+```{python}
+#| label: df-analitico
+
+df_eda = df[columnas_id + columnas_2016].copy()
+
+df_clasif_municipio = df_eda.melt(id_vars=columnas_id, var_name="fecha_str",
+                                   value_name="clasificacion_sequia")
+df_clasif_municipio["fecha"] = df_clasif_municipio["fecha_str"].map(parsear_fecha)
+df_clasif_municipio = df_clasif_municipio.drop(columns="fecha_str")
+
+df_clasif_municipio["intensidad"] = df_clasif_municipio["clasificacion_sequia"].map(intensidad_map)
+df_clasif_municipio["intensidad_desc"] = df_clasif_municipio["intensidad"].map(intensidad_labels)
+
+df_analitico = df_clasif_municipio.sort_values(["CVE_CONCATENADA", "fecha"]).reset_index(drop=True)
+
+display(df_analitico.head())
+print(f"\nFilas en df_analitico (2016+): {len(df_analitico):,}")
 ```
 
 ## Verificación de la transformación
 
-Como control de calidad, se calcula el porcentaje de municipios en sequía
-(D0 o más) por año, usando la serie mensual armonizada.
-
 ```{python}
-#| label: fig-serie-anual
-#| fig-cap: "Porcentaje de municipios en sequía (D0+) por año, 2003-2025"
+#| label: fig-serie-2016
+#| fig-cap: "Porcentaje de municipios en sequía (D0+), quincenal, 2016-2026"
 
-mensual["anio"] = mensual["fecha"].dt.year
-pct_anual = (mensual[mensual["anio"] < 2026]
-             .groupby("anio")
-             .apply(lambda g: (g["nivel_severidad_max"] > 0).mean() * 100))
+pct_quincenal = (df_analitico.groupby("fecha")["intensidad"]
+                              .apply(lambda s: (s > 0).mean() * 100))
 
 fig, ax = plt.subplots()
-ax.plot(pct_anual.index, pct_anual.values, marker="o")
-ax.set_xlabel("Año")
+ax.plot(pct_quincenal.index, pct_quincenal.values, linewidth=1)
+ax.set_xlabel("Fecha")
 ax.set_ylabel("% de municipios en sequía")
 ax.set_ylim(0, 100)
 plt.tight_layout()
@@ -260,12 +293,9 @@ plt.show()
 
 ```{python}
 #| label: tbl-distribucion
-#| tbl-cap: "Distribución de categorías en la serie de resolución nativa"
+#| tbl-cap: "Distribución de categorías en el dataset analítico (2016+)"
 
-display(largo.loc[~largo["es_hueco_publicacion"], "categoria"]
-             .value_counts()
-             .rename("frecuencia")
-             .to_frame())
+display(df_analitico["intensidad_desc"].value_counts().rename("frecuencia").to_frame())
 ```
 
 ## Guardado de datos limpios
@@ -273,8 +303,8 @@ display(largo.loc[~largo["es_hueco_publicacion"], "categoria"]
 ```{python}
 #| label: guardado
 
-largo.to_parquet("../data/processed/sequia_long.parquet", index=False)
-mensual.drop(columns="anio").to_parquet("../data/processed/sequia_mensual.parquet", index=False)
+df_historico.to_parquet("data/processed/sequia_historico.parquet", index=False)
+df_analitico.to_parquet("data/processed/sequia_analitico_2016.parquet", index=False)
 
 print("Archivos guardados en data/processed/")
 ```
@@ -284,16 +314,19 @@ print("Archivos guardados en data/processed/")
 1. **Llave de municipio** (`CVE_CONCATENADA`): verificada como única, sin
    nulos en columnas de identificación.
 2. **Celda vacía → "sin sequía"** (nivel ordinal 0), *excepto* en fechas
-   donde el 100% de los municipios está vacío, tratadas como hueco real de
-   publicación del monitor (`NaN`).
-3. **Formato ancho → largo**: una fila por municipio–fecha.
-4. **Severidad ordinal** D0–D4 codificada como 1–5, conservando también la
-   etiqueta categórica original.
-5. **Cambio de periodicidad** (mensual → quincenal en 2014) documentado
-   explícitamente; se conserva la resolución nativa y además se construye
-   una serie armonizada a mensual (peor caso del mes) para comparabilidad
-   de tendencia en todo el periodo 2003–2026.
+   donde el 100% de los municipios está vacío, tratadas como hueco real
+   de publicación del monitor (`NaN`).
+3. **Cambio metodológico en 2016** (umbral de 40% de superficie →
+   intensidad máxima observada): es un cambio de *definición*, no solo de
+   frecuencia, y no puede corregirse re-muestreando. Se optó por
+   **recortar el dataset analítico a partir de 2016** para garantizar
+   comparabilidad interna, conservando la serie completa aparte solo para
+   contexto histórico.
+4. **Formato ancho → largo**: una sola columna `fecha` por
+   municipio-periodo (`df_historico` y `df_analitico`).
+5. **Severidad ordinal** D0–D4 codificada 1–5, con etiqueta descriptiva
+   completa (`intensidad_desc`).
 
-Con esto, `data/processed/sequia_long.parquet` y
-`data/processed/sequia_mensual.parquet` quedan listos como insumo para el
-análisis exploratorio (siguiente documento del proyecto).
+Con esto, `data/processed/sequia_analitico_2016.parquet` queda listo como
+insumo principal para el análisis exploratorio y el modelado; `sequia_historico.parquet`
+queda disponible únicamente para gráficas de contexto de largo plazo.
