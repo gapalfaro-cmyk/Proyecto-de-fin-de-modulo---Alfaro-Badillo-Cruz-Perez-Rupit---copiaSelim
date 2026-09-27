@@ -7,7 +7,19 @@ execute:
 
 ## Diccionario de Datos
 
-El conjunto de datos original contiene registros del Monitor de Sequía en México. A continuación, se detalla la estructura y el catálogo de variables utilizadas en este análisis:
+## Introducción
+
+Esta sección documenta la exploración, limpieza y transformación de la fuente
+principal del proyecto: el **Monitor de Sequía en México**, publicado por el
+Programa Nacional Contra la Sequía
+([PRONACOSE](https://www.datos.gob.mx/es/dataset/programa_nacional_contra_sequia_pronacose)).
+El archivo original (`MunicipiosSequiaCSV.csv`) viene en **formato ancho**:
+una fila por municipio y una columna por fecha de publicación del monitor,
+con la categoría de sequía observada (D0 a D4) o celda vacía.
+
+El objetivo de esta etapa es dejar los datos en un formato **largo (tidy)**,
+con una fila por combinación municipio–fecha, listo para el análisis
+exploratorio y el modelado de las siguientes secciones.
 
 ::: {.grid}
 
@@ -38,93 +50,251 @@ El conjunto de datos original contiene registros del Monitor de Sequía en Méxi
 
 :::
 
----
 
-::: {.callout-important title="Justificación Metodológica: Recorte Temporal"}
-De acuerdo con la documentación oficial de PRONACOSE, la metodología de medición cambió drásticamente en 2016. Para el periodo **2003 a 2015**, la recolección era *mensual* y se requería que la sequía cubriera al menos el 40% del municipio. A partir de **2016**, la recolección es *quincenal* y se asigna la intensidad máxima observada sin importar el área territorial.
 
-Para evitar sesgos algorítmicos al entrenar los modelos con series de tiempo inconsistentes, **se determinó utilizar exclusivamente los registros estandarizados a partir de enero de 2016**.
-:::
-
-## Transformación Estructural (Data Wrangling)
-
-La base original se presenta en un formato ancho (una columna por quincena). Para facilitar el modelado de series de tiempo y la visualización interactiva, parseamos las fechas, filtramos el periodo de estudio y aplicamos un proceso de *melting* para transformar la estructura a un formato largo (una serie temporal continua por cada municipio).
-
-::: {.card}
-::: {.card-header}
-**Código de Limpieza y Transformación (2016-2026)**
-:::
-::: {.card-body}
 ```{python}
-#| code-fold: true
-#| code-summary: "Mostrar código en Python"
+#| label: setup
 
-import pandas as pd
+import re
 import numpy as np
-import warnings
-warnings.filterwarnings('ignore')
+import pandas as pd
+import matplotlib.pyplot as plt
+from IPython.display import display
 
-df = pd.read_csv("../MunicipiosSequiaCSV.csv")
+pd.set_option("display.max_columns", 10)
 
-columnas_base = ['CVE_CONCATENADA', 'CVE_ENT', 'CVE_MUN', 'NOMBRE_MUN', 'ENTIDAD', 'ORG_CUENCA*', 'CLV_OC', 'CON_CUENCA', 'CVE_CONC']
-columnas_fecha_crudas = [col for col in df.columns if col not in columnas_base]
+# Ajustar esta ruta a la ubicación del archivo dentro del repositorio,
+# por ejemplo "data/raw/MunicipiosSequiaCSV.csv"
+RUTA_DATOS = "../MunicipiosSequiaCSV.csv"
 
+ID_COLS = [
+    "CVE_CONCATENADA", "CVE_ENT", "CVE_MUN", "NOMBRE_MUN", "ENTIDAD",
+    "ORG_CUENCA*", "CLV_OC", "CON_CUENCA", "CVE_CONC",
+]
 
-meses = {'ene': '01', 'feb': '02', 'mar': '03', 'abr': '04', 'may': '05', 'jun': '06', 
-         'jul': '07', 'ago': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dic': '12'}
+MESES = {
+    "ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6,
+    "jul": 7, "ago": 8, "sep": 9, "oct": 10, "nov": 11, "dic": 12,
+}
 
-def parse_date(date_str):
-    try: # Intenta leer formato numérico de Excel (ej. 42370)
-        return pd.to_datetime(pd.to_numeric(date_str), origin='1899-12-30', unit='D')
-    except:
-        try: # Intenta leer formato texto (ej. 15-ene-16)
-            dia, mes, anio = date_str.split('-')
-            return pd.to_datetime(f'20{anio}-{meses[mes.lower()]}-{dia}')
-        except:
-            return pd.NaT
+# Nivel ordinal de severidad: sin sequía < D0 < D1 < D2 < D3 < D4
+NIVEL_ORDINAL = {np.nan: 0, "D0": 1, "D1": 2, "D2": 3, "D3": 4, "D4": 5}
+```
 
+## Carga y estructura de los datos
 
-cols_a_conservar = columnas_base.copy()
-mapeo_nombres = {}
+```{python}
+#| label: carga
 
-for col in columnas_fecha_crudas:
-    fecha_dt = parse_date(col)
-    if pd.notnull(fecha_dt) and fecha_dt.year >= 2016:
-        cols_a_conservar.append(col)
-        mapeo_nombres[col] = fecha_dt.strftime('%Y-%m-%d')
+df = pd.read_csv(RUTA_DATOS, encoding="utf-8-sig", low_memory=False)
+df.columns = [c.strip() for c in df.columns]
 
-df_filtrado = df[cols_a_conservar].rename(columns=mapeo_nombres)
+date_cols = [c for c in df.columns if c not in ID_COLS]
 
+print(f"Municipios: {df.shape[0]:,}")
+print(f"Columnas de identificación: {len(ID_COLS)}")
+print(f"Columnas de fecha (periodos publicados): {len(date_cols)}")
+print(f"Entidades federativas: {df['ENTIDAD'].nunique()}")
+```
 
-df_long = df_filtrado.melt(id_vars=columnas_base, 
-                           var_name='Fecha', 
-                           value_name='Categoria_Sequia')
+El archivo cubre `{python} df.shape[0]` municipios de las
+`{python} df['ENTIDAD'].nunique()` entidades del país, con
+`{python} len(date_cols)` cortes de tiempo publicados por el monitor.
 
-df_long['Fecha'] = pd.to_datetime(df_long['Fecha'])
+## Verificación de integridad
 
+Antes de transformar, se verifica que las llaves de municipio sean únicas y
+que no existan valores faltantes en las columnas de identificación.
 
-df_long['Categoria_Sequia'] = df_long['Categoria_Sequia'].fillna('Sin Sequía')
-mapa_sequia = {'Sin Sequía': 0, 'D0': 1, 'D1': 2, 'D2': 3, 'D3': 4, 'D4': 5}
-df_long['Nivel_Num'] = df_long['Categoria_Sequia'].map(mapa_sequia)
+```{python}
+#| label: integridad
 
+duplicados = df["CVE_CONCATENADA"].duplicated().sum()
+nulos_id = df[ID_COLS].isna().sum().sum()
 
-df_clean = df_long.sort_values(['CVE_CONCATENADA', 'Fecha']).reset_index(drop=True)
+print(f"Claves de municipio duplicadas: {duplicados}")
+print(f"Valores nulos en columnas de identificación: {nulos_id}")
 
-# Guardamos en Parquet para que el EDA temporal cargue instantáneamente
-df_clean.to_parquet("../sequia_limpia_2016.parquet", index=False)
+assert duplicados == 0, "Hay CVE_CONCATENADA duplicadas"
+assert nulos_id == 0, "Hay nulos en columnas de identificación"
+```
+
+No se encontraron duplicados ni valores faltantes en las llaves de
+municipio, entidad o cuenca.
+
+## Interpretación de celdas vacías: ¿sin sequía o dato faltante?
+
+Este es el punto de limpieza más importante de la fuente. Una celda vacía
+puede significar dos cosas muy distintas:
+
+1. **Sin sequía** en ese municipio durante ese periodo (la interpretación
+   estándar de la metodología del Monitor de Sequía en México), o
+2. Un **hueco real de publicación**: el monitor no se publicó ese corte
+   para *ningún* municipio del país.
+
+Para distinguirlos, se calcula el porcentaje de celdas vacías por columna
+(fecha): si una fecha tiene el **100% de los municipios vacíos**, se trata
+como hueco real de publicación en vez de "sin sequía".
+
+```{python}
+#| label: fig-vacios-por-fecha
+#| fig-cap: "Porcentaje de municipios sin categoría asignada, por fecha de publicación"
+
+frac_vacio = df[date_cols].isna().mean()
+cols_missing_real = frac_vacio[frac_vacio == 1.0].index.tolist()
+
+fig, ax = plt.subplots()
+ax.plot(range(len(frac_vacio)), frac_vacio.values * 100, linewidth=0.8)
+ax.set_xlabel("Corte de publicación (orden cronológico)")
+ax.set_ylabel("% de municipios vacíos")
+ax.axhline(100, color="firebrick", linestyle="--", linewidth=0.8, label="100% vacío = hueco real")
+ax.legend()
+plt.tight_layout()
+plt.show()
+
+print(f"Fechas con 100% de celdas vacías (hueco real de publicación): {cols_missing_real}")
+```
+
+Se identificaron `{python} len(cols_missing_real)` fechas con hueco real de
+publicación (`{python} ", ".join(cols_missing_real)`). El resto de las
+celdas vacías se codifican como "sin sequía".
+
+## Transformación de formato ancho a largo
+
+```{python}
+#| label: fn-parseo
+
+def parsear_fecha(col_name: str) -> pd.Timestamp:
+    """Convierte 'dd-mmm-aa' (español) a Timestamp, p.ej. '15-sep-26' -> 2026-09-15."""
+    dia, mes_abr, anio2 = col_name.split("-")
+    return pd.Timestamp(year=2000 + int(anio2), month=MESES[mes_abr.lower()], day=int(dia))
+```
+
+```{python}
+#| label: wide-to-long
+
+largo = df.melt(id_vars=ID_COLS, value_vars=date_cols,
+                 var_name="fecha_str", value_name="categoria")
+
+largo["fecha"] = largo["fecha_str"].map(parsear_fecha)
+largo["es_hueco_publicacion"] = largo["fecha_str"].isin(cols_missing_real)
+
+# Nivel ordinal de severidad (0-5); NaN real para huecos de publicación
+largo["nivel_severidad"] = largo["categoria"].map(NIVEL_ORDINAL)
+largo.loc[largo["es_hueco_publicacion"], "nivel_severidad"] = np.nan
+
+largo["categoria"] = largo["categoria"].fillna("Sin sequía")
+largo.loc[largo["es_hueco_publicacion"], "categoria"] = np.nan
+
+# Periodicidad de la fuente: mensual hasta 2013, quincenal desde 2014
+largo["periodicidad"] = np.where(largo["fecha"] < pd.Timestamp("2014-01-01"),
+                                  "mensual", "quincenal")
+
+largo = (largo.drop(columns=["fecha_str"])
+              .sort_values(["CVE_CONCATENADA", "fecha"])
+              .reset_index(drop=True))
+
+display(largo.head())
+print(f"\nFilas en formato largo: {len(largo):,}")
+```
+
+::: {.callout-note}
+## Decisión de limpieza: cambio de periodicidad
+
+La fuente cambia de frecuencia **mensual (2003–2013)** a **quincenal
+(2014 en adelante)**. Esto se documenta en la columna `periodicidad` y se
+conserva la resolución nativa en este dataset para el análisis de detalle
+2014–2026. Para comparar tendencias a lo largo de **todo** el periodo
+2003–2026 de forma consistente, en la siguiente sección se construye además
+una serie armonizada a frecuencia mensual.
 :::
-:::
 
-::: {.card}
-::: {.card-header}
-Estructura Final del Conjunto de Datos
-:::
-::: {.card-body}
-print(f"Estructura final: {df_clean.shape[0]:,} observaciones a nivel municipio-quincena.")
-print(f"Rango temporal efectivo: de {df_clean['Fecha'].min().date()} a {df_clean['Fecha'].max().date()}")
+## Armonización a frecuencia mensual (comparabilidad 2003–2026)
 
-df_clean[['NOMBRE_MUN', 'ENTIDAD', 'Fecha', 'Categoria_Sequia', 'Nivel_Num']].head()
-:::
-:::
+Se colapsa cada municipio-mes tomando la **severidad máxima observada en el
+mes** (criterio de peor caso, estándar en climatología de sequías: reporta
+si el municipio estuvo en sequía en algún momento del mes).
 
+```{python}
+#| label: armonizacion-mensual
+
+tmp = largo.copy()
+tmp["anio_mes"] = tmp["fecha"].values.astype("datetime64[M]")
+
+mensual = (tmp.groupby(ID_COLS + ["anio_mes"], as_index=False)
+              .agg(nivel_severidad_max=("nivel_severidad", "max"),
+                   n_lecturas=("nivel_severidad", "size"),
+                   n_lecturas_validas=("nivel_severidad", "count"))
+              .rename(columns={"anio_mes": "fecha"}))
+
+inv_map = {0: "Sin sequía", 1: "D0", 2: "D1", 3: "D2", 4: "D3", 5: "D4"}
+mensual["categoria_max"] = mensual["nivel_severidad_max"].map(inv_map)
+mensual = mensual.sort_values(["CVE_CONCATENADA", "fecha"]).reset_index(drop=True)
+
+display(mensual.head())
+print(f"\nFilas en formato mensual armonizado: {len(mensual):,}")
+```
+
+## Verificación de la transformación
+
+Como control de calidad, se calcula el porcentaje de municipios en sequía
+(D0 o más) por año, usando la serie mensual armonizada.
+
+```{python}
+#| label: fig-serie-anual
+#| fig-cap: "Porcentaje de municipios en sequía (D0+) por año, 2003-2025"
+
+mensual["anio"] = mensual["fecha"].dt.year
+pct_anual = (mensual[mensual["anio"] < 2026]
+             .groupby("anio")
+             .apply(lambda g: (g["nivel_severidad_max"] > 0).mean() * 100))
+
+fig, ax = plt.subplots()
+ax.plot(pct_anual.index, pct_anual.values, marker="o")
+ax.set_xlabel("Año")
+ax.set_ylabel("% de municipios en sequía")
+ax.set_ylim(0, 100)
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| label: tbl-distribucion
+#| tbl-cap: "Distribución de categorías en la serie de resolución nativa"
+
+display(largo.loc[~largo["es_hueco_publicacion"], "categoria"]
+             .value_counts()
+             .rename("frecuencia")
+             .to_frame())
+```
+
+## Guardado de datos limpios
+
+```{python}
+#| label: guardado
+
+largo.to_parquet("data/processed/sequia_long.parquet", index=False)
+mensual.drop(columns="anio").to_parquet("data/processed/sequia_mensual.parquet", index=False)
+
+print("Archivos guardados en data/processed/")
+```
+
+## Resumen de decisiones de limpieza
+
+1. **Llave de municipio** (`CVE_CONCATENADA`): verificada como única, sin
+   nulos en columnas de identificación.
+2. **Celda vacía → "sin sequía"** (nivel ordinal 0), *excepto* en fechas
+   donde el 100% de los municipios está vacío, tratadas como hueco real de
+   publicación del monitor (`NaN`).
+3. **Formato ancho → largo**: una fila por municipio–fecha.
+4. **Severidad ordinal** D0–D4 codificada como 1–5, conservando también la
+   etiqueta categórica original.
+5. **Cambio de periodicidad** (mensual → quincenal en 2014) documentado
+   explícitamente; se conserva la resolución nativa y además se construye
+   una serie armonizada a mensual (peor caso del mes) para comparabilidad
+   de tendencia en todo el periodo 2003–2026.
+
+Con esto, `data/processed/sequia_long.parquet` y
+`data/processed/sequia_mensual.parquet` quedan listos como insumo para el
+análisis exploratorio (siguiente documento del proyecto).
 

@@ -131,7 +131,6 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#diccionario-de-datos" id="toc-diccionario-de-datos" class="nav-link active" data-scroll-target="#diccionario-de-datos">Diccionario de Datos</a></li>
-  <li><a href="#transformación-estructural-data-wrangling" id="toc-transformación-estructural-data-wrangling" class="nav-link" data-scroll-target="#transformación-estructural-data-wrangling">Transformación Estructural (Data Wrangling)</a></li>
   </ul>
 </nav>
     </div>
@@ -200,43 +199,6 @@ ul.task-list li input[type="checkbox"] {
 <div class="callout-body-container callout-body">
 <p>De acuerdo con la documentación oficial de PRONACOSE, la metodología de medición cambió drásticamente en 2016. Para el periodo <strong>2003 a 2015</strong>, la recolección era <em>mensual</em> y se requería que la sequía cubriera al menos el 40% del municipio. A partir de <strong>2016</strong>, la recolección es <em>quincenal</em> y se asigna la intensidad máxima observada sin importar el área territorial.</p>
 <p>Para evitar sesgos algorítmicos al entrenar los modelos con series de tiempo inconsistentes, <strong>se determinó utilizar exclusivamente los registros estandarizados a partir de enero de 2016</strong>.</p>
-</div>
-</div>
-</section>
-<section id="transformación-estructural-data-wrangling" class="level2">
-<h2 class="anchored" data-anchor-id="transformación-estructural-data-wrangling">Transformación Estructural (Data Wrangling)</h2>
-<p>La base original se presenta en un formato ancho (una columna por quincena). Para facilitar el modelado de series de tiempo y la visualización interactiva, parseamos las fechas, filtramos el periodo de estudio y aplicamos un proceso de <em>melting</em> para transformar la estructura a un formato largo (una serie temporal continua por cada municipio).</p>
-<div class="card">
-<div class="card-header">
-<p><strong>Código de Limpieza y Transformación (2016-2026)</strong></p>
-</div>
-<div class="card-body">
-<p>#| code-fold: true #| code-summary: “Mostrar código en Python”</p>
-<p>import pandas as pd import numpy as np import warnings warnings.filterwarnings(‘ignore’)</p>
-<p>df = pd.read_csv(“../MunicipiosSequiaCSV.csv”)</p>
-<p>columnas_base = [‘CVE_CONCATENADA’, ‘CVE_ENT’, ‘CVE_MUN’, ‘NOMBRE_MUN’, ‘ENTIDAD’, ’ORG_CUENCA*‘, ’CLV_OC’, ‘CON_CUENCA’, ‘CVE_CONC’] columnas_fecha_crudas = [col for col in df.columns if col not in columnas_base]</p>
-<p>meses = {‘ene’: ‘01’, ‘feb’: ‘02’, ‘mar’: ‘03’, ‘abr’: ‘04’, ‘may’: ‘05’, ‘jun’: ‘06’, ‘jul’: ‘07’, ‘ago’: ‘08’, ‘sep’: ‘09’, ‘oct’: ‘10’, ‘nov’: ‘11’, ‘dic’: ‘12’}</p>
-<p>def parse_date(date_str): try: # Intenta leer formato numérico de Excel (ej. 42370) return pd.to_datetime(pd.to_numeric(date_str), origin=‘1899-12-30’, unit=‘D’) except: try: # Intenta leer formato texto (ej. 15-ene-16) dia, mes, anio = date_str.split(‘-’) return pd.to_datetime(f’20{anio}-{meses[mes.lower()]}-{dia}’) except: return pd.NaT</p>
-<p>cols_a_conservar = columnas_base.copy() mapeo_nombres = {}</p>
-<p>for col in columnas_fecha_crudas: fecha_dt = parse_date(col) if pd.notnull(fecha_dt) and fecha_dt.year &gt;= 2016: cols_a_conservar.append(col) mapeo_nombres[col] = fecha_dt.strftime(‘%Y-%m-%d’)</p>
-<p>df_filtrado = df[cols_a_conservar].rename(columns=mapeo_nombres)</p>
-<p>df_long = df_filtrado.melt(id_vars=columnas_base, var_name=‘Fecha’, value_name=‘Categoria_Sequia’)</p>
-<p>df_long[‘Fecha’] = pd.to_datetime(df_long[‘Fecha’])</p>
-<p>df_long[‘Categoria_Sequia’] = df_long[‘Categoria_Sequia’].fillna(‘Sin Sequía’) mapa_sequia = {‘Sin Sequía’: 0, ‘D0’: 1, ‘D1’: 2, ‘D2’: 3, ‘D3’: 4, ‘D4’: 5} df_long[‘Nivel_Num’] = df_long[‘Categoria_Sequia’].map(mapa_sequia)</p>
-<p>df_clean = df_long.sort_values([‘CVE_CONCATENADA’, ‘Fecha’]).reset_index(drop=True)</p>
-<section id="guardamos-en-parquet-para-que-el-eda-temporal-cargue-instantáneamente" class="level1">
-<h1>Guardamos en Parquet para que el EDA temporal cargue instantáneamente</h1>
-<p>df_clean.to_parquet(“../sequia_limpia_2016.parquet”, index=False)</p>
-</section>
-</div>
-</div>
-<div class="card">
-<div class="card-header">
-<p>Estructura Final del Conjunto de Datos</p>
-</div>
-<div class="card-body">
-<p>print(f”Estructura final: {df_clean.shape[0]:,} observaciones a nivel municipio-quincena.”) print(f”Rango temporal efectivo: de {df_clean[‘Fecha’].min().date()} a {df_clean[‘Fecha’].max().date()}“)</p>
-<p>df_clean[[‘NOMBRE_MUN’, ‘ENTIDAD’, ‘Fecha’, ‘Categoria_Sequia’, ‘Nivel_Num’]].head()</p>
 </div>
 </div>
 
