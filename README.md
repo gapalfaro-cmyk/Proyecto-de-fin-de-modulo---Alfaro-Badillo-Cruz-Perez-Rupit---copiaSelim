@@ -83,7 +83,7 @@ La evaluación final incluirá la defensa oral del proyecto. Cada equipo dispond
     Datos
     Análisis y modelado
     Resultados
-    Canclusión
+    Conclusión
 
 Además se realizarán dos preguntas que serán evaluadas. Las preguntas pueden dirigirse a cualquier integrante del equipo, por lo que TODOS los integrantes del equipo deben ser capaces de explicar las decisiones tomadas durante el análisis, las estructura del proyecto, el código, etc.
 
@@ -101,7 +101,7 @@ Datos: Programa Nacional Contra la Sequía — PRONACOSE
 
 Propuesta de análisis: Estudiar qué regiones presentan mayor exposición o persistencia de sequía y cómo cambia la situación a través del tiempo.
 
-Posibles preguntas:
+Posibles preguntas (Maestra):
 
     ¿Qué municipios presentan sequías más frecuentes?
     ¿Dónde son más persistentes?
@@ -109,14 +109,14 @@ Posibles preguntas:
     ¿Existe relación con variables climatológicas?
     ¿Puede anticiparse un cambio en la intensidad de sequía?
 
-Preguntas abordadas:
+Preguntas abordadas (por el Equipo):
 
-    ¿Cómo se distribuye la intensidad de la sequía entre los municipios de México en enero de 2026 y qué características presentan los municipios con mayor afectación?
-    ¿Qué estados concentran la mayor cantidad de municipios con sequía?
-    ¿Qué categorías de sequía (D0–D4) predominan?
-    ¿Qué regiones presentan las categorías más intensas?
-    ¿Existen grupos de municipios con patrones similares de afectación?
-    ¿Existe alguna relación entre la intensidad de sequía y la vulnerabilidad social, económica o ambiental?
+    ¿Qué municipios de México presentan mayor frecuencia e intensidad de sequía entre 2016 y 2026?
+    ¿Pueden agruparse en regiones con patrones similares?
+    ¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)?
+    ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)?
+    ¿Se pueden indenfificar regiones o municipios con patronces similares?
+    ¿QUÉ patrones de vulnerabilidad existen?
 
 Modelos posibles: Clasificación, clustering territorial, modelos temporales o forecasting.
 
@@ -147,4 +147,22 @@ Para el desarrollo del proyecto es posible usar documentación, bibliotecas, rec
 Cualquier integrante debe poder explicar cómo se obtuvieron los datos, cómo se limpiaron, por qué se usó cierto modelo, cómo se evaluó, qué significa el resultado, cómo se construyó la visualización, cuáles son las principales limitaciones, etc.
 
 La incapacidad para explicar alguna parte del trabajo podrá afectar la calificación individual.
+
+## ACERCA DE LOS DATOS
+
+En nuestra Lectura y Preparación del CSV: 01-preparacion_datos.qmd
+
+DATOS CSV USADOS (dentro de la carpeta data/raw/):
+1. MunicipiosSequiaCSV.csv — Monitor de Sequía PRONACOSE. 2,478 municipios x ~435 fechas (2003-2026), categorías D0-D4.
+2. vulnerabilidad_ambiental_municipal.csv
+3. vulnerabilidad_social_municipal.csv
+4. vulnerabilidad_economica_municipal.csv
+  (las 3 de vulnerabilidad: 2,463 municipios c/u, llave cve_concatenada, probabilidad 0-100 + categoría Muy Baja→Muy Alta)
+
+
+OUTPUTS (NUESTROS DATASETS PROCESADOS PARA MODELOS Y EDA) (en data/processed/):
+- sequia_historico.parquet → serie completa 2003-2026, SOLO para gráficas de contexto histórico (no comparable pre/post 2016, no usar para modelar).
+- sequia_analitico_2016.parquet → dataset principal, municipio-quincena, 2016-2026, con vulnerabilidad ya integrada. Usar esto para EDA y modelado.
+- resumen_municipal.parquet → una fila por municipio con frecuencia de sequía (%), intensidad media/máxima, persistencia (racha más larga en sequía) + las 3 vulnerabilidades. Este es el insumo listo para el clustering territorial.
+
 
