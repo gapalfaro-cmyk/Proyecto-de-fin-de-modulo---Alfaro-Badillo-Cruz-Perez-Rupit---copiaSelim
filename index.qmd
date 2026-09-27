@@ -9,7 +9,8 @@ México enfrenta un escenario crítico de estrés hídrico. Entender cómo se di
 
 ## Pregunta de investigación
 
-- ¿Qué municipios de México presentan mayor frecuencia e intensidad de sequía entre 2016 y 2026? ¿Y puede agruparse en regiones con patrones similares?
+- ¿Qué municipios de México presentan mayor frecuencia e intensidad de sequía entre 2016 y 2026? 
+- ¿Pueden agruparse en regiones con patrones similares?
 
 #### Preguntas secundarias
 
