@@ -28,7 +28,7 @@ https://smn.conagua.gob.mx/es/climatologia/monitor-de-sequia/monitor-de-sequia-e
 **Fuente secundaria:** Datos de enero 2026 y vulnerabiliades ambiental, económica y social en enero 2026:
 https://www.datos.gob.mx/es/dataset/programa_nacional_contra_sequia_pronacose
 
-## Datos y Metodología:
+## Datos y Metodología
 
 **Variable objetivo:** intensidad (nivel ordinal 0–5 de severidad de sequía por municipio-quincena), y sus derivadas por municipio — frecuencia (% de quincenas en D0+) y persistencia (duración media/máxima de rachas consecutivas en sequía).
 
