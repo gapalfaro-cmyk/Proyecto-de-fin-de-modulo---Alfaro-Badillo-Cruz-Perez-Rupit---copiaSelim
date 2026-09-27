@@ -40,7 +40,7 @@ pd.set_option("display.max_columns", 10)
 # Ajustar esta ruta según el archivo del equipo.
 # Si usan la versión .xlsx, cambien esta línea por:
 #   df = pd.read_excel("data/raw/MunicipiosSequia.xlsx")
-RUTA_DATOS = "data/raw/MunicipiosSequiaCSV.csv"
+RUTA_DATOS = "../data/raw/MunicipiosSequiaCSV.csv"
 ```
 
 
@@ -303,8 +303,8 @@ display(df_analitico["intensidad_desc"].value_counts().rename("frecuencia").to_f
 ```{python}
 #| label: guardado
 
-df_historico.to_parquet("data/processed/sequia_historico.parquet", index=False)
-df_analitico.to_parquet("data/processed/sequia_analitico_2016.parquet", index=False)
+df_historico.to_parquet("../data/processed/sequia_historico.parquet", index=False)
+df_analitico.to_parquet("../data/processed/sequia_analitico_2016.parquet", index=False)
 
 print("Archivos guardados en data/processed/")
 ```

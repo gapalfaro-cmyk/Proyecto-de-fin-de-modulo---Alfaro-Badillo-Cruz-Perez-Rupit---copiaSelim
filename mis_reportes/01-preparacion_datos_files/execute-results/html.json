@@ -1,0 +1,12 @@
+{
+  "hash": "d24371513eb1016ce1c79e5f1aa300fe",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"1. Preparación y Limpieza de Datos\"\njupyter: python3\nexecute:\n  cache: true\n---\n\n## Diccionario de Datos\n\n## Introducción\n\nEsta sección documenta la preparación de la fuente principal del proyecto:\nel **Monitor de Sequía en México**, publicado por el Programa Nacional\nContra la Sequía\n([PRONACOSE](https://www.datos.gob.mx/es/dataset/programa_nacional_contra_sequia_pronacose)).\nEl archivo original viene en **formato ancho**: una fila por municipio y\nuna columna por fecha de publicación del monitor, con la categoría de\nsequía observada (D0 a D4) o celda vacía.\n\nSe generan **dos productos** a partir de esta limpieza:\n\n- **`df_historico`**: serie completa 2003–2026 en formato largo, útil para\n  gráficas de contexto de largo plazo (con la salvedad metodológica que se\n  documenta más abajo).\n- **`df_analitico`**: subconjunto 2016 en adelante, con una sola columna\n  `fecha`, definición metodológica consistente y frecuencia quincenal\n  uniforme — este es el dataset que alimenta el EDA y el modelado.\n\n::: {#setup .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nfrom IPython.display import display\n\npd.set_option(\"display.max_columns\", 10)\n\n# Ajustar esta ruta según el archivo del equipo.\n# Si usan la versión .xlsx, cambien esta línea por:\n#   df = pd.read_excel(\"data/raw/MunicipiosSequia.xlsx\")\nRUTA_DATOS = \"data/raw/MunicipiosSequiaCSV.csv\"\n```\n:::\n\n\n::: {.grid}\n\n::: {.g-col-6}\n**Variables Geográficas**\n\n* **`CVE_CONCATENADA`**: Clave del municipio (ID Único).\n* **`CVE_ENT`**: Clave de la entidad federativa.\n* **`CVE_MUN`**: Clave del Municipio.\n* **`NOMBRE_MUN`**: Nombre del municipio.\n* **`ENTIDAD`**: Nombre de la entidad federativa.\n* **`ORG_CUENCA*`**: Organismo de cuenca.\n* **`CLV_OC`**: Clave del organismo de cuenca.\n* **`CON_CUENCA`**: Consejo de cuenca.\n* **`CVE_CONC`**: Clave del consejo de cuenca.\n:::\n\n::: {.g-col-6}\n**Categorías de Severidad (Variable Objetivo)**\n\n* `Sin valor`: Sin sequía (Condiciones normales).\n* `D0`: Anormalmente seco.\n* `D1`: Sequía Moderada.\n* `D2`: Sequía Severa.\n* `D3`: Sequía Extrema.\n* `D4`: Sequía Excepcional.\n:::\n\n:::\n\n",
+    "supporting": [
+      "01-preparacion_datos_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
