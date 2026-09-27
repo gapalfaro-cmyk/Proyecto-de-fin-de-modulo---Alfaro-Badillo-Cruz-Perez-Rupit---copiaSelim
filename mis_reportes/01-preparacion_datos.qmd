@@ -1,42 +1,66 @@
 ---
-title: "Preparación y Limpieza de Datos"
+title: "1. Preparación y Limpieza de Datos"
 jupyter: python3
 execute:
   cache: true
 ---
-## Información Disponible
 
-Columnas:
-CVE_CONCATENADA: Clave del municipio
-CVE_ENT: Clave de la entidad federativa
-CVE_MUN: Clave Municipio
-NOMBRE_MUN: Nombre municipio
-ENTIDAD: Nombre de la entidad federativa 
-ORG_CUENCA: Organismo de cuenca donde se localiza el municipio
-CLV_OC:Clave del organismo de cuenca donde se localiza el municipio
-CON_CUENCA: Consejo de cuenca donde se localiza el municipio
-CVE_CUENCA: Clave del consejo de cuenca donde se localiza el municipio
+## Diccionario de Datos
 
-# Clasificación de la Sequía
-Sin valor: Sin sequía
-D0: Anormalmente seco
-D1: Sequía Moderada
-D2: Sequía Severa
-D3: Sequía Extrema
-D4: Sequía Excepcional 
+El conjunto de datos original contiene registros del Monitor de Sequía en México. A continuación, se detalla la estructura y el catálogo de variables utilizadas en este análisis:
+
+::: {.grid}
+
+::: {.g-col-6}
+**Variables Geográficas**
+
+* **`CVE_CONCATENADA`**: Clave del municipio (ID Único).
+* **`CVE_ENT`**: Clave de la entidad federativa.
+* **`CVE_MUN`**: Clave del Municipio.
+* **`NOMBRE_MUN`**: Nombre del municipio.
+* **`ENTIDAD`**: Nombre de la entidad federativa.
+* **`ORG_CUENCA*`**: Organismo de cuenca.
+* **`CLV_OC`**: Clave del organismo de cuenca.
+* **`CON_CUENCA`**: Consejo de cuenca.
+* **`CVE_CONC`**: Clave del consejo de cuenca.
+:::
+
+::: {.g-col-6}
+**Categorías de Severidad (Variable Objetivo)**
+
+* `Sin valor`: Sin sequía (Condiciones normales).
+* `D0`: Anormalmente seco.
+* `D1`: Sequía Moderada.
+* `D2`: Sequía Severa.
+* `D3`: Sequía Extrema.
+* `D4`: Sequía Excepcional.
+:::
+
+:::
+
+---
+
+::: {.callout-important title="Justificación Metodológica: Recorte Temporal"}
+De acuerdo con la documentación oficial de PRONACOSE, la metodología de medición cambió drásticamente en 2016. Para el periodo **2003 a 2015**, la recolección era *mensual* y se requería que la sequía cubriera al menos el 40% del municipio. A partir de **2016**, la recolección es *quincenal* y se asigna la intensidad máxima observada sin importar el área territorial.
+
+Para evitar sesgos algorítmicos al entrenar los modelos con series de tiempo inconsistentes, **se determinó utilizar exclusivamente los registros estandarizados a partir de enero de 2016**.
+:::
 
 ## Transformación Estructural (Data Wrangling)
 
-La base original de PRONACOSE se presenta en un formato ancho (una columna por fecha). Para facilitar el modelado de series de tiempo y la visualización, aplicamos un proceso de *melting* para transformar la estructura a un formato largo, obteniendo una serie temporal continua por cada municipio.
+La base original se presenta en un formato ancho (una columna por quincena). Para facilitar el modelado de series de tiempo y la visualización interactiva, parseamos las fechas, filtramos el periodo de estudio y aplicamos un proceso de *melting* para transformar la estructura a un formato largo (una serie temporal continua por cada municipio).
 
 ::: {.card}
 ::: {.card-header}
-**Código de Limpieza y Estandarización de Fechas**
+**Código de Limpieza y Transformación (2016-2026)**
 :::
 ::: {.card-body}
 ```{python}
+#| code-fold: true
+#| code-summary: "Mostrar código en Python"
+
 import pandas as pd
-import plotly.express as px
+import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -45,82 +69,64 @@ df = pd.read_csv("../MunicipiosSequiaCSV.csv")
 
 # 2. Separar columnas geográficas de las columnas temporales
 columnas_base = ['CVE_CONCATENADA', 'CVE_ENT', 'CVE_MUN', 'NOMBRE_MUN', 'ENTIDAD', 'ORG_CUENCA*', 'CLV_OC', 'CON_CUENCA', 'CVE_CONC']
-columnas_fecha = [col for col in df.columns if col not in columnas_base]
+columnas_fecha_crudas = [col for col in df.columns if col not in columnas_base]
 
-# 3. Transformar de formato ancho a largo (Melt)
-df_long = df.melt(id_vars=columnas_base, value_vars=columnas_fecha, 
-                  var_name='Fecha_Texto', value_name='Categoria_Sequia')
-
-# 4. Manejo de nulos: Los vacíos indican ausencia de sequía
-df_long['Categoria_Sequia'] = df_long['Categoria_Sequia'].fillna('Sin Sequía')
-
-# 5. Estandarización de fechas ultrarrápida (Mapeo de únicos)
+# 3. Estandarización de fechas ultrarrápida (Aplicado a nombres de columnas)
 meses = {'ene': '01', 'feb': '02', 'mar': '03', 'abr': '04', 'may': '05', 'jun': '06', 
          'jul': '07', 'ago': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dic': '12'}
 
 def parse_date(date_str):
-    try:
-        dia, mes, anio = date_str.split('-')
-        return pd.to_datetime(f'20{anio}-{meses[mes.lower()]}-{dia}')
+    try: # Intenta leer formato numérico de Excel (ej. 42370)
+        return pd.to_datetime(pd.to_numeric(date_str), origin='1899-12-30', unit='D')
     except:
-        return pd.NaT
+        try: # Intenta leer formato texto (ej. 15-ene-16)
+            dia, mes, anio = date_str.split('-')
+            return pd.to_datetime(f'20{anio}-{meses[mes.lower()]}-{dia}')
+        except:
+            return pd.NaT
 
-# EL TRUCO: Solo calculamos las fechas únicas (ej. 500 cálculos en lugar de 1.5 millones)
-fechas_unicas = df_long['Fecha_Texto'].unique()
-mapa_fechas = {fecha: parse_date(fecha) for fecha in fechas_unicas}
+# 4. Filtrado temporal ANTES del melt (Ahorra memoria y procesador)
+cols_a_conservar = columnas_base.copy()
+mapeo_nombres = {}
 
-# Asignamos el diccionario mapeado a la columna completa instantáneamente
-df_long['Fecha'] = df_long['Fecha_Texto'].map(mapa_fechas)
+for col in columnas_fecha_crudas:
+    fecha_dt = parse_date(col)
+    if pd.notnull(fecha_dt) and fecha_dt.year >= 2016:
+        cols_a_conservar.append(col)
+        mapeo_nombres[col] = fecha_dt.strftime('%Y-%m-%d')
 
-# 6. Crear un índice numérico de severidad para futuros modelos (0 a 5)
+df_filtrado = df[cols_a_conservar].rename(columns=mapeo_nombres)
+
+# 5. Transformar de formato ancho a largo (Melt)
+df_long = df_filtrado.melt(id_vars=columnas_base, 
+                           var_name='Fecha', 
+                           value_name='Categoria_Sequia')
+
+df_long['Fecha'] = pd.to_datetime(df_long['Fecha'])
+
+# 6. Manejo de nulos y creación de índice numérico de severidad
+df_long['Categoria_Sequia'] = df_long['Categoria_Sequia'].fillna('Sin Sequía')
 mapa_sequia = {'Sin Sequía': 0, 'D0': 1, 'D1': 2, 'D2': 3, 'D3': 4, 'D4': 5}
 df_long['Nivel_Num'] = df_long['Categoria_Sequia'].map(mapa_sequia)
 
-# Limpiar columnas innecesarias y ordenar
-df_clean = df_long.drop(columns=['Fecha_Texto']).sort_values(['CVE_CONCATENADA', 'Fecha'])
+# 7. Limpiar, ordenar y guardar estado óptimo
+df_clean = df_long.sort_values(['CVE_CONCATENADA', 'Fecha']).reset_index(drop=True)
 
-print(f"Estructura final: {df_clean.shape[0]:,} registros.")
-df_clean.head()
-```
+# Guardamos en Parquet para que el EDA temporal cargue instantáneamente
+df_clean.to_parquet("../sequia_limpia_2016.parquet", index=False)
 :::
 :::
-
-## EDA
-
-Para entender el comportamiento histórico, calculamos cuántos municipios se encontraban en cada categoría de sequía en cada quincena registrada desde 2003 hasta 2026.
 
 ::: {.card}
 ::: {.card-header}
-Evolución Nacional de la Sequía (2003 - 2026)
+Estructura Final del Conjunto de Datos
 :::
 ::: {.card-body}
+print(f"Estructura final: {df_clean.shape[0]:,} observaciones a nivel municipio-quincena.")
+print(f"Rango temporal efectivo: de {df_clean['Fecha'].min().date()} a {df_clean['Fecha'].max().date()}")
 
-```{python}
-# Contar municipios por categoría en cada fecha
-evolucion = df_clean.groupby(['Fecha', 'Categoria_Sequia']).size().reset_index(name='Conteo')
+df_clean[['NOMBRE_MUN', 'ENTIDAD', 'Fecha', 'Categoria_Sequia', 'Nivel_Num']].head()
+:::
+:::
 
-# Colores oficiales del Monitor de Sequía
-orden = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
-colores = {'Sin Sequía': '#e0e0e0', 'D0': '#ffff00', 'D1': '#fcd37f', 
-           'D2': '#ffaa00', 'D3': '#e60000', 'D4': '#730000'}
 
-# Gráfica de área apilada interactiva
-# Gráfica de área apilada interactiva
-fig = px.area(evolucion, x='Fecha', y='Conteo', 
-              color='Categoria_Sequia',
-              category_orders={'Categoria_Sequia': orden},
-              color_discrete_map=colores)
-
-fig.update_layout(
-    title_text='Proporción de Municipios por Nivel de Severidad de Sequía',
-    xaxis_title='Año',
-    yaxis_title='Número de Municipios',
-    template='plotly_white',
-    hovermode='x unified',
-    legend_title_text='Nivel de Sequía',
-    margin=dict(l=20, r=20, t=50, b=20)
-)
-
-# Mostrar la gráfica en Quarto
-fig.show()
-```
