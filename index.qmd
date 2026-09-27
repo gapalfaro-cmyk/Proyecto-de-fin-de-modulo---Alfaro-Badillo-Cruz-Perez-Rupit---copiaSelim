@@ -17,7 +17,7 @@ México enfrenta un escenario crítico de estrés hídrico. Entender cómo se di
 - ¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)?
 - ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)?
 - ¿Se pueden indenfificar regiones o municipios con patronces similares?
-- ¿Qúe patrones de vulnerabilidad existen?
+- ¿Qué patrones de vulnerabilidad existen?
 
 ## Información disponible
 
