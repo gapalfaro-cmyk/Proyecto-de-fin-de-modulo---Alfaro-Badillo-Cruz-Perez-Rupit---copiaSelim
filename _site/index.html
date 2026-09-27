@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Reporte – Evolución de la Sequía en México</title>
+<title>Sequía en México – Evolución de la Sequía en México</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -130,12 +130,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#el-problema-del-agua-en-méxico" id="toc-el-problema-del-agua-en-méxico" class="nav-link active" data-scroll-target="#el-problema-del-agua-en-méxico">El Problema del Agua en México</a></li>
-  <li><a href="#pregunta-de-investigación" id="toc-pregunta-de-investigación" class="nav-link" data-scroll-target="#pregunta-de-investigación">Pregunta de Investigación</a>
-  <ul class="collapse">
-  <li><a href="#objetivos-secundarios" id="toc-objetivos-secundarios" class="nav-link" data-scroll-target="#objetivos-secundarios">Objetivos Secundarios</a></li>
-  </ul></li>
-  <li><a href="#metodología-y-alcance" id="toc-metodología-y-alcance" class="nav-link" data-scroll-target="#metodología-y-alcance">Metodología y Alcance</a></li>
+  <li><a href="#pregunta-de-investigación" id="toc-pregunta-de-investigación" class="nav-link active" data-scroll-target="#pregunta-de-investigación">Pregunta de investigación</a></li>
+  <li><a href="#hipótesis" id="toc-hipótesis" class="nav-link" data-scroll-target="#hipótesis">Hipótesis</a></li>
   </ul>
 </nav>
     </div>
@@ -144,7 +140,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Reporte</h1>
+<h1 class="title">Sequía en México</h1>
 </div>
 
 
@@ -167,34 +163,24 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Impacto territorial de la sequía en México.</figcaption>
 </figure>
 </div>
-<section id="el-problema-del-agua-en-méxico" class="level2">
-<h2 class="anchored" data-anchor-id="el-problema-del-agua-en-méxico">El Problema del Agua en México</h2>
-<p>México enfrenta un escenario crítico de estrés hídrico. Entender cómo se distribuye y persiste este fenómeno es fundamental para el diseño de políticas públicas, la asignación de recursos agrícolas y la gestión de presas. Este proyecto analiza la evolución territorial y temporal de la sequía a nivel municipal utilizando registros históricos reales.</p>
-</section>
 <section id="pregunta-de-investigación" class="level2">
-<h2 class="anchored" data-anchor-id="pregunta-de-investigación">Pregunta de Investigación</h2>
-<p><strong>¿Qué regiones del país presentan la mayor exposición y persistencia a niveles críticos de sequía, y cómo ha evolucionado su intensidad en las últimas dos décadas?</strong></p>
-<section id="objetivos-secundarios" class="level3">
-<h3 class="anchored" data-anchor-id="objetivos-secundarios">Objetivos Secundarios</h3>
-<ol type="1">
-<li><strong>Modelado Espacial:</strong> Identificar clústers geográficos con patrones estadísticos similares de estrés hídrico.</li>
-<li><strong>Dinámica Temporal:</strong> Detectar la frecuencia y los picos de anomalías (D3 - Sequía Extrema y D4 - Sequía Excepcional) a lo largo del tiempo.</li>
-</ol>
+<h2 class="anchored" data-anchor-id="pregunta-de-investigación">Pregunta de investigación</h2>
+<p>Pregunta principal ¿Qué municipios de México presentan mayor frecuencia y persistencia de sequía entre 2016 y 2026, y pueden agruparse en regiones con patrones temporales similares?</p>
+<section id="preguntas-secundarias" class="level5">
+<h5 class="anchored" data-anchor-id="preguntas-secundarias">Preguntas secundarias</h5>
+<p>¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)? ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)? ¿Pueden agruparse los municipios en clusters territoriales con patrones temporales de severidad similares?</p>
 </section>
 </section>
-<section id="metodología-y-alcance" class="level2">
-<h2 class="anchored" data-anchor-id="metodología-y-alcance">Metodología y Alcance</h2>
-<p>El análisis se estructura bajo un enfoque de ciencia de datos, integrando preprocesamiento, análisis exploratorio, modelado no supervisado (Clustering) y visualización interactiva.</p>
-<ul>
-<li><strong>Fuente Principal:</strong> Programa Nacional Contra la Sequía (PRONACOSE).</li>
-<li><strong>Unidad de Análisis:</strong> Nivel Municipal (2,400+ municipios).</li>
-<li><strong>Variable Objetivo:</strong> Categorías del Monitor de Sequía (D0 a D4).</li>
-<li><strong>Herramientas:</strong> Análisis procesado íntegramente en Python (Pandas, Scikit-learn, Plotly) y desplegado mediante Quarto.</li>
-</ul>
+<section id="hipótesis" class="level2">
+<h2 class="anchored" data-anchor-id="hipótesis">Hipótesis</h2>
+<p>Los municipios del norte y centro-norte de México (zonas áridas y semiáridas) presentan mayor frecuencia y persistencia de sequía que los del sur y sureste, y estos patrones son suficientemente consistentes en el tiempo como para formar agrupaciones territoriales coherentes geográficamente (no solo estadísticamente).</p>
 <hr>
-<blockquote class="blockquote">
-<p><strong>Nota para la revisión:</strong> Este documento es interactivo. En las siguientes secciones, los bloques de código Python se encuentran colapsados por defecto para facilitar la lectura ejecutiva, pero pueden expandirse haciendo clic en <em>“Ver código de Python”</em>.</p>
-</blockquote>
+<p><strong>Variable objetivo:</strong> intensidad (nivel ordinal 0–5 de severidad de sequía por municipio-quincena), y sus derivadas por municipio — frecuencia (% de quincenas en D0+) y persistencia (duración media/máxima de rachas consecutivas en sequía).</p>
+<p><strong>Variables explicativas:</strong> geográficas (ENTIDAD, ORG_CUENCA*, CON_CUENCA), temporales (año, mes, quincena, estacionalidad).</p>
+<p><strong>Población de interés:</strong> los 2,478 municipios de México cubiertos por el Monitor de Sequía (PRONACOSE).</p>
+<p><strong>Unidad de análisis:</strong> municipio-quincena para el análisis temporal; municipio (con su serie resumida) para el clustering territorial.</p>
+<p><strong>Periodo y alcance:</strong> enero 2016 – septiembre 2026 (df_analitico), alcance geográfico nacional (32 entidades). La serie 2003–2015 (df_historico) se usa solo para contexto, no para el modelo, por el cambio metodológico ya documentado.</p>
+<p><strong>Modelo propuesto:</strong> clustering territorial (k-means o jerárquico) sobre variables de frecuencia y persistencia agregadas por municipio, con validación de coherencia geográfica de los clusters (¿coinciden con regiones hidrológicas o zonas climáticas conocidas?).</p>
 
 
 </section>

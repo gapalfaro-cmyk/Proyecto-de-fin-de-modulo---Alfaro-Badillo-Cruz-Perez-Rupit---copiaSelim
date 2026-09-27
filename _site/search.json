@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Reporte",
+    "title": "Sequía en México",
     "section": "",
     "text": "Impacto territorial de la sequía en México."
   },
@@ -51,9 +51,9 @@
   {
     "objectID": "index.html#pregunta-de-investigación",
     "href": "index.html#pregunta-de-investigación",
-    "title": "Reporte",
-    "section": "Pregunta de Investigación",
-    "text": "Pregunta de Investigación\n¿Qué regiones del país presentan la mayor exposición y persistencia a niveles críticos de sequía, y cómo ha evolucionado su intensidad en las últimas dos décadas?\n\nObjetivos Secundarios\n\nModelado Espacial: Identificar clústers geográficos con patrones estadísticos similares de estrés hídrico.\nDinámica Temporal: Detectar la frecuencia y los picos de anomalías (D3 - Sequía Extrema y D4 - Sequía Excepcional) a lo largo del tiempo."
+    "title": "Sequía en México",
+    "section": "Pregunta de investigación",
+    "text": "Pregunta de investigación\nPregunta principal ¿Qué municipios de México presentan mayor frecuencia y persistencia de sequía entre 2016 y 2026, y pueden agruparse en regiones con patrones temporales similares?\n\nPreguntas secundarias\n¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)? ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)? ¿Pueden agruparse los municipios en clusters territoriales con patrones temporales de severidad similares?"
   },
   {
     "objectID": "index.html#metodología-y-alcance",
@@ -194,5 +194,12 @@
     "title": "1. Preparación y Limpieza de Datos",
     "section": "Diccionario de variables",
     "text": "Diccionario de variables\n\n\nVariables Geográficas\n\nCVE_CONCATENADA: Clave del municipio (ID único).\nCVE_ENT: Clave de la entidad federativa.\nCVE_MUN: Clave del municipio.\nNOMBRE_MUN: Nombre del municipio.\nENTIDAD: Nombre de la entidad federativa.\nORG_CUENCA*: Organismo de cuenca (el asterisco es parte literal del nombre de columna en el CSV original, no una nota al pie).\nCLV_OC: Clave del organismo de cuenca.\nCON_CUENCA: Consejo de cuenca.\nCVE_CONC: Clave del consejo de cuenca.\n\n\n\nCategorías de Severidad (Variable Objetivo)\n\nSin valor: Sin sequía (condiciones normales).\nD0: Anormalmente seco.\nD1: Sequía Moderada.\nD2: Sequía Severa.\nD3: Sequía Extrema.\nD4: Sequía Excepcional.\n\n\n\nAdemás de estas 9 columnas de identificación, el archivo original trae ~435 columnas de fecha (una por cada corte de publicación del monitor, p. ej. 31-ene-03, 15-sep-26), que se transforman en la columna única fecha durante la limpieza (ver secciones siguientes)."
+  },
+  {
+    "objectID": "index.html#hipótesis",
+    "href": "index.html#hipótesis",
+    "title": "Sequía en México",
+    "section": "Hipótesis",
+    "text": "Hipótesis\nLos municipios del norte y centro-norte de México (zonas áridas y semiáridas) presentan mayor frecuencia y persistencia de sequía que los del sur y sureste, y estos patrones son suficientemente consistentes en el tiempo como para formar agrupaciones territoriales coherentes geográficamente (no solo estadísticamente).\n\nVariable objetivo: intensidad (nivel ordinal 0–5 de severidad de sequía por municipio-quincena), y sus derivadas por municipio — frecuencia (% de quincenas en D0+) y persistencia (duración media/máxima de rachas consecutivas en sequía).\nVariables explicativas: geográficas (ENTIDAD, ORG_CUENCA*, CON_CUENCA), temporales (año, mes, quincena, estacionalidad).\nPoblación de interés: los 2,478 municipios de México cubiertos por el Monitor de Sequía (PRONACOSE).\nUnidad de análisis: municipio-quincena para el análisis temporal; municipio (con su serie resumida) para el clustering territorial.\nPeriodo y alcance: enero 2016 – septiembre 2026 (df_analitico), alcance geográfico nacional (32 entidades). La serie 2003–2015 (df_historico) se usa solo para contexto, no para el modelo, por el cambio metodológico ya documentado.\nModelo propuesto: clustering territorial (k-means o jerárquico) sobre variables de frecuencia y persistencia agregadas por municipio, con validación de coherencia geográfica de los clusters (¿coinciden con regiones hidrológicas o zonas climáticas conocidas?)."
   }
 ]

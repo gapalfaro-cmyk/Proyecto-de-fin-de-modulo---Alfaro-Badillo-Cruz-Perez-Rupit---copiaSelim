@@ -1,30 +1,35 @@
 ---
-title: "Reporte"
+title: "Sequía en México"
 ---
 
 ![Impacto territorial de la sequía en México.](foto_sequia.jpeg){fig-align="center" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"}
 
-## El Problema del Agua en México
+## Pregunta de investigación
 
-México enfrenta un escenario crítico de estrés hídrico. Entender cómo se distribuye y persiste este fenómeno es fundamental para el diseño de políticas públicas, la asignación de recursos agrícolas y la gestión de presas. Este proyecto analiza la evolución territorial y temporal de la sequía a nivel municipal utilizando registros históricos reales.
+Pregunta principal
+¿Qué municipios de México presentan mayor frecuencia y persistencia de sequía entre 2016 y 2026, y pueden agruparse en regiones con patrones temporales similares?
 
-## Pregunta de Investigación
+##### Preguntas secundarias
 
-**¿Qué regiones del país presentan la mayor exposición y persistencia a niveles críticos de sequía, y cómo ha evolucionado su intensidad en las últimas dos décadas?**
+¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)?
+¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)?
+¿Pueden agruparse los municipios en clusters territoriales con patrones temporales de severidad similares?
 
-### Objetivos Secundarios
-1. **Modelado Espacial:** Identificar clústers geográficos con patrones estadísticos similares de estrés hídrico.
-2. **Dinámica Temporal:** Detectar la frecuencia y los picos de anomalías (D3 - Sequía Extrema y D4 - Sequía Excepcional) a lo largo del tiempo.
+## Hipótesis
+Los municipios del norte y centro-norte de México (zonas áridas y semiáridas) presentan mayor frecuencia y persistencia de sequía que los del sur y sureste, y estos patrones son suficientemente consistentes en el tiempo como para formar agrupaciones territoriales coherentes geográficamente (no solo estadísticamente).
 
-## Metodología y Alcance
-
-El análisis se estructura bajo un enfoque de ciencia de datos, integrando preprocesamiento, análisis exploratorio, modelado no supervisado (Clustering) y visualización interactiva.
-
-* **Fuente Principal:** Programa Nacional Contra la Sequía (PRONACOSE).
-* **Unidad de Análisis:** Nivel Municipal (2,400+ municipios).
-* **Variable Objetivo:** Categorías del Monitor de Sequía (D0 a D4).
-* **Herramientas:** Análisis procesado íntegramente en Python (Pandas, Scikit-learn, Plotly) y desplegado mediante Quarto.
 
 ---
 
-> **Nota para la revisión:** Este documento es interactivo. En las siguientes secciones, los bloques de código Python se encuentran colapsados por defecto para facilitar la lectura ejecutiva, pero pueden expandirse haciendo clic en *"Ver código de Python"*.
+
+**Variable objetivo:** intensidad (nivel ordinal 0–5 de severidad de sequía por municipio-quincena), y sus derivadas por municipio — frecuencia (% de quincenas en D0+) y persistencia (duración media/máxima de rachas consecutivas en sequía).
+
+**Variables explicativas:** geográficas (ENTIDAD, ORG_CUENCA*, CON_CUENCA), temporales (año, mes, quincena, estacionalidad).
+
+**Población de interés:** los 2,478 municipios de México cubiertos por el Monitor de Sequía (PRONACOSE).
+
+**Unidad de análisis:** municipio-quincena para el análisis temporal; municipio (con su serie resumida) para el clustering territorial.
+
+**Periodo y alcance:** enero 2016 – septiembre 2026 (df_analitico), alcance geográfico nacional (32 entidades). La serie 2003–2015 (df_historico) se usa solo para contexto, no para el modelo, por el cambio metodológico ya documentado.
+
+**Modelo propuesto:** clustering territorial (k-means o jerárquico) sobre variables de frecuencia y persistencia agregadas por municipio, con validación de coherencia geográfica de los clusters (¿coinciden con regiones hidrológicas o zonas climáticas conocidas?).
