@@ -5,8 +5,6 @@ execute:
   cache: true
 ---
 
-## Diccionario de Datos
-
 ## Introducción
 
 Esta sección documenta la preparación de la fuente principal del proyecto:
@@ -26,7 +24,6 @@ Se generan **dos productos** a partir de esta limpieza:
   `fecha`, definición metodológica consistente y frecuencia quincenal
   uniforme — este es el dataset que alimenta el EDA y el modelado.
 
-
 ```{python}
 #| label: setup
 
@@ -42,36 +39,6 @@ pd.set_option("display.max_columns", 10)
 #   df = pd.read_excel("data/raw/MunicipiosSequia.xlsx")
 RUTA_DATOS = "../data/raw/MunicipiosSequiaCSV.csv"
 ```
-
-
-::: {.grid}
-
-::: {.g-col-6}
-**Variables Geográficas**
-
-* **`CVE_CONCATENADA`**: Clave del municipio (ID Único).
-* **`CVE_ENT`**: Clave de la entidad federativa.
-* **`CVE_MUN`**: Clave del Municipio.
-* **`NOMBRE_MUN`**: Nombre del municipio.
-* **`ENTIDAD`**: Nombre de la entidad federativa.
-* **`ORG_CUENCA*`**: Organismo de cuenca.
-* **`CLV_OC`**: Clave del organismo de cuenca.
-* **`CON_CUENCA`**: Consejo de cuenca.
-* **`CVE_CONC`**: Clave del consejo de cuenca.
-:::
-
-::: {.g-col-6}
-**Categorías de Severidad (Variable Objetivo)**
-
-* `Sin valor`: Sin sequía (Condiciones normales).
-* `D0`: Anormalmente seco.
-* `D1`: Sequía Moderada.
-* `D2`: Sequía Severa.
-* `D3`: Sequía Extrema.
-* `D4`: Sequía Excepcional.
-:::
-
-:::
 
 ## Carga y estructura de los datos
 
@@ -93,6 +60,43 @@ print(f"Columnas de identificación: {len(columnas_id)}")
 print(f"Columnas de fecha (periodos publicados): {len(columnas_fecha)}")
 print(f"Entidades federativas: {df['ENTIDAD'].nunique()}")
 ```
+
+## Diccionario de variables
+
+::: {.grid}
+
+::: {.g-col-6}
+**Variables Geográficas**
+
+* **`CVE_CONCATENADA`**: Clave del municipio (ID único).
+* **`CVE_ENT`**: Clave de la entidad federativa.
+* **`CVE_MUN`**: Clave del municipio.
+* **`NOMBRE_MUN`**: Nombre del municipio.
+* **`ENTIDAD`**: Nombre de la entidad federativa.
+* **`ORG_CUENCA*`**: Organismo de cuenca (el asterisco es parte literal del
+  nombre de columna en el CSV original, no una nota al pie).
+* **`CLV_OC`**: Clave del organismo de cuenca.
+* **`CON_CUENCA`**: Consejo de cuenca.
+* **`CVE_CONC`**: Clave del consejo de cuenca.
+:::
+
+::: {.g-col-6}
+**Categorías de Severidad (Variable Objetivo)**
+
+* `Sin valor`: Sin sequía (condiciones normales).
+* `D0`: Anormalmente seco.
+* `D1`: Sequía Moderada.
+* `D2`: Sequía Severa.
+* `D3`: Sequía Extrema.
+* `D4`: Sequía Excepcional.
+:::
+
+:::
+
+Además de estas 9 columnas de identificación, el archivo original trae
+~435 columnas de fecha (una por cada corte de publicación del monitor,
+p. ej. `31-ene-03`, `15-sep-26`), que se transforman en la columna única
+`fecha` durante la limpieza (ver secciones siguientes).
 
 ## Verificación de integridad
 
