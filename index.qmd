@@ -21,11 +21,14 @@ México enfrenta un escenario crítico de estrés hídrico. Entender cómo se di
 
 ## Información disponible
 
+**Fuente principal:** Programa Nacional Contra la Sequía — PRONACOSE
+Datos históricos:
+https://smn.conagua.gob.mx/es/climatologia/monitor-de-sequia/monitor-de-sequia-en-mexico
 
+**Fuente secundaria:** Datos de enero 2026 y vulnerabiliades ambiental, económica y social en enero 2026:
+https://www.datos.gob.mx/es/dataset/programa_nacional_contra_sequia_pronacose
 
-
----
-
+## Datos y Metodología:
 
 **Variable objetivo:** intensidad (nivel ordinal 0–5 de severidad de sequía por municipio-quincena), y sus derivadas por municipio — frecuencia (% de quincenas en D0+) y persistencia (duración media/máxima de rachas consecutivas en sequía).
 
