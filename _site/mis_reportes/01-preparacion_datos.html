@@ -177,6 +177,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#codificación-de-la-intensidad-de-sequía" id="toc-codificación-de-la-intensidad-de-sequía" class="nav-link" data-scroll-target="#codificación-de-la-intensidad-de-sequía">Codificación de la intensidad de sequía</a></li>
   <li><a href="#dataset-histórico-completo-formato-largo-solo-para-contexto" id="toc-dataset-histórico-completo-formato-largo-solo-para-contexto" class="nav-link" data-scroll-target="#dataset-histórico-completo-formato-largo-solo-para-contexto">Dataset histórico completo (formato largo, solo para contexto)</a></li>
   <li><a href="#dataset-analítico-2016-para-eda-y-modelado" id="toc-dataset-analítico-2016-para-eda-y-modelado" class="nav-link" data-scroll-target="#dataset-analítico-2016-para-eda-y-modelado">Dataset analítico 2016+ (para EDA y modelado)</a></li>
+  <li><a href="#datos-complementarios-vulnerabilidad-ante-sequía" id="toc-datos-complementarios-vulnerabilidad-ante-sequía" class="nav-link" data-scroll-target="#datos-complementarios-vulnerabilidad-ante-sequía">Datos complementarios: vulnerabilidad ante sequía</a></li>
+  <li><a href="#resumen-por-municipio-hazard-vulnerabilidad-listo-para-clustering" id="toc-resumen-por-municipio-hazard-vulnerabilidad-listo-para-clustering" class="nav-link" data-scroll-target="#resumen-por-municipio-hazard-vulnerabilidad-listo-para-clustering">Resumen por municipio (hazard + vulnerabilidad, listo para clustering)</a></li>
   <li><a href="#verificación-de-la-transformación" id="toc-verificación-de-la-transformación" class="nav-link" data-scroll-target="#verificación-de-la-transformación">Verificación de la transformación</a></li>
   <li><a href="#guardado-de-datos-limpios" id="toc-guardado-de-datos-limpios" class="nav-link" data-scroll-target="#guardado-de-datos-limpios">Guardado de datos limpios</a></li>
   <li><a href="#resumen-de-decisiones-de-limpieza" id="toc-resumen-de-decisiones-de-limpieza" class="nav-link" data-scroll-target="#resumen-de-decisiones-de-limpieza">Resumen de decisiones de limpieza</a></li>
@@ -213,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong><code>df_historico</code></strong>: serie completa 2003–2026 en formato largo, útil para gráficas de contexto de largo plazo (con la salvedad metodológica que se documenta más abajo).</li>
 <li><strong><code>df_analitico</code></strong>: subconjunto 2016 en adelante, con una sola columna <code>fecha</code>, definición metodológica consistente y frecuencia quincenal uniforme — este es el dataset que alimenta el EDA y el modelado.</li>
 </ul>
-<div id="setup" class="cell" data-execution_count="2">
+<div id="setup" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -232,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="carga-y-estructura-de-los-datos" class="level2">
 <h2 class="anchored" data-anchor-id="carga-y-estructura-de-los-datos">Carga y estructura de los datos</h2>
-<div id="carga" class="cell" data-execution_count="3">
+<div id="carga" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(RUTA_DATOS, encoding<span class="op">=</span><span class="st">"utf-8-sig"</span>, low_memory<span class="op">=</span><span class="va">False</span>)</span>
@@ -291,7 +293,7 @@ Entidades federativas: 32</code></pre>
 </section>
 <section id="verificación-de-integridad" class="level2">
 <h2 class="anchored" data-anchor-id="verificación-de-integridad">Verificación de integridad</h2>
-<div id="integridad" class="cell" data-execution_count="4">
+<div id="integridad" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>duplicados <span class="op">=</span> df[<span class="st">"CVE_CONCATENADA"</span>].duplicated().<span class="bu">sum</span>()</span>
@@ -313,7 +315,7 @@ Valores nulos en columnas de identificación: 0</code></pre>
 <section id="de-nombres-de-columna-a-fechas-reales" class="level2">
 <h2 class="anchored" data-anchor-id="de-nombres-de-columna-a-fechas-reales">De nombres de columna a fechas reales</h2>
 <p>Los nombres de columna vienen como texto en español (<code>31-ene-03</code>, <code>15-sep-26</code>), que <code>pandas</code> no reconoce de forma nativa. Se parsean manualmente para poder analizar la cobertura temporal.</p>
-<div id="fn-parseo" class="cell" data-execution_count="5">
+<div id="fn-parseo" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>MESES <span class="op">=</span> {</span>
@@ -327,7 +329,7 @@ Valores nulos en columnas de identificación: 0</code></pre>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Timestamp(year<span class="op">=</span><span class="dv">2000</span> <span class="op">+</span> <span class="bu">int</span>(anio2), month<span class="op">=</span>MESES[mes_abr.lower()], day<span class="op">=</span><span class="bu">int</span>(dia))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="cell-fig-cobertura-anual" class="cell" data-execution_count="6">
+<div id="cell-fig-cobertura-anual" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fechas_cols <span class="op">=</span> pd.Series(columnas_fecha).<span class="bu">map</span>(parsear_fecha)</span>
@@ -377,7 +379,7 @@ Figure&nbsp;1: Número de cortes de publicación del monitor por año
 </div>
 </div>
 <p><strong>Decisión de limpieza:</strong> para el dataset analítico que alimenta el EDA y el modelado, se <strong>recorta la serie a partir de enero de 2016</strong>, donde la definición y la frecuencia (quincenal) son consistentes en todo el rango. El costo de esta decisión es perder 13 años de historia (2003–2015); a cambio se gana un dataset internamente comparable, que es indispensable para cualquier análisis de tendencia, clustering o modelado serio. La serie completa 2003–2026 se conserva aparte (<code>df_historico</code>) únicamente para gráficas de contexto de largo plazo, dejando explícita esta salvedad cada vez que se use.</p>
-<div id="cols-2016" class="cell" data-execution_count="7">
+<div id="cols-2016" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fecha_por_columna <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(columnas_fecha, fechas_cols))</span>
@@ -397,7 +399,7 @@ Columnas descartadas (2003-2015, dataset histórico únicamente): 179</code></pr
 </section>
 <section id="codificación-de-la-intensidad-de-sequía" class="level2">
 <h2 class="anchored" data-anchor-id="codificación-de-la-intensidad-de-sequía">Codificación de la intensidad de sequía</h2>
-<div id="mapas-intensidad" class="cell" data-execution_count="8">
+<div id="mapas-intensidad" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>intensidad_map <span class="op">=</span> {np.nan: <span class="dv">0</span>, <span class="st">"D0"</span>: <span class="dv">1</span>, <span class="st">"D1"</span>: <span class="dv">2</span>, <span class="st">"D2"</span>: <span class="dv">3</span>, <span class="st">"D3"</span>: <span class="dv">4</span>, <span class="st">"D4"</span>: <span class="dv">5</span>}</span>
@@ -412,7 +414,7 @@ Columnas descartadas (2003-2015, dataset histórico únicamente): 179</code></pr
 </details>
 </div>
 <p>Al igual que en la exploración inicial, una celda vacía se interpreta como “sin sequía” (nivel 0), <strong>excepto</strong> en fechas donde el 100% de los municipios está vacío, que se tratan como hueco real de publicación del monitor y se dejan como <code>NaN</code> en vez de 0.</p>
-<div id="huecos-publicacion" class="cell" data-execution_count="9">
+<div id="huecos-publicacion" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>frac_vacio <span class="op">=</span> df[columnas_fecha].isna().mean()</span>
@@ -426,7 +428,7 @@ Columnas descartadas (2003-2015, dataset histórico únicamente): 179</code></pr
 </section>
 <section id="dataset-histórico-completo-formato-largo-solo-para-contexto" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-histórico-completo-formato-largo-solo-para-contexto">Dataset histórico completo (formato largo, solo para contexto)</h2>
-<div id="cell-df-historico" class="cell" data-execution_count="10">
+<div id="cell-df-historico" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_historico <span class="op">=</span> df.melt(id_vars<span class="op">=</span>columnas_id, value_vars<span class="op">=</span>columnas_fecha,</span>
@@ -552,7 +554,7 @@ Filas en df_historico: 1,077,930</code></pre>
 <section id="dataset-analítico-2016-para-eda-y-modelado" class="level2">
 <h2 class="anchored" data-anchor-id="dataset-analítico-2016-para-eda-y-modelado">Dataset analítico 2016+ (para EDA y modelado)</h2>
 <p>Se parte de las columnas 2016 en adelante y se pivotea a una sola columna <code>fecha</code>, exactamente como en la exploración inicial del equipo, con las etiquetas de intensidad ya resueltas.</p>
-<div id="cell-df-analitico" class="cell" data-execution_count="11">
+<div id="cell-df-analitico" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_eda <span class="op">=</span> df[columnas_id <span class="op">+</span> columnas_2016].copy()</span>
@@ -674,21 +676,434 @@ Filas en df_analitico (2016+): 634,368</code></pre>
 </div>
 </div>
 </section>
-<section id="verificación-de-la-transformación" class="level2">
-<h2 class="anchored" data-anchor-id="verificación-de-la-transformación">Verificación de la transformación</h2>
-<div id="cell-fig-serie-2016" class="cell" data-execution_count="12">
+<section id="datos-complementarios-vulnerabilidad-ante-sequía" class="level2">
+<h2 class="anchored" data-anchor-id="datos-complementarios-vulnerabilidad-ante-sequía">Datos complementarios: vulnerabilidad ante sequía</h2>
+<p>Además del Monitor de Sequía (que mide el <strong>peligro</strong>: dónde y con qué severidad ocurre la sequía), se incorporan tres índices de <strong>vulnerabilidad</strong> municipal calculados por PRONACOSE/CONAGUA con metodología IPCC (2007): ambiental, social y económica. Esto permite pasar de un análisis de solo “dónde hay sequía” a uno de “dónde importa más” (riesgo = peligro × vulnerabilidad).</p>
+<div id="carga-vulnerabilidad" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pct_quincenal <span class="op">=</span> (df_analitico.groupby(<span class="st">"fecha"</span>)[<span class="st">"intensidad"</span>]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">apply</span>(<span class="kw">lambda</span> s: (s <span class="op">&gt;</span> <span class="dv">0</span>).mean() <span class="op">*</span> <span class="dv">100</span>))</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>ax.plot(pct_quincenal.index, pct_quincenal.values, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Fecha"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"</span><span class="sc">% d</span><span class="st">e municipios en sequía"</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar rutas según la ubicación en el repositorio</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>RUTA_VULN_AMBIENTAL <span class="op">=</span> <span class="st">"../data/raw/vulnerabilidad_ambiental_municipal.csv"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>RUTA_VULN_SOCIAL <span class="op">=</span> <span class="st">"../data/raw/vulnerabilidad_social_municipal.csv"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>RUTA_VULN_ECONOMICA <span class="op">=</span> <span class="st">"../data/raw/vulnerabilidad_economica_municipal.csv"</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>vuln_amb <span class="op">=</span> pd.read_csv(RUTA_VULN_AMBIENTAL)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>vuln_soc <span class="op">=</span> pd.read_csv(RUTA_VULN_SOCIAL)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>vuln_eco <span class="op">=</span> pd.read_csv(RUTA_VULN_ECONOMICA)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nombre, d <span class="kw">in</span> [(<span class="st">"ambiental"</span>, vuln_amb), (<span class="st">"social"</span>, vuln_soc), (<span class="st">"económica"</span>, vuln_eco)]:</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    dup <span class="op">=</span> d[<span class="st">"cve_concatenada"</span>].duplicated().<span class="bu">sum</span>()</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    nulos <span class="op">=</span> d.isna().<span class="bu">sum</span>().<span class="bu">sum</span>()</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>d<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> municipios, duplicados=</span><span class="sc">{</span>dup<span class="sc">}</span><span class="ss">, nulos=</span><span class="sc">{</span>nulos<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>ambiental: 2463 municipios, duplicados=0, nulos=0
+social: 2463 municipios, duplicados=0, nulos=0
+económica: 2463 municipios, duplicados=0, nulos=0</code></pre>
+</div>
+</div>
+<div id="cell-cobertura-vulnerabilidad" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>municipios_sequia <span class="op">=</span> <span class="bu">set</span>(df[<span class="st">"CVE_CONCATENADA"</span>])</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>municipios_vuln <span class="op">=</span> <span class="bu">set</span>(vuln_amb[<span class="st">"cve_concatenada"</span>])</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>faltantes <span class="op">=</span> df[<span class="op">~</span>df[<span class="st">"CVE_CONCATENADA"</span>].isin(municipios_vuln)][[<span class="st">"CVE_CONCATENADA"</span>, <span class="st">"NOMBRE_MUN"</span>, <span class="st">"ENTIDAD"</span>]]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Municipios con dato de vulnerabilidad: </span><span class="sc">{</span><span class="bu">len</span>(municipios_vuln)<span class="sc">}</span><span class="ss"> de </span><span class="sc">{</span><span class="bu">len</span>(municipios_sequia)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Municipios sin dato de vulnerabilidad (</span><span class="sc">{</span><span class="bu">len</span>(faltantes)<span class="sc">}</span><span class="ss">):"</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>display(faltantes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Municipios con dato de vulnerabilidad: 2463 de 2478
+Municipios sin dato de vulnerabilidad (15):</code></pre>
+</div>
+<div id="cobertura-vulnerabilidad" class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CVE_CONCATENADA</th>
+<th data-quarto-table-cell-role="th">NOMBRE_MUN</th>
+<th data-quarto-table-cell-role="th">ENTIDAD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>2006</td>
+<td>San Quintín**</td>
+<td>Baja California</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>2007</td>
+<td>San Felipe**</td>
+<td>Baja California</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">34</th>
+<td>4012</td>
+<td>Seybaplaya**</td>
+<td>Campeche</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">35</th>
+<td>4013</td>
+<td>Dzitbalché**</td>
+<td>Campeche</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">207</th>
+<td>7125</td>
+<td>Honduras de la Sierra**</td>
+<td>Chiapas</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">457</th>
+<td>12082</td>
+<td>Las Vigas***</td>
+<td>Guerrero</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">458</th>
+<td>12083</td>
+<td>Ñuu Savi***</td>
+<td>Guerrero</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">459</th>
+<td>12084</td>
+<td>Santa Cruz del Rincón***</td>
+<td>Guerrero</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">460</th>
+<td>12085</td>
+<td>San Nicolás***</td>
+<td>Guerrero</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">941</th>
+<td>17034</td>
+<td>Coatetelco**</td>
+<td>Morelos</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">942</th>
+<td>17035</td>
+<td>Xoxocotla**</td>
+<td>Morelos</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">943</th>
+<td>17036</td>
+<td>Hueyapan**</td>
+<td>Morelos</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1889</th>
+<td>24059</td>
+<td>Villa de Pozos***</td>
+<td>San Luis Potosí</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1908</th>
+<td>25019</td>
+<td>Eldorado***</td>
+<td>Sinaloa</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1909</th>
+<td>25020</td>
+<td>Juan José Ríos***</td>
+<td>Sinaloa</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Los municipios sin dato de vulnerabilidad son, casi todos, municipios de creación reciente (marcados con <code>**</code>/<code>***</code> en <code>NOMBRE_MUN</code>), posteriores al cálculo del índice. Representan menos del 1% del total y se documentan como limitación: para esos municipios, las variables de vulnerabilidad quedarán como <code>NaN</code> tras el merge.</p>
+<div id="cell-fig-distribucion-vulnerabilidad" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>orden_cat <span class="op">=</span> [<span class="st">"Muy Baja"</span>, <span class="st">"Baja"</span>, <span class="st">"Media"</span>, <span class="st">"Alta"</span>, <span class="st">"Muy Alta"</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">3.5</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, nombre, d <span class="kw">in</span> <span class="bu">zip</span>(axes, [<span class="st">"Ambiental"</span>, <span class="st">"Social"</span>, <span class="st">"Económica"</span>], [vuln_amb, vuln_soc, vuln_eco]):</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    conteo <span class="op">=</span> d[<span class="st">"t_prob"</span>].value_counts().reindex(orden_cat)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    ax.bar(orden_cat, conteo.values)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    ax.set_title(nombre)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-distribucion-vulnerabilidad" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-distribucion-vulnerabilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-preparacion_datos_files/figure-html/fig-distribucion-vulnerabilidad-output-1.png" width="952" height="329" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-distribucion-vulnerabilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Distribución de categorías de vulnerabilidad por dimensión
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div id="merge-vulnerabilidad" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>vuln <span class="op">=</span> (vuln_amb.rename(columns<span class="op">=</span>{<span class="st">"probabilidad"</span>: <span class="st">"vulnerabilidad_ambiental"</span>,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"t_prob"</span>: <span class="st">"vulnerabilidad_ambiental_cat"</span>})</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>                 .merge(vuln_soc.rename(columns<span class="op">=</span>{<span class="st">"probabilidad"</span>: <span class="st">"vulnerabilidad_social"</span>,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">"t_prob"</span>: <span class="st">"vulnerabilidad_social_cat"</span>})</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>                                [[<span class="st">"cve_concatenada"</span>, <span class="st">"vulnerabilidad_social"</span>, <span class="st">"vulnerabilidad_social_cat"</span>]],</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>                        on<span class="op">=</span><span class="st">"cve_concatenada"</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                 .merge(vuln_eco.rename(columns<span class="op">=</span>{<span class="st">"probabilidad"</span>: <span class="st">"vulnerabilidad_economica"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>                                                   <span class="st">"t_prob"</span>: <span class="st">"vulnerabilidad_economica_cat"</span>})</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>                                [[<span class="st">"cve_concatenada"</span>, <span class="st">"vulnerabilidad_economica"</span>, <span class="st">"vulnerabilidad_economica_cat"</span>]],</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>                        on<span class="op">=</span><span class="st">"cve_concatenada"</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>                 .rename(columns<span class="op">=</span>{<span class="st">"cve_concatenada"</span>: <span class="st">"CVE_CONCATENADA"</span>,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"cve_rha"</span>: <span class="st">"CVE_RHA_VULN"</span>, <span class="st">"nom_rha"</span>: <span class="st">"NOM_RHA_VULN"</span>}))</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>df_analitico <span class="op">=</span> df_analitico.merge(vuln, on<span class="op">=</span><span class="st">"CVE_CONCATENADA"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Filas en df_analitico tras el merge: </span><span class="sc">{</span><span class="bu">len</span>(df_analitico)<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Municipios sin vulnerabilidad tras el merge (NaN): "</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"</span><span class="sc">{</span>df_analitico<span class="sc">.</span>loc[df_analitico[<span class="st">'vulnerabilidad_ambiental'</span>].isna(), <span class="st">'CVE_CONCATENADA'</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Filas en df_analitico tras el merge: 634,368
+Municipios sin vulnerabilidad tras el merge (NaN): 15</code></pre>
+</div>
+</div>
+</section>
+<section id="resumen-por-municipio-hazard-vulnerabilidad-listo-para-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-por-municipio-hazard-vulnerabilidad-listo-para-clustering">Resumen por municipio (hazard + vulnerabilidad, listo para clustering)</h2>
+<p>Se agrega el dataset analítico a nivel municipio: frecuencia de sequía (% de quincenas en D0+), intensidad media y máxima, y la racha más larga de quincenas consecutivas en sequía (persistencia), y se une con las tres dimensiones de vulnerabilidad.</p>
+<div id="cell-resumen-municipal" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">"en_sequia"</span>] <span class="op">=</span> df_analitico[<span class="st">"intensidad"</span>] <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> racha_maxima(serie_bool: pd.Series) <span class="op">-&gt;</span> <span class="bu">int</span>:</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Longitud de la racha más larga de True consecutivos."""</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    grupos <span class="op">=</span> (serie_bool <span class="op">!=</span> serie_bool.shift()).cumsum()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    tam_grupo <span class="op">=</span> serie_bool.groupby(grupos).transform(<span class="st">"size"</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">int</span>((tam_grupo <span class="op">*</span> serie_bool).<span class="bu">max</span>())</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>resumen_municipal <span class="op">=</span> (</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    df_analitico.groupby(columnas_id, dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    .agg(frecuencia_sequia_pct<span class="op">=</span>(<span class="st">"en_sequia"</span>, <span class="kw">lambda</span> s: s.mean() <span class="op">*</span> <span class="dv">100</span>),</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>         intensidad_media<span class="op">=</span>(<span class="st">"intensidad"</span>, <span class="st">"mean"</span>),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>         intensidad_max<span class="op">=</span>(<span class="st">"intensidad"</span>, <span class="st">"max"</span>))</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>rachas <span class="op">=</span> (df_analitico.sort_values(<span class="st">"fecha"</span>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>                       .groupby(<span class="st">"CVE_CONCATENADA"</span>)[<span class="st">"en_sequia"</span>]</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>                       .<span class="bu">apply</span>(racha_maxima)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>                       .rename(<span class="st">"racha_maxima_quincenas"</span>))</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>resumen_municipal <span class="op">=</span> resumen_municipal.merge(rachas, on<span class="op">=</span><span class="st">"CVE_CONCATENADA"</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>resumen_municipal <span class="op">=</span> resumen_municipal.merge(vuln, on<span class="op">=</span><span class="st">"CVE_CONCATENADA"</span>, how<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>display(resumen_municipal.sort_values(<span class="st">"frecuencia_sequia_pct"</span>, ascending<span class="op">=</span><span class="va">False</span>).head(<span class="dv">10</span>))</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Municipios en resumen_municipal: </span><span class="sc">{</span><span class="bu">len</span>(resumen_municipal)<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="resumen-municipal" class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CVE_CONCATENADA</th>
+<th data-quarto-table-cell-role="th">CVE_ENT</th>
+<th data-quarto-table-cell-role="th">CVE_MUN</th>
+<th data-quarto-table-cell-role="th">NOMBRE_MUN</th>
+<th data-quarto-table-cell-role="th">ENTIDAD</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">vulnerabilidad_ambiental_cat</th>
+<th data-quarto-table-cell-role="th">vulnerabilidad_social</th>
+<th data-quarto-table-cell-role="th">vulnerabilidad_social_cat</th>
+<th data-quarto-table-cell-role="th">vulnerabilidad_economica</th>
+<th data-quarto-table-cell-role="th">vulnerabilidad_economica_cat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2311</th>
+<td>30210</td>
+<td>30</td>
+<td>210</td>
+<td>Uxpanapa</td>
+<td>Veracruz de Ignacio de la Llave</td>
+<td>...</td>
+<td>Muy Baja</td>
+<td>23.008501</td>
+<td>Baja</td>
+<td>4.98</td>
+<td>Muy Baja</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2192</th>
+<td>30091</td>
+<td>30</td>
+<td>91</td>
+<td>Jesús Carranza</td>
+<td>Veracruz de Ignacio de la Llave</td>
+<td>...</td>
+<td>Baja</td>
+<td>61.153502</td>
+<td>Alta</td>
+<td>50.79</td>
+<td>Media</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1421</th>
+<td>20407</td>
+<td>20</td>
+<td>407</td>
+<td>Santa María Chimalapa</td>
+<td>Oaxaca</td>
+<td>...</td>
+<td>Muy Baja</td>
+<td>56.681909</td>
+<td>Media</td>
+<td>77.55</td>
+<td>Alta</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1071</th>
+<td>20057</td>
+<td>20</td>
+<td>57</td>
+<td>Matías Romero Avendaño</td>
+<td>Oaxaca</td>
+<td>...</td>
+<td>Muy Baja</td>
+<td>55.115507</td>
+<td>Media</td>
+<td>16.12</td>
+<td>Muy Baja</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">142</th>
+<td>7059</td>
+<td>7</td>
+<td>59</td>
+<td>Ocosingo</td>
+<td>Chiapas</td>
+<td>...</td>
+<td>Media</td>
+<td>91.027282</td>
+<td>Muy Alta</td>
+<td>31.44</td>
+<td>Baja</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1212</th>
+<td>20198</td>
+<td>20</td>
+<td>198</td>
+<td>San Juan Guichicovi</td>
+<td>Oaxaca</td>
+<td>...</td>
+<td>Muy Baja</td>
+<td>26.153094</td>
+<td>Baja</td>
+<td>5.05</td>
+<td>Muy Baja</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2171</th>
+<td>30070</td>
+<td>30</td>
+<td>70</td>
+<td>Hidalgotitlán</td>
+<td>Veracruz de Ignacio de la Llave</td>
+<td>...</td>
+<td>Muy Baja</td>
+<td>78.781367</td>
+<td>Alta</td>
+<td>36.96</td>
+<td>Baja</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">418</th>
+<td>12043</td>
+<td>12</td>
+<td>43</td>
+<td>Metlatónoc</td>
+<td>Guerrero</td>
+<td>...</td>
+<td>Muy Baja</td>
+<td>96.994363</td>
+<td>Muy Alta</td>
+<td>74.72</td>
+<td>Alta</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">1913</th>
+<td>26004</td>
+<td>26</td>
+<td>4</td>
+<td>Altar</td>
+<td>Sonora</td>
+<td>...</td>
+<td>Media</td>
+<td>53.333064</td>
+<td>Media</td>
+<td>86.35</td>
+<td>Muy Alta</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">453</th>
+<td>12078</td>
+<td>12</td>
+<td>78</td>
+<td>Cochoapa el Grande</td>
+<td>Guerrero</td>
+<td>...</td>
+<td>Muy Baja</td>
+<td>99.999925</td>
+<td>Muy Alta</td>
+<td>1.32</td>
+<td>Muy Baja</td>
+</tr>
+</tbody>
+</table>
+
+<p>10 rows × 21 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Municipios en resumen_municipal: 2,478</code></pre>
+</div>
+</div>
+</section>
+<section id="verificación-de-la-transformación" class="level2">
+<h2 class="anchored" data-anchor-id="verificación-de-la-transformación">Verificación de la transformación</h2>
+<div id="cell-fig-serie-2016" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>pct_quincenal <span class="op">=</span> (df_analitico.groupby(<span class="st">"fecha"</span>)[<span class="st">"intensidad"</span>]</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">apply</span>(<span class="kw">lambda</span> s: (s <span class="op">&gt;</span> <span class="dv">0</span>).mean() <span class="op">*</span> <span class="dv">100</span>))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>ax.plot(pct_quincenal.index, pct_quincenal.values, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Fecha"</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"</span><span class="sc">% d</span><span class="st">e municipios en sequía"</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-serie-2016" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -697,18 +1112,18 @@ Filas en df_analitico (2016+): 634,368</code></pre>
 <img src="01-preparacion_datos_files/figure-html/fig-serie-2016-output-1.png" width="664" height="470" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-serie-2016-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Porcentaje de municipios en sequía (D0+), quincenal, 2016-2026
+Figure&nbsp;3: Porcentaje de municipios en sequía (D0+), quincenal, 2016-2026
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>display(df_analitico[<span class="st">"intensidad_desc"</span>].value_counts().rename(<span class="st">"frecuencia"</span>).to_frame())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>display(df_analitico[<span class="st">"intensidad_desc"</span>].value_counts().rename(<span class="st">"frecuencia"</span>).to_frame())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="tbl-distribucion" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="13">
+<div id="tbl-distribucion" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="17">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-distribucion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Distribución de categorías en el dataset analítico (2016+)
@@ -766,13 +1181,14 @@ Table&nbsp;1: Distribución de categorías en el dataset analítico (2016+)
 </section>
 <section id="guardado-de-datos-limpios" class="level2">
 <h2 class="anchored" data-anchor-id="guardado-de-datos-limpios">Guardado de datos limpios</h2>
-<div id="guardado" class="cell" data-execution_count="14">
+<div id="guardado" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_historico.to_parquet(<span class="st">"../data/processed/sequia_historico.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_analitico.to_parquet(<span class="st">"../data/processed/sequia_analitico_2016.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Archivos guardados en data/processed/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_historico.to_parquet(<span class="st">"../data/processed/sequia_historico.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>df_analitico.to_parquet(<span class="st">"../data/processed/sequia_analitico_2016.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>resumen_municipal.to_parquet(<span class="st">"../data/processed/resumen_municipal.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Archivos guardados en data/processed/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Archivos guardados en data/processed/</code></pre>
@@ -787,8 +1203,10 @@ Table&nbsp;1: Distribución de categorías en el dataset analítico (2016+)
 <li><strong>Cambio metodológico en 2016</strong> (umbral de 40% de superficie → intensidad máxima observada): es un cambio de <em>definición</em>, no solo de frecuencia, y no puede corregirse re-muestreando. Se optó por <strong>recortar el dataset analítico a partir de 2016</strong> para garantizar comparabilidad interna, conservando la serie completa aparte solo para contexto histórico.</li>
 <li><strong>Formato ancho → largo</strong>: una sola columna <code>fecha</code> por municipio-periodo (<code>df_historico</code> y <code>df_analitico</code>).</li>
 <li><strong>Severidad ordinal</strong> D0–D4 codificada 1–5, con etiqueta descriptiva completa (<code>intensidad_desc</code>).</li>
+<li><strong>Vulnerabilidad ante sequía</strong> (ambiental, social, económica; PRONACOSE/ CONAGUA, metodología IPCC 2007) se integra vía <code>CVE_CONCATENADA</code>. Cobertura de 2,463 de 2,478 municipios (99.4%); los faltantes son municipios de creación reciente, posteriores al cálculo del índice, y quedan como <code>NaN</code>.</li>
+<li><strong>Resumen por municipio</strong> (<code>resumen_municipal</code>): frecuencia, intensidad media/máxima y persistencia (racha más larga en sequía) de 2016 a la fecha, combinado con las tres dimensiones de vulnerabilidad — listo como insumo directo para el clustering territorial.</li>
 </ol>
-<p>Con esto, <code>data/processed/sequia_analitico_2016.parquet</code> queda listo como insumo principal para el análisis exploratorio y el modelado; <code>sequia_historico.parquet</code> queda disponible únicamente para gráficas de contexto de largo plazo.</p>
+<p>Con esto, <code>data/processed/sequia_analitico_2016.parquet</code> queda listo como insumo principal para el análisis exploratorio a nivel municipio-quincena; <code>resumen_municipal.parquet</code> es el insumo para el clustering territorial (peligro + vulnerabilidad); <code>sequia_historico.parquet</code> queda disponible únicamente para gráficas de contexto de largo plazo.</p>
 
 
 </section>

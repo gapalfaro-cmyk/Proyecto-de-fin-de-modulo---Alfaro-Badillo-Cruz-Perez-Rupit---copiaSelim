@@ -16,10 +16,12 @@ México enfrenta un escenario crítico de estrés hídrico. Entender cómo se di
 
 - ¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)?
 - ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)?
-- ¿Pueden agruparse los municipios en clusters territoriales con patrones temporales de severidad similares?
+- ¿Se pueden indenfificar regiones o municipios con patronces similares?
+- ¿Qúe patrones de vulnerabilidad existen?
 
-## Hipótesis
-Los municipios del norte y centro-norte de México (zonas áridas y semiáridas) presentan mayor frecuencia y persistencia de sequía que los del sur y sureste, y estos patrones son suficientemente consistentes en el tiempo como para formar agrupaciones territoriales coherentes geográficamente (no solo estadísticamente).
+## Información disponible
+
+
 
 
 ---

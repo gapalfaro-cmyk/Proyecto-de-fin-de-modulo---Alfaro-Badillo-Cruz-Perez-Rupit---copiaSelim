@@ -277,6 +277,127 @@ display(df_analitico.head())
 print(f"\nFilas en df_analitico (2016+): {len(df_analitico):,}")
 ```
 
+## Datos complementarios: vulnerabilidad ante sequía
+
+Además del Monitor de Sequía (que mide el **peligro**: dónde y con qué
+severidad ocurre la sequía), se incorporan tres índices de **vulnerabilidad**
+municipal calculados por PRONACOSE/CONAGUA con metodología IPCC (2007):
+ambiental, social y económica. Esto permite pasar de un análisis de solo
+"dónde hay sequía" a uno de "dónde importa más" (riesgo = peligro ×
+vulnerabilidad).
+
+```{python}
+#| label: carga-vulnerabilidad
+
+# Ajustar rutas según la ubicación en el repositorio
+RUTA_VULN_AMBIENTAL = "../data/raw/vulnerabilidad_ambiental_municipal.csv"
+RUTA_VULN_SOCIAL = "../data/raw/vulnerabilidad_social_municipal.csv"
+RUTA_VULN_ECONOMICA = "../data/raw/vulnerabilidad_economica_municipal.csv"
+
+vuln_amb = pd.read_csv(RUTA_VULN_AMBIENTAL)
+vuln_soc = pd.read_csv(RUTA_VULN_SOCIAL)
+vuln_eco = pd.read_csv(RUTA_VULN_ECONOMICA)
+
+for nombre, d in [("ambiental", vuln_amb), ("social", vuln_soc), ("económica", vuln_eco)]:
+    dup = d["cve_concatenada"].duplicated().sum()
+    nulos = d.isna().sum().sum()
+    print(f"{nombre}: {d.shape[0]} municipios, duplicados={dup}, nulos={nulos}")
+```
+
+```{python}
+#| label: cobertura-vulnerabilidad
+
+municipios_sequia = set(df["CVE_CONCATENADA"])
+municipios_vuln = set(vuln_amb["cve_concatenada"])
+faltantes = df[~df["CVE_CONCATENADA"].isin(municipios_vuln)][["CVE_CONCATENADA", "NOMBRE_MUN", "ENTIDAD"]]
+
+print(f"Municipios con dato de vulnerabilidad: {len(municipios_vuln)} de {len(municipios_sequia)}")
+print(f"Municipios sin dato de vulnerabilidad ({len(faltantes)}):")
+display(faltantes)
+```
+
+Los municipios sin dato de vulnerabilidad son, casi todos, municipios de
+creación reciente (marcados con `**`/`***` en `NOMBRE_MUN`), posteriores al
+cálculo del índice. Representan menos del 1% del total y se documentan como
+limitación: para esos municipios, las variables de vulnerabilidad quedarán
+como `NaN` tras el merge.
+
+```{python}
+#| label: fig-distribucion-vulnerabilidad
+#| fig-cap: "Distribución de categorías de vulnerabilidad por dimensión"
+
+orden_cat = ["Muy Baja", "Baja", "Media", "Alta", "Muy Alta"]
+fig, axes = plt.subplots(1, 3, figsize=(10, 3.5), sharey=True)
+for ax, nombre, d in zip(axes, ["Ambiental", "Social", "Económica"], [vuln_amb, vuln_soc, vuln_eco]):
+    conteo = d["t_prob"].value_counts().reindex(orden_cat)
+    ax.bar(orden_cat, conteo.values)
+    ax.set_title(nombre)
+    ax.tick_params(axis="x", rotation=45)
+plt.tight_layout()
+plt.show()
+```
+
+```{python}
+#| label: merge-vulnerabilidad
+
+vuln = (vuln_amb.rename(columns={"probabilidad": "vulnerabilidad_ambiental",
+                                   "t_prob": "vulnerabilidad_ambiental_cat"})
+                 .merge(vuln_soc.rename(columns={"probabilidad": "vulnerabilidad_social",
+                                                   "t_prob": "vulnerabilidad_social_cat"})
+                                [["cve_concatenada", "vulnerabilidad_social", "vulnerabilidad_social_cat"]],
+                        on="cve_concatenada")
+                 .merge(vuln_eco.rename(columns={"probabilidad": "vulnerabilidad_economica",
+                                                   "t_prob": "vulnerabilidad_economica_cat"})
+                                [["cve_concatenada", "vulnerabilidad_economica", "vulnerabilidad_economica_cat"]],
+                        on="cve_concatenada")
+                 .rename(columns={"cve_concatenada": "CVE_CONCATENADA",
+                                   "cve_rha": "CVE_RHA_VULN", "nom_rha": "NOM_RHA_VULN"}))
+
+df_analitico = df_analitico.merge(vuln, on="CVE_CONCATENADA", how="left")
+
+print(f"Filas en df_analitico tras el merge: {len(df_analitico):,}")
+print(f"Municipios sin vulnerabilidad tras el merge (NaN): "
+      f"{df_analitico.loc[df_analitico['vulnerabilidad_ambiental'].isna(), 'CVE_CONCATENADA'].nunique()}")
+```
+
+## Resumen por municipio (hazard + vulnerabilidad, listo para clustering)
+
+Se agrega el dataset analítico a nivel municipio: frecuencia de sequía (%
+de quincenas en D0+), intensidad media y máxima, y la racha más larga de
+quincenas consecutivas en sequía (persistencia), y se une con las tres
+dimensiones de vulnerabilidad.
+
+```{python}
+#| label: resumen-municipal
+
+df_analitico["en_sequia"] = df_analitico["intensidad"] > 0
+
+def racha_maxima(serie_bool: pd.Series) -> int:
+    """Longitud de la racha más larga de True consecutivos."""
+    grupos = (serie_bool != serie_bool.shift()).cumsum()
+    tam_grupo = serie_bool.groupby(grupos).transform("size")
+    return int((tam_grupo * serie_bool).max())
+
+resumen_municipal = (
+    df_analitico.groupby(columnas_id, dropna=False)
+    .agg(frecuencia_sequia_pct=("en_sequia", lambda s: s.mean() * 100),
+         intensidad_media=("intensidad", "mean"),
+         intensidad_max=("intensidad", "max"))
+    .reset_index()
+)
+
+rachas = (df_analitico.sort_values("fecha")
+                       .groupby("CVE_CONCATENADA")["en_sequia"]
+                       .apply(racha_maxima)
+                       .rename("racha_maxima_quincenas"))
+
+resumen_municipal = resumen_municipal.merge(rachas, on="CVE_CONCATENADA")
+resumen_municipal = resumen_municipal.merge(vuln, on="CVE_CONCATENADA", how="left")
+
+display(resumen_municipal.sort_values("frecuencia_sequia_pct", ascending=False).head(10))
+print(f"\nMunicipios en resumen_municipal: {len(resumen_municipal):,}")
+```
+
 ## Verificación de la transformación
 
 ```{python}
@@ -309,6 +430,7 @@ display(df_analitico["intensidad_desc"].value_counts().rename("frecuencia").to_f
 
 df_historico.to_parquet("../data/processed/sequia_historico.parquet", index=False)
 df_analitico.to_parquet("../data/processed/sequia_analitico_2016.parquet", index=False)
+resumen_municipal.to_parquet("../data/processed/resumen_municipal.parquet", index=False)
 
 print("Archivos guardados en data/processed/")
 ```
@@ -330,7 +452,17 @@ print("Archivos guardados en data/processed/")
    municipio-periodo (`df_historico` y `df_analitico`).
 5. **Severidad ordinal** D0–D4 codificada 1–5, con etiqueta descriptiva
    completa (`intensidad_desc`).
+6. **Vulnerabilidad ante sequía** (ambiental, social, económica; PRONACOSE/
+   CONAGUA, metodología IPCC 2007) se integra vía `CVE_CONCATENADA`. Cobertura
+   de 2,463 de 2,478 municipios (99.4%); los faltantes son municipios de
+   creación reciente, posteriores al cálculo del índice, y quedan como `NaN`.
+7. **Resumen por municipio** (`resumen_municipal`): frecuencia, intensidad
+   media/máxima y persistencia (racha más larga en sequía) de 2016 a la
+   fecha, combinado con las tres dimensiones de vulnerabilidad — listo como
+   insumo directo para el clustering territorial.
 
 Con esto, `data/processed/sequia_analitico_2016.parquet` queda listo como
-insumo principal para el análisis exploratorio y el modelado; `sequia_historico.parquet`
-queda disponible únicamente para gráficas de contexto de largo plazo.
+insumo principal para el análisis exploratorio a nivel municipio-quincena;
+`resumen_municipal.parquet` es el insumo para el clustering territorial
+(peligro + vulnerabilidad); `sequia_historico.parquet` queda disponible
+únicamente para gráficas de contexto de largo plazo.
