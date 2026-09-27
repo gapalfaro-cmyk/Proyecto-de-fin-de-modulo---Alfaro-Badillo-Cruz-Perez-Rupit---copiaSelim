@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
@@ -107,6 +107,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -167,6 +170,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#diccionario-de-datos" id="toc-diccionario-de-datos" class="nav-link active" data-scroll-target="#diccionario-de-datos">Diccionario de Datos</a></li>
   <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#carga-y-estructura-de-los-datos" id="toc-carga-y-estructura-de-los-datos" class="nav-link" data-scroll-target="#carga-y-estructura-de-los-datos">Carga y estructura de los datos</a></li>
+  <li><a href="#verificación-de-integridad" id="toc-verificación-de-integridad" class="nav-link" data-scroll-target="#verificación-de-integridad">Verificación de integridad</a></li>
+  <li><a href="#de-nombres-de-columna-a-fechas-reales" id="toc-de-nombres-de-columna-a-fechas-reales" class="nav-link" data-scroll-target="#de-nombres-de-columna-a-fechas-reales">De nombres de columna a fechas reales</a></li>
+  <li><a href="#cambio-metodológico-en-2016-por-qué-no-basta-con-re-muestrear" id="toc-cambio-metodológico-en-2016-por-qué-no-basta-con-re-muestrear" class="nav-link" data-scroll-target="#cambio-metodológico-en-2016-por-qué-no-basta-con-re-muestrear">Cambio metodológico en 2016: por qué no basta con re-muestrear</a></li>
+  <li><a href="#codificación-de-la-intensidad-de-sequía" id="toc-codificación-de-la-intensidad-de-sequía" class="nav-link" data-scroll-target="#codificación-de-la-intensidad-de-sequía">Codificación de la intensidad de sequía</a></li>
+  <li><a href="#dataset-histórico-completo-formato-largo-solo-para-contexto" id="toc-dataset-histórico-completo-formato-largo-solo-para-contexto" class="nav-link" data-scroll-target="#dataset-histórico-completo-formato-largo-solo-para-contexto">Dataset histórico completo (formato largo, solo para contexto)</a></li>
+  <li><a href="#dataset-analítico-2016-para-eda-y-modelado" id="toc-dataset-analítico-2016-para-eda-y-modelado" class="nav-link" data-scroll-target="#dataset-analítico-2016-para-eda-y-modelado">Dataset analítico 2016+ (para EDA y modelado)</a></li>
+  <li><a href="#verificación-de-la-transformación" id="toc-verificación-de-la-transformación" class="nav-link" data-scroll-target="#verificación-de-la-transformación">Verificación de la transformación</a></li>
+  <li><a href="#guardado-de-datos-limpios" id="toc-guardado-de-datos-limpios" class="nav-link" data-scroll-target="#guardado-de-datos-limpios">Guardado de datos limpios</a></li>
+  <li><a href="#resumen-de-decisiones-de-limpieza" id="toc-resumen-de-decisiones-de-limpieza" class="nav-link" data-scroll-target="#resumen-de-decisiones-de-limpieza">Resumen de decisiones de limpieza</a></li>
   </ul>
 </nav>
     </div>
@@ -216,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajustar esta ruta según el archivo del equipo.</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Si usan la versión .xlsx, cambien esta línea por:</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   df = pd.read_excel("data/raw/MunicipiosSequia.xlsx")</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>RUTA_DATOS <span class="op">=</span> <span class="st">"data/raw/MunicipiosSequiaCSV.csv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>RUTA_DATOS <span class="op">=</span> <span class="st">"../data/raw/MunicipiosSequiaCSV.csv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <div class="grid">
@@ -246,6 +259,535 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
+</section>
+<section id="carga-y-estructura-de-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="carga-y-estructura-de-los-datos">Carga y estructura de los datos</h2>
+<div id="carga" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(RUTA_DATOS, encoding<span class="op">=</span><span class="st">"utf-8-sig"</span>, low_memory<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df.columns <span class="op">=</span> [c.strip() <span class="cf">for</span> c <span class="kw">in</span> df.columns]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Columnas de identificación del municipio (no son fechas)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>columnas_id <span class="op">=</span> [</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CVE_CONCATENADA"</span>, <span class="st">"CVE_ENT"</span>, <span class="st">"CVE_MUN"</span>, <span class="st">"NOMBRE_MUN"</span>, <span class="st">"ENTIDAD"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ORG_CUENCA*"</span>, <span class="st">"CLV_OC"</span>, <span class="st">"CON_CUENCA"</span>, <span class="st">"CVE_CONC"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>columnas_fecha <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df.columns <span class="cf">if</span> c <span class="kw">not</span> <span class="kw">in</span> columnas_id]</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Municipios: </span><span class="sc">{</span>df<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">:,}</span><span class="ss">"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columnas de identificación: </span><span class="sc">{</span><span class="bu">len</span>(columnas_id)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columnas de fecha (periodos publicados): </span><span class="sc">{</span><span class="bu">len</span>(columnas_fecha)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Entidades federativas: </span><span class="sc">{</span>df[<span class="st">'ENTIDAD'</span>]<span class="sc">.</span>nunique()<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Municipios: 2,478
+Columnas de identificación: 9
+Columnas de fecha (periodos publicados): 435
+Entidades federativas: 32</code></pre>
+</div>
+</div>
+</section>
+<section id="verificación-de-integridad" class="level2">
+<h2 class="anchored" data-anchor-id="verificación-de-integridad">Verificación de integridad</h2>
+<div id="integridad" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>duplicados <span class="op">=</span> df[<span class="st">"CVE_CONCATENADA"</span>].duplicated().<span class="bu">sum</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>nulos_id <span class="op">=</span> df[columnas_id].isna().<span class="bu">sum</span>().<span class="bu">sum</span>()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Claves de municipio duplicadas: </span><span class="sc">{</span>duplicados<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Valores nulos en columnas de identificación: </span><span class="sc">{</span>nulos_id<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> duplicados <span class="op">==</span> <span class="dv">0</span>, <span class="st">"Hay CVE_CONCATENADA duplicadas"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> nulos_id <span class="op">==</span> <span class="dv">0</span>, <span class="st">"Hay nulos en columnas de identificación"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Claves de municipio duplicadas: 0
+Valores nulos en columnas de identificación: 0</code></pre>
+</div>
+</div>
+<p>No se encontraron duplicados ni valores faltantes en las llaves de municipio, entidad o cuenca.</p>
+</section>
+<section id="de-nombres-de-columna-a-fechas-reales" class="level2">
+<h2 class="anchored" data-anchor-id="de-nombres-de-columna-a-fechas-reales">De nombres de columna a fechas reales</h2>
+<p>Los nombres de columna vienen como texto en español (<code>31-ene-03</code>, <code>15-sep-26</code>), que <code>pandas</code> no reconoce de forma nativa. Se parsean manualmente para poder analizar la cobertura temporal.</p>
+<div id="fn-parseo" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>MESES <span class="op">=</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ene"</span>: <span class="dv">1</span>, <span class="st">"feb"</span>: <span class="dv">2</span>, <span class="st">"mar"</span>: <span class="dv">3</span>, <span class="st">"abr"</span>: <span class="dv">4</span>, <span class="st">"may"</span>: <span class="dv">5</span>, <span class="st">"jun"</span>: <span class="dv">6</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"jul"</span>: <span class="dv">7</span>, <span class="st">"ago"</span>: <span class="dv">8</span>, <span class="st">"sep"</span>: <span class="dv">9</span>, <span class="st">"oct"</span>: <span class="dv">10</span>, <span class="st">"nov"</span>: <span class="dv">11</span>, <span class="st">"dic"</span>: <span class="dv">12</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> parsear_fecha(col_name: <span class="bu">str</span>) <span class="op">-&gt;</span> pd.Timestamp:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Convierte 'dd-mmm-aa' (español) a Timestamp, p.ej. '15-sep-26' -&gt; 2026-09-15."""</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    dia, mes_abr, anio2 <span class="op">=</span> col_name.split(<span class="st">"-"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Timestamp(year<span class="op">=</span><span class="dv">2000</span> <span class="op">+</span> <span class="bu">int</span>(anio2), month<span class="op">=</span>MESES[mes_abr.lower()], day<span class="op">=</span><span class="bu">int</span>(dia))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div id="cell-fig-cobertura-anual" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fechas_cols <span class="op">=</span> pd.Series(columnas_fecha).<span class="bu">map</span>(parsear_fecha)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>conteo_anual <span class="op">=</span> fechas_cols.dt.year.value_counts().sort_index()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ax.bar(conteo_anual.index.astype(<span class="bu">str</span>), conteo_anual.values)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Año"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Cortes de publicación"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">"x"</span>, rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-cobertura-anual" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cobertura-anual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-preparacion_datos_files/figure-html/fig-cobertura-anual-output-1.png" width="663" height="473" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cobertura-anual-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Número de cortes de publicación del monitor por año
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Se confirma lo esperado: <strong>12 cortes por año</strong> entre 2003 y 2013 (mensual) y <strong>~24 cortes por año</strong> desde 2014 (quincenal). Este cambio de frecuencia por sí solo ya complica comparar el periodo completo, pero hay un problema más importante que el de frecuencia, documentado a continuación.</p>
+</section>
+<section id="cambio-metodológico-en-2016-por-qué-no-basta-con-re-muestrear" class="level2">
+<h2 class="anchored" data-anchor-id="cambio-metodológico-en-2016-por-qué-no-basta-con-re-muestrear">Cambio metodológico en 2016: por qué no basta con re-muestrear</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Hallazgo clave de la documentación de la fuente
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Según la nota metodológica que acompaña al dataset, la forma de asignar la categoría de sequía a un municipio <strong>cambió de definición</strong>, no solo de frecuencia:</p>
+<ul>
+<li><strong>2003–2015</strong>: se asignaba una categoría (D0 a D4) al municipio solo cuando esa condición cubría <strong>al menos 40% de su superficie</strong>.</li>
+<li><strong>2016 en adelante</strong>: se asigna la categoría de <strong>mayor intensidad observada en cualquier punto</strong> del municipio, sin importar qué porcentaje de su superficie cubre.</li>
+</ul>
+<p>Esto significa que un mismo valor “D2” <strong>no es comparable</strong> antes y después de 2016: el criterio de 2003–2015 es más conservador (requiere afectación extendida) y el de 2016+ es más sensible (basta un punto afectado). Re-muestrear la frecuencia (mensual → quincenal) no resuelve este problema de fondo.</p>
+</div>
+</div>
+<p><strong>Decisión de limpieza:</strong> para el dataset analítico que alimenta el EDA y el modelado, se <strong>recorta la serie a partir de enero de 2016</strong>, donde la definición y la frecuencia (quincenal) son consistentes en todo el rango. El costo de esta decisión es perder 13 años de historia (2003–2015); a cambio se gana un dataset internamente comparable, que es indispensable para cualquier análisis de tendencia, clustering o modelado serio. La serie completa 2003–2026 se conserva aparte (<code>df_historico</code>) únicamente para gráficas de contexto de largo plazo, dejando explícita esta salvedad cada vez que se use.</p>
+<div id="cols-2016" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fecha_por_columna <span class="op">=</span> <span class="bu">dict</span>(<span class="bu">zip</span>(columnas_fecha, fechas_cols))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>columnas_2016 <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> columnas_fecha <span class="cf">if</span> fecha_por_columna[c] <span class="op">&gt;=</span> pd.Timestamp(<span class="st">"2016-01-01"</span>)]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columnas totales: </span><span class="sc">{</span><span class="bu">len</span>(columnas_fecha)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columnas a partir de 2016 (dataset analítico): </span><span class="sc">{</span><span class="bu">len</span>(columnas_2016)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columnas descartadas (2003-2015, dataset histórico únicamente): "</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(columnas_fecha) <span class="op">-</span> <span class="bu">len</span>(columnas_2016)<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Columnas totales: 435
+Columnas a partir de 2016 (dataset analítico): 256
+Columnas descartadas (2003-2015, dataset histórico únicamente): 179</code></pre>
+</div>
+</div>
+</section>
+<section id="codificación-de-la-intensidad-de-sequía" class="level2">
+<h2 class="anchored" data-anchor-id="codificación-de-la-intensidad-de-sequía">Codificación de la intensidad de sequía</h2>
+<div id="mapas-intensidad" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>intensidad_map <span class="op">=</span> {np.nan: <span class="dv">0</span>, <span class="st">"D0"</span>: <span class="dv">1</span>, <span class="st">"D1"</span>: <span class="dv">2</span>, <span class="st">"D2"</span>: <span class="dv">3</span>, <span class="st">"D3"</span>: <span class="dv">4</span>, <span class="st">"D4"</span>: <span class="dv">5</span>}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>intensidad_labels <span class="op">=</span> {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span>: <span class="st">"Sin sequía"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: <span class="st">"D0 Anormalmente seco"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: <span class="st">"D1 Sequía moderada"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">"D2 Sequía severa"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>: <span class="st">"D3 Sequía extrema"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>: <span class="st">"D4 Sequía excepcional"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>Al igual que en la exploración inicial, una celda vacía se interpreta como “sin sequía” (nivel 0), <strong>excepto</strong> en fechas donde el 100% de los municipios está vacío, que se tratan como hueco real de publicación del monitor y se dejan como <code>NaN</code> en vez de 0.</p>
+<div id="huecos-publicacion" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>frac_vacio <span class="op">=</span> df[columnas_fecha].isna().mean()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>huecos_publicacion <span class="op">=</span> frac_vacio[frac_vacio <span class="op">==</span> <span class="fl">1.0</span>].index.tolist()</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Fechas con 100% de celdas vacías (hueco real de publicación): </span><span class="sc">{</span>huecos_publicacion<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Fechas con 100% de celdas vacías (hueco real de publicación): ['31-ago-03', '29-feb-04']</code></pre>
+</div>
+</div>
+</section>
+<section id="dataset-histórico-completo-formato-largo-solo-para-contexto" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-histórico-completo-formato-largo-solo-para-contexto">Dataset histórico completo (formato largo, solo para contexto)</h2>
+<div id="cell-df-historico" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_historico <span class="op">=</span> df.melt(id_vars<span class="op">=</span>columnas_id, value_vars<span class="op">=</span>columnas_fecha,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        var_name<span class="op">=</span><span class="st">"fecha_str"</span>, value_name<span class="op">=</span><span class="st">"clasificacion_sequia"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>df_historico[<span class="st">"fecha"</span>] <span class="op">=</span> df_historico[<span class="st">"fecha_str"</span>].<span class="bu">map</span>(parsear_fecha)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>df_historico[<span class="st">"es_hueco_publicacion"</span>] <span class="op">=</span> df_historico[<span class="st">"fecha_str"</span>].isin(huecos_publicacion)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df_historico[<span class="st">"intensidad"</span>] <span class="op">=</span> df_historico[<span class="st">"clasificacion_sequia"</span>].<span class="bu">map</span>(intensidad_map)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>df_historico.loc[df_historico[<span class="st">"es_hueco_publicacion"</span>], <span class="st">"intensidad"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>df_historico[<span class="st">"intensidad_desc"</span>] <span class="op">=</span> df_historico[<span class="st">"intensidad"</span>].<span class="bu">map</span>(intensidad_labels)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>df_historico <span class="op">=</span> (df_historico.drop(columns<span class="op">=</span><span class="st">"fecha_str"</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>                             .sort_values([<span class="st">"CVE_CONCATENADA"</span>, <span class="st">"fecha"</span>])</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>                             .reset_index(drop<span class="op">=</span><span class="va">True</span>))</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>display(df_historico.head())</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Filas en df_historico: </span><span class="sc">{</span><span class="bu">len</span>(df_historico)<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="df-historico" class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CVE_CONCATENADA</th>
+<th data-quarto-table-cell-role="th">CVE_ENT</th>
+<th data-quarto-table-cell-role="th">CVE_MUN</th>
+<th data-quarto-table-cell-role="th">NOMBRE_MUN</th>
+<th data-quarto-table-cell-role="th">ENTIDAD</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">clasificacion_sequia</th>
+<th data-quarto-table-cell-role="th">fecha</th>
+<th data-quarto-table-cell-role="th">es_hueco_publicacion</th>
+<th data-quarto-table-cell-role="th">intensidad</th>
+<th data-quarto-table-cell-role="th">intensidad_desc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>NaN</td>
+<td>2003-01-31</td>
+<td>False</td>
+<td>0.0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>NaN</td>
+<td>2003-02-28</td>
+<td>False</td>
+<td>0.0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>NaN</td>
+<td>2003-03-31</td>
+<td>False</td>
+<td>0.0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>NaN</td>
+<td>2003-04-30</td>
+<td>False</td>
+<td>0.0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>NaN</td>
+<td>2003-05-31</td>
+<td>False</td>
+<td>0.0</td>
+<td>Sin sequía</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 14 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Filas en df_historico: 1,077,930</code></pre>
+</div>
+</div>
+</section>
+<section id="dataset-analítico-2016-para-eda-y-modelado" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-analítico-2016-para-eda-y-modelado">Dataset analítico 2016+ (para EDA y modelado)</h2>
+<p>Se parte de las columnas 2016 en adelante y se pivotea a una sola columna <code>fecha</code>, exactamente como en la exploración inicial del equipo, con las etiquetas de intensidad ya resueltas.</p>
+<div id="cell-df-analitico" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_eda <span class="op">=</span> df[columnas_id <span class="op">+</span> columnas_2016].copy()</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>df_clasif_municipio <span class="op">=</span> df_eda.melt(id_vars<span class="op">=</span>columnas_id, var_name<span class="op">=</span><span class="st">"fecha_str"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                   value_name<span class="op">=</span><span class="st">"clasificacion_sequia"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df_clasif_municipio[<span class="st">"fecha"</span>] <span class="op">=</span> df_clasif_municipio[<span class="st">"fecha_str"</span>].<span class="bu">map</span>(parsear_fecha)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>df_clasif_municipio <span class="op">=</span> df_clasif_municipio.drop(columns<span class="op">=</span><span class="st">"fecha_str"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>df_clasif_municipio[<span class="st">"intensidad"</span>] <span class="op">=</span> df_clasif_municipio[<span class="st">"clasificacion_sequia"</span>].<span class="bu">map</span>(intensidad_map)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>df_clasif_municipio[<span class="st">"intensidad_desc"</span>] <span class="op">=</span> df_clasif_municipio[<span class="st">"intensidad"</span>].<span class="bu">map</span>(intensidad_labels)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>df_analitico <span class="op">=</span> df_clasif_municipio.sort_values([<span class="st">"CVE_CONCATENADA"</span>, <span class="st">"fecha"</span>]).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>display(df_analitico.head())</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Filas en df_analitico (2016+): </span><span class="sc">{</span><span class="bu">len</span>(df_analitico)<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="df-analitico" class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">CVE_CONCATENADA</th>
+<th data-quarto-table-cell-role="th">CVE_ENT</th>
+<th data-quarto-table-cell-role="th">CVE_MUN</th>
+<th data-quarto-table-cell-role="th">NOMBRE_MUN</th>
+<th data-quarto-table-cell-role="th">ENTIDAD</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">CVE_CONC</th>
+<th data-quarto-table-cell-role="th">clasificacion_sequia</th>
+<th data-quarto-table-cell-role="th">fecha</th>
+<th data-quarto-table-cell-role="th">intensidad</th>
+<th data-quarto-table-cell-role="th">intensidad_desc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>16</td>
+<td>NaN</td>
+<td>2016-01-15</td>
+<td>0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>16</td>
+<td>NaN</td>
+<td>2016-01-31</td>
+<td>0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>16</td>
+<td>NaN</td>
+<td>2016-02-15</td>
+<td>0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>16</td>
+<td>NaN</td>
+<td>2016-02-29</td>
+<td>0</td>
+<td>Sin sequía</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>1001</td>
+<td>1</td>
+<td>1</td>
+<td>Aguascalientes</td>
+<td>Aguascalientes</td>
+<td>...</td>
+<td>16</td>
+<td>NaN</td>
+<td>2016-03-15</td>
+<td>0</td>
+<td>Sin sequía</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 13 columns</p>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Filas en df_analitico (2016+): 634,368</code></pre>
+</div>
+</div>
+</section>
+<section id="verificación-de-la-transformación" class="level2">
+<h2 class="anchored" data-anchor-id="verificación-de-la-transformación">Verificación de la transformación</h2>
+<div id="cell-fig-serie-2016" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>pct_quincenal <span class="op">=</span> (df_analitico.groupby(<span class="st">"fecha"</span>)[<span class="st">"intensidad"</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                              .<span class="bu">apply</span>(<span class="kw">lambda</span> s: (s <span class="op">&gt;</span> <span class="dv">0</span>).mean() <span class="op">*</span> <span class="dv">100</span>))</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>ax.plot(pct_quincenal.index, pct_quincenal.values, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Fecha"</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"</span><span class="sc">% d</span><span class="st">e municipios en sequía"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>, <span class="dv">100</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-serie-2016" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-serie-2016-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="01-preparacion_datos_files/figure-html/fig-serie-2016-output-1.png" width="664" height="470" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-serie-2016-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Porcentaje de municipios en sequía (D0+), quincenal, 2016-2026
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>display(df_analitico[<span class="st">"intensidad_desc"</span>].value_counts().rename(<span class="st">"frecuencia"</span>).to_frame())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div id="tbl-distribucion" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="12">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-distribucion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Distribución de categorías en el dataset analítico (2016+)
+</figcaption>
+<div aria-describedby="tbl-distribucion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe cell caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">frecuencia</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">intensidad_desc</th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Sin sequía</th>
+<td>318571</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">D0 Anormalmente seco</th>
+<td>163950</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">D1 Sequía moderada</th>
+<td>86342</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">D2 Sequía severa</th>
+<td>41673</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">D3 Sequía extrema</th>
+<td>19248</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">D4 Sequía excepcional</th>
+<td>4584</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="guardado-de-datos-limpios" class="level2">
+<h2 class="anchored" data-anchor-id="guardado-de-datos-limpios">Guardado de datos limpios</h2>
+<div id="guardado" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_historico.to_parquet(<span class="st">"../data/processed/sequia_historico.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>df_analitico.to_parquet(<span class="st">"../data/processed/sequia_analitico_2016.parquet"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Archivos guardados en data/processed/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Archivos guardados en data/processed/</code></pre>
+</div>
+</div>
+</section>
+<section id="resumen-de-decisiones-de-limpieza" class="level2">
+<h2 class="anchored" data-anchor-id="resumen-de-decisiones-de-limpieza">Resumen de decisiones de limpieza</h2>
+<ol type="1">
+<li><strong>Llave de municipio</strong> (<code>CVE_CONCATENADA</code>): verificada como única, sin nulos en columnas de identificación.</li>
+<li><strong>Celda vacía → “sin sequía”</strong> (nivel ordinal 0), <em>excepto</em> en fechas donde el 100% de los municipios está vacío, tratadas como hueco real de publicación del monitor (<code>NaN</code>).</li>
+<li><strong>Cambio metodológico en 2016</strong> (umbral de 40% de superficie → intensidad máxima observada): es un cambio de <em>definición</em>, no solo de frecuencia, y no puede corregirse re-muestreando. Se optó por <strong>recortar el dataset analítico a partir de 2016</strong> para garantizar comparabilidad interna, conservando la serie completa aparte solo para contexto histórico.</li>
+<li><strong>Formato ancho → largo</strong>: una sola columna <code>fecha</code> por municipio-periodo (<code>df_historico</code> y <code>df_analitico</code>).</li>
+<li><strong>Severidad ordinal</strong> D0–D4 codificada 1–5, con etiqueta descriptiva completa (<code>intensidad_desc</code>).</li>
+</ol>
+<p>Con esto, <code>data/processed/sequia_analitico_2016.parquet</code> queda listo como insumo principal para el análisis exploratorio y el modelado; <code>sequia_historico.parquet</code> queda disponible únicamente para gráficas de contexto de largo plazo.</p>
 
 
 </section>
