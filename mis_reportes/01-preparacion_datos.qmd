@@ -64,14 +64,12 @@ import numpy as np
 import warnings
 warnings.filterwarnings('ignore')
 
-# 1. Cargar datos
 df = pd.read_csv("../MunicipiosSequiaCSV.csv")
 
-# 2. Separar columnas geográficas de las columnas temporales
 columnas_base = ['CVE_CONCATENADA', 'CVE_ENT', 'CVE_MUN', 'NOMBRE_MUN', 'ENTIDAD', 'ORG_CUENCA*', 'CLV_OC', 'CON_CUENCA', 'CVE_CONC']
 columnas_fecha_crudas = [col for col in df.columns if col not in columnas_base]
 
-# 3. Estandarización de fechas ultrarrápida (Aplicado a nombres de columnas)
+
 meses = {'ene': '01', 'feb': '02', 'mar': '03', 'abr': '04', 'may': '05', 'jun': '06', 
          'jul': '07', 'ago': '08', 'sep': '09', 'oct': '10', 'nov': '11', 'dic': '12'}
 
@@ -85,7 +83,7 @@ def parse_date(date_str):
         except:
             return pd.NaT
 
-# 4. Filtrado temporal ANTES del melt (Ahorra memoria y procesador)
+
 cols_a_conservar = columnas_base.copy()
 mapeo_nombres = {}
 
@@ -97,19 +95,19 @@ for col in columnas_fecha_crudas:
 
 df_filtrado = df[cols_a_conservar].rename(columns=mapeo_nombres)
 
-# 5. Transformar de formato ancho a largo (Melt)
+
 df_long = df_filtrado.melt(id_vars=columnas_base, 
                            var_name='Fecha', 
                            value_name='Categoria_Sequia')
 
 df_long['Fecha'] = pd.to_datetime(df_long['Fecha'])
 
-# 6. Manejo de nulos y creación de índice numérico de severidad
+
 df_long['Categoria_Sequia'] = df_long['Categoria_Sequia'].fillna('Sin Sequía')
 mapa_sequia = {'Sin Sequía': 0, 'D0': 1, 'D1': 2, 'D2': 3, 'D3': 4, 'D4': 5}
 df_long['Nivel_Num'] = df_long['Categoria_Sequia'].map(mapa_sequia)
 
-# 7. Limpiar, ordenar y guardar estado óptimo
+
 df_clean = df_long.sort_values(['CVE_CONCATENADA', 'Fecha']).reset_index(drop=True)
 
 # Guardamos en Parquet para que el EDA temporal cargue instantáneamente
