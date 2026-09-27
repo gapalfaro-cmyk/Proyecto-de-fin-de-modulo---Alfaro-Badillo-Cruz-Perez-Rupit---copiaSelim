@@ -51,7 +51,6 @@ exploratorio y el modelado de las siguientes secciones.
 :::
 
 
-
 ```{python}
 #| label: setup
 
@@ -63,9 +62,7 @@ from IPython.display import display
 
 pd.set_option("display.max_columns", 10)
 
-# Ajustar esta ruta a la ubicación del archivo dentro del repositorio,
-# por ejemplo "data/raw/MunicipiosSequiaCSV.csv"
-RUTA_DATOS = "../MunicipiosSequiaCSV.csv"
+RUTA_DATOS = "../data/raw/MunicipiosSequiaCSV.csv"
 
 ID_COLS = [
     "CVE_CONCATENADA", "CVE_ENT", "CVE_MUN", "NOMBRE_MUN", "ENTIDAD",
@@ -90,16 +87,19 @@ df = pd.read_csv(RUTA_DATOS, encoding="utf-8-sig", low_memory=False)
 df.columns = [c.strip() for c in df.columns]
 
 date_cols = [c for c in df.columns if c not in ID_COLS]
+n_municipios = df.shape[0]
+n_entidades = df["ENTIDAD"].nunique()
+n_fechas = len(date_cols)
 
-print(f"Municipios: {df.shape[0]:,}")
+print(f"Municipios: {n_municipios:,}")
 print(f"Columnas de identificación: {len(ID_COLS)}")
-print(f"Columnas de fecha (periodos publicados): {len(date_cols)}")
-print(f"Entidades federativas: {df['ENTIDAD'].nunique()}")
+print(f"Columnas de fecha (periodos publicados): {n_fechas}")
+print(f"Entidades federativas: {n_entidades}")
 ```
 
-El archivo cubre `{python} df.shape[0]` municipios de las
-`{python} df['ENTIDAD'].nunique()` entidades del país, con
-`{python} len(date_cols)` cortes de tiempo publicados por el monitor.
+El archivo cubre el total de municipios del país (ver salida de la celda
+anterior) distribuidos en las 32 entidades federativas, con más de 400
+cortes de tiempo publicados por el monitor desde 2003.
 
 ## Verificación de integridad
 
@@ -155,9 +155,9 @@ plt.show()
 print(f"Fechas con 100% de celdas vacías (hueco real de publicación): {cols_missing_real}")
 ```
 
-Se identificaron `{python} len(cols_missing_real)` fechas con hueco real de
-publicación (`{python} ", ".join(cols_missing_real)`). El resto de las
-celdas vacías se codifican como "sin sequía".
+Las fechas listadas en la salida de la celda anterior (100% de municipios
+vacíos) se tratan como hueco real de publicación. El resto de las celdas
+vacías se codifican como "sin sequía".
 
 ## Transformación de formato ancho a largo
 
@@ -273,8 +273,8 @@ display(largo.loc[~largo["es_hueco_publicacion"], "categoria"]
 ```{python}
 #| label: guardado
 
-largo.to_parquet("data/processed/sequia_long.parquet", index=False)
-mensual.drop(columns="anio").to_parquet("data/processed/sequia_mensual.parquet", index=False)
+largo.to_parquet("../data/processed/sequia_long.parquet", index=False)
+mensual.drop(columns="anio").to_parquet("../data/processed/sequia_mensual.parquet", index=False)
 
 print("Archivos guardados en data/processed/")
 ```
@@ -297,4 +297,3 @@ print("Archivos guardados en data/processed/")
 Con esto, `data/processed/sequia_long.parquet` y
 `data/processed/sequia_mensual.parquet` quedan listos como insumo para el
 análisis exploratorio (siguiente documento del proyecto).
-
