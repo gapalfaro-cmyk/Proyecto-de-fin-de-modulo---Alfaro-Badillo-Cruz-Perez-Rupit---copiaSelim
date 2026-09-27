@@ -53,7 +53,7 @@
     "href": "index.html#pregunta-de-investigación",
     "title": "Sequía en México",
     "section": "Pregunta de investigación",
-    "text": "Pregunta de investigación\nPregunta principal ¿Qué municipios de México presentan mayor frecuencia y persistencia de sequía entre 2016 y 2026, y pueden agruparse en regiones con patrones temporales similares?\n\nPreguntas secundarias\n¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)? ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)? ¿Pueden agruparse los municipios en clusters territoriales con patrones temporales de severidad similares?"
+    "text": "Pregunta de investigación\n\n¿Qué municipios de México presentan mayor frecuencia e intensidad de sequía entre 2016 y 2026? ¿Y puede agruparse en regiones con patrones temporales similares?\n\n\nPreguntas secundarias\n\n¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)?\n¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)?\n¿Pueden agruparse los municipios en clusters territoriales con patrones temporales de severidad similares?"
   },
   {
     "objectID": "index.html#metodología-y-alcance",
@@ -201,5 +201,12 @@
     "title": "Sequía en México",
     "section": "Hipótesis",
     "text": "Hipótesis\nLos municipios del norte y centro-norte de México (zonas áridas y semiáridas) presentan mayor frecuencia y persistencia de sequía que los del sur y sureste, y estos patrones son suficientemente consistentes en el tiempo como para formar agrupaciones territoriales coherentes geográficamente (no solo estadísticamente).\n\nVariable objetivo: intensidad (nivel ordinal 0–5 de severidad de sequía por municipio-quincena), y sus derivadas por municipio — frecuencia (% de quincenas en D0+) y persistencia (duración media/máxima de rachas consecutivas en sequía).\nVariables explicativas: geográficas (ENTIDAD, ORG_CUENCA*, CON_CUENCA), temporales (año, mes, quincena, estacionalidad).\nPoblación de interés: los 2,478 municipios de México cubiertos por el Monitor de Sequía (PRONACOSE).\nUnidad de análisis: municipio-quincena para el análisis temporal; municipio (con su serie resumida) para el clustering territorial.\nPeriodo y alcance: enero 2016 – septiembre 2026 (df_analitico), alcance geográfico nacional (32 entidades). La serie 2003–2015 (df_historico) se usa solo para contexto, no para el modelo, por el cambio metodológico ya documentado.\nModelo propuesto: clustering territorial (k-means o jerárquico) sobre variables de frecuencia y persistencia agregadas por municipio, con validación de coherencia geográfica de los clusters (¿coinciden con regiones hidrológicas o zonas climáticas conocidas?)."
+  },
+  {
+    "objectID": "index.html#contexto",
+    "href": "index.html#contexto",
+    "title": "Sequía en México",
+    "section": "Contexto",
+    "text": "Contexto\nMéxico enfrenta un escenario crítico de estrés hídrico. Entender cómo se distribuye y persiste este fenómeno es fundamental para el diseño de políticas públicas, la asignación de recursos agrícolas y la gestión de infraestructura. Este proyecto analiza la evolución temporal y territorial de la sequía a nivel municipal utilizando registros históricos reales."
   }
 ]
