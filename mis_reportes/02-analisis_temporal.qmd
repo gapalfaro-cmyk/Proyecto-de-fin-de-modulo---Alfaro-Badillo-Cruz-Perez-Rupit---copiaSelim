@@ -104,15 +104,19 @@ plt.show()
 
 ## Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)
 
-Eje Vertical ($Y$): Representa el número total de estados afectados, con un límite máximo de 32 entidades federativas (el $100\%$ del país).
+**Eje Vertical ($Y$):** Representa el número total de estados afectados, con un límite máximo de 32 entidades federativas (el $100\%$ del país).
 
-Eje Horizontal ($X$): Representa la línea del tiempo ordenada por años (de 2016 a 2026).
+**Eje Horizontal ($X$):** Representa la línea del tiempo ordenada por años (de 2016 a 2026).
 
-Colores (Niveles de Sequía): Muestran la intensidad de afectación acumulada en cada fecha:
-  - 🟢 Verde (Sin Sequía): Estados sin afectación.
-  - 🟡 Amarillo (D0 - Anormalmente Seco): Condición previa o posterior a una sequía.
-  - 🟠 Naranja (D1 - Sequía Moderada / D2 - Sequía Severa): Afectaciones moderadas a graves.
-  - 🔴 Rojo/Guinda (D3 - Sequía Extrema / D4 - Sequía Excepcional): Las condiciones más críticas del Monitor de Sequía.
+**Colores (Niveles de Sequía):** Muestran la intensidad de afectación acumulada en cada fecha:
+  
+-🟢 Verde (Sin Sequía): Estados sin afectación.
+
+-🟡 Amarillo (D0 - Anormalmente Seco): Condición previa o posterior a una sequía.
+
+-🟠 Naranja (D1 - Sequía Moderada / D2 - Sequía Severa): Afectaciones moderadas a graves.
+
+-🔴 Rojo/Guinda (D3 - Sequía Extrema / D4 - Sequía Excepcional): Las condiciones más críticas del Monitor de Sequía.
 
 ```{python}
 # GRAFICA 3: Barras apiladas con etiquetas por año en el eje X a nivel estado/entidad
