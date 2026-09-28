@@ -18,7 +18,7 @@ sns.set_theme(style="whitegrid")
 plt.rcParams.update({'font.sans-serif': 'DejaVu Sans', 'font.size': 11})
 
 # 1. Carga de la base analítica
-df_analitico = pd.read_parquet("sequia_analitico_2016.parquet")
+df_analitico = pd.read_parquet("data/processed/sequia_analitico_2016.parquet")
 
 # Asegurar formato correcto de fechas
 df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
