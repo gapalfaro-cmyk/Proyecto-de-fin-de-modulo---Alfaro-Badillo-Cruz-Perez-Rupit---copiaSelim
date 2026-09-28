@@ -1,7 +1,29 @@
 ---
-title: "Este es mi segundo reporte"
-description: "Análisis de los datos de otro trimestre"
-date: "2026-12-01"
+title: "2. Análisis temporal"
+jupyter: python3
+execute:
+  cache: true
 ---
 
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings('ignore')
 
+# Estilo visual para reportes
+sns.set_theme(style="whitegrid")
+plt.rcParams.update({'font.sans-serif': 'DejaVu Sans', 'font.size': 11})
+
+# 1. Carga de la base analítica
+df_analitico = pd.read_parquet("sequia_analitico_2016.parquet")
+
+# Asegurar formato correcto de fechas
+df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
+df_analitico['anio'] = df_analitico['fecha'].dt.year
+
+# Normalización de categorías de sequía (D0 a D4 y Sin Sequía)
+cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
+```
