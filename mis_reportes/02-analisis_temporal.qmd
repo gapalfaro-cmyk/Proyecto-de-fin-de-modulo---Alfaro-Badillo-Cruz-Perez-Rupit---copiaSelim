@@ -27,3 +27,78 @@ df_analitico['anio'] = df_analitico['fecha'].dt.year
 # Normalización de categorías de sequía (D0 a D4 y Sin Sequía)
 cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
 ```
+
+## Proporción de Municipios en Sequía vs. Total Evaluado en México
+
+El gráfico de líneas y área sombreada permite analizar la magnitud absoluta y la tendencia temporal de los municipios afectados por sequía en comparación con el total de municipios monitoreados en el país.
+Línea Azul Punteada (--): Muestra el Total de Municipios Registrados / Evaluados por el Monitor de Sequía (alrededor de 2,400 a 2,470 municipios). Sirve como el límite superior o techo de referencia ( 100% ).
+Brecha entre la Línea Azul y Naranja: Cuando la línea naranja está muy cerca de la azul, significa que prácticamente todo el país estuvo en sequía (crisis nacional).
+
+```{python}
+# GRAFICA 1: Municipios que presentan sequía vs Total de municipios en el tiempo
+df_g1 = df_analitico.groupby('fecha').agg(
+    total_municipios=('CVE_CONCATENADA', 'nunique'),
+    municipios_en_sequia=('en_sequia', lambda x: (x > 0).sum())
+).reset_index()
+
+plt.figure(figsize=(12, 5.5))
+plt.plot(df_g1['fecha'], df_g1['total_municipios'], label='Total de Municipios Registrados', color='#1f77b4', linestyle='--', linewidth=2)
+plt.plot(df_g1['fecha'], df_g1['municipios_en_sequia'], label='Municipios en Sequía (D0 - D4)', color='#d95f02', linewidth=2.5)
+plt.fill_between(df_g1['fecha'], df_g1['municipios_en_sequia'], color='#d95f02', alpha=0.15)
+plt.title('Proporción de Municipios en Sequía vs. Total Evaluado en México', fontsize=13, fontweight='bold', pad=12)
+plt.xlabel('Fecha', fontsize=11)
+plt.ylabel('Número de Municipios', fontsize=11)
+plt.legend(loc='upper right', frameon=True)
+plt.tight_layout()
+plt.savefig('grafica1_municipios_vs_total.png', dpi=300)
+plt.show()
+```
+
+## Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior
+
+Se presenta un cambio estructural en el patrón de sequía en México: entre 2016 y 2020 el fenómeno se concentraba principalmente en fases preventivas (D0 y D1), el periodo 2022–2024 marcó una escala crítica sin precedentes, donde un número histórico de municipios alcanzó simultáneamente niveles de sequía extrema (D3) y excepcional (D4).
+
+```{python}
+# 1. Asegurar formato de fecha y año
+df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
+df_analitico['anio'] = df_analitico['fecha'].dt.year
+
+# 2. Mapeo de códigos numéricos (1-5) a categorías de sequía (D0-D4)
+mapa_intensidad = {
+    1: 'D0',
+    2: 'D1',
+    3: 'D2',
+    4: 'D3',
+    5: 'D4'
+}
+
+# 3. Filtrar niveles con afectación (1 a 5)
+df_filtrado = df_analitico[df_analitico['intensidad'].isin([1, 2, 3, 4, 5])].copy()
+df_filtrado['intensidad_nom'] = df_filtrado['intensidad'].map(mapa_intensidad)
+
+# 4. Agrupar por año y nivel mapeado
+df_g2 = df_filtrado.groupby(['anio', 'intensidad_nom'])['CVE_CONCATENADA'].nunique().reset_index()
+
+# 5. Dibujar la gráfica
+plt.figure(figsize=(11, 6))
+
+sns.barplot(
+    data=df_g2,
+    x='intensidad_nom',
+    y='CVE_CONCATENADA',
+    hue='anio',
+    palette='YlOrRd',
+    order=['D0', 'D1', 'D2', 'D3', 'D4']
+)
+
+plt.title('Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior', fontsize=13, fontweight='bold', pad=12)
+plt.xlabel('Nivel de Intensidad (Monitor CONAGUA / PRONACOSE)', fontsize=11)
+plt.ylabel('Número Único de Municipios Afectados', fontsize=11)
+plt.legend(title='Año', bbox_to_anchor=(1.02, 1), loc='upper left', frameon=True)
+plt.tight_layout()
+
+plt.savefig('grafica2_niveles_vs_anio.png', dpi=300)
+plt.show()
+```
+
+
