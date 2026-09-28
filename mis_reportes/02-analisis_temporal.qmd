@@ -192,3 +192,7 @@ plt.show()
 
 ### Conclusión:
 Las entidades federativas del sur, centro y occidente registran un volumen muy alto de unidades municipales impactadas por la escasez de agua.
+
+
+------------------------------------------------------------------------
+## PRUEBA MAPA: Distribución de sequia en México 2026
