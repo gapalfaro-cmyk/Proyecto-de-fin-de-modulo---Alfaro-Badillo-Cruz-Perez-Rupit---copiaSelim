@@ -196,3 +196,6 @@ Las entidades federativas del sur, centro y occidente registran un volumen muy a
 
 ------------------------------------------------------------------------
 ## PRUEBA MAPA: Distribución de sequia en México 2026
+```{python}
+import geopandas as gpd
+```
