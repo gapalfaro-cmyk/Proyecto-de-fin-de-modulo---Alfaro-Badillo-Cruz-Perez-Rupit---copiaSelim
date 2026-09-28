@@ -59,6 +59,7 @@ plt.show()
 Se presenta un cambio estructural en el patrón de sequía en México: entre 2016 y 2020 el fenómeno se concentraba principalmente en fases preventivas (D0 y D1), el periodo 2022–2024 marcó una escala crítica sin precedentes, donde un número histórico de municipios alcanzó simultáneamente niveles de sequía extrema (D3) y excepcional (D4).
 
 ```{python}
+# GRAFICA 2: Comparativo de Municipios por Nivel de Sequía
 # 1. Asegurar formato de fecha y año
 df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
 df_analitico['anio'] = df_analitico['fecha'].dt.year
@@ -101,4 +102,90 @@ plt.savefig('grafica2_niveles_vs_anio.png', dpi=300)
 plt.show()
 ```
 
+## Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)
 
+Eje Vertical ($Y$): Representa el número total de estados afectados, con un límite máximo de 32 entidades federativas (el $100\%$ del país).
+Eje Horizontal ($X$): Representa la línea del tiempo ordenada por años (de 2016 a 2026).
+Colores (Niveles de Sequía): Muestran la intensidad de afectación acumulada en cada fecha:
+- 🟢 Verde (Sin Sequía): Estados sin afectación.
+- 🟡 Amarillo (D0 - Anormalmente Seco): Condición previa o posterior a una sequía.
+- 🟠 Naranja (D1 - Sequía Moderada / D2 - Sequía Severa): Afectaciones moderadas a graves.
+- 🔴 Rojo/Guinda (D3 - Sequía Extrema / D4 - Sequía Excepcional): Las condiciones más críticas del Monitor de Sequía.
+
+```{python}
+# GRAFICA 3: Barras apiladas con etiquetas por año en el eje X a nivel estado/entidad
+# 1. Preparar la clasificación categórica
+df_analitico['clasificacion_para_grafica'] = df_analitico['clasificacion_sequia'].fillna('Sin Sequía')
+df_analitico['clasificacion_para_grafica'] = pd.Categorical(
+    df_analitico['clasificacion_para_grafica'],
+    categories=cat_order,
+    ordered=True
+)
+
+# 2. Agrupar por fecha y nivel de sequía contando ESTADOS ÚNICOS (ENTIDAD)
+df_g3_estado = df_analitico.groupby(['fecha', 'clasificacion_para_grafica'])['ENTIDAD'].nunique().unstack(fill_value=0)
+df_g3_estado = df_g3_estado.reindex(columns=cat_order, fill_value=0)
+
+# 3. Graficar
+colors = ['#2ca02c', '#fee08b', '#fdae61', '#f46d43', '#d53e4f', '#9e0142']
+ax = df_g3_estado.plot(kind='bar', stacked=True, figsize=(13, 6.5), color=colors[:len(cat_order)], width=0.85)
+
+plt.title('Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)', fontsize=13, fontweight='bold', pad=12)
+plt.xlabel('Año', fontsize=11)
+plt.ylabel('Número de Estados (Máx. 32)', fontsize=11)
+
+# Etiquetas del eje X por año
+fechas = pd.to_datetime(df_g3_estado.index)
+etiquetas_anios = []
+anio_previo = None
+
+for fecha in fechas:
+    if fecha.year != anio_previo:
+        etiquetas_anios.append(str(fecha.year))
+        anio_previo = fecha.year
+    else:
+        etiquetas_anios.append('')
+
+plt.xticks(ticks=range(len(df_g3_estado.index)), labels=etiquetas_anios, rotation=0, ha='center')
+plt.legend(title='Nivel de Sequía', bbox_to_anchor=(1.02, 1), loc='upper left', frameon=True)
+plt.tight_layout()
+
+plt.savefig('grafica3_distribucion_estados_tiempo.png', dpi=300)
+plt.show()
+```
+
+### Principales Tendencias Históricas
+- 2016 - 2018 (Años estables): Predomina el color verde y los niveles de sequía leve (D0/D1). Gran parte del país se mantuvo sin condiciones críticas.
+- 2019 - 2020 (Primer pico severo): Aumenta considerablemente la franja naranja y roja, reduciendo los estados sin sequía a menos de la mitad del país.
+- 2021 (Recuperación temporal): Se observa una recuperación notable durante la segunda mitad del año por lluvias intensas.
+- 2023 - 2024 (La crisis más severa del periodo): Es el punto más crítico visible en la gráfica. Las categorías D3 (Extrema) y D4 (Excepcional) ocupan una franja dominante, abarcando casi la totalidad de los 32 estados con algún grado de sequía o sequía extrema.
+
+### Conclusión / Mensaje Principal
+La gráfica evidencía que la sequía en México no solo es un fenómeno recurrente o estacional, sino que ha mostrado un incremento en la gravedad e intensidad de sus picos a partir de 2020, alcanzando una crisis histórica entre 2023 y 2024 donde prácticamente toda la República Mexicana presentó algún grado de afectación.
+
+## Distribución de municipios afectados para comparar qué estados son los más críticos:
+Este diagrama de barras horizontales permite identificar la distribución geográfica y el impacto acumulado de la sequía a nivel de los estados de la República Mexicana.
+
+```{python}
+# GRAFICA 4: Comparativo por Estado en una fecha reciente (o año completo)
+# Filtrar o agrupar municipios en sequía por Estado
+df_estado_mun = df_analitico[df_analitico['en_sequia'] == True].groupby('ENTIDAD')['CVE_CONCATENADA'].nunique().sort_values(ascending=False).reset_index()
+
+plt.figure(figsize=(12, 8))
+sns.barplot(data=df_estado_mun, x='CVE_CONCATENADA', y='ENTIDAD', palette='Oranges_r')
+
+plt.title('Número de Municipios en Sequía por Entidad Federativa', fontsize=13, fontweight='bold', pad=12)
+plt.xlabel('Número de Municipios Afectados', fontsize=11)
+plt.ylabel('Estado / Entidad', fontsize=11)
+plt.tight_layout()
+
+plt.savefig('grafica_sequia_por_estado.png', dpi=300)
+plt.show()
+```
+
+### Estados más afectados (Concentración geográfica)
+- Oaxaca encabeza la lista con la barra más larga. Esto se debe principalmente a su división territorial (cuenta con 570 municipios), lo que incrementa el conteo absoluto de municipios en sequía en comparación con otros estados.
+- Le siguen estados como Puebla, Veracruz, Jalisco, Estado de México, Chiapas y Michoacán.
+
+### Conclusión:
+Las entidades federativas del sur, centro y occidente registran un volumen muy alto de unidades municipales impactadas por la escasez de agua.
