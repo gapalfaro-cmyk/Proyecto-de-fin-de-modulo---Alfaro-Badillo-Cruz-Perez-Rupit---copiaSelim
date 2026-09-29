@@ -3,6 +3,12 @@ title: "2. Análisis exploratorio de datos"
 jupyter: python3
 execute:
   cache: true
+output:
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll #fill
+    theme: yeti
+    source_code: embed
 ---
 
 =====================================
