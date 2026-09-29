@@ -49,7 +49,7 @@ jobs:
             any::dplyr
             any::ggplot2
             any::reticulate
-            any::skim
+            any::skimr
 
       - name: Renderizar sitio
         run: quarto render
