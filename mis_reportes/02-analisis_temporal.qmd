@@ -1,9 +1,45 @@
 ---
-title: "2. Análisis temporal"
+title: "2. Análisis exploratorio de datos"
 jupyter: python3
 execute:
   cache: true
 ---
+
+=====================================
+
+Row {data-height=200}
+-------------------------------------
+
+### Visión general
+
+En la República Mexicana hay **32,058** municipios en los **32**estados. 
+- **1** → República Mexicana.
+- **32** → Estados.
+- **32,058** → Municipios
+### Regla visual
+
+```text
+Página
+=====================================
+
+Row o Column
+-------------------------------------
+
+### Caja
+```
+
+### Antes de comenzar
+
+Para crear uno desde RStudio:
+
+`File > New File > R Markdown > From Template > Flex Dashboard`
+
+Después se modifica el YAML y la estructura del documento.
+
+Row
+-------------------------------------
+
+
 
 ```{python}
 import pandas as pd
