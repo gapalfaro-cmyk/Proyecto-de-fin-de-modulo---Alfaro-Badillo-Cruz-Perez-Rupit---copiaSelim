@@ -1,29 +1,9 @@
 ---
 title: "2. Análisis exploratorio de datos"
-output:
-  flexdashboard::flex_dashboard:
-    orientation: rows
-    vertical_layout: scroll #fill
-    theme: yeti
-    source_code: embed
+jupyter: python3
+execute:
+  cache: true
 ---
-
-```{r setup, include=FALSE}
-library(flexdashboard)
-library(ggplot2)
-library(dplyr)
-library(scales)
-library(DT)
-library(plotly)
-
-knitr::opts_chunk$set(
-  echo = FALSE,
-  message = FALSE,
-  warning = FALSE,
-  fig.width = 7,
-  fig.height = 4
-)
-```
 
 ```{python}
 import pandas as pd
@@ -47,50 +27,6 @@ df_analitico['anio'] = df_analitico['fecha'].dt.year
 # Normalización de categorías de sequía (D0 a D4 y Sin Sequía)
 cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
 ```
-
-EDA
-=====================================
-
-Row {data-height=200}
--------------------------------------
-
-### Visión general
-
-Para este análisis tenemos:
-- **1** → República Mexicana.
-- **32** → Estados.
-- **32,058** → Municipios
-
-### Regla visual
-
-```{python}
-#AQUÍ VA EL CÓDIGO DE PYTHON
-
-```
-
-```text
-Página
-=====================================
-
-Row o Column
--------------------------------------
-
-### Caja
-```
-
-### Antes de comenzar
-
-Para crear uno desde RStudio:
-
-`File > New File > R Markdown > From Template > Flex Dashboard`
-
-Después se modifica el YAML y la estructura del documento.
-
-Row
--------------------------------------
-
-
-
 
 ## Proporción de Municipios en Sequía vs. Total Evaluado en México
 
