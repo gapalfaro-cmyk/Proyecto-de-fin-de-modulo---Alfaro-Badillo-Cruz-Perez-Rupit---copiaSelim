@@ -1,4 +1,4 @@
-h---
+---
 title: "2. Análisis temporal"
 jupyter: python3
 execute:
