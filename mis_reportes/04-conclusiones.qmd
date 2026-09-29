@@ -81,10 +81,9 @@ fig_scatter = px.scatter(
     hover_name='NOMBRE_MUN',
     hover_data={'ENTIDAD': True, 'Perfil_Riesgo': False, 'Vulnerabilidad_Total': ':.2f'},
     color_discrete_map={
-        'Riesgo Bajo / Resilientes': '#2ca02c',
-        'Riesgo Medio / Vulnerabilidad Social': '#ff7f0e',
-        'Riesgo Alto / Estrés Hídrico': '#d62728',
-        'Riesgo Crítico / Tormenta Perfecta': '#4b0082'
+    'Riesgo Bajo / Resilientes': '#c0a900',
+    'Riesgo Medio-Alto': '#eb5e5e', 
+    'Riesgo Crítico': '#691edb', 
     },
     title='<b>Matriz de Riesgo: Peligro Histórico vs Fragilidad Estructural</b>',
     labels={

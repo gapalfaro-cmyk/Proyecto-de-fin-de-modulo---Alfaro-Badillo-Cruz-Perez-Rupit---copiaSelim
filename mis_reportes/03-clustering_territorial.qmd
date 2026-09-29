@@ -49,15 +49,14 @@ X_imputed = imputer.fit_transform(df[features])
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_imputed)
 
-kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
 df['Cluster_ID'] = kmeans.fit_predict(X_scaled)
 
 cluster_risk = pd.DataFrame(X_scaled).groupby(df['Cluster_ID']).mean().sum(axis=1).sort_values()
 mapeo_nombres = {
     cluster_risk.index[0]: 'Riesgo Bajo / Resilientes',
-    cluster_risk.index[1]: 'Riesgo Medio / Vulnerabilidad Social',
-    cluster_risk.index[2]: 'Riesgo Alto / Estrés Hídrico',
-    cluster_risk.index[3]: 'Riesgo Crítico / Tormenta Perfecta'
+    cluster_risk.index[1]: 'Riesgo Medio-Alto',
+    cluster_risk.index[2]: 'Riesgo Crítico',
 }
 
 df['Perfil_Riesgo'] = df['Cluster_ID'].map(mapeo_nombres)
@@ -78,10 +77,9 @@ features_norm = [f + '_norm' for f in features]
 nombres_ejes = ['Frecuencia Sequía', 'Racha Máxima', 'Vul. Ambiental', 'Vul. Social', 'Vul. Económica']
 
 colores_cluster = {
-    'Riesgo Bajo / Resilientes': '#2ca02c',          # Verde
-    'Riesgo Medio / Vulnerabilidad Social': '#ff7f0e', # Naranja
-    'Riesgo Alto / Estrés Hídrico': '#d62728',         # Rojo
-    'Riesgo Crítico / Tormenta Perfecta': '#4b0082'    # Morado oscuro
+    'Riesgo Bajo / Resilientes': '#c0a900',
+    'Riesgo Medio-Alto': '#eb5e5e', 
+    'Riesgo Crítico': '#691edb',         
 }
 
 fig = go.Figure()
@@ -151,7 +149,7 @@ fig_codo.add_trace(go.Scatter(
     line=dict(width=3)
 ))
 
-fig_codo.add_vline(x=4, line_width=2, line_dash="dash", line_color="gray")
+fig_codo.add_vline(x=3, line_width=2, line_dash="dash", line_color="gray")
 
 
 fig_codo.update_layout(

@@ -203,13 +203,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#row" id="toc-row" class="nav-link active" data-scroll-target="#row">Row</a>
-  <ul class="collapse">
-  <li><a href="#visión-general" id="toc-visión-general" class="nav-link" data-scroll-target="#visión-general">Visión general</a></li>
-  <li><a href="#antes-de-comenzar" id="toc-antes-de-comenzar" class="nav-link" data-scroll-target="#antes-de-comenzar">Antes de comenzar</a></li>
-  </ul></li>
-  <li><a href="#row-1" id="toc-row-1" class="nav-link" data-scroll-target="#row-1">Row</a></li>
-  <li><a href="#proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico" id="toc-proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico" class="nav-link" data-scroll-target="#proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico">Proporción de Municipios en Sequía vs.&nbsp;Total Evaluado en México</a></li>
+  <li><a href="#proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico" id="toc-proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico" class="nav-link active" data-scroll-target="#proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico">Proporción de Municipios en Sequía vs.&nbsp;Total Evaluado en México</a></li>
   <li><a href="#comparativo-de-municipios-afectados-por-nivel-de-sequía-vs.-año-anterior" id="toc-comparativo-de-municipios-afectados-por-nivel-de-sequía-vs.-año-anterior" class="nav-link" data-scroll-target="#comparativo-de-municipios-afectados-por-nivel-de-sequía-vs.-año-anterior">Comparativo de Municipios Afectados por Nivel de Sequía vs.&nbsp;Año Anterior</a></li>
   <li><a href="#distribución-temporal-de-estados-por-nivel-de-sequía-d0-a-d4" id="toc-distribución-temporal-de-estados-por-nivel-de-sequía-d0-a-d4" class="nav-link" data-scroll-target="#distribución-temporal-de-estados-por-nivel-de-sequía-d0-a-d4">Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)</a>
   <ul class="collapse">
@@ -247,80 +241,54 @@ window.Quarto = {
 </header>
 
 
-<p>```{r setup, include=FALSE} library(flexdashboard) library(ggplot2) library(dplyr) library(scales) library(DT) library(plotly)</p>
-<p>knitr::opts_chunk$set( echo = FALSE, message = FALSE, warning = FALSE, fig.width = 7, fig.height = 4 )</p>
-<p>=====================================</p>
-<section id="row" class="level2" data-height="200">
-<h2 data-height="200" class="anchored" data-anchor-id="row">Row</h2>
-<section id="visión-general" class="level3">
-<h3 class="anchored" data-anchor-id="visión-general">Visión general</h3>
-<p>En la República Mexicana hay <strong>32,058</strong> municipios en los <strong>32</strong>estados. - <strong>1</strong> → República Mexicana. - <strong>32</strong> → Estados. - <strong>32,058</strong> → Municipios ### Regla visual</p>
-<pre class="text"><code>Página
-=====================================
-
-Row o Column
--------------------------------------
-
-### Caja</code></pre>
-</section>
-<section id="antes-de-comenzar" class="level3">
-<h3 class="anchored" data-anchor-id="antes-de-comenzar">Antes de comenzar</h3>
-<p>Para crear uno desde RStudio:</p>
-<p><code>File &gt; New File &gt; R Markdown &gt; From Template &gt; Flex Dashboard</code></p>
-<p>Después se modifica el YAML y la estructura del documento.</p>
-</section>
-</section>
-<section id="row-1" class="level2">
-<h2 class="anchored" data-anchor-id="row-1">Row</h2>
 <div id="538c1e15" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Estilo visual para reportes</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.sans-serif'</span>: <span class="st">'DejaVu Sans'</span>, <span class="st">'font.size'</span>: <span class="dv">11</span>})</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Carga de la base analítica</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df_analitico <span class="op">=</span> pd.read_parquet(<span class="st">"../data/processed/sequia_analitico_2016.parquet"</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegurar formato correcto de fechas</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'fecha'</span>] <span class="op">=</span> pd.to_datetime(df_analitico[<span class="st">'fecha'</span>])</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'anio'</span>] <span class="op">=</span> df_analitico[<span class="st">'fecha'</span>].dt.year</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalización de categorías de sequía (D0 a D4 y Sin Sequía)</span></span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>cat_order <span class="op">=</span> [<span class="st">'Sin Sequía'</span>, <span class="st">'D0'</span>, <span class="st">'D1'</span>, <span class="st">'D2'</span>, <span class="st">'D3'</span>, <span class="st">'D4'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Estilo visual para reportes</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>plt.rcParams.update({<span class="st">'font.sans-serif'</span>: <span class="st">'DejaVu Sans'</span>, <span class="st">'font.size'</span>: <span class="dv">11</span>})</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Carga de la base analítica</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>df_analitico <span class="op">=</span> pd.read_parquet(<span class="st">"../data/processed/sequia_analitico_2016.parquet"</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Asegurar formato correcto de fechas</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'fecha'</span>] <span class="op">=</span> pd.to_datetime(df_analitico[<span class="st">'fecha'</span>])</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'anio'</span>] <span class="op">=</span> df_analitico[<span class="st">'fecha'</span>].dt.year</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalización de categorías de sequía (D0 a D4 y Sin Sequía)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>cat_order <span class="op">=</span> [<span class="st">'Sin Sequía'</span>, <span class="st">'D0'</span>, <span class="st">'D1'</span>, <span class="st">'D2'</span>, <span class="st">'D3'</span>, <span class="st">'D4'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-</section>
 <section id="proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico" class="level2">
 <h2 class="anchored" data-anchor-id="proporción-de-municipios-en-sequía-vs.-total-evaluado-en-méxico">Proporción de Municipios en Sequía vs.&nbsp;Total Evaluado en México</h2>
 <p>El gráfico de líneas y área sombreada permite analizar la magnitud absoluta y la tendencia temporal de los municipios afectados por sequía en comparación con el total de municipios monitoreados en el país. Línea Azul Punteada (–): Muestra el Total de Municipios Registrados / Evaluados por el Monitor de Sequía (alrededor de 2,400 a 2,470 municipios). Sirve como el límite superior o techo de referencia ( 100% ). Brecha entre la Línea Azul y Naranja: Cuando la línea naranja está muy cerca de la azul, significa que prácticamente todo el país estuvo en sequía (crisis nacional).</p>
 <div id="210b98fd" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 1: Municipios que presentan sequía vs Total de municipios en el tiempo</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df_g1 <span class="op">=</span> df_analitico.groupby(<span class="st">'fecha'</span>).agg(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    total_municipios<span class="op">=</span>(<span class="st">'CVE_CONCATENADA'</span>, <span class="st">'nunique'</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    municipios_en_sequia<span class="op">=</span>(<span class="st">'en_sequia'</span>, <span class="kw">lambda</span> x: (x <span class="op">&gt;</span> <span class="dv">0</span>).<span class="bu">sum</span>())</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="fl">5.5</span>))</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.plot(df_g1[<span class="st">'fecha'</span>], df_g1[<span class="st">'total_municipios'</span>], label<span class="op">=</span><span class="st">'Total de Municipios Registrados'</span>, color<span class="op">=</span><span class="st">'#1f77b4'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.plot(df_g1[<span class="st">'fecha'</span>], df_g1[<span class="st">'municipios_en_sequia'</span>], label<span class="op">=</span><span class="st">'Municipios en Sequía (D0 - D4)'</span>, color<span class="op">=</span><span class="st">'#d95f02'</span>, linewidth<span class="op">=</span><span class="fl">2.5</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df_g1[<span class="st">'fecha'</span>], df_g1[<span class="st">'municipios_en_sequia'</span>], color<span class="op">=</span><span class="st">'#d95f02'</span>, alpha<span class="op">=</span><span class="fl">0.15</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Proporción de Municipios en Sequía vs. Total Evaluado en México'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Número de Municipios'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper right'</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica1_municipios_vs_total.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 1: Municipios que presentan sequía vs Total de municipios en el tiempo</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_g1 <span class="op">=</span> df_analitico.groupby(<span class="st">'fecha'</span>).agg(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    total_municipios<span class="op">=</span>(<span class="st">'CVE_CONCATENADA'</span>, <span class="st">'nunique'</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    municipios_en_sequia<span class="op">=</span>(<span class="st">'en_sequia'</span>, <span class="kw">lambda</span> x: (x <span class="op">&gt;</span> <span class="dv">0</span>).<span class="bu">sum</span>())</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="fl">5.5</span>))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.plot(df_g1[<span class="st">'fecha'</span>], df_g1[<span class="st">'total_municipios'</span>], label<span class="op">=</span><span class="st">'Total de Municipios Registrados'</span>, color<span class="op">=</span><span class="st">'#1f77b4'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.plot(df_g1[<span class="st">'fecha'</span>], df_g1[<span class="st">'municipios_en_sequia'</span>], label<span class="op">=</span><span class="st">'Municipios en Sequía (D0 - D4)'</span>, color<span class="op">=</span><span class="st">'#d95f02'</span>, linewidth<span class="op">=</span><span class="fl">2.5</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.fill_between(df_g1[<span class="st">'fecha'</span>], df_g1[<span class="st">'municipios_en_sequia'</span>], color<span class="op">=</span><span class="st">'#d95f02'</span>, alpha<span class="op">=</span><span class="fl">0.15</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Proporción de Municipios en Sequía vs. Total Evaluado en México'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Fecha'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Número de Municipios'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper right'</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica1_municipios_vs_total.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -337,47 +305,47 @@ Row o Column
 <div id="7b89df8e" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 2: Comparativo de Municipios por Nivel de Sequía</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Asegurar formato de fecha y año</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'fecha'</span>] <span class="op">=</span> pd.to_datetime(df_analitico[<span class="st">'fecha'</span>])</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'anio'</span>] <span class="op">=</span> df_analitico[<span class="st">'fecha'</span>].dt.year</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Mapeo de códigos numéricos (1-5) a categorías de sequía (D0-D4)</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mapa_intensidad <span class="op">=</span> {</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: <span class="st">'D0'</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: <span class="st">'D1'</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">'D2'</span>,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>: <span class="st">'D3'</span>,</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>: <span class="st">'D4'</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Filtrar niveles con afectación (1 a 5)</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>df_filtrado <span class="op">=</span> df_analitico[df_analitico[<span class="st">'intensidad'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])].copy()</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>df_filtrado[<span class="st">'intensidad_nom'</span>] <span class="op">=</span> df_filtrado[<span class="st">'intensidad'</span>].<span class="bu">map</span>(mapa_intensidad)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Agrupar por año y nivel mapeado</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>df_g2 <span class="op">=</span> df_filtrado.groupby([<span class="st">'anio'</span>, <span class="st">'intensidad_nom'</span>])[<span class="st">'CVE_CONCATENADA'</span>].nunique().reset_index()</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Dibujar la gráfica</span></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">6</span>))</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_g2,</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'intensidad_nom'</span>,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'CVE_CONCATENADA'</span>,</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'anio'</span>,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">'YlOrRd'</span>,</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    order<span class="op">=</span>[<span class="st">'D0'</span>, <span class="st">'D1'</span>, <span class="st">'D2'</span>, <span class="st">'D3'</span>, <span class="st">'D4'</span>]</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Nivel de Intensidad (Monitor CONAGUA / PRONACOSE)'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Número Único de Municipios Afectados'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Año'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.02</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica2_niveles_vs_anio.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 2: Comparativo de Municipios por Nivel de Sequía</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Asegurar formato de fecha y año</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'fecha'</span>] <span class="op">=</span> pd.to_datetime(df_analitico[<span class="st">'fecha'</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'anio'</span>] <span class="op">=</span> df_analitico[<span class="st">'fecha'</span>].dt.year</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Mapeo de códigos numéricos (1-5) a categorías de sequía (D0-D4)</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mapa_intensidad <span class="op">=</span> {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span>: <span class="st">'D0'</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">2</span>: <span class="st">'D1'</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span>: <span class="st">'D2'</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">4</span>: <span class="st">'D3'</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">5</span>: <span class="st">'D4'</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Filtrar niveles con afectación (1 a 5)</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>df_filtrado <span class="op">=</span> df_analitico[df_analitico[<span class="st">'intensidad'</span>].isin([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])].copy()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>df_filtrado[<span class="st">'intensidad_nom'</span>] <span class="op">=</span> df_filtrado[<span class="st">'intensidad'</span>].<span class="bu">map</span>(mapa_intensidad)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Agrupar por año y nivel mapeado</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>df_g2 <span class="op">=</span> df_filtrado.groupby([<span class="st">'anio'</span>, <span class="st">'intensidad_nom'</span>])[<span class="st">'CVE_CONCATENADA'</span>].nunique().reset_index()</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Dibujar la gráfica</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">6</span>))</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>sns.barplot(</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_g2,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'intensidad_nom'</span>,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'CVE_CONCATENADA'</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    hue<span class="op">=</span><span class="st">'anio'</span>,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    palette<span class="op">=</span><span class="st">'YlOrRd'</span>,</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    order<span class="op">=</span>[<span class="st">'D0'</span>, <span class="st">'D1'</span>, <span class="st">'D2'</span>, <span class="st">'D3'</span>, <span class="st">'D4'</span>]</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Nivel de Intensidad (Monitor CONAGUA / PRONACOSE)'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Número Único de Municipios Afectados'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Año'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.02</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica2_niveles_vs_anio.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -402,45 +370,45 @@ Row o Column
 <div id="b037efa0" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 3: Barras apiladas con etiquetas por año en el eje X a nivel estado/entidad</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Preparar la clasificación categórica</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'clasificacion_para_grafica'</span>] <span class="op">=</span> df_analitico[<span class="st">'clasificacion_sequia'</span>].fillna(<span class="st">'Sin Sequía'</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'clasificacion_para_grafica'</span>] <span class="op">=</span> pd.Categorical(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    df_analitico[<span class="st">'clasificacion_para_grafica'</span>],</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    categories<span class="op">=</span>cat_order,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    ordered<span class="op">=</span><span class="va">True</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Agrupar por fecha y nivel de sequía contando ESTADOS ÚNICOS (ENTIDAD)</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>df_g3_estado <span class="op">=</span> df_analitico.groupby([<span class="st">'fecha'</span>, <span class="st">'clasificacion_para_grafica'</span>])[<span class="st">'ENTIDAD'</span>].nunique().unstack(fill_value<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>df_g3_estado <span class="op">=</span> df_g3_estado.reindex(columns<span class="op">=</span>cat_order, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Graficar</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#2ca02c'</span>, <span class="st">'#fee08b'</span>, <span class="st">'#fdae61'</span>, <span class="st">'#f46d43'</span>, <span class="st">'#d53e4f'</span>, <span class="st">'#9e0142'</span>]</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> df_g3_estado.plot(kind<span class="op">=</span><span class="st">'bar'</span>, stacked<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="fl">6.5</span>), color<span class="op">=</span>colors[:<span class="bu">len</span>(cat_order)], width<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Año'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Número de Estados (Máx. 32)'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas del eje X por año</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>fechas <span class="op">=</span> pd.to_datetime(df_g3_estado.index)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>etiquetas_anios <span class="op">=</span> []</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>anio_previo <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fecha <span class="kw">in</span> fechas:</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> fecha.year <span class="op">!=</span> anio_previo:</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>        etiquetas_anios.append(<span class="bu">str</span>(fecha.year))</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>        anio_previo <span class="op">=</span> fecha.year</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        etiquetas_anios.append(<span class="st">''</span>)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>plt.xticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(df_g3_estado.index)), labels<span class="op">=</span>etiquetas_anios, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Nivel de Sequía'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.02</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica3_distribucion_estados_tiempo.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 3: Barras apiladas con etiquetas por año en el eje X a nivel estado/entidad</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Preparar la clasificación categórica</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'clasificacion_para_grafica'</span>] <span class="op">=</span> df_analitico[<span class="st">'clasificacion_sequia'</span>].fillna(<span class="st">'Sin Sequía'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_analitico[<span class="st">'clasificacion_para_grafica'</span>] <span class="op">=</span> pd.Categorical(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    df_analitico[<span class="st">'clasificacion_para_grafica'</span>],</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    categories<span class="op">=</span>cat_order,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    ordered<span class="op">=</span><span class="va">True</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Agrupar por fecha y nivel de sequía contando ESTADOS ÚNICOS (ENTIDAD)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>df_g3_estado <span class="op">=</span> df_analitico.groupby([<span class="st">'fecha'</span>, <span class="st">'clasificacion_para_grafica'</span>])[<span class="st">'ENTIDAD'</span>].nunique().unstack(fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>df_g3_estado <span class="op">=</span> df_g3_estado.reindex(columns<span class="op">=</span>cat_order, fill_value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Graficar</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">'#2ca02c'</span>, <span class="st">'#fee08b'</span>, <span class="st">'#fdae61'</span>, <span class="st">'#f46d43'</span>, <span class="st">'#d53e4f'</span>, <span class="st">'#9e0142'</span>]</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> df_g3_estado.plot(kind<span class="op">=</span><span class="st">'bar'</span>, stacked<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">13</span>, <span class="fl">6.5</span>), color<span class="op">=</span>colors[:<span class="bu">len</span>(cat_order)], width<span class="op">=</span><span class="fl">0.85</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Año'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Número de Estados (Máx. 32)'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetas del eje X por año</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>fechas <span class="op">=</span> pd.to_datetime(df_g3_estado.index)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>etiquetas_anios <span class="op">=</span> []</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>anio_previo <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fecha <span class="kw">in</span> fechas:</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> fecha.year <span class="op">!=</span> anio_previo:</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        etiquetas_anios.append(<span class="bu">str</span>(fecha.year))</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        anio_previo <span class="op">=</span> fecha.year</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>        etiquetas_anios.append(<span class="st">''</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>plt.xticks(ticks<span class="op">=</span><span class="bu">range</span>(<span class="bu">len</span>(df_g3_estado.index)), labels<span class="op">=</span>etiquetas_anios, rotation<span class="op">=</span><span class="dv">0</span>, ha<span class="op">=</span><span class="st">'center'</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Nivel de Sequía'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.02</span>, <span class="dv">1</span>), loc<span class="op">=</span><span class="st">'upper left'</span>, frameon<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica3_distribucion_estados_tiempo.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -470,20 +438,20 @@ Row o Column
 <div id="f1d79c45" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 4: Comparativo por Estado en una fecha reciente (o año completo)</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar o agrupar municipios en sequía por Estado</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df_estado_mun <span class="op">=</span> df_analitico[df_analitico[<span class="st">'en_sequia'</span>] <span class="op">==</span> <span class="va">True</span>].groupby(<span class="st">'ENTIDAD'</span>)[<span class="st">'CVE_CONCATENADA'</span>].nunique().sort_values(ascending<span class="op">=</span><span class="va">False</span>).reset_index()</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>df_estado_mun, x<span class="op">=</span><span class="st">'CVE_CONCATENADA'</span>, y<span class="op">=</span><span class="st">'ENTIDAD'</span>, palette<span class="op">=</span><span class="st">'Oranges_r'</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Número de Municipios en Sequía por Entidad Federativa'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Número de Municipios Afectados'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Estado / Entidad'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica_sequia_por_estado.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GRAFICA 4: Comparativo por Estado en una fecha reciente (o año completo)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar o agrupar municipios en sequía por Estado</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df_estado_mun <span class="op">=</span> df_analitico[df_analitico[<span class="st">'en_sequia'</span>] <span class="op">==</span> <span class="va">True</span>].groupby(<span class="st">'ENTIDAD'</span>)[<span class="st">'CVE_CONCATENADA'</span>].nunique().sort_values(ascending<span class="op">=</span><span class="va">False</span>).reset_index()</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>df_estado_mun, x<span class="op">=</span><span class="st">'CVE_CONCATENADA'</span>, y<span class="op">=</span><span class="st">'ENTIDAD'</span>, palette<span class="op">=</span><span class="st">'Oranges_r'</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Número de Municipios en Sequía por Entidad Federativa'</span>, fontsize<span class="op">=</span><span class="dv">13</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Número de Municipios Afectados'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Estado / Entidad'</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">'grafica_sequia_por_estado.png'</span>, dpi<span class="op">=</span><span class="dv">300</span>)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -511,7 +479,7 @@ Row o Column
 <div id="3e5d6990" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <hr>
@@ -519,61 +487,61 @@ Row o Column
 <div id="5e1e929b" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Ver código de la gráfica interactiva</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_parquet(<span class="st">"../data/processed/sequia_analitico_2016.parquet"</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>evolucion <span class="op">=</span> df.groupby([<span class="st">'fecha'</span>, <span class="st">'intensidad_desc'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'conteo'</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>evolucion[<span class="st">'porcentaje'</span>] <span class="op">=</span> evolucion.groupby(<span class="st">'fecha'</span>)[<span class="st">'conteo'</span>].transform(<span class="kw">lambda</span> x: (x <span class="op">/</span> x.<span class="bu">sum</span>()) <span class="op">*</span> <span class="dv">100</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>orden_categorias <span class="op">=</span> [</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Sin sequía'</span>, </span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D0 Anormalmente seco'</span>, </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D1 Sequía moderada'</span>, </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D2 Sequía severa'</span>, </span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D3 Sequía extrema'</span>, </span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D4 Sequía excepcional'</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>colores_oficiales <span class="op">=</span> {</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Sin sequía'</span>: <span class="st">'#e0e0e0'</span>,          <span class="co"># Gris claro</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D0 Anormalmente seco'</span>: <span class="st">'#ffff00'</span>, <span class="co"># Amarillo</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D1 Sequía moderada'</span>: <span class="st">'#fcd37f'</span>,   <span class="co"># Naranja claro</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D2 Sequía severa'</span>: <span class="st">'#ffaa00'</span>,     <span class="co"># Naranja oscuro</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D3 Sequía extrema'</span>: <span class="st">'#e60000'</span>,    <span class="co"># Rojo</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D4 Sequía excepcional'</span>: <span class="st">'#730000'</span> <span class="co"># Rojo oscuro / Guinda</span></span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.area(</span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    evolucion, </span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'fecha'</span>, </span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'porcentaje'</span>, </span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'intensidad_desc'</span>,</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    category_orders<span class="op">=</span>{<span class="st">'intensidad_desc'</span>: orden_categorias},</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>colores_oficiales</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'&lt;b&gt;Evolución Nacional de la Sequía en México (2016 - 2026)&lt;/b&gt;'</span>,</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">''</span>,</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">'</span><span class="sc">% d</span><span class="st">e Municipios del País'</span>,</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>    hovermode<span class="op">=</span><span class="st">'x unified'</span>,</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    legend_title_text<span class="op">=</span><span class="st">'Nivel de Severidad'</span>,</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>        orientation<span class="op">=</span><span class="st">"h"</span>,</span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>        yanchor<span class="op">=</span><span class="st">"bottom"</span>,</span>
-<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=-</span><span class="fl">0.25</span>,</span>
-<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>        xanchor<span class="op">=</span><span class="st">"center"</span>,</span>
-<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="fl">0.5</span></span>
-<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="bu">dict</span>(l<span class="op">=</span><span class="dv">20</span>, r<span class="op">=</span><span class="dv">20</span>, t<span class="op">=</span><span class="dv">50</span>, b<span class="op">=</span><span class="dv">20</span>)</span>
-<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a>fig.update_yaxes(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">100</span>])</span>
-<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.express <span class="im">as</span> px</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_parquet(<span class="st">"../data/processed/sequia_analitico_2016.parquet"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>evolucion <span class="op">=</span> df.groupby([<span class="st">'fecha'</span>, <span class="st">'intensidad_desc'</span>]).size().reset_index(name<span class="op">=</span><span class="st">'conteo'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>evolucion[<span class="st">'porcentaje'</span>] <span class="op">=</span> evolucion.groupby(<span class="st">'fecha'</span>)[<span class="st">'conteo'</span>].transform(<span class="kw">lambda</span> x: (x <span class="op">/</span> x.<span class="bu">sum</span>()) <span class="op">*</span> <span class="dv">100</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>orden_categorias <span class="op">=</span> [</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Sin sequía'</span>, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D0 Anormalmente seco'</span>, </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D1 Sequía moderada'</span>, </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D2 Sequía severa'</span>, </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D3 Sequía extrema'</span>, </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D4 Sequía excepcional'</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>colores_oficiales <span class="op">=</span> {</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Sin sequía'</span>: <span class="st">'#e0e0e0'</span>,          <span class="co"># Gris claro</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D0 Anormalmente seco'</span>: <span class="st">'#ffff00'</span>, <span class="co"># Amarillo</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D1 Sequía moderada'</span>: <span class="st">'#fcd37f'</span>,   <span class="co"># Naranja claro</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D2 Sequía severa'</span>: <span class="st">'#ffaa00'</span>,     <span class="co"># Naranja oscuro</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D3 Sequía extrema'</span>: <span class="st">'#e60000'</span>,    <span class="co"># Rojo</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D4 Sequía excepcional'</span>: <span class="st">'#730000'</span> <span class="co"># Rojo oscuro / Guinda</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> px.area(</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    evolucion, </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span><span class="st">'fecha'</span>, </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span><span class="st">'porcentaje'</span>, </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">'intensidad_desc'</span>,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    category_orders<span class="op">=</span>{<span class="st">'intensidad_desc'</span>: orden_categorias},</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>    color_discrete_map<span class="op">=</span>colores_oficiales</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>fig.update_layout(</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>    title<span class="op">=</span><span class="st">'&lt;b&gt;Evolución Nacional de la Sequía en México (2016 - 2026)&lt;/b&gt;'</span>,</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    xaxis_title<span class="op">=</span><span class="st">''</span>,</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    yaxis_title<span class="op">=</span><span class="st">'</span><span class="sc">% d</span><span class="st">e Municipios del País'</span>,</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    template<span class="op">=</span><span class="st">'plotly_white'</span>,</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    hovermode<span class="op">=</span><span class="st">'x unified'</span>,</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    legend_title_text<span class="op">=</span><span class="st">'Nivel de Severidad'</span>,</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    legend<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>        orientation<span class="op">=</span><span class="st">"h"</span>,</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>        yanchor<span class="op">=</span><span class="st">"bottom"</span>,</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>        y<span class="op">=-</span><span class="fl">0.25</span>,</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>        xanchor<span class="op">=</span><span class="st">"center"</span>,</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="fl">0.5</span></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    margin<span class="op">=</span><span class="bu">dict</span>(l<span class="op">=</span><span class="dv">20</span>, r<span class="op">=</span><span class="dv">20</span>, t<span class="op">=</span><span class="dv">50</span>, b<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>fig.update_yaxes(<span class="bu">range</span><span class="op">=</span>[<span class="dv">0</span>, <span class="dv">100</span>])</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div style="height:525px; width:100%;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
