@@ -1,4 +1,4 @@
----
+h---
 title: "2. Análisis temporal"
 jupyter: python3
 execute:
@@ -251,3 +251,65 @@ fig.update_yaxes(range=[0, 100])
 
 fig.show()
 ```
+
+## Top 15 Municipios "Crónicos"
+
+
+Evalúa el desgaste territorial a largo plazo, identificando aquellos lugares donde la sequía ha dejado de ser un evento temporal para convertirse en una condición persistente.
+
+1. Elementos Visuales del Gráfico
+**Eje Vertical ($Y$):** Muestra los nombres de los 15 municipios (con su respectivo estado) que encabezan la lista.Eje **Horizontal ($X$):** Representa la racha máxima de quincenas consecutivas que el municipio ha pasado sin salir de condiciones de sequía.
+**Gradiente de Color (Rojo):** Indica la frecuencia histórica. Un rojo más oscuro significa que, además de tener una racha larga, ese municipio ha pasado casi todo el periodo evaluado (2016-2026) bajo algún grado de sequía.
+2. Puntos Clave para el Análisis
+**Falta de recarga hídrica:** Las rachas prolongadas (que pueden representar meses o incluso años ininterrumpidos) indican que los mantos acuíferos y presas locales no han tenido ventanas de recuperación, llevando a un agotamiento estructural de los recursos.
+**Doble factor de riesgo:** Si un municipio tiene una barra muy larga (racha extensa) y un color rojo muy intenso (alta frecuencia), se clasifica como una zona de emergencia crónica. Esto significa que cualquier lluvia que caiga es insuficiente para revertir el déficit acumulado.
+
+Este análisis identifica el 'epicentro' de la crisis hídrica. Las declaratorias de emergencia convencionales son ineficaces para estos municipios top 15, ya que su déficit no es estacional, sino crónico, requiriendo intervenciones estructurales permanentes como reconversión agrícola o nueva infraestructura de abasto.
+
+
+```{python}
+# Creamos una columna que combine el municipio y su estado para que no haya confusión (ej. "Centro, Tabasco")
+df_mun['Municipio_Estado'] = df_mun['NOMBRE_MUN'] + ', ' + df_mun['ENTIDAD']
+
+# Obtenemos los 15 municipios con la racha más alta y los ordenamos de menor a mayor (para Plotly)
+df_top15_crónicos = df_mun.nlargest(15, 'racha_maxima_quincenas').sort_values('racha_maxima_quincenas', ascending=True)
+
+# gráfica interactiva
+fig_cronicos = px.bar(
+    df_top15_crónicos,
+    x='racha_maxima_quincenas',
+    y='Municipio_Estado',
+    orientation='h',
+    color='frecuencia_sequia_pct', # El color revelará si además de una racha larga, siempre están secos
+    color_continuous_scale='Reds',
+    title='Top 15 Municipios "Crónicos": Mayor racha continua en sequía',
+    labels={
+        'racha_maxima_quincenas': 'Quincenas Consecutivas en Sequía',
+        'Municipio_Estado': 'Municipio',
+        'frecuencia_sequia_pct': '% de Frecuencia Total'
+    }
+)
+
+# formato del Hover (Etiqueta al pasar el cursor)
+fig_cronicos.update_traces(
+    hovertemplate=(
+        "<b>%{y}</b><br>"
+        "Racha Máxima: %{x} quincenas seguidas<br>"
+        "Frecuencia Histórica: %{marker.color:.1f}% del tiempo en sequía<br>"
+        "<extra></extra>"
+    )
+)
+
+# 4. Ajustes visuales
+fig_cronicos.update_layout(
+    height=600,
+    plot_bgcolor='white',
+    coloraxis_colorbar=dict(title="% Frecuencia<br>Histórica")
+)
+fig_cronicos.update_xaxes(showgrid=True, gridcolor='lightgray')
+
+# Mostrar gráfica
+fig_cronicos.show()
+```
+
+
