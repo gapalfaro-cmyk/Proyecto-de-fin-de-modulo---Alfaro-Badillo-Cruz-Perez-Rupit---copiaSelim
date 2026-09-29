@@ -197,7 +197,7 @@ Las entidades federativas del sur, centro y occidente registran un volumen muy a
 ------------------------------------------------------------------------
 ## Evolución Nacional de la Sequía en México 
 ```{python}
-df = pd.read_parquet("sequia_analitico_2016.parquet")
+df = pd.read_parquet("../data/processed/sequia_analitico_2016.parquet")
 
 evolucion = df.groupby(['fecha', 'intensidad_desc']).size().reset_index(name='conteo')
 
