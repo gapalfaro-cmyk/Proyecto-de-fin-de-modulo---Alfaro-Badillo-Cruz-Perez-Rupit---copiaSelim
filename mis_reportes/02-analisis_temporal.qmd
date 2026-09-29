@@ -1,8 +1,5 @@
 ---
 title: "2. Análisis exploratorio de datos"
-jupyter: python3
-execute:
-  cache: true
 output:
   flexdashboard::flex_dashboard:
     orientation: rows
@@ -26,7 +23,32 @@ knitr::opts_chunk$set(
   fig.width = 7,
   fig.height = 4
 )
+```
 
+```{python}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings('ignore')
+
+# Estilo visual para reportes
+sns.set_theme(style="whitegrid")
+plt.rcParams.update({'font.sans-serif': 'DejaVu Sans', 'font.size': 11})
+
+# 1. Carga de la base analítica
+df_analitico = pd.read_parquet("../data/processed/sequia_analitico_2016.parquet")
+
+# Asegurar formato correcto de fechas
+df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
+df_analitico['anio'] = df_analitico['fecha'].dt.year
+
+# Normalización de categorías de sequía (D0 a D4 y Sin Sequía)
+cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
+```
+
+EDA
 =====================================
 
 Row {data-height=200}
@@ -34,11 +56,17 @@ Row {data-height=200}
 
 ### Visión general
 
-En la República Mexicana hay **32,058** municipios en los **32**estados. 
+Para este análisis tenemos:
 - **1** → República Mexicana.
 - **32** → Estados.
 - **32,058** → Municipios
+
 ### Regla visual
+
+```{python}
+#AQUÍ VA EL CÓDIGO DE PYTHON
+
+```
 
 ```text
 Página
@@ -63,28 +91,6 @@ Row
 
 
 
-```{python}
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import warnings
-warnings.filterwarnings('ignore')
-
-# Estilo visual para reportes
-sns.set_theme(style="whitegrid")
-plt.rcParams.update({'font.sans-serif': 'DejaVu Sans', 'font.size': 11})
-
-# 1. Carga de la base analítica
-df_analitico = pd.read_parquet("../data/processed/sequia_analitico_2016.parquet")
-
-# Asegurar formato correcto de fechas
-df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
-df_analitico['anio'] = df_analitico['fecha'].dt.year
-
-# Normalización de categorías de sequía (D0 a D4 y Sin Sequía)
-cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
-```
 
 ## Proporción de Municipios en Sequía vs. Total Evaluado en México
 
