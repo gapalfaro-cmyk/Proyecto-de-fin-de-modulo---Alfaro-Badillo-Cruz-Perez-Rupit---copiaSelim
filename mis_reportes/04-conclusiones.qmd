@@ -1,0 +1,106 @@
+---
+title: "4. Conclusiones"
+jupyter: python3
+execute:
+  cache: true
+  warning: false
+  message: false
+---
+
+
+```{python}
+#| code-fold: true
+#| code-summary: "Ver código del Mapa de Riesgo Estatal"
+
+import pandas as pd
+import plotly.express as px
+import requests
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+
+df = pd.read_parquet("../data/processed/municipios_clusterizados.parquet")
+
+features = ['frecuencia_sequia_pct', 'racha_maxima_quincenas', 
+            'vulnerabilidad_ambiental', 'vulnerabilidad_social', 'vulnerabilidad_economica']
+
+X_scaled = StandardScaler().fit_transform(SimpleImputer(strategy='median').fit_transform(df[features]))
+df['Indice_Riesgo_Global'] = X_scaled.sum(axis=1)
+
+riesgo_estatal = df.groupby('ENTIDAD', as_index=False)['Indice_Riesgo_Global'].mean()
+riesgo_estatal = riesgo_estatal.sort_values('Indice_Riesgo_Global', ascending=False)
+
+url_geojson = "https://raw.githubusercontent.com/angelnmara/geojson/master/mexicoHigh.json"
+mx_regiones = requests.get(url_geojson).json()
+
+mapa_nombres = {
+    'Veracruz de Ignacio de la Llave': 'Veracruz', 
+    'Michoacán de Ocampo': 'Michoacán', 
+    'Coahuila de Zaragoza': 'Coahuila',
+    'Estado de México': 'México'
+}
+riesgo_estatal['ENTIDAD_MAPA'] = riesgo_estatal['ENTIDAD'].replace(mapa_nombres)
+
+fig_mapa = px.choropleth(
+    riesgo_estatal,
+    geojson=mx_regiones,
+    featureidkey='properties.name',
+    locations='ENTIDAD_MAPA',
+    color='Indice_Riesgo_Global',
+    color_continuous_scale='Reds',
+    title='<b>Índice Promedio de Riesgo Hídrico por Entidad Federativa</b>',
+    labels={'Indice_Riesgo_Global': 'Nivel de Riesgo (Z-score)'}
+)
+
+fig_mapa.update_geos(fitbounds="locations", visible=False)
+fig_mapa.update_layout(margin={"r":0,"t":50,"l":0,"b":0}, template='plotly_white')
+fig_mapa.show()
+```
+
+- Agrega el riesgo municipal para identificar macro-regiones prioritarias, facilitando la asignación de recursos y la planeación de políticas públicas a nivel entidad federativa
+
+
+```{python}
+#| code-fold: true
+#| code-summary: "Ver código de la Matriz de Riesgo"
+
+import pandas as pd
+import plotly.express as px
+
+df = pd.read_parquet("../data/processed/municipios_clusterizados.parquet")
+
+df['Vulnerabilidad_Total'] = df['vulnerabilidad_ambiental'] + df['vulnerabilidad_social'] + df['vulnerabilidad_economica']
+
+df_plot = df.dropna(subset=['Vulnerabilidad_Total', 'frecuencia_sequia_pct']).copy()
+
+fig_scatter = px.scatter(
+    df_plot,
+    x='frecuencia_sequia_pct',
+    y='Vulnerabilidad_Total',
+    color='Perfil_Riesgo',
+    hover_name='NOMBRE_MUN',
+    hover_data={'ENTIDAD': True, 'Perfil_Riesgo': False, 'Vulnerabilidad_Total': ':.2f'},
+    color_discrete_map={
+        'Riesgo Bajo / Resilientes': '#2ca02c',
+        'Riesgo Medio / Vulnerabilidad Social': '#ff7f0e',
+        'Riesgo Alto / Estrés Hídrico': '#d62728',
+        'Riesgo Crítico / Tormenta Perfecta': '#4b0082'
+    },
+    title='<b>Matriz de Riesgo: Peligro Histórico vs Fragilidad Estructural</b>',
+    labels={
+        'frecuencia_sequia_pct': '% de Quincenas en Sequía (Peligro)',
+        'Vulnerabilidad_Total': 'Índice de Vulnerabilidad Acumulada'
+    },
+    opacity=0.7
+)
+
+fig_scatter.update_layout(
+    template='plotly_white',
+    legend_title_text='Segmento',
+    legend=dict(orientation="h", y=-0.2),
+    margin=dict(l=20, r=20, t=50, b=20)
+)
+
+fig_scatter.show()
+```
+
+- Contrasta la exposición histórica frente a la fragilidad estructural para detectar "bombas de tiempo": municipios donde un evento climático atípico tendría consecuencias devastadoras inmediatas.

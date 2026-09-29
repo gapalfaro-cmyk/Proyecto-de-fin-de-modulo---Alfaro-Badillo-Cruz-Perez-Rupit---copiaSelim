@@ -236,8 +236,77 @@ plt.show()
 Las entidades federativas del sur, centro y occidente registran un volumen muy alto de unidades municipales impactadas por la escasez de agua.
 
 
-------------------------------------------------------------------------
+---
+
 ## PRUEBA MAPA: Distribución de sequia en México 2026
+
 ```{python}
 import geopandas as gpd
+```
+
+
+
+
+---- 
+mas pruebasss de graficas, si nos gusta esta grafica!
+
+```{python}
+#| code-fold: true
+#| code-summary: "Ver código de la gráfica interactiva"
+
+import pandas as pd
+import plotly.express as px
+
+df = pd.read_parquet("../data/processed/sequia_analitico_2016.parquet")
+
+evolucion = df.groupby(['fecha', 'intensidad_desc']).size().reset_index(name='conteo')
+
+evolucion['porcentaje'] = evolucion.groupby('fecha')['conteo'].transform(lambda x: (x / x.sum()) * 100)
+orden_categorias = [
+    'Sin sequía', 
+    'D0 Anormalmente seco', 
+    'D1 Sequía moderada', 
+    'D2 Sequía severa', 
+    'D3 Sequía extrema', 
+    'D4 Sequía excepcional'
+]
+
+colores_oficiales = {
+    'Sin sequía': '#e0e0e0',          # Gris claro
+    'D0 Anormalmente seco': '#ffff00', # Amarillo
+    'D1 Sequía moderada': '#fcd37f',   # Naranja claro
+    'D2 Sequía severa': '#ffaa00',     # Naranja oscuro
+    'D3 Sequía extrema': '#e60000',    # Rojo
+    'D4 Sequía excepcional': '#730000' # Rojo oscuro / Guinda
+}
+
+fig = px.area(
+    evolucion, 
+    x='fecha', 
+    y='porcentaje', 
+    color='intensidad_desc',
+    category_orders={'intensidad_desc': orden_categorias},
+    color_discrete_map=colores_oficiales
+)
+
+fig.update_layout(
+    title='<b>Evolución Nacional de la Sequía en México (2016 - 2026)</b>',
+    xaxis_title='',
+    yaxis_title='% de Municipios del País',
+    template='plotly_white',
+    hovermode='x unified',
+    legend_title_text='Nivel de Severidad',
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=-0.25,
+        xanchor="center",
+        x=0.5
+    ),
+    margin=dict(l=20, r=20, t=50, b=20)
+)
+
+fig.update_yaxes(range=[0, 100])
+
+fig.show()
 ```

@@ -1,6 +1,118 @@
 ---
-title: "Tercer reporte trimestral"
-description: "Análisis de los datos actualizados"
-date: "2026-04-01"
+title: "3. Modelado Espacial y Clustering Territorial"
+jupyter: python3
+execute:
+  cache: true
+  warning: false
+  message: false
 ---
 
+## Identificación de Zonas de Riesgo Estratégico
+
+El análisis temporal nos muestra *cuándo* ocurre la sequía, pero para la toma de decisiones ejecutivas necesitamos saber *dónde* actuar con prioridad. 
+
+Utilizamos un algoritmo de agrupamiento (K-Means) para segmentar los municipios basándonos en cinco dimensiones críticas:
+1. **Frecuencia de sequía:** Porcentaje del tiempo que el municipio pasa en condiciones D0+.
+2. **Persistencia:** La racha histórica más larga de quincenas consecutivas en sequía.
+3. **Vulnerabilidad Ambiental:** Probabilidad de daño al ecosistema.
+4. **Vulnerabilidad Social:** Sensibilidad de la población ante la falta de agua.
+5. **Vulnerabilidad Económica:** Riesgo de pérdidas productivas y financieras.
+
+## Pipeline de Machine Learning
+
+Dado que las variables tienen distintas escalas (porcentajes, conteo de quincenas y probabilidades continuas), implementamos un pipeline de preprocesamiento que incluye imputación de valores nulos (para los municipios de reciente creación) y estandarización (Z-score).
+
+```{python}
+#| code-fold: true
+#| code-summary: "Ver código de preprocesamiento y entrenamiento K-Means"
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.cluster import KMeans
+import plotly.graph_objects as go
+
+df = pd.read_parquet("../data/processed/resumen_municipal.parquet")
+
+features = [
+    'frecuencia_sequia_pct', 
+    'racha_maxima_quincenas',
+    'vulnerabilidad_ambiental', 
+    'vulnerabilidad_social', 
+    'vulnerabilidad_economica'
+]
+
+imputer = SimpleImputer(strategy='median')
+X_imputed = imputer.fit_transform(df[features])
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_imputed)
+
+kmeans = KMeans(n_clusters=4, random_state=42, n_init=10)
+df['Cluster_ID'] = kmeans.fit_predict(X_scaled)
+
+cluster_risk = pd.DataFrame(X_scaled).groupby(df['Cluster_ID']).mean().sum(axis=1).sort_values()
+mapeo_nombres = {
+    cluster_risk.index[0]: 'Riesgo Bajo / Resilientes',
+    cluster_risk.index[1]: 'Riesgo Medio / Vulnerabilidad Social',
+    cluster_risk.index[2]: 'Riesgo Alto / Estrés Hídrico',
+    cluster_risk.index[3]: 'Riesgo Crítico / Tormenta Perfecta'
+}
+
+df['Perfil_Riesgo'] = df['Cluster_ID'].map(mapeo_nombres)
+
+df.to_parquet("../data/processed/municipios_clusterizados.parquet", index=False)
+
+print("Distribución de municipios por perfil de riesgo:")
+df['Perfil_Riesgo'].value_counts()
+
+perfiles = df.groupby('Perfil_Riesgo')[features].mean().reset_index()
+
+for col in features:
+    min_val = df[col].min()
+    max_val = df[col].max()
+    perfiles[col + '_norm'] = (perfiles[col] - min_val) / (max_val - min_val)
+
+features_norm = [f + '_norm' for f in features]
+nombres_ejes = ['Frecuencia Sequía', 'Racha Máxima', 'Vul. Ambiental', 'Vul. Social', 'Vul. Económica']
+
+colores_cluster = {
+    'Riesgo Bajo / Resilientes': '#2ca02c',          # Verde
+    'Riesgo Medio / Vulnerabilidad Social': '#ff7f0e', # Naranja
+    'Riesgo Alto / Estrés Hídrico': '#d62728',         # Rojo
+    'Riesgo Crítico / Tormenta Perfecta': '#4b0082'    # Morado oscuro
+}
+
+fig = go.Figure()
+
+for i, row in perfiles.iterrows():
+    perfil = row['Perfil_Riesgo']
+    valores = row[features_norm].tolist()
+    valores += [valores[0]]
+    ejes_cerrados = nombres_ejes + [nombres_ejes[0]]
+    
+    fig.add_trace(go.Scatterpolar(
+        r=valores,
+        theta=ejes_cerrados,
+        fill='toself',
+        name=perfil,
+        line_color=colores_cluster[perfil],
+        opacity=0.7
+    ))
+
+fig.update_layout(
+    polar=dict(
+        radialaxis=dict(visible=False, range=[0, 1])
+    ),
+    showlegend=True,
+    title='<b>Perfiles Territoriales: Descomposición del Riesgo</b>',
+    template='plotly_white',
+    legend=dict(orientation="h", y=-0.2)
+)
+
+fig.show()
+```
+
+
+- Descompone la estructura interna de los clústeres para revelar la naturaleza del riesgo, diferenciando aquellos impulsados por el peligro meteorológico de los originados por fragilidad socioeconómica.
