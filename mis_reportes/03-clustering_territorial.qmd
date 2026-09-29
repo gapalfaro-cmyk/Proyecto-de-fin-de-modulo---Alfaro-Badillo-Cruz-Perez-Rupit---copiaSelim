@@ -116,3 +116,53 @@ fig.show()
 
 
 - Descompone la estructura interna de los clústeres para revelar la naturaleza del riesgo, diferenciando aquellos impulsados por el peligro meteorológico de los originados por fragilidad socioeconómica.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Ver código de validación del modelo (Método del Codo)"
+
+import pandas as pd
+import plotly.graph_objects as go
+from sklearn.cluster import KMeans
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+
+df = pd.read_parquet("../data/processed/resumen_municipal.parquet")
+features = ['frecuencia_sequia_pct', 'racha_maxima_quincenas', 
+            'vulnerabilidad_ambiental', 'vulnerabilidad_social', 'vulnerabilidad_economica']
+
+X = SimpleImputer(strategy='median').fit_transform(df[features])
+X_scaled = StandardScaler().fit_transform(X)
+
+inercia = []
+rango_k = range(2, 11)
+
+for k in rango_k:
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    kmeans.fit(X_scaled)
+    inercia.append(kmeans.inertia_)
+
+fig_codo = go.Figure()
+fig_codo.add_trace(go.Scatter(
+    x=list(rango_k), 
+    y=inercia, 
+    mode='lines+markers',
+    marker=dict(size=10, color='#b05c38'), 
+    line=dict(width=3)
+))
+
+fig_codo.add_vline(x=4, line_width=2, line_dash="dash", line_color="gray")
+
+
+fig_codo.update_layout(
+    title='<b>Validación: Método del Codo (Inercia)</b>',
+    xaxis_title='Número de Segmentos (k)',
+    yaxis_title='Inercia Intra-Clúster ($WCSS$)',
+    template='plotly_white',
+    margin=dict(l=20, r=20, t=50, b=20)
+)
+
+fig_codo.show()
+```
+
+- La gráfica evalúa la inercia interna ($WCSS$) del modelo frente a diferentes números de segmentos ($k$). Demuestra la elección de 4 perfiles territoriales, ya que en $k=4$ ocurre un claro punto de inflexión donde la curva se suaviza. Añadir clústeres adicionales (de 5 a 10) ofrece reducciones de error cada vez menores, lo que fragmentaría los datos y sobrecomplicaría el análisis sin aportar una mejora estadística sustancial en la cohesión de los grupos.   

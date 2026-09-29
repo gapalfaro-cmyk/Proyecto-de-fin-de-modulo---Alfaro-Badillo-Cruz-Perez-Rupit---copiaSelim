@@ -48,6 +48,8 @@ jobs:
             any::readxl
             any::dplyr
             any::ggplot2
+            any::reticulate
+            any::skim
 
       - name: Renderizar sitio
         run: quarto render
