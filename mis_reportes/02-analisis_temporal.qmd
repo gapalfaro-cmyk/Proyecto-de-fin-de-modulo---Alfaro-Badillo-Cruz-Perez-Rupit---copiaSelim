@@ -249,6 +249,8 @@ import geopandas as gpd
 
 ---- 
 mas pruebasss de graficas, si nos gusta esta grafica!
+- Visualiza la proporción histórica del territorio bajo estrés hídrico, dimensionando la magnitud y duración de las crisis climatológicas recientes a nivel nacional.
+
 
 ```{python}
 #| code-fold: true
