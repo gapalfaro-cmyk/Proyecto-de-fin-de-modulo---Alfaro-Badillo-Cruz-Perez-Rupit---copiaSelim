@@ -36,7 +36,8 @@ mapa_nombres = {
     'Veracruz de Ignacio de la Llave': 'Veracruz', 
     'Michoacán de Ocampo': 'Michoacán', 
     'Coahuila de Zaragoza': 'Coahuila',
-    'Estado de México': 'México'
+    'Estado de México': 'México',
+    'Querétaro de Arteaga': 'Querétaro'
 }
 riesgo_estatal['ENTIDAD_MAPA'] = riesgo_estatal['ENTIDAD'].replace(mapa_nombres)
 
