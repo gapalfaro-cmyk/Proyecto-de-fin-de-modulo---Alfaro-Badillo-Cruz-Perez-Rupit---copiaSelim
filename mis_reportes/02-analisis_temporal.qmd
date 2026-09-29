@@ -195,220 +195,58 @@ Las entidades federativas del sur, centro y occidente registran un volumen muy a
 
 
 ------------------------------------------------------------------------
-## PRUEBA MAPA: Distribución de sequia en México 2026
+## Evolución Nacional de la Sequía en México 
 ```{python}
-import geopandas as gpd
-```
+df = pd.read_parquet("sequia_analitico_2016.parquet")
 
----
-title: "2. Análisis exploratorio de datos"
-jupyter: python3
-execute:
-  cache: true
----
+evolucion = df.groupby(['fecha', 'intensidad_desc']).size().reset_index(name='conteo')
 
-```{python}
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import warnings
-warnings.filterwarnings('ignore')
-
-# Estilo visual para reportes
-sns.set_theme(style="whitegrid")
-plt.rcParams.update({'font.sans-serif': 'DejaVu Sans', 'font.size': 11})
-
-colores_custom = [
-    '#BDBDBD', # Sin Sequia
-    '#FFFF00', # D0
-    '#F4E4C1', # D1
-    '#F4A261', # D2
-    '#E63946', # D3
-    '#800020'  # D4
+evolucion['porcentaje'] = evolucion.groupby('fecha')['conteo'].transform(lambda x: (x / x.sum()) * 100)
+orden_categorias = [
+    'Sin sequía',
+    'D0 Anormalmente seco',
+    'D1 Sequía moderada',
+    'D2 Sequía severa',
+    'D3 Sequía extrema',
+    'D4 Sequía excepcional'
 ]
 
-# 1. Carga de la base analítica
-df_analitico = pd.read_parquet("../data/processed/sequia_analitico_2016.parquet")
-
-# Asegurar formato correcto de fechas
-df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
-df_analitico['anio'] = df_analitico['fecha'].dt.year
-
-# Normalización de categorías de sequía (D0 a D4 y Sin Sequía)
-cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
-
-# Normalizar la columna de clasificación
-df_analitico['clasificacion_sequia'] = df_analitico['clasificacion_sequia'].fillna('Sin Sequía')
-df_analitico['clasificacion_sequia'] = pd.Categorical(
-    df_analitico['clasificacion_sequia'],
-    categories=cat_order,
-    ordered=True
-
-```
-## Proporción de Sequía en el Tiempo
-
-Este gráfico, nos muestran la proporción de meses y municipios con algún gradi de sequía en el año. 
-
-```{python}
-# GRAFICA 1: Proporción de niveles de sequía en los años
-df_percent[cat_order].plot(
-    kind='bar',
-    stacked=True,
-    figsize=(14, 7),
-    color=colores_custom,
-    width=0.85
-)
-
-plt.title('Distribución de la intensidad de sequía por año', fontsize=14, fontweight='bold')
-plt.xlabel('Año', fontsize=12)
-plt.ylabel('Porcentaje de Municipios', fontsize=12)
-plt.legend(title='Nivel de Sequía', bbox_to_anchor=(1.02, 1), loc='upper left')
-plt.tight_layout()
-plt.show()
-plt.show()
-```
-
-## Proporción de Municipios en Sequía vs. Total Evaluado en México
-
-El gráfico de líneas y área sombreada permite analizar la magnitud absoluta y la tendencia temporal de los municipios afectados por sequía en comparación con el total de municipios monitoreados en el país.
-Línea Azul Punteada (--): Muestra el Total de Municipios Registrados / Evaluados por el Monitor de Sequía (alrededor de 2,400 a 2,470 municipios). Sirve como el límite superior o techo de referencia ( 100% ).
-Brecha entre la Línea Azul y Naranja: Cuando la línea naranja está muy cerca de la azul, significa que prácticamente todo el país estuvo en sequía (crisis nacional).
-
-```{python}
-# GRAFICA 2: Municipios que presentan sequía vs Total de municipios en el tiempo
-df_g1 = df_analitico.groupby('fecha').agg(
-    total_municipios=('CVE_CONCATENADA', 'nunique'),
-    municipios_en_sequia=('en_sequia', lambda x: (x > 0).sum())
-).reset_index()
-
-plt.figure(figsize=(12, 5.5))
-plt.plot(df_g1['fecha'], df_g1['total_municipios'], label='Total de Municipios Registrados', color='#1f77b4', linestyle='--', linewidth=2)
-plt.plot(df_g1['fecha'], df_g1['municipios_en_sequia'], label='Municipios en Sequía (D0 - D4)', color='#d95f02', linewidth=2.5)
-plt.fill_between(df_g1['fecha'], df_g1['municipios_en_sequia'], color='#d95f02', alpha=0.15)
-plt.title('Proporción de Municipios en Sequía vs. Total Evaluado en México', fontsize=13, fontweight='bold', pad=12)
-plt.xlabel('Fecha', fontsize=11)
-plt.ylabel('Número de Municipios', fontsize=11)
-plt.legend(loc='upper right', frameon=True)
-plt.tight_layout()
-plt.savefig('grafica1_municipios_vs_total.png', dpi=300)
-plt.show()
-```
-
-## Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior
-
-Se presenta un cambio estructural en el patrón de sequía en México: entre 2016 y 2020 el fenómeno se concentraba principalmente en fases preventivas (D0 y D1), el periodo 2022–2024 marcó una escala crítica sin precedentes, donde un número histórico de municipios alcanzó simultáneamente niveles de sequía extrema (D3) y excepcional (D4).
-
-```{python}
-# GRAFICA 3: Comparativo de Municipios por Nivel de Sequía
-# 1. Asegurar formato de fecha y año
-df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
-df_analitico['anio'] = df_analitico['fecha'].dt.year
-
-# 2. Mapeo de códigos numéricos (1-5) a categorías de sequía (D0-D4)
-mapa_intensidad = {
-    1: 'D0',
-    2: 'D1',
-    3: 'D2',
-    4: 'D3',
-    5: 'D4'
+colores_oficiales = {
+    'Sin sequía': '#e0e0e0',          # Gris claro
+    'D0 Anormalmente seco': '#ffff00', # Amarillo
+    'D1 Sequía moderada': '#fcd37f',   # Naranja claro
+    'D2 Sequía severa': '#ffaa00',     # Naranja oscuro
+    'D3 Sequía extrema': '#e60000',    # Rojo
+    'D4 Sequía excepcional': '#730000' # Rojo oscuro / Guinda
 }
 
-# 3. Filtrar niveles con afectación (1 a 5)
-df_filtrado = df_analitico[df_analitico['intensidad'].isin([1, 2, 3, 4, 5])].copy()
-df_filtrado['intensidad_nom'] = df_filtrado['intensidad'].map(mapa_intensidad)
-
-# 4. Agrupar por año y nivel mapeado
-df_g2 = df_filtrado.groupby(['anio', 'intensidad_nom'])['CVE_CONCATENADA'].nunique().reset_index()
-
-# 5. Dibujar la gráfica
-plt.figure(figsize=(11, 6))
-
-sns.barplot(
-    data=df_g2,
-    x='intensidad_nom',
-    y='CVE_CONCATENADA',
-    hue='anio',
-    palette='colores_custom'
+fig = px.area(
+    evolucion,
+    x='fecha',
+    y='porcentaje',
+    color='intensidad_desc',
+    category_orders={'intensidad_desc': orden_categorias},
+    color_discrete_map=colores_oficiales
 )
 
-plt.title('Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior', fontsize=13, fontweight='bold', pad=12)
-plt.xlabel('Nivel de Intensidad (Monitor CONAGUA / PRONACOSE)', fontsize=11)
-plt.ylabel('Número Único de Municipios Afectados', fontsize=11)
-plt.legend(title='Año', bbox_to_anchor=(1.02, 1), loc='upper left', frameon=True)
-plt.tight_layout()
+fig.update_layout(
+    title='<b>Evolución Nacional de la Sequía en México (2016 - 2026)</b>',
+    xaxis_title='',
+    yaxis_title='% de Municipios del País',
+    template='plotly_white',
+    hovermode='x unified',
+    legend_title_text='Nivel de Severidad',
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=-0.25,
+        xanchor="center",
+        x=0.5
+    ),
+    margin=dict(l=20, r=20, t=50, b=20)
+)
 
-plt.savefig('grafica2_niveles_vs_anio.png', dpi=300)
-plt.show()
+fig.update_yaxes(range=[0, 100])
+
+fig.show()
 ```
-
-## Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)
-
-**Eje Vertical ($Y$):** Representa el número total de estados afectados, con un límite máximo de 32 entidades federativas (el $100\%$ del país).
-
-**Eje Horizontal ($X$):** Representa la línea del tiempo ordenada por años (de 2016 a 2026).
-
-**Colores (Niveles de Sequía):** Muestran la intensidad de afectación acumulada en cada fecha:
-
--   🟢 Verde (Sin Sequía): Estados sin afectación.
--   🟡 Amarillo (D0 - Anormalmente Seco): Condición previa o posterior a una sequía.
--   🟠 Naranja (D1 - Sequía Moderada / D2 - Sequía Severa): Afectaciones moderadas a graves.
--   🔴 Rojo/Guinda (D3 - Sequía Extrema / D4 - Sequía Excepcional): Las condiciones más críticas del Monitor de Sequía.
-
-```{python}
-# GRAFICA 4: Barras apiladas de Estados por Nivel Máximo de Sequía
-
-# 1. Asegurar formato de la columna de intensidad (llenar nulos con 0 para 'Sin Sequía')
-df_analitico['intensidad_num'] = pd.to_numeric(df_analitico['intensidad'], errors='coerce').fillna(0).astype(int)
-
-# 2. Agrupar para obtener la intensidad MÁXIMA por cada Estado en cada Fecha
-# Esto evita que un estado sume puntos múltiples veces en una misma fecha
-df_max_estado = df_analitico.groupby(['fecha', 'ENTIDAD'])['intensidad_num'].max().reset_index()
-
-# 3. Mapear de nuevo a las categorías de texto y ordenar
-cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
-mapa_cat = {0: 'Sin Sequía', 1: 'D0', 2: 'D1', 3: 'D2', 4: 'D3', 5: 'D4'}
-
-df_max_estado['categoria_maxima'] = df_max_estado['intensidad_num'].map(mapa_cat)
-df_max_estado['categoria_maxima'] = pd.Categorical(
-    df_max_estado['categoria_maxima'], 
-    categories=cat_order, 
-    ordered=True
-)
-
-# 4. Agrupar ahora contando los estados únicos 
-df_g3_corregido = df_max_estado.groupby(['fecha', 'categoria_maxima'])['ENTIDAD'].nunique().unstack(fill_value=0)
-df_g3_corregido = df_g3_corregido.reindex(columns=cat_order, fill_value=0)
-
-# 5. Graficar
-ax = df_g3_corregido.plot(
-    kind='bar', 
-    stacked=True, 
-    figsize=(13, 6.5), 
-    color=colores_custom, 
-    width=0.85
-)
-
-# Títulos y etiquetas
-plt.title('Distribución Temporal de Estados por Nivel Máximo de Sequía', fontsize=13, fontweight='bold', pad=12)
-plt.xlabel('Año', fontsize=11)
-plt.ylabel('Número de Estados (Máx. 32)', fontsize=11)
-
-# Etiquetas del eje X (mostrar solo el año cuando cambia)
-fechas = pd.to_datetime(df_g3_corregido.index)
-etiquetas_anios = []
-anio_previo = None
-
-for fecha in fechas:
-    if fecha.year != anio_previo:
-        etiquetas_anios.append(str(fecha.year))
-        anio_previo = fecha.year
-    else:
-        etiquetas_anios.append('')
-
-plt.xticks(ticks=range(len(df_g3_corregido.index)), labels=etiquetas_anios, rotation=0, ha='center')
-
-# Leyenda y márgenes
-plt.legend(title='Nivel de Sequía Máximo', bbox_to_anchor=(1.02, 1), loc='upper left', frameon=True)
-plt.tight_layout()
-
