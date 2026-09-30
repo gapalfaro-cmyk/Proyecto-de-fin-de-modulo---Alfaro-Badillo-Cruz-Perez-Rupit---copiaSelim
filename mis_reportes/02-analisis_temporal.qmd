@@ -19,7 +19,7 @@ import textwrap  # <--- Importante para dividir el texto en renglones
 sns.set_theme(style="whitegrid")
 plt.rcParams.update({'font.sans-serif': 'DejaVu Sans', 'font.size': 11})
 
-# 1. Carga de la base analítica
+# Carga de la base analítica
 df_analitico = pd.read_parquet("../data/processed/sequia_analitico_2016.parquet")
 
 # Asegurar formato correcto de fechas
@@ -30,30 +30,66 @@ df_analitico['anio'] = df_analitico['fecha'].dt.year
 cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
 ```
 
-## Proporción de Municipios en Sequía vs. Total Evaluado en México
+## Municipios en sequía frente al total evaluado
+En la siguiente gráfica podemos ver la evolución, mes a mes, del número de municipios de México que presentan condiciones de sequía en comparación con el total de municipios registrados.
 
-El gráfico de líneas y área sombreada permite analizar la magnitud absoluta y la tendencia temporal de los municipios afectados por sequía en comparación con el total de municipios monitoreados en el país.
-Línea Azul Punteada (--): Muestra el Total de Municipios Registrados / Evaluados por el Monitor de Sequía (alrededor de 2,400 a 2,470 municipios). Sirve como el límite superior o techo de referencia ( 100% ).
-Brecha entre la Línea Azul y Naranja: Cuando la línea naranja está muy cerca de la azul, significa que prácticamente todo el país estuvo en sequía (crisis nacional).
+La línea azul punteada mmuestra el total de municipios con información (2,478 municipios). Y el área naranja indica los municipios en alguna categoría de sequía, desde **D0 (anormalmentre seco)** hasta **D4 (sequía excepcional)**, según la clasificación del Monitor de Sequía de México.
 
 ```{python}
+import plotly.graph_objects as go
+
 # GRAFICA 1: Municipios que presentan sequía vs Total de municipios en el tiempo
 df_g1 = df_analitico.groupby('fecha').agg(
     total_municipios=('CVE_CONCATENADA', 'nunique'),
     municipios_en_sequia=('en_sequia', lambda x: (x > 0).sum())
 ).reset_index()
 
-plt.figure(figsize=(12, 5.5))
-plt.plot(df_g1['fecha'], df_g1['total_municipios'], label='Total de Municipios Registrados', color='#1f77b4', linestyle='--', linewidth=2)
-plt.plot(df_g1['fecha'], df_g1['municipios_en_sequia'], label='Municipios en Sequía (D0 - D4)', color='#d95f02', linewidth=2.5)
-plt.fill_between(df_g1['fecha'], df_g1['municipios_en_sequia'], color='#d95f02', alpha=0.15)
-plt.title('Proporción de Municipios en Sequía vs. Total Evaluado en México', fontsize=13, fontweight='bold', pad=12)
-plt.xlabel('Fecha', fontsize=11)
-plt.ylabel('Número de Municipios', fontsize=11)
-plt.legend(loc='upper right', frameon=True)
-plt.tight_layout()
-plt.savefig('grafica1_municipios_vs_total.png', dpi=300)
-plt.show()
+# Porcentaje para mostrar en el tooltip
+df_g1['pct_sequia'] = (df_g1['municipios_en_sequia'] / df_g1['total_municipios'] * 100).round(1)
+
+fig = go.Figure()
+
+# Línea total de municipios
+fig.add_trace(go.Scatter(
+    x=df_g1['fecha'],
+    y=df_g1['total_municipios'],
+    name='Total de Municipios Registrados',
+    mode='lines',
+    line=dict(color='#1f77b4', width=2, dash='dash'),
+    hovertemplate='<b>Total registrados</b><br>%{y:,} municipios<extra></extra>'
+))
+
+# Área de municipios en sequía
+fig.add_trace(go.Scatter(
+    x=df_g1['fecha'],
+    y=df_g1['municipios_en_sequia'],
+    name='Municipios en Sequía (D0 - D4)',
+    mode='lines',
+    line=dict(color='#d95f02', width=2.5),
+    fill='tozeroy',
+    fillcolor='rgba(217, 95, 2, 0.15)',
+    customdata=df_g1[['pct_sequia']],
+    hovertemplate='<b>En sequía</b><br>%{y:,} municipios'
+                  '<br>%{customdata[0]}% del total<extra></extra>'
+))
+
+fig.update_layout(
+    title=dict(
+        text='<b>Proporción de Municipios en Sequía vs. Total Evaluado en México</b>',
+        font=dict(size=16)
+    ),
+    xaxis_title='Fecha',
+    yaxis_title='Número de Municipios',
+    hovermode='x unified',          # un solo tooltip con todos los valores de esa fecha
+    template='plotly_white',
+    legend=dict(orientation='h', yanchor='bottom', y=1.02, xanchor='right', x=1),
+    height=520,
+    margin=dict(l=60, r=30, t=80, b=50),
+)
+
+fig.update_yaxes(rangemode='tozero')
+
+fig.show()
 ```
 
 ## Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior
