@@ -14,6 +14,7 @@ import warnings
 warnings.filterwarnings('ignore')
 import plotly.express as px
 import textwrap  # <--- Importante para dividir el texto en renglones
+from plotly.colors import sample_colorscale
 
 # Estilo visual para reportes
 sns.set_theme(style="whitegrid")
@@ -44,7 +45,6 @@ df_g1 = df_analitico.groupby('fecha').agg(
     municipios_en_sequia=('en_sequia', lambda x: (x > 0).sum())
 ).reset_index()
 
-# Porcentaje para mostrar en el tooltip
 df_g1['pct_sequia'] = (df_g1['municipios_en_sequia'] / df_g1['total_municipios'] * 100).round(1)
 
 fig = go.Figure()
@@ -87,53 +87,89 @@ fig.update_layout(
     margin=dict(l=60, r=30, t=80, b=50),
 )
 
-fig.update_yaxes(rangemode='tozero')
-
 fig.show()
 ```
 
-## Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior
-
-Se presenta un cambio estructural en el patrón de sequía en México: entre 2016 y 2020 el fenómeno se concentraba principalmente en fases preventivas (D0 y D1), el periodo 2022–2024 marcó una escala crítica sin precedentes, donde un número histórico de municipios alcanzó simultáneamente niveles de sequía extrema (D3) y excepcional (D4).
+## ¿Cómo ha cambiado la severidad de la sequía año con año?
+* 2026 es un año en curso, por lo que sus valores no son comparables con los de años completos.
 
 ```{python}
-# GRAFICA 2: Comparativo de Municipios por Nivel de Sequía
+# GRAFICA 2: Municipios por nivel de sequía, agrupados por año
 df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
 df_analitico['anio'] = df_analitico['fecha'].dt.year
 
-mapa_intensidad = {
-    1: 'D0',
-    2: 'D1',
-    3: 'D2',
-    4: 'D3',
-    5: 'D4'
-}
+mapa_intensidad = {1: 'D0 Anormalmente seco', 2: 'D1 Sequía moderada', 3: 'D2 Sequía severa', 4: 'D3 Sequía extrema', 5: 'D4 Sequía excepcional'}
+orden_niveles = list(mapa_intensidad.values())
 
-df_filtrado = df_analitico[df_analitico['intensidad'].isin([1, 2, 3, 4, 5])].copy()
+df_filtrado = df_analitico[df_analitico['intensidad'].isin(mapa_intensidad)].copy()
 df_filtrado['intensidad_nom'] = df_filtrado['intensidad'].map(mapa_intensidad)
 
-df_g2 = df_filtrado.groupby(['anio', 'intensidad_nom'])['CVE_CONCATENADA'].nunique().reset_index()
-
-plt.figure(figsize=(11, 6))
-
-sns.barplot(
-    data=df_g2,
-    x='intensidad_nom',
-    y='CVE_CONCATENADA',
-    hue='anio',
-    palette='YlOrRd',
-    order=['D0', 'D1', 'D2', 'D3', 'D4']
+df_g2 = (
+    df_filtrado.groupby(['anio', 'intensidad_nom'])['CVE_CONCATENADA']
+    .nunique()
+    .reset_index(name='municipios')
 )
 
-plt.title('Comparativo de Municipios Afectados por Nivel de Sequía vs. Año Anterior', fontsize=13, fontweight='bold', pad=12)
-plt.xlabel('Nivel de Intensidad (Monitor CONAGUA / PRONACOSE)', fontsize=11)
-plt.ylabel('Número Único de Municipios Afectados', fontsize=11)
-plt.legend(title='Año', bbox_to_anchor=(1.02, 1), loc='upper left', frameon=True)
-plt.tight_layout()
+# Porcentaje respecto al total del año
+total_por_anio = df_analitico.groupby('anio')['CVE_CONCATENADA'].nunique().rename('total_anio')
+df_g2 = df_g2.merge(total_por_anio, on='anio')
+df_g2['pct'] = (df_g2['municipios'] / df_g2['total_anio'] * 100).round(1)
 
-plt.savefig('grafica2_niveles_vs_anio.png', dpi=300)
-plt.show()
+# Año incompleto 2026
+ultimo_anio = df_g2['anio'].max()
+df_g2['anio_txt'] = df_g2['anio'].astype(str)
+df_g2.loc[df_g2['anio'] == ultimo_anio, 'anio_txt'] = f'{ultimo_anio}*'
+orden_anios = sorted(df_g2['anio_txt'].unique())
+
+# Color por intensidad
+colores_sequia = {
+    'D0 Anormalmente seco':  '#FFFF00',
+    'D1 Sequía moderada':    '#FCD37F',
+    'D2 Sequía severa':      '#FFAA00',
+    'D3 Sequía extrema':     '#E60000',
+    'D4 Sequía excepcional': '#730000',
+}
+
+fig = px.bar(
+    df_g2,
+    x='anio_txt',
+    y='municipios',
+    color='intensidad_nom',
+    barmode='group',
+    category_orders={'intensidad_nom': orden_niveles, 'anio_txt': orden_anios},
+    color_discrete_map=colores_sequia,
+    custom_data=['intensidad_nom', 'pct', 'total_anio'],
+    labels={
+        'anio_txt': 'Año',
+        'municipios': 'Número de municipios afectados',
+        'intensidad_nom': 'Intensidad de sequía'
+    }
+)
+
+fig.update_traces(
+    marker_line_color='rgba(0,0,0,0.35)',
+    marker_line_width=0.6,
+    hovertemplate='<b>Año %{x}</b><br>'
+                  'Nivel: %{customdata[0]}<br>'
+                  'Municipios afectados: %{y:,}<br>'
+                  '%{customdata[1]}% de %{customdata[2]:,} evaluados'
+                  '<extra></extra>'
+)
+
+fig.update_layout(
+    title=dict(
+        text='<b>Municipios afectados por intensidad de sequía, por año</b>',
+        font=dict(size=16)
+    ),
+    template='plotly_white',
+    bargap=0.15,
+    bargroupgap=0.04,
+    legend=dict(title='Nivel', orientation='v', yanchor='top', y=1, xanchor='left', x=1.02),
+    height=520,
+    margin=dict(l=60, r=30, t=80, b=90),
+)
 ```
+Podemos ver que entre 2016 y 2022 la sequía, aunque de bajo nivel, fue extensa (más de 2,000 municipios tuvieron al menos una quincena en D0 cada año), con muy pocos municipios en D3 y D4. Para 2023 y 2024 el patrón cambió, pues los niveles D2 y D3 se multiplicaron y en 2024 casi 370 municipios llegaron a D4 Sequía excepcional, **el máximo de los útlimos 10 años**. En 2025 este patrón disminuyó, aunque los niveles extremos siguen por encima de lo observado antes de 2023.
 
 ## Distribución Temporal de Estados por Nivel de Sequía (D0 a D4)
 
