@@ -266,26 +266,26 @@ Es claro que la sequía en México es una condición casi permanente a nivel est
 - 2021 (Primer pico severo): Aumenta considerablemente la franja naranja y roja, reduciendo los estados sin sequía a menos de la mitad del país.
 - 2023 - 2024 (La crisis más severa y prolongada): Es el punto más crítico visible en la gráfica. Las categorías D3 (Extrema) y D4 (Excepcional) ocupan una franja dominante, abarcando casi la totalidad de los 32 estados con algún grado de sequía o sequía extrema durante meses.
 
-## Distribución de municipios afectados para comparar qué estados son los más críticos:
-Este diagrama de barras horizontales permite identificar la distribución geográfica y el impacto acumulado de la sequía a nivel de los estados de la República Mexicana.
+## ¿Qué estados concentran más municipios que han presentado sequía?
+
+Esta gráfica compara los 32 estados según el número de municipios distintos que han estado en sequía (categorías D0 a D4) en algún momento del 2016-2026.
 
 ```{python}
-# GRAFICA 4: Comparativo por Estado en una fecha reciente (o año completo)
-#Distribución de municipios afectados para comparar qué estados son los más críticos:
+# GRAFICA 4: Comparativo por Estado
 
 df_estado_mun = df_analitico[df_analitico['en_sequia'] == True].groupby('ENTIDAD')['CVE_CONCATENADA'].nunique().reset_index()
 df_estado_mun.rename(columns={'CVE_CONCATENADA': 'num_municipios'}, inplace=True)
 
 df_estado_mun = df_estado_mun.sort_values(by='num_municipios', ascending=True)
 
+# gráfica interactiva
 fig = px.bar(
     df_estado_mun,
     x='num_municipios',
     y='ENTIDAD',
     orientation='h', # Barras horizontales
     color='num_municipios', # El color dependerá del número de municipios
-    color_continuous_scale='Oranges', # Paleta de colores similar a la que usabas
-    title='Número de Municipios en Sequía por Entidad Federativa'
+    color_continuous_scale='Oranges'# Paleta de colores similar a la que usabas
 )
 
 fig.update_traces(
@@ -297,7 +297,11 @@ fig.update_traces(
 )
 
 fig.update_layout(
-    height=800, # Altura en píxeles
+    title=dict(
+        text='<b>Número de Municipios en Sequía por Entidad Federativa</b>',
+        font=dict(size=16)
+    ),
+    height=700, # Altura en píxeles
     xaxis_title='Número de Municipios Afectados',
     yaxis_title='Estado / Entidad',
     plot_bgcolor='white',
@@ -310,19 +314,107 @@ fig.update_yaxes(showgrid=False)
 
 fig.show()
 ```
-
-### Estados más afectados (Concentración geográfica)
-- Oaxaca encabeza la lista con la barra más larga. Esto se debe principalmente a su división territorial (cuenta con 570 municipios), lo que incrementa el conteo absoluto de municipios en sequía en comparación con otros estados.
-- Le siguen estados como Puebla, Veracruz, Jalisco, Estado de México, Chiapas y Michoacán.
-
-### Conclusión:
-Las entidades federativas del sur, centro y occidente registran un volumen muy alto de unidades municipales impactadas por la escasez de agua.
+Entre 2016 y 2026, la sequía alcanzó a la gran mayoría de los municipios de casi todos los estados. Oaxaca encabeza el conteo con unos 570 municipios, seguida de Puebla y Veracruz con más de 200 cada una, pero este orden refleja principalmente el número de municipios que tiene cada entidad. **Esta gráfica muestra el alcance territorial de la sequía, no qué estados fueron más críticos.**
 
 
-------------------------------------------------------------------------
-## Evolución Nacional de la Sequía en México 
+## ¿Qué estados están hoy en peor situación?
+*Considerese la información al 15/09/2026.
+
+Cada barra es un estado y representa el 100% de sus municipios, repartidos según su intensidad de sequía: desde Sin sequía (🟢 Verde) hasta D4 Sequía excepcional (🔴 Rojo oscuro).
+
 ```{python}
-import plotly.express as px
+# GRAFICA 4.1: Estados comparados en una fecha de referencia (% de municipios por nivel)
+df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
+
+# Fecha de referencia: la más reciente. Cámbiala si quieres otra, ej. pd.Timestamp('2024-05-15')
+fecha_ref = df_analitico['fecha'].max()
+
+mapa_intensidad = {
+    0: 'Sin sequía',
+    1: 'D0 Anormalmente seco',
+    2: 'D1 Sequía moderada',
+    3: 'D2 Sequía severa',
+    4: 'D3 Sequía extrema',
+    5: 'D4 Sequía excepcional'
+}
+orden_niveles = list(mapa_intensidad.values())
+
+df_ref = df_analitico[df_analitico['fecha'] == fecha_ref].copy()
+df_ref['intensidad'] = df_ref['intensidad'].fillna(0)
+df_ref['nivel'] = df_ref['intensidad'].map(mapa_intensidad)
+
+# Municipios por estado y nivel
+df_g4 = (
+    df_ref.groupby(['ENTIDAD', 'nivel'])['CVE_CONCATENADA']
+    .nunique()
+    .reset_index(name='municipios')
+)
+total_mun = df_g4.groupby('ENTIDAD')['municipios'].sum().rename('total_mun')
+df_g4 = df_g4.merge(total_mun, on='ENTIDAD')
+df_g4['pct'] = (df_g4['municipios'] / df_g4['total_mun'] * 100).round(1)
+
+# Orden de los estados: % de municipios en D2 o peor (el más crítico queda arriba)
+pct_d2_mas = df_ref.groupby('ENTIDAD')['intensidad'].apply(lambda x: (x >= 3).mean() * 100)
+orden_estados = pct_d2_mas.sort_values(ascending=True).index.tolist()
+
+colores = {
+    'Sin sequía':            '#2ca02c',
+    'D0 Anormalmente seco':  '#FFFF00',
+    'D1 Sequía moderada':    '#FCD37F',
+    'D2 Sequía severa':      '#FFAA00',
+    'D3 Sequía extrema':     '#E60000',
+    'D4 Sequía excepcional': '#730000',
+}
+
+fig = px.bar(
+    df_g4,
+    x='pct',
+    y='ENTIDAD',
+    color='nivel',
+    orientation='h',
+    barmode='stack',
+    category_orders={'nivel': orden_niveles, 'ENTIDAD': orden_estados},
+    color_discrete_map=colores,
+    custom_data=['nivel', 'municipios', 'total_mun'],
+    labels={'pct': '% de municipios del estado', 'ENTIDAD': 'Estado', 'nivel': 'Nivel de sequía'}
+)
+
+fig.update_traces(
+    marker_line_color='rgba(0,0,0,0.25)',
+    marker_line_width=0.4,
+    hovertemplate='<b>%{y}</b><br>'
+                  '%{customdata[0]}<br>'
+                  '%{customdata[1]:,} de %{customdata[2]:,} municipios (%{x}%)'
+                  '<extra></extra>'
+)
+
+fig.update_layout(
+    title=dict(
+        text=f'<b>Municipios por nivel de sequía en cada estado</b><br>'
+             f'<span style="font-size:13px;color:gray">Corte al {fecha_ref:%d/%m/%Y} · ordenado por % de municipios en D2 o peor</span>',
+        font=dict(size=16)
+    ),
+    template='plotly_white',
+    height=820,
+    legend=dict(title='Nivel de sequía', orientation='v', yanchor='top', y=1, xanchor='left', x=1.02),
+    margin=dict(l=140, r=30, t=100, b=60)
+)
+fig.update_xaxes(range=[0, 100], ticksuffix='%', showgrid=True, gridcolor='lightgray')
+fig.update_yaxes(showgrid=False)
+
+fig.show()
+```
+Al 15 de septiembre de 2026 no hay municipios en sequía extrema (D3) ni excepcional (D4) en el país. La condición más severa es D2, concentrada en el norte (Tamaulipas y Chihuahua). En el sur y sureste la sequía es leve pero muy extendida: Quintana Roo tiene todos sus municipios en D1 y Guerrero, Chiapas y Tabasco casi no tienen municipios libres de sequía. Cuatro estados (Aguascalientes, Baja California Sur, Ciudad de México y Sinaloa) están completamente sin sequía.
+
+
+## ¿Qué proporción del país está en sequía y qué tan severa es, quincena a quincena?
+
+Esta gráfica de áreas apiladas muestra, para cada fecha, el porcentaje de municipios en cada nivel del Monitor de Sequía. Como cada municipio tiene un único nivel por fecha, las capas son excluyentes y suman 100%. El gris es la parte del país sin sequía; conforme suben los colores, aumenta la severidad hasta el rojo oscuro (D4).
+
+Esto nos permite identificar la estacionalidad, los episodios críticos y la velocidad de recuperación.
+
+```{python}
+# GRAFICA 5: Evolución Nacional de la Sequía en México 
 df = pd.read_parquet("../data/processed/sequia_analitico_2016.parquet")
 
 evolucion = df.groupby(['fecha', 'intensidad_desc']).size().reset_index(name='conteo')
@@ -376,139 +468,131 @@ fig.update_yaxes(range=[0, 100])
 
 fig.show()
 ```
+La sequía en México es recurrente y estacional, pero de severidad baja en la mayor parte del periodo 2016-2026. El episodio de 2023-2024 rompe este patrón pues a mediados de 2024 prácticamente todos los municipios del país (98%) presentaban algún nivel de sequía, hasta una cuarta parte estaba en D3 y una porción visible llegó a D4. La recuperación fue rápida, y desde finales de 2024 el país ha mantenido condiciones mayormente favorables.
 
-## Top 15 Municipios "Crónicos"
 
+## ¿Dónde es más persistente la sequía?
 
 Evalúa el desgaste territorial a largo plazo, identificando aquellos lugares donde la sequía ha dejado de ser un evento temporal para convertirse en una condición persistente.
 
-1. Elementos Visuales del Gráfico
-**Eje Vertical ($Y$):** Muestra los nombres de los 15 municipios (con su respectivo estado) que encabezan la lista.Eje **Horizontal ($X$):** Representa la racha máxima de quincenas consecutivas que el municipio ha pasado sin salir de condiciones de sequía.
-**Gradiente de Color (Rojo):** Indica la frecuencia histórica. Un rojo más oscuro significa que, además de tener una racha larga, ese municipio ha pasado casi todo el periodo evaluado (2016-2026) bajo algún grado de sequía.
-2. Puntos Clave para el Análisis
-**Falta de recarga hídrica:** Las rachas prolongadas (que pueden representar meses o incluso años ininterrumpidos) indican que los mantos acuíferos y presas locales no han tenido ventanas de recuperación, llevando a un agotamiento estructural de los recursos.
-**Doble factor de riesgo:** Si un municipio tiene una barra muy larga (racha extensa) y un color rojo muy intenso (alta frecuencia), se clasifica como una zona de emergencia crónica. Esto significa que cualquier lluvia que caiga es insuficiente para revertir el déficit acumulado.
-
-Este análisis identifica el 'epicentro' de la crisis hídrica. Las declaratorias de emergencia convencionales son ineficaces para estos municipios top 15, ya que su déficit no es estacional, sino crónico, requiriendo intervenciones estructurales permanentes como reconversión agrícola o nueva infraestructura de abasto.
+Esta gráfica muestra los 15 municipios con la racha más larga de quincenas consecutivas en condición de sequía (D0 o peor) entre 2016 y 2026. Una quincena sin sequía "rompe" la racha, así que mide qué tan seguido y sin interrupciones ha estado seco un municipio, no cuántas veces lo ha estado en total.
 
 ```{python}
-df_mun = pd.read_parquet("../data/processed/resumen_municipal.parquet")
-# Creamos una columna que combine el municipio y su estado para que no haya confusión (ej. "Centro, Tabasco")
-df_mun['Municipio_Estado'] = df_mun['NOMBRE_MUN'] + ', ' + df_mun['ENTIDAD']
-
-# Obtenemos los 15 municipios con la racha más alta y los ordenamos de menor a mayor (para Plotly)
-df_top15_crónicos = df_mun.nlargest(15, 'racha_maxima_quincenas').sort_values('racha_maxima_quincenas', ascending=True)
-
-# gráfica interactiva
-fig_cronicos = px.bar(
-    df_top15_crónicos,
-    x='racha_maxima_quincenas',
-    y='Municipio_Estado',
-    orientation='h',
-    color='frecuencia_sequia_pct', # El color revelará si además de una racha larga, siempre están secos
-    color_continuous_scale='Reds',
-    title='Top 15 Municipios "Crónicos": Mayor racha continua en sequía',
-    labels={
-        'racha_maxima_quincenas': 'Quincenas Consecutivas en Sequía',
-        'Municipio_Estado': 'Municipio',
-        'frecuencia_sequia_pct': '% de Frecuencia Total'
-    }
-)
-
-# formato del Hover (Etiqueta al pasar el cursor)
-fig_cronicos.update_traces(
-    hovertemplate=(
-        "<b>%{y}</b><br>"
-        "Racha Máxima: %{x} quincenas seguidas<br>"
-        "Frecuencia Histórica: %{marker.color:.1f}% del tiempo en sequía<br>"
-        "<extra></extra>"
-    )
-)
-
-# 4. Ajustes visuales
-fig_cronicos.update_layout(
-    height=600,
-    plot_bgcolor='white',
-    coloraxis_colorbar=dict(title="% Frecuencia<br>Histórica")
-)
-fig_cronicos.update_xaxes(showgrid=True, gridcolor='lightgray')
-
-# Mostrar gráfica
-fig_cronicos.show()
-```
-
-## Comportamiento del ciclo hidrológico de México, cruzando el territorio (estados) con el tiempo (meses del año) para revelar patrones predecibles.
-
-Elementos Visuales del Gráfico
-
-**Eje Horizontal ($X$):** Los 12 meses del año, organizados cronológicamente (Ene - Dic).
-
-**Eje Vertical ($Y$):**
-
-1. Las entidades federativas, ordenadas de arriba hacia abajo desde las que tienen el promedio de sequía más severo hasta las menos afectadas.
-
-2. Intensidad de Color: Mapea el promedio histórico de severidad. Los tonos amarillos indican condiciones normales o leves, mientras que los naranjas y rojos intensos muestran promedios históricos de sequía severa, extrema o excepcional.
-
-### Puntos Clave para el Análisis
-Temporada de Estiaje vs. Lluvias: Visualmente se notará una franja vertical más oscura (roja/naranja) que cruza casi todo el país entre los meses de abril, mayo y junio. Esto ilustra la dureza de la temporada de estiaje previa al verano.
-A partir de agosto, septiembre y octubre, los colores suelen aclararse, reflejando el alivio que traen la temporada de lluvias y los huracanes.
-Disparidad Norte-Sur: Los estados ubicados en la parte superior del eje Y (típicamente del norte y centro) mostrarán colores cálidos durante la mayor parte del año, reflejando su aridez natural y alta vulnerabilidad.
-Los estados en la parte inferior (típicamente sureste) tendrán cuadros mucho más claros, oscureciéndose solo brevemente en primavera.
-
-```{python}
-# GRAFICA 5: Heatmap de Estacionalidad de la Sequía (Estado vs Mes)
-# ==============================================================================
+# GRAFICA 6: Top 15 Municipios "Crónicos"
 import pandas as pd
 import plotly.express as px
 
-# 1. Asegurar formato de datos
+df_mun = pd.read_parquet("../data/processed/resumen_municipal.parquet")
+df_mun['Municipio_Estado'] = df_mun['NOMBRE_MUN'] + ', ' + df_mun['ENTIDAD']
+
+# keep='all' conserva los empates en el lugar 15
+top = (
+    df_mun.nlargest(15, 'racha_maxima_quincenas', keep='all')
+    .sort_values('racha_maxima_quincenas', ascending=True)
+    .copy()
+)
+top['anios_racha'] = (top['racha_maxima_quincenas'] / 24).round(1)
+
+fig = px.bar(
+    top,
+    x='racha_maxima_quincenas',
+    y='Municipio_Estado',
+    orientation='h',
+    color='frecuencia_sequia_pct',
+    color_continuous_scale='Reds',
+    range_color=[0, 100],                      # escala completa: todos se ven "altos"
+    text='racha_maxima_quincenas',
+    custom_data=['frecuencia_sequia_pct', 'anios_racha'],
+    labels={
+        'racha_maxima_quincenas': 'Quincenas consecutivas en sequía',
+        'Municipio_Estado': 'Municipio',
+        'frecuencia_sequia_pct': '% de frecuencia histórica'
+    }
+)
+
+fig.update_traces(
+    textposition='outside',
+    hovertemplate='<b>%{y}</b><br>'
+                  'Racha máxima: %{x} quincenas (≈ %{customdata[1]} años)<br>'
+                  'Frecuencia histórica: %{customdata[0]:.1f}% del tiempo en sequía'
+                  '<extra></extra>'
+)
+
+fig.update_layout(
+    title=dict(
+        text='<b>Municipios con sequía más persistente</b><br>',
+        font=dict(size=16)
+    ),
+    template='plotly_white',
+    height=620,
+    margin=dict(l=20, r=30, t=100, b=60),
+    coloraxis_colorbar=dict(title='% de frecuencia<br>histórica', ticksuffix='%')
+)
+fig.update_xaxes(showgrid=True, gridcolor='lightgray', rangemode='tozero')
+
+fig.show()
+fig.write_html('grafica_municipios_cronicos.html', include_plotlyjs='cdn')
+```
+Los municipios con sequía más persistente se concentran en el norte árido (Chihuahua y Coahuila), en San Luis Potosí y en La Montaña de Guerrero. Ciudad Valles encabeza la lista con cerca de 160 quincenas consecutivas (más de 6 años) en algún nivel de sequía, y los 15 municipios superan las 120. Todos pasaron en sequía entre 76% y 91% de las quincenas del periodo, por lo que su condición se acerca más a la norma que a un episodio.
+
+## ¿En qué meses y en qué estados se concentra la sequía?
+
+Este mapa de calor cruza los 32 estados con los 12 meses del año y muestra la intensidad promedio de sequía entre 2016 y 2026. Los estados están ordenados de arriba hacia abajo, de mayor a menor promedio anual. La escala va de 0 (sin sequía) a 2 (sequía moderada); entre más oscuro el color, mayor es la intensidad promedio.
+
+Lo que se muestra es un promedio histórico, no una condición de un año concreto; episodios extremos como el de 2023-2024 pueden influir mucho en el promedio mensual. Además, el promedio incluye las quincenas sin sequía (valor 0), por lo que combina qué tan seguido y qué tan intensa es la sequía. Los rojos de este mapa corresponden a promedios entre D0 y D2, no a sequía extrema constante. Por último, el valor de un estado resume a todos sus municipios y puede ocultar zonas con condiciones mucho peores.
+
+```{python}
+# GRAFICA 7: Heatmap de estacionalidad de la sequía (Estado vs Mes)
 df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
 df_analitico['mes'] = df_analitico['fecha'].dt.month
 df_analitico['intensidad_num'] = pd.to_numeric(df_analitico['intensidad'], errors='coerce').fillna(0)
 
-# 2. Agrupar calculando la intensidad PROMEDIO histórica por Estado y Mes
 df_heatmap = df_analitico.groupby(['ENTIDAD', 'mes'])['intensidad_num'].mean().reset_index()
-
-# 3. Pivotar la tabla (Filas = Estados, Columnas = Meses)
 df_pivot = df_heatmap.pivot(index='ENTIDAD', columns='mes', values='intensidad_num')
 
-# Mapear los números de mes a nombres para mejor lectura
 nombres_meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 df_pivot.columns = nombres_meses
 
-# 4. Ordenar la tabla: Poner los estados más secos (mayor promedio anual) hasta arriba
+# Más secos ARRIBA (descending), como dice la descripción
 df_pivot['promedio_anual'] = df_pivot.mean(axis=1)
-df_pivot = df_pivot.sort_values('promedio_anual', ascending=True).drop(columns=['promedio_anual'])
+df_pivot = df_pivot.sort_values('promedio_anual', ascending=False).drop(columns='promedio_anual')
 
-# 5. Crear la gráfica de mapa de calor interactiva
-fig_heatmap = px.imshow(
+fig = px.imshow(
     df_pivot,
-    labels=dict(x="Mes del Año", y="Estado / Entidad", color="Intensidad<br>Promedio"),
     x=nombres_meses,
     y=df_pivot.index,
-    color_continuous_scale='YlOrRd', # Usa colores del amarillo al rojo intenso
-    aspect='auto', # Ajusta el tamaño de los cuadros a la pantalla
-    title='Mapa de Calor: Estacionalidad y Severidad Promedio de la Sequía por Estado'
+    labels=dict(x='Mes', y='Estado', color='Intensidad promedio'),
+    color_continuous_scale='YlOrRd',
+    zmin=0,                              # ancla la escala en "sin sequía"
+    zmax=df_pivot.max().max(),
+    aspect='auto'
 )
 
-# 6. Formato del Hover
-fig_heatmap.update_traces(
-    hovertemplate=(
-        "<b>Estado:</b> %{y}<br>"
-        "<b>Mes:</b> %{x}<br>"
-        "<b>Severidad Promedio:</b> %{z:.2f} (Escala 0 a 5)<br>"
-        "<extra></extra>"
+fig.update_traces(
+    hovertemplate='<b>%{y}</b><br>%{x}<br>'
+                  'Intensidad promedio: %{z:.2f}<extra></extra>'
+)
+
+fig.update_layout(
+    title=dict(
+        text='<b>Estacionalidad de la sequía por estado</b><br>'
+             '<span style="font-size:13px;color:gray">Intensidad promedio por mes, 2016-2026 · '
+             'ordenado de mayor a menor promedio anual</span>',
+        x=0, xanchor='left', y=0.97
+    ),
+    template='plotly_white',
+    height=840,
+    margin=dict(l=20, r=20, t=120, b=30),
+    coloraxis_colorbar=dict(
+        title='Intensidad<br>promedio',
+        tickvals=[0, 1, 2],
+        ticktext=['0 Sin sequía', '1 = D0', '2 = D1']
     )
 )
+fig.update_xaxes(side='top', title=None)    # evita el traslape con el título
+fig.update_yaxes(title=None)
 
-# 7. Ajustes de tamaño
-fig_heatmap.update_layout(
-    height=800,
-    plot_bgcolor='white',
-    xaxis=dict(side='top') # Pone los meses arriba para que parezca un calendario
-)
-
-# Mostrar gráfica
-fig_heatmap.show()
+fig.show()
 ```
-El mapa de calor evidencia la marcada estacionalidad de la sequía en el territorio nacional. Al observar el endurecimiento de las condiciones entre abril y junio, se subraya la necesidad de implementar políticas preventivas de racionamiento de agua desde el primer trimestre del año, adaptadas a la carga térmica histórica de cada estado en lugar de reaccionar hasta que ocurre la crisis de verano.
+
+El mapa de calor evidencia que la sequía en México tiene un ciclo anual definido en el norte y noroeste, con máximos entre abril y junio (Sinaloa en mayo es el punto más intenso) y alivio entre septiembre y noviembre. Dentro de ese patrón hay excepciones importantes: Baja California mantiene una intensidad alta todo el año, y Tabasco y Quintana Roo tienen su pico entre agosto y octubre. Los estados del centro y sur (Tlaxcala, Puebla, Ciudad de México, Yucatán) presentan las intensidades promedio más bajas y estables.
