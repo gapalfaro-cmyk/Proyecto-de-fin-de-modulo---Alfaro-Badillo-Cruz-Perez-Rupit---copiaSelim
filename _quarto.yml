@@ -9,13 +9,13 @@ website:
     pinned: true
     left:
       - href: index.qmd
-        text: 🏠 Índice
+        text: 🏠 Home
       - href: mis_reportes/01-preparacion_datos.qmd
-        text: ⚙️ Datos
+        text: ⚙️ Procesamiento
       - href: mis_reportes/02-analisis_temporal.qmd
-        text: 📈 Evolución Histórica
+        text: 📈 Análisis
       - href: mis_reportes/03-clustering_territorial.qmd
-        text: 🗺️ Patrones Espaciales
+        text: 🗺️ Patrones
       - href: mis_reportes/04-conclusiones.qmd
         text: 🎯 Conclusiones
 
