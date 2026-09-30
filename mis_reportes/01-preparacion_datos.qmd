@@ -7,21 +7,21 @@ execute:
 
 ## Introducción
 
-Esta sección documenta la preparación de la fuente principal del proyecto:
+Esta sección documenta la preparación de la fuente de datos del proyecto:
 el **Monitor de Sequía en México**, publicado por el Programa Nacional
 Contra la Sequía
 ([PRONACOSE](https://www.datos.gob.mx/es/dataset/programa_nacional_contra_sequia_pronacose)).
 El archivo original viene en **formato ancho**: una fila por municipio y
-una columna por fecha de publicación del monitor, con la categoría de
+una columna por fecha de publicación del monitoreo, con la categoría de
 sequía observada (D0 a D4) o celda vacía.
 
-Se generan **dos productos** a partir de esta limpieza:
+Se generan **dos productos** a partir de la limpieza y procesamiento:
 
 - **`df_historico`**: serie completa 2003–2026 en formato largo, útil para
   gráficas de contexto de largo plazo (con la salvedad metodológica que se
   documenta más abajo).
-- **`df_analitico`**: subconjunto 2016 en adelante, con una sola columna
-  `fecha`, definición metodológica consistente y frecuencia quincenal
+- **`df_analitico`**: subconjunto 2016 en adelante, con una columna para la
+  `fecha`, definición metodológica consistente con frecuencia quincenal
   uniforme — este es el dataset que alimenta el EDA y el modelado.
 
 ```{python}
@@ -94,9 +94,9 @@ print(f"Entidades federativas: {df['ENTIDAD'].nunique()}")
 :::
 
 Además de estas 9 columnas de identificación, el archivo original trae
-~435 columnas de fecha (una por cada corte de publicación del monitor,
-p. ej. `31-ene-03`, `15-sep-26`), que se transforman en la columna única
-`fecha` durante la limpieza (ver secciones siguientes).
+~435 columnas de fecha (una por cada corte de publicación del monitoreo,
+p. ej. `31-ene-03`, `15-sep-26`), que se transforman a ser campso de información dentro de la columna 
+`fecha` durante la limpieza y procesamiento (ver secciones siguientes).
 
 ## Verificación de integridad
 
@@ -152,10 +152,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-Se confirma lo esperado: **12 cortes por año** entre 2003 y 2013 (mensual)
-y **~24 cortes por año** desde 2014 (quincenal). Este cambio de frecuencia
-por sí solo ya complica comparar el periodo completo, pero hay un problema
-más importante que el de frecuencia, documentado a continuación.
+Se confirman: **12 cortes por año** entre 2003 y 2013 (mensual)
+y **~24 cortes por año** desde 2014 (quincenal). Este cambio de frecuencia complica comparar el periodo completo, pero hay un segundo reto, que es el de frecuencia, documentado a continuación.
 
 ## Cambio metodológico en 2016: por qué no basta con re-muestrear
 
@@ -184,7 +182,7 @@ el modelado, se **recorta la serie a partir de enero de 2016**, donde la
 definición y la frecuencia (quincenal) son consistentes en todo el rango.
 El costo de esta decisión es perder 13 años de historia (2003–2015); a
 cambio se gana un dataset internamente comparable, que es indispensable
-para cualquier análisis de tendencia, clustering o modelado serio. La
+para cualquier análisis de tendencia, clustering o modelado. La
 serie completa 2003–2026 se conserva aparte (`df_historico`) únicamente
 para gráficas de contexto de largo plazo, dejando explícita esta
 salvedad cada vez que se use.
@@ -279,7 +277,7 @@ print(f"\nFilas en df_analitico (2016+): {len(df_analitico):,}")
 
 ## Datos complementarios: vulnerabilidad ante sequía
 
-Además del Monitor de Sequía (que mide el **peligro**: dónde y con qué
+Además del Monitoreo de Sequía (que mide el **peligro**: dónde y con qué
 severidad ocurre la sequía), se incorporan tres índices de **vulnerabilidad**
 municipal calculados por PRONACOSE/CONAGUA con metodología IPCC (2007):
 ambiental, social y económica. Esto permite pasar de un análisis de solo
