@@ -5,10 +5,12 @@ title: "Riesgos de una sequía en México"
 ![Impacto territorial de la sequía en México.](foto_sequia.jpeg){fig-align="center" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"}
 
 # Problematica
+
 Actualmente, el país reacciona a la sequía mirando al cielo: si no llueve, declaramos emergencia. Esto es un error costoso y miope. La falta de agua no golpea igual a un campo tecnificado que a una comunidad marginada sin tuberías. Al medir únicamente "dónde no llueve", el gobierno reacciona a ciegas y desperdicia presupuesto: mandamos recursos a lugares que tienen cómo defenderse y abandonamos a comunidades que están a un día de colapsar. Estamos confundiendo el clima con el desastre.
 
 
 # ¿Dónde están las verdaderas "bombas de tiempo" de México? 
+
 Si dejar de llover no significa lo mismo para todos, hay entidades y municipios que necesitan de mayor apoyo que otros.
 
 - **¿Cuáles son los municipios específicos que, debido a su extrema fragilidad económica y social, necesitan de mayor apoyo ante la próxima sequía, por más pequeña que sea? ¿Cuáles son los que mayor riesgo de colapsar ante un sequía?**
