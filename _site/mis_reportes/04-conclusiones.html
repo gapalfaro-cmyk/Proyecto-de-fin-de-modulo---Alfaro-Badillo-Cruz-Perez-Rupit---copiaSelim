@@ -144,11 +144,11 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../mis_reportes/02-analisis_temporal.html"> 
-<span class="menu-text">Exploración</span></a>
+<span class="menu-text">Exploración y Datos Técnicos</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../mis_reportes/04-conclusiones.html" aria-current="page"> 
-<span class="menu-text">Resumen Ejecutivo</span></a>
+<span class="menu-text">Conclusiones</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -166,7 +166,11 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link active" data-scroll-target="#conclusiones">Conclusiones</a></li>
+  <li><a href="#en-que-estados-hay-mayor-riesgo-frente-una-sequía" id="toc-en-que-estados-hay-mayor-riesgo-frente-una-sequía" class="nav-link active" data-scroll-target="#en-que-estados-hay-mayor-riesgo-frente-una-sequía">¿En que estados hay mayor riesgo frente una sequía?</a></li>
+  <li><a href="#cúales-son-los-municipios-de-mayor-riesgo-a-colapsar-frente-una-sequía" id="toc-cúales-son-los-municipios-de-mayor-riesgo-a-colapsar-frente-una-sequía" class="nav-link" data-scroll-target="#cúales-son-los-municipios-de-mayor-riesgo-a-colapsar-frente-una-sequía">¿Cúales son los municipios de mayor riesgo a colapsar frente una sequía?</a>
+  <ul class="collapse">
+  <li><a href="#conclusiones" id="toc-conclusiones" class="nav-link" data-scroll-target="#conclusiones">Conclusiones</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -192,6 +196,22 @@ if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.M
 </header>
 
 
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>El Cambio de Paradigma
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La sequía en México ha dejado de ser un fenómeno transitorio para convertirse en una crisis crónica. Sin embargo, <strong>medir únicamente la falta de lluvia es insuficiente para la toma de decisiones</strong>. El presupuesto público no debe asignarse donde simplemente “falta el agua”, sino donde su ausencia detona el mayor daño social y económico.</p>
+</div>
+</div>
+<section id="en-que-estados-hay-mayor-riesgo-frente-una-sequía" class="level2">
+<h2 class="anchored" data-anchor-id="en-que-estados-hay-mayor-riesgo-frente-una-sequía">¿En que estados hay mayor riesgo frente una sequía?</h2>
+<p>Para traducir el análisis algorítmico en estrategias ejecutivas, el modelo se escaló a una visión macro-regional. El siguiente índice permite visualizar de inmediato qué entidades federativas concentran el mayor riesgo global acumulado.</p>
 <div id="50a869d5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Ver código del Mapa de Riesgo Estatal</summary>
@@ -268,9 +288,9 @@ if (outputEl) {{
                         })                };            </script>        </div>
 </div>
 </div>
-<ul>
-<li>Agrega el riesgo municipal para identificar macro-regiones prioritarias, facilitando la asignación de recursos y la planeación de políticas públicas a nivel entidad federativa</li>
-</ul>
+</section>
+<section id="cúales-son-los-municipios-de-mayor-riesgo-a-colapsar-frente-una-sequía" class="level2">
+<h2 class="anchored" data-anchor-id="cúales-son-los-municipios-de-mayor-riesgo-a-colapsar-frente-una-sequía">¿Cúales son los municipios de mayor riesgo a colapsar frente una sequía?</h2>
 <div id="cc20e98f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Ver código de la Matriz de Riesgo</summary>
@@ -340,7 +360,9 @@ if (outputEl) {{
 </div>
 </div>
 <ul>
-<li>Contrasta la exposición histórica frente a la fragilidad estructural para detectar “bombas de tiempo”: municipios donde un evento climático atípico tendría consecuencias devastadoras inmediatas.</li>
+<li><p>⚫ Intervención Crítica (Alta sequía + Alta vulnerabilidad): Representa el peor escenario posible. Requiere ayuda humanitaria inmediata y contención de daños, ya que la exposición histórica máxima coincide con una estructura comunitaria insostenible.</p></li>
+<li><p>🔴 Prioritarios (Baja sequía + Alta vulnerabilidad): Las “bombas de tiempo” territoriales. La inversión aquí debe centrarse en desarrollo de resiliencia y mitigación social (cisternas comunitarias, subsidios preventivos) antes de que la próxima crisis climática los impacte.</p></li>
+<li><p>🟢 Resilientes (Alta/Baja sequía + Baja vulnerabilidad): Municipios cuya robustez socioeconómica amortigua el estrés hídrico. El presupuesto debe dirigirse hacia la infraestructura a largo plazo y modernización tecnológica (presas, tecnificación de riego), y no hacia el asistencialismo de emergencia.</p></li>
 </ul>
 <section id="conclusiones" class="level3">
 <h3 class="anchored" data-anchor-id="conclusiones">Conclusiones</h3>
@@ -356,6 +378,7 @@ if (outputEl) {{
 <p>Finalmente, estos resultados proporcionan una línea base robusta para abandonar las declaratorias generales de emergencia y transitar hacia políticas “quirúrgicas”. El modelo territorial construido en este proyecto demuestra que el presupuesto público no debe asignarse solo donde falta el agua, sino donde su ausencia genera el mayor daño social y económico, permitiendo intervenciones diferenciadas: ayuda humanitaria para la zona de intervención crítica, desarrollo de resiliencia para los municipios prioritarios, e infraestructura a largo plazo para las regiones resilientes.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

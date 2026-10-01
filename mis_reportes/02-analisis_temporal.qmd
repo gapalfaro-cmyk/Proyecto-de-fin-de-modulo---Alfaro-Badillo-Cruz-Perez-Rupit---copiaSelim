@@ -6,7 +6,6 @@ execute:
 ---
 
 ```{python}
-#| echo: false
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -32,7 +31,6 @@ cat_order = ['Sin Sequía', 'D0', 'D1', 'D2', 'D3', 'D4']
 ## ¿Cómo ha cambiado la severidad de la sequía año con año?
 
 ```{python}
-# GRAFICA 2: Municipios por nivel de sequía, agrupados por año
 df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
 df_analitico['anio'] = df_analitico['fecha'].dt.year
 
@@ -107,6 +105,7 @@ fig.update_layout(
     margin=dict(l=60, r=30, t=80, b=90),
 )
 ```
+
 *\*Observación. 2026 es un año en curso, por lo que sus valores no son comparables con los de años completos.*
 
 Podemos ver que entre 2016 y 2022 la sequía, aunque de bajo nivel, fue extensa (más de 2,000 municipios tuvieron al menos una quincena en D0 cada año), con muy pocos municipios en D3 y D4. Para 2023 y 2024 el patrón cambió, pues los niveles D2 y D3 se multiplicaron y en 2024 casi 370 municipios llegaron a D4 Sequía excepcional, **el máximo de los útlimos 10 años**. En 2025 este patrón disminuyó, aunque los niveles extremos siguen por encima de lo observado antes de 2023.
@@ -116,7 +115,6 @@ Podemos ver que entre 2016 y 2022 la sequía, aunque de bajo nivel, fue extensa 
 Cada barra es una quincena y su altura completa son los 32 estados del país. El color indica la intensidad máxima de sequía que alcanzó cada estado en esa fecha, es decir, la condición de su municipio más afectado: desde Sin sequía (🟢 Verde) hasta D4 Sequía excepcional (🔴 Rojo oscuro).
 
 ```{python}
-# GRAFICA 3: Barras apiladas interactivas (con Plotly)
 df_analitico['fecha'] = pd.to_datetime(df_analitico['fecha'])
 
 mapa_intensidad = {
@@ -135,19 +133,17 @@ df_max_estado = df_analitico.groupby(['fecha', 'ENTIDAD'])['intensidad_num'].max
 df_max_estado['categoria_maxima'] = df_max_estado['intensidad_num'].map(mapa_intensidad)
 df_max_estado['categoria_maxima'] = pd.Categorical(df_max_estado['categoria_maxima'], categories=orden_niveles, ordered=True)
 
-# Obtenemos el número de estados
 df_conteo = df_max_estado.groupby(['fecha', 'categoria_maxima'])['ENTIDAD'].nunique().reset_index(name='num_estados')
 
 def formatear_lista_estados(estados):
     texto_unido = ', '.join(sorted(estados))
-    renglones = textwrap.wrap(texto_unido, width=50) # Ajusta 'width' si lo quieres más ancho o angosto
+    renglones = textwrap.wrap(texto_unido, width=50) 
     return '<br>'.join(renglones)
 
 df_nombres = df_max_estado.groupby(['fecha', 'categoria_maxima'])['ENTIDAD'].apply(
     formatear_lista_estados
 ).reset_index(name='lista_estados')
 
-# Unimos ambos datos
 df_plotly = pd.merge(df_conteo, df_nombres, on=['fecha', 'categoria_maxima'])
 df_plotly = df_plotly[df_plotly['num_estados'] > 0]
 
@@ -170,7 +166,6 @@ fig = px.bar(
     color_discrete_map=colores_custom_plotly
 )
 
-# %{x|%d-%m-%Y} = Toma el eje X (fecha) y le da formato Día-Mes-Año
 fig.update_traces(
     hovertemplate=(
         "<b>Fecha: %{x|%d-%m-%Y}</b><br>"
@@ -199,6 +194,7 @@ fig.update_yaxes(showgrid=True, gridcolor='lightgray')
 
 fig.show()
 ```
+
 Es claro que la sequía en México es una condición casi permanente a nivel estatal, casi todo el país está en algún grado de sequía casi todo el tiempo. La franja verde (sin sequía) rara vez pasa de 10 a 15 estados. 
 
 ### Principales Tendencias Históricas

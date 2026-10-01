@@ -11,9 +11,9 @@ website:
       - href: index.qmd
         text: Inicio
       - href: mis_reportes/02-analisis_temporal.qmd
-        text: Exploración
+        text: Exploración y Datos Técnicos
       - href: mis_reportes/04-conclusiones.qmd
-        text: Resumen Ejecutivo
+        text: Conclusiones
 
 format:
   html:

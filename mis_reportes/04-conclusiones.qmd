@@ -7,6 +7,14 @@ execute:
   message: false
 ---
 
+::: {.callout-important icon=false}
+## El Cambio de Paradigma
+La sequía en México ha dejado de ser un fenómeno transitorio para convertirse en una crisis crónica. Sin embargo, **medir únicamente la falta de lluvia es insuficiente para la toma de decisiones**. El presupuesto público no debe asignarse donde simplemente "falta el agua", sino donde su ausencia detona el mayor daño social y económico.
+:::
+
+## ¿En que estados hay mayor riesgo frente una sequía?
+
+Para traducir el análisis algorítmico en estrategias ejecutivas, el modelo se escaló a una visión macro-regional. El siguiente índice permite visualizar de inmediato qué entidades federativas concentran el mayor riesgo global acumulado.
 
 ```{python}
 #| code-fold: true
@@ -57,8 +65,8 @@ fig_mapa.update_layout(margin={"r":0,"t":50,"l":0,"b":0}, template='plotly_white
 fig_mapa.show()
 ```
 
-- Agrega el riesgo municipal para identificar macro-regiones prioritarias, facilitando la asignación de recursos y la planeación de políticas públicas a nivel entidad federativa
 
+## ¿Cúales son los municipios de mayor riesgo a colapsar frente una sequía?
 
 ```{python}
 #| code-fold: true
@@ -102,7 +110,11 @@ fig_scatter.update_layout(
 
 ```
 
-- Contrasta la exposición histórica frente a la fragilidad estructural para detectar "bombas de tiempo": municipios donde un evento climático atípico tendría consecuencias devastadoras inmediatas.
+- ⚫ Intervención Crítica (Alta sequía + Alta vulnerabilidad): Representa el peor escenario posible. Requiere ayuda humanitaria inmediata y contención de daños, ya que la exposición histórica máxima coincide con una estructura comunitaria insostenible.
+
+- 🔴 Prioritarios (Baja sequía + Alta vulnerabilidad): Las "bombas de tiempo" territoriales. La inversión aquí debe centrarse en desarrollo de resiliencia y mitigación social (cisternas comunitarias, subsidios preventivos) antes de que la próxima crisis climática los impacte.
+
+- 🟢 Resilientes (Alta/Baja sequía + Baja vulnerabilidad): Municipios cuya robustez socioeconómica amortigua el estrés hídrico. El presupuesto debe dirigirse hacia la infraestructura a largo plazo y modernización tecnológica (presas, tecnificación de riego), y no hacia el asistencialismo de emergencia.
 
 
 
