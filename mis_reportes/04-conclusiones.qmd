@@ -8,8 +8,11 @@ execute:
 ---
 
 ::: {.callout-important icon=false}
-## El Cambio de Paradigma
-La sequía en México ha dejado de ser un fenómeno transitorio para convertirse en una crisis crónica. Sin embargo, **medir únicamente la falta de lluvia es insuficiente para la toma de decisiones**. El presupuesto público no debe asignarse donde simplemente "falta el agua", sino donde su ausencia detona el mayor daño social y económico.
+## Necesitamos cambiar nuestro sesgo!
+La sequía en México ha dejado de ser un fenómeno transitorio para convertirse en una crisis crónica. Sin embargo,  no podemos solamente **medir la falta de lluvia** para tomar desición sobre cuales regiones priorizar inversión y recursos. 
+
+- **Es decir, el presupuesto no debe asignarse donde simplemente "falta el agua", sino donde su ausencia detona el mayor daño social y económico.**
+
 :::
 
 ## ¿En que estados hay mayor riesgo frente una sequía?
