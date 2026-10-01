@@ -1,5 +1,5 @@
 ---
-title: "4. Conclusiones"
+title: "Conclusiones"
 jupyter: python3
 execute:
   cache: true
@@ -81,8 +81,8 @@ fig_scatter = px.scatter(
     hover_name='NOMBRE_MUN',
     hover_data={'ENTIDAD': True, 'Perfil_Riesgo': False, 'Vulnerabilidad_Total': ':.2f'},
     color_discrete_map={
-    'Resilientes': '#03a20e',
-    'Prioritarios': '#b50707', 
+    'Resilientes': '#47a74b',
+    'Prioritarios': '#8d2b2b', 
     'Intervención Crítica': '#070606', 
     },
     title='<b>Matriz de Riesgo: Peligro Histórico vs Fragilidad Estructural</b>',
