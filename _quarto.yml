@@ -14,6 +14,8 @@ website:
         text: Exploración
       - href: mis_reportes/04-conclusiones.qmd
         text: Resumen Ejecutivo
+      - href: mis_reportes/05-dashboard.qmd
+        text: Prueba
 
 format:
   html:
