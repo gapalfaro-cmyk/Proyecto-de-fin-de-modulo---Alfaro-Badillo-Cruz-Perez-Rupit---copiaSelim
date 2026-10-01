@@ -2,8 +2,8 @@ project:
   type: website
 
 website:
-  title: "Evolución de la Sequía en México"
-  description: "Análisis territorial y temporal (PRONACOSE)"
+  title: "Sequía en México"
+  description: "Análisis territorial y temporal de la sequía en México (PRONACOSE)"
   navbar:
     background: primary
     pinned: true

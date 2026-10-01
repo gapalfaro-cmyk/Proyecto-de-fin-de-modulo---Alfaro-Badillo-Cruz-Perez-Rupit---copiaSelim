@@ -4,40 +4,20 @@ title: "Sequía en México"
 
 ![Impacto territorial de la sequía en México.](foto_sequia.jpeg){fig-align="center" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"}
 
-## Contexto
-México enfrenta un escenario crítico de estrés hídrico. Entender cómo se distribuye y persiste este fenómeno es fundamental para el diseño de políticas públicas, la asignación de recursos agrícolas y la gestión de infraestructura. Este proyecto analiza la evolución temporal y territorial de la sequía a nivel municipal utilizando registros históricos reales.
+# Problematica
+Actualmente, el país reacciona a la sequía mirando al cielo: si no llueve, declaramos emergencia. Esto es un error costoso y miope. La falta de agua no golpea igual a un campo tecnificado que a una comunidad marginada sin tuberías. Al medir únicamente "dónde no llueve", el gobierno reacciona a ciegas y desperdicia presupuesto: mandamos recursos a lugares que tienen cómo defenderse y abandonamos a comunidades que están a un día de colapsar. Estamos confundiendo el clima con el desastre.
 
-## Pregunta de investigación
 
+# ¿Dónde están las verdaderas "bombas de tiempo" de México? 
+Si dejar de llover no significa lo mismo para todos, hay entidades y municipios que necesitan de mayor apoyo que otros.
+- **¿Cuáles son los municipios específicos que, debido a su extrema fragilidad económica y social, necesitan de mayor apoyo ante la próxima sequía, por más pequeña que sea? ¿Cuáles son los que mayor riesgo de colapsar ante un sequía?**
 - ¿Qué municipios de México presentan mayor frecuencia e intensidad de sequía entre 2016 y 2026? 
-- ¿Pueden agruparse en regiones con patrones similares?
 
-#### Preguntas secundarias
 
-- ¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)?
-- ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)?
-- ¿Se pueden indenfificar regiones o municipios con patronces similares?
-- ¿Qué patrones de vulnerabilidad existen?
+# Hipotesis
+Creemos que el riego real de un municipio no depende de la frecuencia de lluvía o sequía, sino de qué tan frágil es el municipio que la recibe.
 
-## Información disponible
+Existe una correlación entre las factores ambientales, enconómicos y sociales con el nivel de sequia en cada municipio. Es decir, entre mas vulnerable sea el estado el impacto es mayor
 
-**Fuente principal:** Programa Nacional Contra la Sequía — PRONACOSE
-Datos históricos:
-https://smn.conagua.gob.mx/es/climatologia/monitor-de-sequia/monitor-de-sequia-en-mexico
 
-**Fuente secundaria:** Datos de enero 2026 y vulnerabiliades ambiental, económica y social en enero 2026:
-https://www.datos.gob.mx/es/dataset/programa_nacional_contra_sequia_pronacose
 
-## Datos y Metodología
-
-**Variable objetivo:** intensidad (nivel ordinal 0–5 de severidad de sequía por municipio-quincena), y sus derivadas por municipio — frecuencia (% de quincenas en D0+) y persistencia (duración media/máxima de rachas consecutivas en sequía).
-
-**Variables explicativas:** geográficas (ENTIDAD, ORG_CUENCA*, CON_CUENCA), temporales (año, mes, quincena, estacionalidad).
-
-**Población de interés:** los 2,478 municipios de México cubiertos por el Monitor de Sequía (PRONACOSE).
-
-**Unidad de análisis:** municipio-quincena para el análisis temporal; municipio (con su serie resumida) para el clustering territorial.
-
-**Periodo y alcance:** enero 2016 – septiembre 2026 (df_analitico), alcance geográfico nacional (32 entidades). La serie 2003–2015 (df_historico) se usa solo para contexto, no para el modelo, por el cambio metodológico ya documentado.
-
-**Modelo propuesto:** clustering territorial (k-means o jerárquico) sobre variables de frecuencia y persistencia agregadas por municipio, con validación de coherencia geográfica de los clusters (¿coinciden con regiones hidrológicas o zonas climáticas conocidas?).
