@@ -100,7 +100,6 @@ fig_scatter.update_layout(
     margin=dict(l=20, r=20, t=50, b=20)
 )
 
-fig_scatter.show()
 ```
 
 - Contrasta la exposición histórica frente a la fragilidad estructural para detectar "bombas de tiempo": municipios donde un evento climático atípico tendría consecuencias devastadoras inmediatas.

@@ -9,15 +9,15 @@ website:
     pinned: true
     left:
       - href: index.qmd
-        text: 🏠 Home
+        text: Inicio
       - href: mis_reportes/01-preparacion_datos.qmd
-        text: ⚙️ Procesamiento
+        text: Exploración
       - href: mis_reportes/02-analisis_temporal.qmd
-        text: 📈 Análisis
+        text: Resumen Ejecutivo
       - href: mis_reportes/03-clustering_territorial.qmd
-        text: 🗺️ Patrones
+        text: este noooo
       - href: mis_reportes/04-conclusiones.qmd
-        text: 🎯 Conclusiones
+        text: este tampoco (los dejamos en lo que hacen el reporte)
 
 format:
   html:

@@ -262,7 +262,6 @@ fig.show()
 Es claro que la sequía en México es una condición casi permanente a nivel estatal, casi todo el país está en algún grado de sequía casi todo el tiempo. La franja verde (sin sequía) rara vez pasa de 10 a 15 estados. 
 
 ### Principales Tendencias Históricas
-- 2016 - 2018 (Años estables): Predomina el color verde y los niveles de sequía leve (D0/D1). Gran parte del país se mantuvo sin condiciones críticas.
 - 2021 (Primer pico severo): Aumenta considerablemente la franja naranja y roja, reduciendo los estados sin sequía a menos de la mitad del país.
 - 2023 - 2024 (La crisis más severa y prolongada): Es el punto más crítico visible en la gráfica. Las categorías D3 (Extrema) y D4 (Excepcional) ocupan una franja dominante, abarcando casi la totalidad de los 32 estados con algún grado de sequía o sequía extrema durante meses.
 

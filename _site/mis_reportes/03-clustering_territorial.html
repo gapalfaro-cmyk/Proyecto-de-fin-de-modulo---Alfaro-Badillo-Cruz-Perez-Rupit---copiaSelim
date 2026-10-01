@@ -169,19 +169,19 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">🏠 Índice</span></a>
+<span class="menu-text">🏠 Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../mis_reportes/01-preparacion_datos.html"> 
-<span class="menu-text">⚙️ Datos</span></a>
+<span class="menu-text">⚙️ Procesamiento</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../mis_reportes/02-analisis_temporal.html"> 
-<span class="menu-text">📈 Evolución Histórica</span></a>
+<span class="menu-text">📈 Análisis</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../mis_reportes/03-clustering_territorial.html" aria-current="page"> 
-<span class="menu-text">🗺️ Patrones Espaciales</span></a>
+<span class="menu-text">🗺️ Patrones</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../mis_reportes/04-conclusiones.html"> 
@@ -238,7 +238,7 @@ window.Quarto = {
 <section id="pipeline-de-machine-learning" class="level2">
 <h2 class="anchored" data-anchor-id="pipeline-de-machine-learning">Pipeline de Machine Learning</h2>
 <p>Dado que las variables tienen distintas escalas (porcentajes, conteo de quincenas y probabilidades continuas), implementamos un pipeline de preprocesamiento que incluye imputación de valores nulos (para los municipios de reciente creación) y estandarización (Z-score).</p>
-<div id="35c810e6" class="cell" data-execution_count="1">
+<div id="35c810e6" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Ver código de preprocesamiento y entrenamiento K-Means</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -361,7 +361,7 @@ if (outputEl) {{
 <ul>
 <li>Descompone la estructura interna de los clústeres para revelar la naturaleza del riesgo, diferenciando aquellos impulsados por el peligro meteorológico de los originados por fragilidad socioeconómica.</li>
 </ul>
-<div id="3616350f" class="cell" data-execution_count="2">
+<div id="3616350f" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Ver código de validación del modelo (Método del Codo)</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -437,7 +437,7 @@ if (outputEl) {{
 </div>
 </div>
 <ul>
-<li>La gráfica evalúa la inercia interna (<span class="math inline">\(WCSS\)</span>) del modelo frente a diferentes números de segmentos (<span class="math inline">\(k\)</span>). Demuestra la elección de 4 perfiles territoriales, ya que en <span class="math inline">\(k=4\)</span> ocurre un claro punto de inflexión donde la curva se suaviza. Añadir clústeres adicionales (de 5 a 10) ofrece reducciones de error cada vez menores, lo que fragmentaría los datos y sobrecomplicaría el análisis sin aportar una mejora estadística sustancial en la cohesión de los grupos.</li>
+<li>La gráfica evalúa la inercia interna (<span class="math inline">\(WCSS\)</span>) del modelo frente a diferentes números de segmentos (<span class="math inline">\(k\)</span>). Demuestra la elección de 4 perfiles territoriales, ya que en <span class="math inline">\(k=3\)</span> ocurre un claro punto de inflexión donde la curva se suaviza. Añadir clústeres adicionales (de 5 a 10) ofrece reducciones de error cada vez menores, lo que fragmentaría los datos y sobrecomplicaría el análisis sin aportar una mejora estadística sustancial en la cohesión de los grupos.</li>
 </ul>
 
 

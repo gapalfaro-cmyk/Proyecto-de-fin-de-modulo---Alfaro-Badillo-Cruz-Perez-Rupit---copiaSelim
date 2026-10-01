@@ -163,4 +163,4 @@ fig_codo.update_layout(
 fig_codo.show()
 ```
 
-- La gráfica evalúa la inercia interna ($WCSS$) del modelo frente a diferentes números de segmentos ($k$). Demuestra la elección de 4 perfiles territoriales, ya que en $k=4$ ocurre un claro punto de inflexión donde la curva se suaviza. Añadir clústeres adicionales (de 5 a 10) ofrece reducciones de error cada vez menores, lo que fragmentaría los datos y sobrecomplicaría el análisis sin aportar una mejora estadística sustancial en la cohesión de los grupos.   
+- La gráfica evalúa la inercia interna ($WCSS$) del modelo frente a diferentes números de segmentos ($k$). Demuestra la elección de 4 perfiles territoriales, ya que en $k=3$ ocurre un claro punto de inflexión donde la curva se suaviza. Añadir clústeres adicionales (de 5 a 10) ofrece reducciones de error cada vez menores, lo que fragmentaría los datos y sobrecomplicaría el análisis sin aportar una mejora estadística sustancial en la cohesión de los grupos.
