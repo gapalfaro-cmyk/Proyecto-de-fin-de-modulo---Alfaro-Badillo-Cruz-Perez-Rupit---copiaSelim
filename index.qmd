@@ -17,7 +17,9 @@ Si dejar de llover no significa lo mismo para todos, hay entidades y municipios 
 
 # Hipotesis
 
-- **Existe una correlación entre las factores ambientales, enconómicos y sociales con el nivel de sequia en cada municipio. Es decir, entre mas sequía tiene un estado o municipio, entonces su vulnerabilidad es mayor.**
+Existe una correlación entre las factores ambientales, enconómicos y sociales con el nivel de sequia en cada municipio.
+
+- **Es decir, entre mas sequía tiene un estado o municipio, entonces su vulnerabilidad es mayor.**
 
 
 
