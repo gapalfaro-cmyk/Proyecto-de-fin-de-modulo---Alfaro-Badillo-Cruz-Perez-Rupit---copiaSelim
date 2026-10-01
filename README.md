@@ -111,12 +111,9 @@ Posibles preguntas (Maestra):
 
 Preguntas abordadas (por el Equipo):
 
+    ¿Cuáles son los municipios específicos que, debido a su extrema fragilidad económica y social, necesitan de mayor apoyo ante la sequía, por más pequeña que sea? 
+    ¿Cuáles son los que tienen mayor riesgo de colapsar ante una sequía?
     ¿Qué municipios de México presentan mayor frecuencia e intensidad de sequía entre 2016 y 2026?
-    ¿Pueden agruparse en regiones con patrones similares?
-    ¿Qué municipios presentan sequías más frecuentes (mayor proporción de periodos quincenales en D0 o más)?
-    ¿Dónde es más persistente la sequía (rachas más largas de periodos consecutivos en condición de sequía)?
-    ¿Se pueden indenfificar regiones o municipios con patronces similares?
-    ¿QUÉ patrones de vulnerabilidad existen?
 
 Modelos posibles: Clasificación, clustering territorial, modelos temporales o forecasting.
 
