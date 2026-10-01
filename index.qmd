@@ -12,14 +12,12 @@ Actualmente, el país reacciona a la sequía mirando al cielo: si no llueve, dec
 Si dejar de llover no significa lo mismo para todos, hay entidades y municipios que necesitan de mayor apoyo que otros.
 
 - **¿Cuáles son los municipios específicos que, debido a su extrema fragilidad económica y social, necesitan de mayor apoyo ante la próxima sequía, por más pequeña que sea? ¿Cuáles son los que mayor riesgo de colapsar ante un sequía?**
-
 - ¿Qué municipios de México presentan mayor frecuencia e intensidad de sequía entre 2016 y 2026? 
 
 
 # Hipotesis
-Creemos que el riego real de un municipio no depende de la frecuencia de lluvía o sequía, sino de qué tan frágil es el municipio que la recibe.
 
-Existe una correlación entre las factores ambientales, enconómicos y sociales con el nivel de sequia en cada municipio. Es decir, entre mas vulnerable sea el estado el impacto es mayor
+- **Existe una correlación entre las factores ambientales, enconómicos y sociales con el nivel de sequia en cada municipio. Es decir, entre mas sequía tiene un estado o municipio, entonces su vulnerabilidad es mayor.**
 
 
 
