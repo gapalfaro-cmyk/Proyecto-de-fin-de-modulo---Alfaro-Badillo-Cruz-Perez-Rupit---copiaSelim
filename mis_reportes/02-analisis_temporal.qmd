@@ -429,3 +429,147 @@ fig.show()
 ```
 
 El mapa de calor evidencia que la sequía en México tiene un ciclo anual definido en el norte y noroeste, con máximos entre abril y junio (Sinaloa en mayo es el punto más intenso) y alivio entre septiembre y noviembre. Dentro de ese patrón hay excepciones importantes: Baja California mantiene una intensidad alta todo el año, y Tabasco y Quintana Roo tienen su pico entre agosto y octubre. Los estados del centro y sur (Tlaxcala, Puebla, Ciudad de México, Yucatán) presentan las intensidades promedio más bajas y estables.
+
+
+```{python}
+#| code-fold: true
+#| code-summary: "Ver código de preprocesamiento y entrenamiento K-Means"
+
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.impute import SimpleImputer
+from sklearn.cluster import KMeans
+import plotly.graph_objects as go
+
+df = pd.read_parquet("../data/processed/resumen_municipal.parquet")
+
+features = [
+    'frecuencia_sequia_pct', 
+    'racha_maxima_quincenas',
+    'vulnerabilidad_ambiental', 
+    'vulnerabilidad_social', 
+    'vulnerabilidad_economica'
+]
+
+imputer = SimpleImputer(strategy='median')
+X_imputed = imputer.fit_transform(df[features])
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X_imputed)
+
+kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
+df['Cluster_ID'] = kmeans.fit_predict(X_scaled)
+
+cluster_risk = pd.DataFrame(X_scaled).groupby(df['Cluster_ID']).mean().sum(axis=1).sort_values()
+mapeo_nombres = {
+    cluster_risk.index[0]: 'Resilientes',
+    cluster_risk.index[1]: 'Prioritarios',
+    cluster_risk.index[2]: 'Intervención Crítica',
+}
+
+df['Perfil_Riesgo'] = df['Cluster_ID'].map(mapeo_nombres)
+
+df.to_parquet("../data/processed/municipios_clusterizados.parquet", index=False)
+
+print("Distribución de municipios por perfil de riesgo:")
+df['Perfil_Riesgo'].value_counts()
+
+perfiles = df.groupby('Perfil_Riesgo')[features].mean().reset_index()
+
+for col in features:
+    min_val = df[col].min()
+    max_val = df[col].max()
+    perfiles[col + '_norm'] = (perfiles[col] - min_val) / (max_val - min_val)
+
+features_norm = [f + '_norm' for f in features]
+nombres_ejes = ['Frecuencia Sequía', 'Racha Máxima', 'Vul. Ambiental', 'Vul. Social', 'Vul. Económica']
+
+colores_cluster = {
+    'Resilientes': '#c0a900',
+    'Prioritarios': '#eb5e5e', 
+    'Intervención Crítica': '#691edb',         
+}
+
+fig = go.Figure()
+
+for i, row in perfiles.iterrows():
+    perfil = row['Perfil_Riesgo']
+    valores = row[features_norm].tolist()
+    valores += [valores[0]]
+    ejes_cerrados = nombres_ejes + [nombres_ejes[0]]
+    
+    fig.add_trace(go.Scatterpolar(
+        r=valores,
+        theta=ejes_cerrados,
+        fill='toself',
+        name=perfil,
+        line_color=colores_cluster[perfil],
+        opacity=0.7
+    ))
+
+fig.update_layout(
+    polar=dict(
+        radialaxis=dict(visible=False, range=[0, 1])
+    ),
+    showlegend=True,
+    title='<b>Perfiles Territoriales: Descomposición del Riesgo</b>',
+    template='plotly_white',
+    legend=dict(orientation="h", y=-0.2)
+)
+
+fig.show()
+```
+
+
+- Descompone la estructura interna de los clústeres para revelar la naturaleza del riesgo, diferenciando aquellos impulsados por el peligro meteorológico de los originados por fragilidad socioeconómica.
+
+```{python}
+#| code-fold: true
+#| code-summary: "Ver código de validación del modelo (Método del Codo)"
+
+import pandas as pd
+import plotly.graph_objects as go
+from sklearn.cluster import KMeans
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler
+
+df = pd.read_parquet("../data/processed/resumen_municipal.parquet")
+features = ['frecuencia_sequia_pct', 'racha_maxima_quincenas', 
+            'vulnerabilidad_ambiental', 'vulnerabilidad_social', 'vulnerabilidad_economica']
+
+X = SimpleImputer(strategy='median').fit_transform(df[features])
+X_scaled = StandardScaler().fit_transform(X)
+
+inercia = []
+rango_k = range(2, 11)
+
+for k in rango_k:
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    kmeans.fit(X_scaled)
+    inercia.append(kmeans.inertia_)
+
+fig_codo = go.Figure()
+fig_codo.add_trace(go.Scatter(
+    x=list(rango_k), 
+    y=inercia, 
+    mode='lines+markers',
+    marker=dict(size=10, color='#b05c38'), 
+    line=dict(width=3)
+))
+
+fig_codo.add_vline(x=3, line_width=2, line_dash="dash", line_color="gray")
+
+
+fig_codo.update_layout(
+    title='<b>Validación: Método del Codo (Inercia)</b>',
+    xaxis_title='Número de Segmentos (k)',
+    yaxis_title='Inercia Intra-Clúster ($WCSS$)',
+    template='plotly_white',
+    margin=dict(l=20, r=20, t=50, b=20)
+)
+
+fig_codo.show()
+```
+
+- La gráfica evalúa la inercia interna ($WCSS$) del modelo frente a diferentes números de segmentos ($k$). Demuestra la elección de 4 perfiles territoriales, ya que en $k=3$ ocurre un claro punto de inflexión donde la curva se suaviza. Añadir clústeres adicionales (de 5 a 10) ofrece reducciones de error cada vez menores, lo que fragmentaría los datos y sobrecomplicaría el análisis sin aportar una mejora estadística sustancial en la cohesión de los grupos.
