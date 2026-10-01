@@ -10,14 +10,10 @@ website:
     left:
       - href: index.qmd
         text: Inicio
-      - href: mis_reportes/01-preparacion_datos.qmd
-        text: Exploración
       - href: mis_reportes/02-analisis_temporal.qmd
-        text: Resumen Ejecutivo
-      - href: mis_reportes/03-clustering_territorial.qmd
-        text: este noooo
+        text: Exploración
       - href: mis_reportes/04-conclusiones.qmd
-        text: este tampoco (los dejamos en lo que hacen el reporte)
+        text: Resumen Ejecutivo
 
 format:
   html:

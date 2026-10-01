@@ -1,5 +1,5 @@
 ---
-title: "Sequía en México"
+title: "Riesgos de una sequía en México"
 ---
 
 ![Impacto territorial de la sequía en México.](foto_sequia.jpeg){fig-align="center" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"}

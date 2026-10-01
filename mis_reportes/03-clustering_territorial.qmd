@@ -54,9 +54,9 @@ df['Cluster_ID'] = kmeans.fit_predict(X_scaled)
 
 cluster_risk = pd.DataFrame(X_scaled).groupby(df['Cluster_ID']).mean().sum(axis=1).sort_values()
 mapeo_nombres = {
-    cluster_risk.index[0]: 'Riesgo Bajo / Resilientes',
-    cluster_risk.index[1]: 'Riesgo Medio-Alto',
-    cluster_risk.index[2]: 'Riesgo Crítico',
+    cluster_risk.index[0]: 'Resilientes',
+    cluster_risk.index[1]: 'Prioritarios',
+    cluster_risk.index[2]: 'Intervención Crítica',
 }
 
 df['Perfil_Riesgo'] = df['Cluster_ID'].map(mapeo_nombres)
@@ -77,9 +77,9 @@ features_norm = [f + '_norm' for f in features]
 nombres_ejes = ['Frecuencia Sequía', 'Racha Máxima', 'Vul. Ambiental', 'Vul. Social', 'Vul. Económica']
 
 colores_cluster = {
-    'Riesgo Bajo / Resilientes': '#c0a900',
-    'Riesgo Medio-Alto': '#eb5e5e', 
-    'Riesgo Crítico': '#691edb',         
+    'Resilientes': '#c0a900',
+    'Prioritarios': '#eb5e5e', 
+    'Intervención Crítica': '#691edb',         
 }
 
 fig = go.Figure()
